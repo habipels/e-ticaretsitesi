@@ -32,4 +32,10 @@ class filtre(models.Model):
     def __str__(self):
         full_path = [self.filtre_adi]                  
         return ' --> '.join(full_path[::-1])
-        
+
+class filtre_icerigi(models.Model):
+    filtre_adi= user_adi(verbose_name="Filtre Adı Türkçe",max_length=100)
+    filtre_bagli_oldu_filtre = models.ForeignKey(filtre,blank=True,null=True,verbose_name=" Kategori Bilgisi",on_delete=models.SET_NULL)
+    def __str__(self):
+        full_path = [self.filtre_adi]                  
+        return ' --> '.join(full_path[::-1])
