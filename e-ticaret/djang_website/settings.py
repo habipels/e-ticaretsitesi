@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     # Add our new application
     'main',
     'users',
+    "urun",
+    "admin_page",
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
