@@ -5,7 +5,7 @@ from django.db import models
 class CustomUser(AbstractUser):
 
     STATUS = (
-        ('regular', 'regular'),
+        ('normal', 'normal'),
         ('subscriber', 'subscriber'),
         ('moderator', 'moderator'),
     )
