@@ -21,6 +21,7 @@ from django.urls import path, include
 urlpatterns = [
     path("", include('main.urls')),
     path('admin/', admin.site.urls),
+    path("yonetim/",include("admin_page.urls")),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

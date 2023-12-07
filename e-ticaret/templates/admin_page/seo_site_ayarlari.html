@@ -1,0 +1,82 @@
+{% extends "leyout.html" %}
+{% load crispy_forms_tags %}
+{% block slider %}
+<div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             Şirketin {{sosyalmedya}}   (Her zaman En Son Eklenen Geçerlidir ! Yani En Üstteki)
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#logo">{{sosyalmedya}}  Ekle</button>
+                                    <thead>
+                                        <tr>
+                                            <th>{{sosyalmedya}} Kelimeler</th>
+                                            <th>{{sosyalmedya}} Metni</th>
+
+                                            <th>Sil</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for i in medya %}
+
+                                        <tr class="odd gradeX">
+                                            <td>{{i.site_seo_kelimeleri_tr}}</td>
+                                            <td>{{i.site_seo_metni_tr}}</td>
+                                            <td>{{i.site_seo_kelimeleri_en}}</td>
+                                            <td>{{i.site_seo_metni_en}}</td>
+                                            <td>{{i.site_seo_kelimeleri_de}}</td>
+                                            <td>{{i.site_seo_metni_de}}</td>
+                                            <td><a  href="/yonetim/{{sosyalmedyaa}}/{{i.id}}" class="btn btn-primary">{{sosyalmedya}} Sil</a></td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+
+<!-- The Modal -->
+<div class="modal" id="logo">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">{{sosyalmedya}} Ekle</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" >
+        <form method = "post" enctype="multipart/form-data">
+          {% csrf_token %}
+            {{Email_ekle.media}}
+            {{Email_ekle|crispy}}
+            <br><br><br>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">iptal</button>
+            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Ekle</button>    
+        </form>
+      </div>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        
+    </div>
+
+    </div>
+  </div>
+</div>
+<hr>
+
+{% endblock slider %}

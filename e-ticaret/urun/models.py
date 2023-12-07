@@ -1,5 +1,5 @@
 from django.db import models
-
+from ckeditor.fields import RichTextField
 # Create your models here.
 class kategory_link_ayari(models.CharField):
     def __init__(self, *args, **kwargs):
@@ -39,3 +39,11 @@ class filtre_icerigi(models.Model):
     def __str__(self):
         full_path = [self.filtre_adi]                  
         return ' --> '.join(full_path[::-1])
+    
+
+class urun(models.Model):
+    kategori = models.ManyToManyField(Meslek,blank=True,null=True)
+    urun_adi  = models.CharField(max_length=200,verbose_name="Ürün Adı",blank=True,null=True)
+    fiyat = models.FloatField(verbose_name="Fiyat Bilgisi", blank=True,null=True)
+    urun_aciklama = RichTextField(verbose_name="Ürün Açıklama")
+    

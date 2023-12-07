@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(Meslek)
 admin.site.register(filtre)
 admin.site.register(filtre_icerigi)
+admin.site.register(urun)

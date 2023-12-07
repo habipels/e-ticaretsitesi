@@ -1,0 +1,110 @@
+{% extends "leyout.html" %}
+{% load crispy_forms_tags %}
+{% block slider %}
+<div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             Sitenin Logosu (Her zaman En Son Eklenen Geçerlidir ! Yani En Üstteki)
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#logo">Logo Ekle</button>
+                                    <thead>
+                                        <tr>
+                                            <th>Safa Logosu</th>
+                                            
+                                            <th>Sil</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for i in logo %}
+
+                                        <tr class="odd gradeX">
+                                            <td><img src="{{i.image.url}}" width="100" alt="sayfanın logosu"></td>
+                                            <td><a href="{% url 'admin_panels:logosil' i.id %}" class="btn btn-primary"> Logoyu Sil</a></td>
+                                            
+                                            
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+
+<!-- The Modal -->
+<div class="modal" id="logo">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Logo Ekle</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" style="height: 300px;">
+        <form method = "post" enctype="multipart/form-data">
+          {% csrf_token %}
+            {{logo_ekleme.media}}
+            {{logo_ekleme|crispy}}
+            <br><br><br>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">iptal</button>
+            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Ekle</button>    
+        </form>
+      </div>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        
+    </div>
+
+    </div>
+  </div>
+</div>
+<hr>
+<!-- The Modal -->
+<div class="modal" id="icon">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">İcon Ekle</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body" style="height: 300px;">
+          <form method = "post" enctype="multipart/form-data">
+            {% csrf_token %}
+              {{icon_ekleme.media}}
+              {{icon_ekleme|crispy}}
+              <br><br><br>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">iptal</button>
+              <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Ekle</button>    
+          </form>
+        </div>
+  
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          
+      </div>
+  
+      </div>
+    </div>
+  </div>
+{% endblock slider %}

@@ -1,0 +1,61 @@
+{% extends "leyout.html" %}
+{% load crispy_forms_tags %}
+{% block slider %}
+<div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             Şirketin {{sosyalmedya}}   (Her zaman En Son Eklenen Geçerlidir ! Yani En Üstteki)
+                        </div>
+                        <form method = "post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                              {{Email_ekle.media}}
+                              {{Email_ekle|crispy}}
+                              {{formset}}
+                            
+                              <br><br><br>
+                              <a href="/yonetim/bannerayari"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">iptal</button></a>
+                              <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Onayla</button>
+                          </form>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+
+<!-- The Modal -->
+<div class="modal" id="logo">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">{{sosyalmedya}} Ekle</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" style="height: 400px;">
+        <form method = "post" enctype="multipart/form-data">
+          {% csrf_token %}
+            {{Email_ekle.media}}
+            {{Email_ekle|crispy}}
+            <br><br><br>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">iptal</button>
+            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Ekle</button>
+        </form>
+      </div>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+
+    </div>
+
+    </div>
+  </div>
+</div>
+<hr>
+
+{% endblock slider %}

@@ -1,0 +1,21 @@
+{% extends "leyout.html" %}
+{% load crispy_forms_tags %}
+{% block slider %}
+
+<form method="POST" >
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form.message }}
+    <br>
+    <label for="{{ form.link.id_for_label }}">{{ form.link.label }}</label>
+    {{ form.link }}
+    <br>
+    <label for="{{ form.isim.id_for_label }}">{{ form.isim.label }}</label>
+    {{ form.isim }}
+    <br>
+    <label for="{{ form.baslik.id_for_label }}">{{ form.baslik.label }}</label>
+    {{ form.baslik }}
+    <br>
+    <input type="submit" value="Gönder">
+</form>
+{% endblock slider %}

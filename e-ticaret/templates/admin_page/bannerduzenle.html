@@ -1,0 +1,137 @@
+{% extends "leyout.html" %}
+{% load crispy_forms_tags %}
+{% block slider %}
+<div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             Şirketin {{sosyalmedya}}   (Her zaman En Son Eklenen Geçerlidir ! Yani En Üstteki)
+                        </div>
+                        <form method = "post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                              {{Email_ekle.media}}
+                              {{Email_ekle|crispy}}
+                              {{formset}}
+                            {% if formset %}
+                            <div class="form-group">
+    <label for="baslik1">Filtre Ekle:</label>
+    <input type="text" class="form-control" id="baslik_tr1" value="{{obje.baslik_tr}}" name="baslik_tr1" placeholder="Örneğin :Ehliyet B2 ">
+  </div>
+
+  <div class="form-group">
+    <label for="baslik2">Add Filter:</label>
+    <input type="text" class="form-control" id="baslik_en1" name="baslik_en1" value="{{obje.baslik_en}}"  placeholder="For example: Driver License B2">
+  </div>
+
+  <div class="form-group">
+    <label for="baslik3">Filter hinzufügen:</label>
+    <input type="text" class="form-control" id="baslik_de1" name="baslik_de1" value="{{obje.baslik_de}}" placeholder="Zum Beispiel: Führerschein B2">
+  </div>
+            <hr>
+          <div class="form-group">
+    <label for="baslik1">Filtre Ekle:</label>
+    <input type="text" class="form-control" id="baslik_tr1" name="baslik_tr2" value="{{obje1.baslik_tr}}" placeholder="Örneğin :Ehliyet B2 ">
+  </div>
+
+  <div class="form-group">
+    <label for="baslik2">Add Filter:</label>
+    <input type="text" class="form-control" id="baslik_en1" name="baslik_en2" value="{{obje1.baslik_en}}" placeholder="For example: Driver License B2">
+  </div>
+
+  <div class="form-group">
+    <label for="baslik3">Filter hinzufügen:</label>
+    <input type="text" class="form-control" id="baslik_de1" name="baslik_de2" value="{{obje1.baslik_de}}" placeholder="Zum Beispiel: Führerschein B2">
+  </div>
+          <hr>
+          <div class="form-group">
+    <label for="baslik1">Filtre Ekle:</label>
+    <input type="text" class="form-control" id="baslik_tr1" name="baslik_tr3" value="{{obje2.baslik_tr}}" placeholder="Örneğin :Ehliyet B2 ">
+  </div>
+
+  <div class="form-group">
+    <label for="baslik2">Add Filter:</label>
+    <input type="text" class="form-control" id="baslik_en1" name="baslik_en3" value="{{obje2.baslik_en}}" placeholder="For example: Driver License B2">
+  </div>
+
+  <div class="form-group">
+    <label for="baslik3">Filter hinzufügen:</label>
+    <input type="text" class="form-control" id="baslik_de1" name="baslik_de3" value="{{obje2.baslik_de}}" placeholder="Zum Beispiel: Führerschein B2">
+  </div>
+          <hr>
+          <div class="form-group">
+    <label for="baslik1">Filtre Ekle:</label>
+    <input type="text" class="form-control" id="baslik_tr1" name="baslik_tr4" value="{{obje3.baslik_tr}}" placeholder="Örneğin :Ehliyet B2 ">
+  </div>
+
+  <div class="form-group">
+    <label for="baslik2">Add Filter:</label>
+    <input type="text" class="form-control" id="baslik_en1" name="baslik_en4" value="{{obje3.baslik_en}}" placeholder="For example: Driver License B2">
+  </div>
+
+  <div class="form-group">
+    <label for="baslik3">Filter hinzufügen:</label>
+    <input type="text" class="form-control" id="baslik_de1" name="baslik_de4" value="{{obje3.baslik_de}}" placeholder="Zum Beispiel: Führerschein B2">
+  </div>
+          <hr>
+          <div class="form-group">
+    <label for="baslik1">Filtre Ekle:</label>
+    <input type="text" class="form-control" id="baslik_tr1" name="baslik_tr5" value="{{obje4.baslik_tr}}" placeholder="Örneğin :Ehliyet B2 ">
+  </div>
+
+  <div class="form-group">
+    <label for="baslik2">Add Filter:</label>
+    <input type="text" class="form-control" id="baslik_en1" name="baslik_en5" value="{{obje4.baslik_en}}" placeholder="For example: Driver License B2">
+  </div>
+
+  <div class="form-group">
+    <label for="baslik3">Filter hinzufügen:</label>
+    <input type="text" class="form-control" id="baslik_de1" name="baslik_de5" value="{{obje4.baslik_de}}" placeholder="Zum Beispiel: Führerschein B2">
+  </div>
+                            {% else %}
+                            {% endif %}
+                              <br><br><br>
+                              <a href="/yonetim/bannerayari"><button type="button" class="btn btn-danger" data-bs-dismiss="modal">iptal</button></a>
+                              <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Onayla</button>
+                          </form>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+
+<!-- The Modal -->
+<div class="modal" id="logo">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">{{sosyalmedya}} Ekle</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" style="height: 400px;">
+        <form method = "post" enctype="multipart/form-data">
+          {% csrf_token %}
+            {{Email_ekle.media}}
+            {{Email_ekle|crispy}}
+            <br><br><br>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">iptal</button>
+            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Ekle</button>
+        </form>
+      </div>
+
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+
+    </div>
+
+    </div>
+  </div>
+</div>
+<hr>
+
+{% endblock slider %}

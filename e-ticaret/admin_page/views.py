@@ -1,3 +1,550 @@
 from django.shortcuts import render
-
+from django.shortcuts import render, redirect,get_object_or_404,HttpResponse
+from django.contrib.auth import login, logout, authenticate
 # Create your views here.
+from django.contrib import messages
+from .forms import *
+from site_set.models  import *
+from django.contrib.auth.decorators import login_required
+def AdminLogin(request):
+    if request.method == "POST":
+        form = UserLoginForm(request=request, data=request.POST)
+        if form.is_valid():
+            user = authenticate(
+                username=form.cleaned_data["username"],
+                password=form.cleaned_data["password"],
+                status = "moderator"
+            )
+            if user is not None:
+                login(request, user)
+                messages.success(request, f"Hello <b>{user.username}</b>! You have been logged in")
+                return redirect("/yonetim/manager/")
+
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request, error)
+
+    form = UserLoginForm()
+    content = {"form": form}
+
+    return render(request,"admin_login.html",content)
+
+def admin_anasayfa(request):
+    return render(request,"admin_page/index.html")
+def custom_logout(request):
+    logout(request)
+    return redirect("/yonetim/login/")
+@login_required
+def site_settings_index(request):
+
+    content = {}
+    if True:
+        logo_ekleme = logo_ekle(request.POST or None,request.FILES or None)
+        icon_ekleme= icon_ekle(request.POST or None,request.FILES or None)
+        content["logo"] = sayfa_logosu.objects.order_by("-id").all()
+        content["logo_ekleme"] = logo_ekleme
+        content["icon"] = sayfa_iconu.objects.order_by("-id").all()
+        content["icon_ekleme"] = icon_ekleme
+        if logo_ekleme.is_valid():
+
+            l = logo_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/siteayarlari")
+        if icon_ekleme.is_valid():
+
+            l = icon_ekle.save(commit=False)
+            l.save()
+            return redirect("/yonetim/siteayarlari")
+        return render (request,"admin_page/site_settings.html",content)
+    else:
+        return redirect("/")
+
+def logo_sil(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    sayfa_logosu.objects.filter(id = id).delete()
+    return redirect("/yonetim/siteayarlari")
+
+
+@login_required
+def site_settings_index_icon(request):
+
+    content = {}
+    if True:
+
+        icon_ekleme= icon_ekle(request.POST or None,request.FILES or None)
+
+        content["icon"] = sayfa_iconu.objects.order_by("-id").all()
+        content["icon_ekleme"] = icon_ekleme
+
+        if icon_ekleme.is_valid():
+
+            l = icon_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/siteayarlari")
+        return render (request,"admin_page/icon_site_settings.html",content)
+    else:
+        return redirect("/")
+
+def icon_sil(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    sayfa_iconu.objects.filter(id = id).delete()
+    return redirect("/yonetim/siteayarlariicon")
+
+@login_required
+def telefon_site_settings(request):
+
+    content = {}
+    if True:
+
+        Telefon_ekleme= Telefon_ekle(request.POST or None,request.FILES or None)
+
+        content["Telefon"] = numara.objects.order_by("-id").all()
+        content["Telefon_ekle"] = Telefon_ekle
+
+        if Telefon_ekleme.is_valid():
+
+            l = Telefon_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/telefonayari")
+        return render (request,"admin_page/telefon_site_ayarlari.html",content)
+    else:
+        return redirect("/")
+
+def Telefon_sil(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    numara.objects.filter(id = id).delete()
+    return redirect("/yonetim/telefonayari")
+
+@login_required
+def email_site_settings(request):
+
+    content = {}
+    if True:
+
+        Email_ekleme= Email_ekle(request.POST or None,request.FILES or None)
+
+        content["Email"] = email_adres.objects.order_by("-id").all()
+        content["Email_ekle"] = Email_ekleme
+
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/emailayari")
+        return render (request,"admin_page/email_site_ayarlari.html",content)
+    else:
+        return redirect("/")
+
+def Email_sil(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    email_adres.objects.filter(id = id).delete()
+    return redirect("/yonetim/emailayari")
+
+@login_required
+def adres_site_settings(request):
+
+    content = {}
+    if True:
+
+        Email_ekleme= Adress_ekle(request.POST or None,request.FILES or None)
+
+        content["Adres"] = adres.objects.order_by("-id").all()
+        content["Email_ekle"] = Email_ekleme
+
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/adresayari")
+        return render (request,"admin_page/adress_site.html",content)
+    else:
+        return redirect("/")
+
+def Adres_sil(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    adres.objects.filter(id = id).delete()
+    return redirect("/yonetim/adresayari")
+
+@login_required
+def facebook_site_settings(request):
+
+    content = {}
+    if True:
+
+        Email_ekleme= face_ekle(request.POST or None,request.FILES or None)
+
+        content["medya"] = sosyalmedyaFace.objects.order_by("-id").all()
+        content["Email_ekle"] = Email_ekleme
+        content["sosyalmedya"] = "Facebook"
+        content ["sosyalmedyaa"] = "facebook"
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/facebookayari")
+        return render (request,"admin_page/sosyal_medya_ayari.html",content)
+    else:
+        return redirect("/")
+
+def facebook(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    sosyalmedyaFace.objects.filter(id = id).delete()
+    return redirect("/yonetim/facebookayari")
+
+@login_required
+def instagram_site_settings(request):
+
+    content = {}
+    if True:
+
+        Email_ekleme= insta_ekle(request.POST or None,request.FILES or None)
+
+        content["medya"] = sosyalmedyaInsgr.objects.order_by("-id").all()
+        content["Email_ekle"] = Email_ekleme
+        content["sosyalmedya"] = "İnstagram"
+        content ["sosyalmedyaa"] = "instagram"
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/instagramayari")
+        return render (request,"admin_page/sosyal_medya_ayari.html",content)
+    else:
+        return redirect("/")
+
+def instagram(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    sosyalmedyaFace.objects.filter(id = id).delete()
+    return redirect("/yonetim/instagramayari")
+
+@login_required
+def linkedin_site_settings(request):
+
+    content = {}
+    if True:
+
+        Email_ekleme= linkedin_ekle(request.POST or None,request.FILES or None)
+
+        content["medya"] = sosyalmedyalinkd.objects.order_by("-id").all()
+        content["Email_ekle"] = Email_ekleme
+        content["sosyalmedya"] = "Linkedin"
+        content ["sosyalmedyaa"] = "linkedin"
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/linkedinayari")
+        return render (request,"admin_page/sosyal_medya_ayari.html",content)
+    else:
+        return redirect("/")
+
+def linkedin(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    sosyalmedyalinkd.objects.filter(id = id).delete()
+    return redirect("/yonetim/linkedinayari")
+
+
+@login_required
+def youtube_site_settings(request):
+
+    content = {}
+    if True:
+
+        Email_ekleme= youtube_ekle(request.POST or None,request.FILES or None)
+
+        content["medya"] = sosyalmedyayoutube.objects.order_by("-id").all()
+        content["Email_ekle"] = Email_ekleme
+        content["sosyalmedya"] = "Youtube"
+        content ["sosyalmedyaa"] = "youtube"
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/youtubeayari")
+        return render (request,"admin_page/sosyal_medya_ayari.html",content)
+    else:
+        return redirect("/")
+
+def youtube(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    sosyalmedyayoutube.objects.filter(id = id).delete()
+    return redirect("/yonetim/youtubeayari")
+@login_required
+def twt_site_settings(request):
+
+    content = {}
+    if True:
+
+        Email_ekleme= tw_ekle(request.POST or None,request.FILES or None)
+
+        content["medya"] = sosyalmedyatw.objects.order_by("-id").all()
+        content["Email_ekle"] = Email_ekleme
+        content["sosyalmedya"] = "Twitter"
+        content ["sosyalmedyaa"] = "twitter"
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/twitterayari")
+        return render (request,"admin_page/sosyal_medya_ayari.html",content)
+    else:
+        return redirect("/")
+
+def twiter(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    sosyalmedyatw.objects.filter(id = id).delete()
+    return redirect("/yonetim/twitterayari")
+
+@login_required
+def isim_site_settings(request):
+
+    content = {}
+    if True:
+
+        Email_ekleme= site_isim_ekle(request.POST or None,request.FILES or None)
+
+        content["medya"] = site_adi.objects.order_by("-id").all()
+        content["Email_ekle"] = Email_ekleme
+        content["sosyalmedya"] = "Siteye İsim "
+        content ["sosyalmedyaa"] = "siteismisil"
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/isimayari")
+        return render (request,"admin_page/site_isim_ayari.html",content)
+    else:
+        return redirect("/")
+
+def siteismisil(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    site_adi.objects.filter(id = id).delete()
+    return redirect("/yonetim/isimayari")
+
+
+@login_required
+def seo_site_settings(request):
+
+    content = {}
+    if True:
+
+        Email_ekleme= site_seo_ekle(request.POST or None,request.FILES or None)
+
+        content["medya"] = seo_ayarlari.objects.order_by("-id").all()
+        content["Email_ekle"] = Email_ekleme
+        content["sosyalmedya"] = "Site Seo Ayarları "
+        content ["sosyalmedyaa"] = "seosil"
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/seoayari")
+        return render (request,"admin_page/seo_site_ayarlari.html",content)
+    else:
+        return redirect("/")
+
+def seosil(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    seo_ayarlari.objects.filter(id = id).delete()
+    return redirect("/yonetim/seoayari")
+
+@login_required
+def banner_site_settings(request):
+
+    content = {}
+    if True:
+
+        Email_ekleme= site_banner_ekle(request.POST or None,request.FILES or None)
+
+        content["medya"] = banner.objects.order_by("-id").all()
+        content["Email_ekle"] = Email_ekleme
+        content["sosyalmedya"] = "Site Banner Ayarları "
+        content ["sosyalmedyaa"] = "bannersil"
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/bannerayari")
+        return render (request,"admin_page/banner_site_ayarlari.html",content)
+    else:
+        return redirect("/")
+
+def bannersil(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    banner.objects.filter(id = id).delete()
+    return redirect("/yonetim/bannerayari")
+def bannerduzenle(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    bannner_duzenle = get_object_or_404(banner,id = id)
+    form = site_banner_ekle(request.POST or None,request.FILES or None,instance = bannner_duzenle)
+    content = {}
+    content["Email_ekle"] = form
+    if form.is_valid():
+        article = form.save(commit=False)
+        article.save()
+        return redirect("/yonetim/bannerayari")
+    return render(request,"admin_page/bannerduzenle.html",content)
+
+
+@login_required
+def anasayfa_site_settings(request):
+
+    content = {}
+    if True:
+
+        Email_ekleme= anasayfa_ekle(request.POST or None,request.FILES or None)
+
+        content["medya"] = anasayfa.objects.order_by("-id").all()
+        content["Email_ekle"] = Email_ekleme
+        content["sosyalmedya"] = "Anasayfa Metin Ayarları "
+        content ["sosyalmedyaa"] = "anasayfasil"
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/anasayfaayari")
+        return render (request,"admin_page/anasayfa_site_ayari.html",content)
+    else:
+        return redirect("/")
+
+def anasayfasil(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    anasayfa.objects.filter(id = id).delete()
+    return redirect("/yonetim/anasayfaayari")
+
+@login_required
+def hakkimizda_site_settings(request):
+
+    content = {}
+    if True:
+
+        Email_ekleme= hakkimizda_ekle(request.POST or None,request.FILES or None)
+
+        content["medya"] = hakkimizda.objects.order_by("-id").all()
+        content["Email_ekle"] = Email_ekleme
+        content["sosyalmedya"] = "Hakkımızda Metin Ayarları "
+        content ["sosyalmedyaa"] = "hakkimizdasil"
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/hakkimizdaayari")
+        return render (request,"admin_page/anasayfa_site_ayari.html",content)
+    else:
+        return redirect("/")
+
+def hakkimizdasil(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    hakkimizda.objects.filter(id = id).delete()
+    return redirect("/yonetim/hakkimizdaayari")
+
+@login_required
+def gomuluadres_site_settings(request):
+
+    content = {}
+    if True:
+
+        Email_ekleme= gomuluadres_ekle(request.POST or None,request.FILES or None)
+
+        content["medya"] = gomulu_adres.objects.order_by("-id").all()
+        content["Email_ekle"] = Email_ekleme
+        content["sosyalmedya"] = "Gömülüadres"
+        content ["sosyalmedyaa"] = "gomuluadress"
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/gomuluadres")
+        return render (request,"admin_page/gomulu.html",content)
+    else:
+        return redirect("/")
+
+def gomuluadress(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    gomulu_adres.objects.filter(id = id).delete()
+    return redirect("/yonetim/gomuluadres")
