@@ -548,3 +548,36 @@ def gomuluadress(request,id):
         return redirect("/")
     gomulu_adres.objects.filter(id = id).delete()
     return redirect("/yonetim/gomuluadres")
+
+
+@login_required
+def kategori_settings(request):
+
+    content = {}
+    if True:
+
+        Email_ekleme= kategori_ekle(request.POST or None,request.FILES or None)
+
+        content["medya"] = Meslek.objects.order_by("-id").filter(silinme_bilgisi =False).all()
+        content["Email_ekle"] = Email_ekleme
+        content["sosyalmedya"] = "Kategori"
+        content ["sosyalmedyaa"] = "kategorisil"
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/kategori")
+        return render (request,"admin_page/kategori.html",content)
+    else:
+        return redirect("/")
+
+def kategorisil (request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    Meslek.objects.filter(id = id).update(silinme_bilgisi = True)
+    return redirect("/yonetim/kategori")
+

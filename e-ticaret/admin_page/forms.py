@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import get_user_model
 from site_set.models import *
-
+from urun.models import *
 class logo_ekle(ModelForm):
     class Meta:
         model = sayfa_logosu
@@ -132,4 +132,15 @@ class gomuluadres_ekle(ModelForm):
         model = gomulu_adres
         fields = [
             'sirket_adresi_tr'
+        ]
+
+class kategori_ekle(ModelForm):
+    class Meta:
+        model = Meslek
+        fields = [
+            'kategori',
+            'ust_kategory',
+            'link',
+            'keywords'
+
         ]

@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     "urun",
     "admin_page",
     "site_set",
+    #crispy forms form düzenleme içerir
+    'crispy_forms',
+    #
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
