@@ -47,3 +47,7 @@ class urun(models.Model):
     fiyat = models.FloatField(verbose_name="Fiyat Bilgisi", blank=True,null=True)
     urun_aciklama = RichTextField(verbose_name="Ürün Açıklama")
     
+
+class urun_resimleri(models.Model):
+    urun_bilgisi = models.ForeignKey(urun,blank=True,null=True,verbose_name="Ürün Bilgisi", on_delete=models.CASCADE)
+    images = models.ImageField(upload_to='gallery/')
