@@ -1,1 +1,98 @@
 {% extends "leyout.html" %}
+{% block head %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+{% endblock head %}
+{% block slider %}
+<div class="container">
+    <h3>Toplam Kullanıcı Sayısı : {{toplamk.count}}</h3> 
+    <h3>Toplam İlan Sayısı :{{toplami.count}} </h3>
+    <h3>Toplam İlana Başvuru Sayısı :{{toplamb.count}} </h3>
+    <h3>Toplam Kullanıcılara yapılan Başvuru Sayısı :{{toplams.count}} </h3>
+</div>
+<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+
+<script>
+var xValues = ["Moderatör Sayısı", "Şirket Sayısı", "Normal Kullanıcı Sayısı"];
+var yValues = [{{moderator.count}},{{sirket.count}},{{kullanici.count}} ];
+var barColors = [
+  "#b91d47",
+  "#00aba9",
+  "#2b5797"
+];
+
+new Chart("myChart", {
+  type: "pie",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "B&B ÜYELERİ "
+    }
+  }
+});
+</script>
+<br>
+<br>
+<canvas id="ilan" style="width:100%;max-width:700px"></canvas>
+
+<script>
+var iValues = ["Aktif İlanlar", "Pasif İlanlar"];
+var iyValues = [{{aktifilan.count}},{{pasifilan.count}} ];
+var ibarColors = [
+  "#393E46",
+  "#00ADB5"
+];
+
+new Chart("ilan", {
+  type: "pie",
+  data: {
+    labels: iValues,
+    datasets: [{
+      backgroundColor: ibarColors,
+      data: iyValues
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "İlan Durumları"
+    }
+  }
+});
+</script>
+
+<br><br>
+<canvas id="email" style="width:100%;max-width:700px"></canvas>
+
+<script>
+var eValues = ["Email Doğrulaması Yapanlar", "Email Doğrulaması Yapmayanlar"];
+var eyValues = [{{dogru.count}},{{yanlis.count}} ];
+var ebarColors = [
+  "#393E46",
+  "#FC3C3C"
+];
+
+new Chart("email", {
+  type: "pie",
+  data: {
+    labels: eValues,
+    datasets: [{
+      backgroundColor: ebarColors,
+      data: eyValues
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "Kullanıcılardan Email Doğrulaması Yapanlar"
+    }
+  }
+});
+</script>
+{% endblock slider %}
