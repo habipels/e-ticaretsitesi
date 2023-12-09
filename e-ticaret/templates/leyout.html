@@ -58,13 +58,22 @@ font-size: 16px;"> Son Giriş Tarihi : {{request.user.last_login}} &nbsp; <a hre
                             </li>
                           
                             <li>
-                                <a  href="/yonetim/kategori"><i class="fa fas fa fa-sort-amount-asc fa-3x"></i> Kategori Ayarları</a>
+                                <a  href="#"><i class="fa fas fa fa-sort-amount-asc fa-3x"></i> Kategori & Fitre Ayarları <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a  href="/yonetim/kategori">Kategori Düzenle</a>
+                                    </li>
+                                    <li>
+                                        <a  href="/yonetim/filtreayarlari">Filtre Düzenle </a>
+                                    </li>
+                                    
+                                </ul>
                             </li>
                             <li>
                                 <a href="#"><i class="fas fa fa-tag fa-3x"></i> Ürün  Ayarları <span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a  href="/yonetim/gomuluadres">Ürün Ekle</a>
+                                        <a  href="/yonetim/urunekle">Ürün Ekle</a>
                                     </li>
                                     <li>
                                         <a  href="/yonetim/adresayari">Stokta 10 Dan Az Ürünler </a>

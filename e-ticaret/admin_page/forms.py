@@ -144,3 +144,13 @@ class kategori_ekle(ModelForm):
             'keywords'
 
         ]
+
+
+class filtre_ekle(ModelForm):
+    class Meta:
+        model = filtre
+        fields = [
+            'filtre_adi',
+            'filtre_bagli_oldu_kategori'
+
+        ]

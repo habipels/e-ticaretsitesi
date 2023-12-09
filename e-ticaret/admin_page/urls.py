@@ -23,8 +23,11 @@ urlpatterns = [
     path("hakkimizdaayari",views.hakkimizda_site_settings,name="hakkimizda_site_settings"),
     path("gomuluadres",views.gomuluadres_site_settings,name="gomuluadres_site_settings"),
     path("kategori",views.kategori_settings,name="kategori_settings"),
+    path("urunekle",views.urun_ekle_settings,name="urun_ekle_settings"),
+    path("filtreayarlari",views.filtre_settings,name="filtre_settings"),
     #silme işlemleri
     #
+    path("urunsil/<int:id>",views.urunsil,name="urunsil"),
     path("kategorisil/<int:id>",views.kategorisil,name="kategorisil"),
     path("gomuluadress/<int:id>",views.gomuluadress,name="gomuluadress"),
     path("logosil/<int:id>",views.logo_sil,name="logosil"),

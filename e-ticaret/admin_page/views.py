@@ -581,3 +581,65 @@ def kategorisil (request,id):
     Meslek.objects.filter(id = id).update(silinme_bilgisi = True)
     return redirect("/yonetim/kategori")
 
+
+@login_required
+def urun_ekle_settings(request):
+
+    content = {}
+    if True:
+
+        Email_ekleme= kategori_ekle(request.POST or None,request.FILES or None)
+
+        content["medya"] = urun.objects.order_by("-id").filter(silinme_bilgisi =False).all()
+        content["Email_ekle"] = Email_ekleme
+        content["sosyalmedya"] = "Ürün"
+        content ["sosyalmedyaa"] = "urunsil"
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/urunekle")
+        return render (request,"admin_page/urun_ekleme.html",content)
+    else:
+        return redirect("/")
+
+def urunsil (request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    urun.objects.filter(id = id).update(silinme_bilgisi = True)
+    return redirect("/yonetim/urunekle")
+
+@login_required
+def filtre_settings(request):
+
+    content = {}
+    if True:
+
+        Email_ekleme= filtre_ekle(request.POST or None,request.FILES or None)
+
+        content["medya"] = filtre.objects.order_by("-id").filter(silinme_bilgisi =False).all()
+        content["Email_ekle"] = Email_ekleme
+        content["sosyalmedya"] = "Filtre"
+        content ["sosyalmedyaa"] = "filtresil"
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/kategori")
+        return render (request,"admin_page/filtre_ayarlari.html",content)
+    else:
+        return redirect("/")
+
+def kategorisil (request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    Meslek.objects.filter(id = id).update(silinme_bilgisi = True)
+    return redirect("/yonetim/kategori")
