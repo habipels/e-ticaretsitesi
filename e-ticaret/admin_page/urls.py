@@ -28,6 +28,7 @@ urlpatterns = [
     path("urunekleme",views.urun_ekleme_yap,name="urun_ekleme_yap"),
     #silme işlemleri
     #
+    path("urunfiltre/<int:id>",views.urun_filre_ve_resim_ekleme,name="urun_filre_ve_resim_ekleme"),
     path("filtresil/<int:id>",views.filtresil,name="filtresil"),
     path("filtreyeicerikekle/<int:id>",views.filtreye_icerik_ekle,name="filtreye_icerik_ekle"),
     path("urunsil/<int:id>",views.urunsil,name="urunsil"),

@@ -618,10 +618,29 @@ def urun_ekleme_yap(request):
 
             l = Email_ekleme.save(commit=False)
             l.save()
-            return redirect("/yonetim/urunekle")
+            Email_ekleme.save_m2m()
+            x = "/yonetim/urunfiltre/"+str(l.id)
+            return redirect(x)
         return render (request,"admin_page/filtreye_icerik_ekle.html",content)
     else:
         return redirect("/")
+def urun_filre_ve_resim_ekleme(request,id):
+    content = {}
+    urun_bilgisi =get_object_or_404(urun,id = id)
+    kategorileri = []
+    filtreler =[] 
+    a = urun_bilgisi.kategori.all()
+    for i in a :
+        kategorileri.append(i)
+    for i in kategorileri:
+        if i.ust_kategory :
+            filtreler.append(filtre.objects.filter(filtre_bagli_oldu_kategori = i.id))
+        else:
+            filtreler.append(filtre.objects.filter(filtre_bagli_oldu_kategori = i.id))
+            break
+    content["fil"] = filtreler
+    content["kategoriler"] = kategorileri
+    return render (request,"admin_page/urun_alt_ozellik.html",content)
 def urunsil (request,id):
 
     content = {}
