@@ -1,5 +1,6 @@
 {% extends "leyout.html" %}
 {% load crispy_forms_tags %}
+{% load custom_tags %}
 {% block slider %}
 <div class="row">
                 <div class="col-md-12">
@@ -40,7 +41,7 @@
                                              <td>{{i.urun_adi}}</td>
                                               <td>{{i.fiyat}}</td>
                                               <td>{{i.urun_stok}}</td>
-                                              <td>{{i.urun_stok}}</td>
+                                              <td>{{i|urun_filtre_icerigi}}</td>
                                               <td>{{i.urun_stok}}</td>
                                               <td>{{i.urun_stok}}</td>
                                               <td>{{i.urun_stok}}</td>

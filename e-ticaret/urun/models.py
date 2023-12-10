@@ -55,12 +55,14 @@ class urun(models.Model):
     urun_aciklama = RichTextField(verbose_name="Ürün Açıklama")
     silinme_bilgisi = models.BooleanField(default=False,verbose_name="Silinme Bilgisi")
     urun_bakma_saysi = models.BigIntegerField(verbose_name="Ürün Bakma Sayısı" ,default=0)
-
+from PIL import Image
+from io import BytesIO
 class urun_resimleri(models.Model):
     urun_bilgisi = models.ForeignKey(urun,blank=True,null=True,verbose_name="Ürün Bilgisi", on_delete=models.CASCADE)
-    images = models.ImageField(upload_to='gallery/')
-
+    image = models.ImageField(upload_to='gallery/')
+    
 
 class urun_filtre_tercihi(models.Model):
     urun = models.ForeignKey(urun,verbose_name="Ürün Bilgisi",blank=True,null=True,on_delete=models.CASCADE)
     filtre_bilgisi =  models.ForeignKey(filtre_icerigi,verbose_name="Filtre İçeriğini Seç",blank=True,null=True,on_delete=models.SET_NULL)
+    

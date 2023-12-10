@@ -626,19 +626,36 @@ def urun_ekleme_yap(request):
         return redirect("/")
 def urun_filre_ve_resim_ekleme(request,id):
     content = {}
+    form = MultipleImageUploadForm(request.POST, request.FILES)
+    content["form"] =form
     urun_bilgisi =get_object_or_404(urun,id = id)
     kategorileri = []
     filtreler =[] 
+    tum_kategoriler = []
     a = urun_bilgisi.kategori.all()
     for i in a :
         kategorileri.append(i)
     for i in kategorileri:
-        if i.ust_kategory :
-            filtreler.append(filtre.objects.filter(filtre_bagli_oldu_kategori = i.id))
-        else:
-            filtreler.append(filtre.objects.filter(filtre_bagli_oldu_kategori = i.id))
-            break
-    content["fil"] = filtreler
+        z = i
+        while z:    
+            if z.ust_kategory :
+                tum_kategoriler.append(z.id)
+            else:
+                tum_kategoriler.append(z.id)
+            z =  z.ust_kategory
+    file = filtre.objects.filter(filtre_bagli_oldu_kategori__id__in = tum_kategoriler)
+    if request.POST:
+        if form.is_valid():
+            images = request.FILES.getlist('images')
+            for images in images:
+                urun_resimleri.objects.create(image=images,urun_bilgisi = get_object_or_404(urun,id = id))  # Urun_resimleri modeline resimleri kaydet
+        for j in file:
+            if request.POST.get(j.filtre_linki):
+                urun_filtre_tercihi.objects.create(urun = get_object_or_404(urun,id = id),filtre_bilgisi = get_object_or_404(filtre_icerigi,id = request.POST.get(j.filtre_linki)))
+            print(request.POST.get(j.filtre_linki))
+        return redirect("/yonetim/urunekle") 
+    content["fil"] = tum_kategoriler
+    content["filtreler"] = file
     content["kategoriler"] = kategorileri
     return render (request,"admin_page/urun_alt_ozellik.html",content)
 def urunsil (request,id):
