@@ -40,7 +40,7 @@ class filtre_icerigi(models.Model):
     filtre_bagli_oldu_filtre = models.ForeignKey(filtre,blank=True,null=True,verbose_name=" Kategori Bilgisi",on_delete=models.SET_NULL)
     silinme_bilgisi = models.BooleanField(default=False,verbose_name="Silinme Bilgisi")
     filtre_renk_kodu = models.CharField(max_length=200,verbose_name="Renk Eklemek ilsterseniz",blank=True,null=True)
-    
+
     def __str__(self):
         full_path = [self.filtre_adi]                  
         return ' --> '.join(full_path[::-1])
@@ -53,7 +53,7 @@ class urun(models.Model):
     urun_stok = models.FloatField(blank=True,null=True,verbose_name="Stok Bilgisi")
     urun_aciklama = RichTextField(verbose_name="Ürün Açıklama")
     silinme_bilgisi = models.BooleanField(default=False,verbose_name="Silinme Bilgisi")
-    
+    urun_bakma_saysi = models.BigIntegerField(verbose_name="Ürün Bakma Sayısı" ,default=0)
 
 class urun_resimleri(models.Model):
     urun_bilgisi = models.ForeignKey(urun,blank=True,null=True,verbose_name="Ürün Bilgisi", on_delete=models.CASCADE)

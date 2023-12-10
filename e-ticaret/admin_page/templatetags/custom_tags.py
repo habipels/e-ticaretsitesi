@@ -9,5 +9,5 @@ def Filtre_icerikleri_alma(stok_kart):
     satis_fiyati = filtre_icerigi.objects.filter(filtre_bagli_oldu_filtre=stok_kart.id)
     icerikler = ""
     for i in satis_fiyati:
-        icerikler = icerikler+" "+i.filtre_adi+"\n"
+        icerikler = icerikler+","+i.filtre_adi+"\n"
     return icerikler if icerikler else 0

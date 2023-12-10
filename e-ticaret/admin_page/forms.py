@@ -154,3 +154,24 @@ class filtre_ekle(ModelForm):
             'filtre_bagli_oldu_kategori'
 
         ]
+
+class filtre_icerigi_ekle(ModelForm):
+    class Meta:
+        model = filtre_icerigi
+        fields = [
+            'filtre_adi',
+            'filtre_renk_kodu'
+
+        ]
+
+class urun_ekle(ModelForm):
+    class Meta:
+        model = urun
+        fields = [
+            'kategori',
+            'urun_adi',
+            'fiyat',
+            'urun_stok',
+            "urun_aciklama"
+
+        ]

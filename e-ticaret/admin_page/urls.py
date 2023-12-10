@@ -27,6 +27,8 @@ urlpatterns = [
     path("filtreayarlari",views.filtre_settings,name="filtre_settings"),
     #silme işlemleri
     #
+    path("filtresil/<int:id>",views.filtresil,name="filtresil"),
+    path("filtreyeicerikekle/<int:id>",views.filtreye_icerik_ekle,name="filtreye_icerik_ekle"),
     path("urunsil/<int:id>",views.urunsil,name="urunsil"),
     path("kategorisil/<int:id>",views.kategorisil,name="kategorisil"),
     path("gomuluadress/<int:id>",views.gomuluadress,name="gomuluadress"),

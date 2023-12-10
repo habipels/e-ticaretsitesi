@@ -588,7 +588,7 @@ def urun_ekle_settings(request):
     content = {}
     if True:
 
-        Email_ekleme= kategori_ekle(request.POST or None,request.FILES or None)
+        Email_ekleme= urun_ekle(request.POST or None,request.FILES or None)
 
         content["medya"] = urun.objects.order_by("-id").filter(silinme_bilgisi =False).all()
         content["Email_ekle"] = Email_ekleme
@@ -629,17 +629,36 @@ def filtre_settings(request):
 
             l = Email_ekleme.save(commit=False)
             l.save()
-            return redirect("/yonetim/kategori")
+            return redirect("/yonetim/filtreayarlari")
         return render (request,"admin_page/filtre_ayarlari.html",content)
     else:
         return redirect("/")
 
-def kategorisil (request,id):
+def filtresil (request,id):
 
     content = {}
     if True:
         pass
     else:
         return redirect("/")
-    Meslek.objects.filter(id = id).update(silinme_bilgisi = True)
-    return redirect("/yonetim/kategori")
+    filtre.objects.filter(id = id).update(silinme_bilgisi = True)
+    return redirect("/yonetim/filtreayarlari")
+
+def filtreye_icerik_ekle(request,id):
+
+    content = {}
+    if True:
+
+        Email_ekleme= filtre_icerigi_ekle(request.POST or None,request.FILES or None)
+        content["Email_ekle"] = Email_ekleme
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.filtre_bagli_oldu_filtre = get_object_or_404(filtre,id = id)
+            l.save()
+            x = "/yonetim/filtreyeicerikekle/"+str(id)
+            return redirect(x)
+        return render (request,"admin_page/filtreye_icerik_ekle.html",content)
+    else:
+        return redirect("/")
+    return render(request,"filtreye_icerik_ekle.html",content)
