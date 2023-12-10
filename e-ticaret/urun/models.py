@@ -31,6 +31,7 @@ class filtre(models.Model):
     filtre_adi= user_adi(verbose_name="Filtre Adı Türkçe",max_length=100)
     filtre_bagli_oldu_kategori = models.ForeignKey(Meslek,blank=True,null=True,verbose_name=" Kategori Bilgisi",on_delete=models.SET_NULL)
     silinme_bilgisi = models.BooleanField(default=False,verbose_name="Silinme Bilgisi")
+    filtre_linki = kategory_link_ayari(max_length=200,verbose_name="Filtre Linki",blank=True,null=True)
     def __str__(self):
         full_path = [self.filtre_adi]                  
         return ' --> '.join(full_path[::-1])
@@ -40,7 +41,7 @@ class filtre_icerigi(models.Model):
     filtre_bagli_oldu_filtre = models.ForeignKey(filtre,blank=True,null=True,verbose_name=" Kategori Bilgisi",on_delete=models.SET_NULL)
     silinme_bilgisi = models.BooleanField(default=False,verbose_name="Silinme Bilgisi")
     filtre_renk_kodu = models.CharField(max_length=200,verbose_name="Renk Eklemek ilsterseniz",blank=True,null=True)
-
+    
     def __str__(self):
         full_path = [self.filtre_adi]                  
         return ' --> '.join(full_path[::-1])

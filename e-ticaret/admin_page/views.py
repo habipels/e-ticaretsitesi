@@ -602,7 +602,26 @@ def urun_ekle_settings(request):
         return render (request,"admin_page/urun_ekleme.html",content)
     else:
         return redirect("/")
+@login_required
+def urun_ekleme_yap(request):
 
+    content = {}
+    if True:
+
+        Email_ekleme= urun_ekle(request.POST or None,request.FILES or None)
+
+        content["medya"] = urun.objects.order_by("-id").filter(silinme_bilgisi =False).all()
+        content["Email_ekle"] = Email_ekleme
+        content["sosyalmedya"] = "Ürün"
+        content ["sosyalmedyaa"] = "urunsil"
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/urunekle")
+        return render (request,"admin_page/filtreye_icerik_ekle.html",content)
+    else:
+        return redirect("/")
 def urunsil (request,id):
 
     content = {}
@@ -628,6 +647,7 @@ def filtre_settings(request):
         if Email_ekleme.is_valid():
 
             l = Email_ekleme.save(commit=False)
+            l.filtre_linki = l.filtre_adi
             l.save()
             return redirect("/yonetim/filtreayarlari")
         return render (request,"admin_page/filtre_ayarlari.html",content)

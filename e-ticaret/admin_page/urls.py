@@ -25,6 +25,7 @@ urlpatterns = [
     path("kategori",views.kategori_settings,name="kategori_settings"),
     path("urunekle",views.urun_ekle_settings,name="urun_ekle_settings"),
     path("filtreayarlari",views.filtre_settings,name="filtre_settings"),
+    path("urunekleme",views.urun_ekleme_yap,name="urun_ekleme_yap"),
     #silme işlemleri
     #
     path("filtresil/<int:id>",views.filtresil,name="filtresil"),
