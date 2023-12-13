@@ -1,0 +1,28 @@
+{% extends "leyout.html" %}
+{% block head %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+{% endblock head %}
+{% load crispy_forms_tags %}
+{% load custom_tags %}
+{% block slider %}
+
+<form method = "post" enctype="multipart/form-data">
+    {% csrf_token %}
+            <label for="">Seçmek İstediğiniz kategori</label>
+            <select name="kategorisi" id="">
+                <option value="0">Tüm Kategori</option>
+            {% for i in kategoriler %}
+                <option value="{{i.id}}">  {{i}}</option>
+                {% endfor %}
+            </select><br>
+            <label for="">fiyat artış veya azaltışı seçiniz</label>
+            <select name="fiyatdurum" id="">
+                <option value="1">ARTIR</option>
+                <option value="2">AZALT</option>
+            </select><br>
+            <label for="">Oranı (Yüzde Cinsinden)</label>
+            <input type="number" name="oran" step="0,001" id=""><br>
+            <a href="/yonetim/urunekle" class="btn btn-danger" >iptal</a>
+            <button type="submit" class="btn btn-success" >Fiyatları Değiştir</button>    
+        </form>
+{% endblock slider %}

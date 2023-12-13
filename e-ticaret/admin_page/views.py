@@ -667,7 +667,54 @@ def urunsil (request,id):
         return redirect("/")
     urun.objects.filter(id = id).update(silinme_bilgisi = True)
     return redirect("/yonetim/urunekle")
+def urun_kategori_bazli_fiyat_degisikligi(request):
 
+    content = {}
+    content["kategoriler"] = Meslek.objects.order_by("-id").filter(silinme_bilgisi =False).all()
+    if request.POST:
+        kategorisi = request.POST.get("kategorisi")
+        fiyatdurum = request.POST.get("fiyatdurum")
+        oran = float(request.POST.get("oran"))
+        if kategorisi == "0":
+            tum_urun = urun.objects.all()
+        else:
+            tum_urun = urun.objects.filter(kategori__id = kategorisi)
+        if fiyatdurum == "1":
+            urun_fiyat = 0
+            for i in tum_urun:
+                id = i.id
+                urun_fiyat = i.fiyat
+                urun_fiyat = ((urun_fiyat *oran)/100)+urun_fiyat
+                urun.objects.filter(id = id).update(fiyat = urun_fiyat)
+        else:
+            urun_fiyat = 0
+            for i in tum_urun:
+                id = i.id
+                urun_fiyat = i.fiyat
+                urun_fiyat = urun_fiyat-((urun_fiyat *oran)/100)
+                urun.objects.filter(id = id).update(fiyat = urun_fiyat)
+        return redirect("/yonetim/urunekle")
+    return render (request,"admin_page/kategori_bazli_fiyat_destirme.html",content)
+@login_required
+def stogu_ondan_az_urunler_settings(request):
+
+    content = {}
+    if True:
+
+        Email_ekleme= urun_ekle(request.POST or None,request.FILES or None)
+
+        content["medya"] = urun.objects.order_by("-id").filter(silinme_bilgisi =False,urun_stok__lt=10).all()
+        content["Email_ekle"] = Email_ekleme
+        content["sosyalmedya"] = "Ürün"
+        content ["sosyalmedyaa"] = "urunsil"
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            return redirect("/yonetim/urunekle")
+        return render (request,"admin_page/urun_ekleme.html",content)
+    else:
+        return redirect("/")
 @login_required
 def filtre_settings(request):
 
