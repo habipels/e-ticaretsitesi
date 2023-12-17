@@ -34,3 +34,15 @@ def urun_filtre_icerigi(stok_kart):
         icerikler = icerikler+","+i.filtre_bilgisi.filtre_adi+"\n"
         
     return icerikler if icerikler else "Filtre Seçilmemiş"
+
+@register.filter
+def urun_resimleri_alma(stok_kart):
+    
+    satis_fiyati = urun_resimleri.objects.filter(urun_bilgisi=stok_kart.id).all()
+    icerikler = ""
+    for i in satis_fiyati:
+        if i.image != None:
+            icerikler = i.image.url
+            break
+        
+    return icerikler if icerikler else ""

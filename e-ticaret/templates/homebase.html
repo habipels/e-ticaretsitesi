@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    {% if pencere_icon %}
+        <link href="{{pencere_icon.sayfa_icon.url}}" rel="icon">
+    {% else %}
+    {% endif %}
+
+
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    {% block head %}
+    
+    {% endblock head %}
+</head>
+    {% block header %}
+        {% include "page_includes/header.html" %}
+    {% endblock header %}
+    {% block menu %}
+        {% include "page_includes/menu.html" %}
+    {% endblock menu %}
+    {% block slider %}
+    
+    {% endblock slider %}
+    {% block content %}
+    
+    {% endblock content %}
+    {% block sidebar %}
+    
+    {% endblock sidebar %}
+    {% block footer %}
+        {% include "page_includes/footer.html" %}
+    {% endblock footer %}
+    {% block javascript %}
+    <script>
+        var ilkOge = document.querySelector('.active_ver');
+
+// İlk öğeye yeni bir sınıf ekleme
+            if (ilkOge) {
+            ilkOge.classList.add('active');
+            }
+    </script>
+    {% endblock javascript %}
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="{% static 'mail/jqBootstrapValidation.min.js' %}"></script>
+    <script src="{% static 'mail/contact.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js"></script>
+</body>
+
+</html>
