@@ -19,11 +19,10 @@ def site_bilgileri():
 # Create your views here.
 def homepage(request):
     content = site_bilgileri()
-    if request.GET:
+    profile = urun.objects.filter(urun_stok__gte=1)
+    if request.GET.get("search"):
         search = request.GET.get("search")
         profile = urun.objects.filter(Q(urun_adi__icontains = search)  & Q(urun_stok__gte=1) )
-    else:
-        profile = urun.objects.filter(urun_stok__gte=1)
     page_num = request.GET.get('page', 1)
     paginator = Paginator(profile, 20) # 6 employees per page
     try:
@@ -38,3 +37,6 @@ def homepage(request):
     content["top"]  = profile
     content["medya"] = page_obj
     return render(request,"index.html",content)
+
+def urunler_tekli_sayfa (request,id,slug):
+    return 0
