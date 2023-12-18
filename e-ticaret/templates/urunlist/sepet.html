@@ -39,7 +39,7 @@
                                 </div>
                             </td>
                             <td class="align-middle"> {% carpma i.urun_bilgisi.fiyat  i.urun_adedi %} TL</td>
-                            <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                            <td class="align-middle"><a href="/urunsil/{{i.urun_bilgisi.id}}/{{i.urun_bilgisi.urun_adi}}"  class="btn btn-sm btn-primary"><i class="fa fa-times"></i></a></td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -60,8 +60,8 @@
                     </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-3 pt-1">
-                            <h6 class="font-weight-medium">Subtotal</h6>
-                            <h6 class="font-weight-medium">$150</h6>
+                            <h6 class="font-weight-medium">Toplam Sepet Tutarı </h6>
+                            <h6 class="font-weight-medium">{% sepet_toplam_tutar  %}</h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Shipping</h6>

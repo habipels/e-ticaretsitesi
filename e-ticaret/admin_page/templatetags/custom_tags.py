@@ -99,3 +99,6 @@ def sepetteki_urun_sayisi_kullan(stok_kart):
 @register.simple_tag
 def carpma(a,b):
     return round(float(a*b), 2)
+@register.simple_tag
+def sepet_toplam_tutar(bilgi):
+    return 0
