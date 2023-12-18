@@ -1,5 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
+from users.models import *
 # Create your models here.
 class kategory_link_ayari(models.CharField):
     def __init__(self, *args, **kwargs):
@@ -65,4 +66,17 @@ class urun_resimleri(models.Model):
 class urun_filtre_tercihi(models.Model):
     urun = models.ForeignKey(urun,verbose_name="Ürün Bilgisi",blank=True,null=True,on_delete=models.CASCADE)
     filtre_bilgisi =  models.ForeignKey(filtre_icerigi,verbose_name="Filtre İçeriğini Seç",blank=True,null=True,on_delete=models.SET_NULL)
-    
+
+
+class sepet_olusturma(models.Model):
+    sepet_sahibi  = models.ForeignKey(CustomUser,blank=True,null = True,on_delete = models.SET_NULL)
+    sepet_satin_alma_durumu = models.BooleanField(default = False)
+
+class ip(models.Model):
+    ip_bilgisi = models.GenericIPAddressField()
+    kayit_tarihi = models.DateTimeField(auto_now=True,null=True)
+
+class sepetteki_urunler(models.Model):
+    kayitli_kullanici = models.ForeignKey(sepet_olusturma,blank = True,null = True,on_delete = models.SET_NULL)
+    kayitli_olmayan_kullanici = models.ForeignKey(ip,blank = True,null = True,on_delete = models.SET_NULL)
+    urun_bilgisi = models.ForeignKey(urun,blank = True,null = True,on_delete = models.SET_NULL)
