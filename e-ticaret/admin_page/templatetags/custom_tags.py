@@ -46,3 +46,20 @@ def urun_resimleri_alma(stok_kart):
             break
         
     return icerikler if icerikler else ""
+
+@register.filter
+def urun_filteleri_alma_bilgisi(stok_kart):
+    class_yapisi = """
+<div class="d-flex mb-3">
+                    <p class="text-dark font-weight-medium mb-0 mr-3">
+"""
+    class_yapisi_devam = """
+
+                    
+                </div>
+"""
+    veri_bir = urun_filtre_tercihi.objects.filter(urun = stok_kart.id )
+    veri_gonder = ""
+    for z in veri_bir:
+        veri_gonder = veri_gonder+class_yapisi+str(z.filtre_bilgisi.filtre_bagli_oldu_filtre.filtre_adi)+": </p><span>"+str(z.filtre_bilgisi.filtre_adi)+"</span>"+class_yapisi_devam
+    return mark_safe(veri_gonder)

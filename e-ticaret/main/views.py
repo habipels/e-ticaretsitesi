@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 from site_set.models import *
 from urun.models import *
@@ -39,4 +39,7 @@ def homepage(request):
     return render(request,"index.html",content)
 
 def urunler_tekli_sayfa (request,id,slug):
-    return 0
+    content = site_bilgileri()
+    content["urun_"] = get_object_or_404(urun,id = id)
+    content["urun_resimleri"] = urun_resimleri.objects.filter(urun_bilgisi = get_object_or_404(urun,id = id))
+    return render(request,"urunlist/urun_goster.html",content)
