@@ -1,4 +1,5 @@
     <!-- Topbar Start -->
+    {% load custom_tags %}
     <div class="container-fluid">
         <div class="row bg-secondary py-2 px-xl-5">
             <div class="col-lg-6 d-none d-lg-block">
@@ -75,19 +76,24 @@
             </div>
             <div class="col-lg-3 col-6 text-right">
              {% if request.user.is_authenticated %}
+                <a href="" class="btn border">Logout</a>
+                <a href="/sepetebak" class="btn border">
+                    <i class="fas fa-shopping-cart text-primary"></i>
+                    <span class="badge">{{ request.user | sepetteki_urun_sayisi}}</span>
+                </a>
+                {% else %}
                 <a href="" class="btn border">Login</a>
                 <a href="" class="btn border">Register</a>
                 <a href="" class="btn border">
                     <i class="fas fa-heart text-primary"></i>
                     <span class="badge">0</span>
                 </a>
-                {% else %}
-                
-                {% endif %}
-                <a href="" class="btn border">
+                <a href="/sepetebak" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge">0</span>
+                    <span class="badge">{{ request | sepetteki_urun_sayisi_kullan}}</span>
                 </a>
+                {% endif %}
+                
             </div>
         </div>
     </div>

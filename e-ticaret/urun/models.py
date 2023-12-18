@@ -81,3 +81,4 @@ class sepetteki_urunler(models.Model):
     kayitli_kullanici = models.ForeignKey(sepet_olusturma,blank = True,null = True,on_delete = models.SET_NULL)
     kayitli_olmayan_kullanici = models.ForeignKey(sepet_olusturma_ip,blank = True,null = True,on_delete = models.SET_NULL)
     urun_bilgisi = models.ForeignKey(urun,blank = True,null = True,on_delete = models.SET_NULL)
+    urun_adedi = models.BigIntegerField(default = 1,verbose_name="ürün Adedi")

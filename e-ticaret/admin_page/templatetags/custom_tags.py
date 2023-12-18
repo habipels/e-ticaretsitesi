@@ -63,3 +63,39 @@ def urun_filteleri_alma_bilgisi(stok_kart):
     for z in veri_bir:
         veri_gonder = veri_gonder+class_yapisi+str(z.filtre_bilgisi.filtre_bagli_oldu_filtre.filtre_adi)+": </p><span>"+str(z.filtre_bilgisi.filtre_adi)+"</span>"+class_yapisi_devam
     return mark_safe(veri_gonder)
+
+
+@register.filter
+def sepetteki_urun_sayisi(stok_kart):
+    
+    satis_fiyati = sepet_olusturma.objects.filter(sepet_sahibi=stok_kart.id,sepet_satin_alma_durumu = False).last()
+    a = sepetteki_urunler.objects.filter(kayitli_kullanici = satis_fiyati )
+    icerikler = 0
+    for i in a:
+        icerikler = icerikler + 1 
+        
+    return icerikler if icerikler else ""
+
+#
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+@register.filter
+def sepetteki_urun_sayisi_kullan(stok_kart):
+    
+    satis_fiyati = sepet_olusturma_ip.objects.filter(sepet_sahibi=get_client_ip(stok_kart),sepet_satin_alma_durumu = False).last()
+    a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = satis_fiyati )
+    icerikler = 0
+    for i in a:
+        icerikler = icerikler + 1 
+        
+    return icerikler if icerikler else ""
+
+@register.simple_tag
+def carpma(a,b):
+    return round(float(a*b), 2)
