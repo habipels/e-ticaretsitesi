@@ -72,11 +72,12 @@ class sepet_olusturma(models.Model):
     sepet_sahibi  = models.ForeignKey(CustomUser,blank=True,null = True,on_delete = models.SET_NULL)
     sepet_satin_alma_durumu = models.BooleanField(default = False)
 
-class ip(models.Model):
-    ip_bilgisi = models.GenericIPAddressField()
-    kayit_tarihi = models.DateTimeField(auto_now=True,null=True)
+
+class sepet_olusturma_ip(models.Model):
+    sepet_sahibi  = models.GenericIPAddressField()
+    sepet_satin_alma_durumu = models.BooleanField(default = False)
 
 class sepetteki_urunler(models.Model):
     kayitli_kullanici = models.ForeignKey(sepet_olusturma,blank = True,null = True,on_delete = models.SET_NULL)
-    kayitli_olmayan_kullanici = models.ForeignKey(ip,blank = True,null = True,on_delete = models.SET_NULL)
+    kayitli_olmayan_kullanici = models.ForeignKey(sepet_olusturma_ip,blank = True,null = True,on_delete = models.SET_NULL)
     urun_bilgisi = models.ForeignKey(urun,blank = True,null = True,on_delete = models.SET_NULL)

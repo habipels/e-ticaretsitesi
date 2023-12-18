@@ -8,5 +8,6 @@ admin.site.register(urun)
 admin.site.register(urun_resimleri)
 admin.site.register(urun_filtre_tercihi)
 admin.site.register(sepet_olusturma)
-admin.site.register(ip)
+
+admin.site.register(sepet_olusturma_ip)
 admin.site.register(sepetteki_urunler)

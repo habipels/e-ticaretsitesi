@@ -74,12 +74,16 @@
                 </form>
             </div>
             <div class="col-lg-3 col-6 text-right">
+             {% if request.user.is_authenticated %}
                 <a href="" class="btn border">Login</a>
                 <a href="" class="btn border">Register</a>
                 <a href="" class="btn border">
                     <i class="fas fa-heart text-primary"></i>
                     <span class="badge">0</span>
                 </a>
+                {% else %}
+                
+                {% endif %}
                 <a href="" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
                     <span class="badge">0</span>
