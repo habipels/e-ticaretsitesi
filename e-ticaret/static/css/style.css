@@ -43,353 +43,94 @@
 }
 /**/
 
-.menustack {
-  display: flex;
-  float: left;
-  width: 100%;
-  position: relative;
-  z-index: 20;
-  background: #4c4c4c;
-  align-items: center;
-  height: 37px;
-  transition: ease-in-out all .1s;
-  z-index: 999;
+.menustack{display:flex;float:left;width:100%;position:relative;z-index:20;background:#4c4c4c;align-items:center;height:37px;transition:ease-in-out all .1s;z-index: 999;}
+.menustack a{transition:ease-in-out all .1s;}
+.menustack a:hover{transition:ease-in-out all .1s;}
+.menustack ul{}
+.menustack ul li{display:block;float:left;}
+.menustack .wrapping{display:block;max-width:1200px;margin:auto;}
+.menustack .level0{display:flex;float:left;width:100%;justify-content:flex-start;align-items:center;flex-wrap:wrap;flex-direction:row;}
+.menustack .level0 .allcats{}
+.menustack .level0 .allcats:hover a{background:#fff;height:38px;border-radius:0px;color:#000;}
+.menustack .level0 .allcats a{padding:3px 15px;height:37px;display:flex;align-items:center;}
+.menustack .level0 .allcats .full_cats{background:#686868;color:#fff;border-radius:40px;font-size:0.80em;font-weight:500;height:27px;}
+.menustack .level0 .allcats:hover .opener{display:flex;}
+.menustack .level0 .allcats .full_cats:hover{background:#fff;height:38px;border-radius:0px;color:#000;}
+.menustack .level0 .allcats a:hover{}
+.menustack .level0 .allcats .opener{position:absolute;width:100%;left:0;background:#fff;margin-top:0;justify-content:center;display:none;padding:5px 25px;box-shadow:0 0.125rem 0.375rem rgba(0,0,0,0.05),0 0.5rem 1.2rem rgba(0,0,0,0.1)!important;}
+.menustack .level0 .allcats .open{display:flex;float:left;width:100%;justify-content:flex-start;max-width:1200px;flex-wrap:wrap;flex-direction:row;padding-bottom:25px;}
+.menustack .level0 .allcats .open li{display:block;float:left;width:20%;}
+.menustack .level0 .allcats .open li a{font-weight:600;padding:0px;color:#000;font-size:0.85em;}
+.menustack .level0 .allcats .open li .open2{display:block;float:left;width:100%;}
+.menustack .level0 .allcats .open li .open2 li{display:block;float:left;width:100%;}
+.menustack .level0 .allcats .open li .open2 li a{display:block;width:100%;font-weight:normal;font-size:0.78em;padding:0px 0px;height:auto;color:#5c636e;line-height:17px;padding-left:10px;position:relative;}
+.menustack .level0 .allcats .open li .open2 li a:before{font-family:"Font Awesome 5 Pro";font-weight:400;content:"\f105";display:inline-block;font-style:normal;font-variant:normal;text-rendering:auto;-webkit-font-smoothing:antialiased;font-size:0.75em;color:#bbb;align-items:center;top:14px;margin-left:0px;margin-right:6px;}
+.menustack .level0 .allcats .open li .open2 li a:hover{color:#f7931e;}
+.menustack .step1{display:flex;margin-top:-1px;}
+.menustack .step1 a{color:#fff;font-size:0.83em;font-weight:400;display:flex;padding:12px 17px;}
+.menustack .step1 a:after{font-family:"Font Awesome 5 Pro";font-weight:400;content:"\f107";display:inline-block;font-style:normal;font-variant:normal;text-rendering:auto;-webkit-font-smoothing:antialiased;font-size:0.75em;color:#bbb;align-items:center;right:6px;position:absolute;top:14px;}
+.menustack .step1 a:hover{background:#fff;color:#000;}
+.menustack .step1{position:relative;}
+.menustack .step1:hover a{background:#fff;color:#000;}
+.menustack .step1:hover .open{display:flex;}
+.menustack .step1 .open{position:absolute;background:#fff;width:350px;display:flex;padding:15px;top:37px;justify-content:space-evenly;display:none;box-shadow:0 0.125rem 0.375rem rgba(0,0,0,0.05),0 0.5rem 1.2rem rgba(0,0,0,0.1)!important;}
+.menustack .step1 .open .left_con{width:88%;}
+.menustack .step1 .open .left_con ul{}
+.menustack .step1 .open .left_con ul li{width:100%;}
+.menustack .step1 .open .left_con ul li a{color:#000;padding:0px;width:100%;display:block;padding:5px 0px;float:left;background:transparent;}
+.menustack .step1 .open .left_con ul li a:hover{color:#f7931e;}
+.menustack .step1 .open .right_con{padding-left:15px;border-left:1px solid #eee;width:36%;}
+.menustack .step1 .open .right_con .title{font-weight:500;font-size:0.91em;margin-bottom:11px;}
+.menustack .step1 .open .right_con ul{max-height:150px;overflow-x:hidden;}
+.menustack .step1 .open .right_con ul li{display:block;float:left;width:100%;}
+.menustack .step1 .open .right_con ul li a{color:#000;padding:5px 0px;font-size:0.70em;background:transparent;}
+.menustack .step1 .open .right_con ul li a:hover{color:#f7931e;}
+.menustack .step1:hover:nth-child(8) .open{margin-left:-80px;}
+.menustack .step1:hover:nth-child(9) .open{margin-left:-150px;}
+.menustack .step1:hover:nth-child(10) .open{margin-left:-236px;}
+.menustack .step1 .open .right_con ul::-webkit-scrollbar{height:12px;width:5px;background:#f1f1f1b3;margin:5px;cursor:pointer;}
+.menustack .step1 .open .right_con ul::-webkit-scrollbar-thumb{background:#ff6a21;}
+.menustack .step1 .open .right_con ul::-webkit-scrollbar-corner{background:#cec6c6;}
+
+
+#baby_header .mainmenu{display:block;float:left;width:calc(100% - 339px);margin-top:-14px;}
+
+
+/* MENULER */
+.mainmenu ul.menu{display:block;float:left;width:100%;text-align:center;font-weight:600;padding-top:13px;text-transform:uppercase;}
+.mainmenu ul.menu li{display:inline-block;}
+.mainmenu ul.menu li:hover .sub1{display:block;}
+.mainmenu ul.menu li:hover a{border-bottom:2px solid #ef5f00;color:#ef5f00;}
+.mainmenu ul.menu li a{display:block;padding:17px;font-size:0.95em;color:#000;padding-left:10px;padding-right:10px;border-bottom:2px solid #fff;position:relative;text-transform:initial;font-weight:600;}
+.mainmenu ul.menu li .sub1{position:absolute;margin-left:0;width:240px;z-index:999;background:#fff;padding-top:11px;padding-bottom:9px;border-top:1px solid #eee;border-bottom:1px solid #f1f1f1;box-shadow:0px 11px 10px #0000000f;display:none;margin-left:-2%;}
+.mainmenu ul.menu li .sub1 .wrap{display:block;max-width:1000px;margin-left:auto;margin-right:auto;}
+.mainmenu ul.menu li .sub1 .left{display:block;width:100%;float:left;padding:8px;padding-left:19px;}
+.mainmenu ul.menu li .sub1 .left ul{display:block;width:100%;}
+.mainmenu ul.menu li .sub1 .left ul li{display:block;width:100%;text-align:left;border:none;}
+.mainmenu ul.menu li .sub1 .left ul li a{border:none;color:#000;line-height:16px;padding:0;border-bottom:1px solid #fff;padding-bottom:2px;padding-top:6px;font-weight:normal;font-size:0.87em;letter-spacing:0px;text-transform:initial;}
+.mainmenu ul.menu li .sub1 .left ul li a:hover{color:#ef5f00;}
+.mainmenu ul.menu li .sub1 .right{display:block;width:80%;float:right;padding-top:8px;padding-bottom:18px;}
+.mainmenu ul.menu li .sub1 .right ul{display:block;float:left;width:25%;border-left:1px solid #ddd;padding-left:25px;}
+.mainmenu ul.menu li .sub1 .right ul li{display:block;float:left;width:100%;}
+.mainmenu ul.menu li .sub1 .right ul li p{text-align:left;padding-bottom:10px;display:block;float:left;font-size:12px;font-weight:600;color:#000;}
+.mainmenu ul.menu li .sub1 .right ul li a{display:block;width:100%;text-align:left;font-weight:400;border:none;padding:0px;font-size:11px;padding-top:6px;padding-bottom:6px;color:#484848;}
+.mainmenu ul.menu li .sub1 .right ul li a:hover{color:#ccc;}
+.mainmenu ul.menu .allc .wrp{display:block;width:100%;float:left;flex-direction:row;background:#fff;}
+.mainmenu ul.menu .allc{z-index:999;}
+.mainmenu ul.menu .allc:hover .open{display:flex;}
+.mainmenu ul.menu .allc .open{position:absolute;width:100%;left:0;background:#ffffff;z-index:99;border-top:1px solid #ef5f00;display:none;justify-content:center;flex-wrap:wrap;flex-direction:row;align-content:flex-start;align-items:flex-start;max-width:100%;margin:auto;border-bottom:1px solid #ddd;padding:45px;padding-top:13px;box-shadow:0px 30px 25px #00000012;}
+.mainmenu ul.menu .allc .open li{display:block;float:left;width:200px;}
+.mainmenu ul.menu .allc .open li a{text-align:left;padding-left:0px;display:block;float:left;border:none;padding:9px 0px;}
+.mainmenu ul.menu .allc .open li .open2{display:block;float:left;width:100%;}
+.mainmenu ul.menu .allc .open li .open2 li{width:100%;}
+.mainmenu ul.menu .allc .open li .open2 li a{padding:0;text-align:left;text-transform:capitalize;font-weight:normal;font-size:13px;line-height:21px;color:#000;border:none;}
+.mainmenu ul.menu .allc .open li .open2 li a:hover{color:#e9290f;}
+
+
+@media screen and (max-width:1200px){
+  .menustack{display: none;}
 }
 
-.menustack a {
-  transition: ease-in-out all .1s;
-}
-
-.menustack a:hover {
-  transition: ease-in-out all .1s;
-}
-
-.menustack ul {
-}
-
-.menustack ul li {
-  display: block;
-  float: left;
-}
-
-.menustack .wrapping {
-  display: block;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.menustack .level0 {
-  display: flex;
-  float: left;
-  width: 100%;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: wrap;
-  flex-direction: row;
-}
-
-.menustack .level0 .allcats {
-}
-
-.menustack .level0 .allcats:hover a {
-  background: #fff;
-  height: 38px;
-  border-radius: 0px;
-  color: #000;
-}
-
-.menustack .level0 .allcats a {
-  padding: 3px 15px;
-  height: 37px;
-  display: flex;
-  align-items: center;
-}
-
-.menustack .level0 .allcats .full_cats {
-  background: #686868;
-  color: #fff;
-  border-radius: 40px;
-  font-size: 0.80em;
-  font-weight: 500;
-  height: 27px;
-}
-
-.menustack .level0 .allcats:hover .opener {
-  display: flex;
-}
-
-.menustack .level0 .allcats .full_cats:hover {
-  background: #fff;
-  height: 38px;
-  border-radius: 0px;
-  color: #000;
-}
-
-.menustack .level0 .allcats a:hover {
-}
-
-.menustack .level0 .allcats .opener {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  background: #fff;
-  margin-top: 0;
-  justify-content: center;
-  display: none;
-  padding: 5px 25px;
-  box-shadow: 0 0.125rem 0.375rem rgba(0,0,0,0.05),0 0.5rem 1.2rem rgba(0,0,0,0.1)!important;
-}
-
-.menustack .level0 .allcats .open {
-  display: flex;
-  float: left;
-  width: 100%;
-  justify-content: flex-start;
-  max-width: 1200px;
-  flex-wrap: wrap;
-  flex-direction: row;
-  padding-bottom: 25px;
-}
-
-.menustack .level0 .allcats .open li {
-  display: block;
-  float: left;
-  width: 20%;
-}
-
-.menustack .level0 .allcats .open li a {
-  font-weight: 600;
-  padding: 0px;
-  color: #000;
-  font-size: 0.85em;
-}
-
-.menustack .level0 .allcats .open li .open2 {
-  display: block;
-  float: left;
-  width: 100%;
-}
-
-.menustack .level0 .allcats .open li .open2 li {
-  display: block;
-  float: left;
-  width: 100%;
-}
-
-.menustack .level0 .allcats .open li .open2 li a {
-  display: block;
-  width: 100%;
-  font-weight: normal;
-  font-size: 0.78em;
-  padding: 0px 0px;
-  height: auto;
-  color: #5c636e;
-  line-height: 17px;
-  padding-left: 10px;
-  position: relative;
-}
-
-.menustack .level0 .allcats .open li .open2 li a:before {
-  font-family: "Font Awesome 5 Pro";
-  font-weight: 400;
-  content: "\f105";
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  font-size: 0.75em;
-  color: #bbb;
-  align-items: center;
-  top: 14px;
-  margin-left: 0px;
-  margin-right: 6px;
-}
-
-.menustack .level0 .allcats .open li .open2 li a:hover {
-  color: #f7931e;
-}
-
-.menustack .step1 {
-  display: flex;
-  margin-top: -1px;
-}
-
-.menustack .step1 a {
-  color: #fff;
-  font-size: 0.83em;
-  font-weight: 400;
-  display: flex;
-  padding: 12px 17px;
-}
-
-.menustack .step1 a:after {
-  font-family: "Font Awesome 5 Pro";
-  font-weight: 400;
-  content: "\f107";
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  font-size: 0.75em;
-  color: #bbb;
-  align-items: center;
-  right: 6px;
-  position: absolute;
-  top: 14px;
-}
-
-.menustack .step1 a:hover {
-  background: #fff;
-  color: #000;
-}
-
-.menustack .step1 {
-  position: relative;
-}
-
-.menustack .step1:hover a {
-  background: #fff;
-  color: #000;
-}
-
-.menustack .step1:hover .open {
-  display: flex;
-}
-
-.menustack .step1 .open {
-  position: absolute;
-  background: #fff;
-  width: 350px;
-  display: flex;
-  padding: 15px;
-  top: 37px;
-  justify-content: space-evenly;
-  display: none;
-  box-shadow: 0 0.125rem 0.375rem rgba(0,0,0,0.05),0 0.5rem 1.2rem rgba(0,0,0,0.1)!important;
-}
-
-.menustack .step1 .open .left_con {
-  width: 88%;
-}
-
-.menustack .step1 .open .left_con ul {
-}
-
-.menustack .step1 .open .left_con ul li {
-  width: 100%;
-}
-
-.menustack .step1 .open .left_con ul li a {
-  color: #000;
-  padding: 0px;
-  width: 100%;
-  display: block;
-  padding: 5px 0px;
-  float: left;
-  background: transparent;
-}
-
-.menustack .step1 .open .left_con ul li a:hover {
-  color: #f7931e;
-}
-
-.menustack .step1 .open .right_con {
-  padding-left: 15px;
-  border-left: 1px solid #eee;
-  width: 36%;
-}
-
-.menustack .step1 .open .right_con .title {
-  font-weight: 500;
-  font-size: 0.91em;
-  margin-bottom: 11px;
-}
-
-.menustack .step1 .open .right_con ul {
-  max-height: 150px;
-  overflow-x: hidden;
-}
-
-.menustack .step1 .open .right_con ul li {
-  display: block;
-  float: left;
-  width: 100%;
-}
-
-.menustack .step1 .open .right_con ul li a {
-  color: #000;
-  padding: 5px 0px;
-  font-size: 0.70em;
-  background: transparent;
-}
-
-.menustack .step1 .open .right_con ul li a:hover {
-  color: #f7931e;
-}
-
-.menustack .step1:hover:nth-child(8) .open {
-  margin-left: -80px;
-}
-
-.menustack .step1:hover:nth-child(9) .open {
-  margin-left: -150px;
-}
-
-.menustack .step1:hover:nth-child(10) .open {
-  margin-left: -236px;
-}
-
-.menustack .step1 .open .right_con ul::-webkit-scrollbar {
-  height: 12px;
-  width: 5px;
-  background: #f1f1f1b3;
-  margin: 5px;
-  cursor: pointer;
-}
-
-.menustack .step1 .open .right_con ul::-webkit-scrollbar-thumb {
-  background: #ff6a21;
-}
-
-.menustack .step1 .open .right_con ul::-webkit-scrollbar-corner {
-  background: #cec6c6;
-}
-
-#imobile {
-  position: fixed;
-  background: #fff;
-  width: 100%;
-  max-width: 250px;
-  padding: 0;
-  z-index: 999999;
-  height: 100vh;
-  overflow: auto;
-  left: -300px;
-  overflow-x: hidden;
-  top: 0;
-  transition: all .2s ease-in-out
-}
-#imobile ul {
-  display: block;
-  float: left
-}
-
-#imobile ul li {
-  display: block;
-  float: left;
-  width: 100%;
-  padding: 0px
-}
-
-#imobile ul li a {
-  display: block;
-  float: left;
-  width: 100%;
-  font-size: 13px;
-  padding: 6px 9px
-}
 
 /**/
 
