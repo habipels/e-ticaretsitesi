@@ -41,8 +41,357 @@
 *::after {
   box-sizing: border-box;
 }
+/**/
 
+.menustack {
+  display: flex;
+  float: left;
+  width: 100%;
+  position: relative;
+  z-index: 20;
+  background: #4c4c4c;
+  align-items: center;
+  height: 37px;
+  transition: ease-in-out all .1s;
+  z-index: 999;
+}
 
+.menustack a {
+  transition: ease-in-out all .1s;
+}
+
+.menustack a:hover {
+  transition: ease-in-out all .1s;
+}
+
+.menustack ul {
+}
+
+.menustack ul li {
+  display: block;
+  float: left;
+}
+
+.menustack .wrapping {
+  display: block;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.menustack .level0 {
+  display: flex;
+  float: left;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.menustack .level0 .allcats {
+}
+
+.menustack .level0 .allcats:hover a {
+  background: #fff;
+  height: 38px;
+  border-radius: 0px;
+  color: #000;
+}
+
+.menustack .level0 .allcats a {
+  padding: 3px 15px;
+  height: 37px;
+  display: flex;
+  align-items: center;
+}
+
+.menustack .level0 .allcats .full_cats {
+  background: #686868;
+  color: #fff;
+  border-radius: 40px;
+  font-size: 0.80em;
+  font-weight: 500;
+  height: 27px;
+}
+
+.menustack .level0 .allcats:hover .opener {
+  display: flex;
+}
+
+.menustack .level0 .allcats .full_cats:hover {
+  background: #fff;
+  height: 38px;
+  border-radius: 0px;
+  color: #000;
+}
+
+.menustack .level0 .allcats a:hover {
+}
+
+.menustack .level0 .allcats .opener {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  background: #fff;
+  margin-top: 0;
+  justify-content: center;
+  display: none;
+  padding: 5px 25px;
+  box-shadow: 0 0.125rem 0.375rem rgba(0,0,0,0.05),0 0.5rem 1.2rem rgba(0,0,0,0.1)!important;
+}
+
+.menustack .level0 .allcats .open {
+  display: flex;
+  float: left;
+  width: 100%;
+  justify-content: flex-start;
+  max-width: 1200px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding-bottom: 25px;
+}
+
+.menustack .level0 .allcats .open li {
+  display: block;
+  float: left;
+  width: 20%;
+}
+
+.menustack .level0 .allcats .open li a {
+  font-weight: 600;
+  padding: 0px;
+  color: #000;
+  font-size: 0.85em;
+}
+
+.menustack .level0 .allcats .open li .open2 {
+  display: block;
+  float: left;
+  width: 100%;
+}
+
+.menustack .level0 .allcats .open li .open2 li {
+  display: block;
+  float: left;
+  width: 100%;
+}
+
+.menustack .level0 .allcats .open li .open2 li a {
+  display: block;
+  width: 100%;
+  font-weight: normal;
+  font-size: 0.78em;
+  padding: 0px 0px;
+  height: auto;
+  color: #5c636e;
+  line-height: 17px;
+  padding-left: 10px;
+  position: relative;
+}
+
+.menustack .level0 .allcats .open li .open2 li a:before {
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 400;
+  content: "\f105";
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-size: 0.75em;
+  color: #bbb;
+  align-items: center;
+  top: 14px;
+  margin-left: 0px;
+  margin-right: 6px;
+}
+
+.menustack .level0 .allcats .open li .open2 li a:hover {
+  color: #f7931e;
+}
+
+.menustack .step1 {
+  display: flex;
+  margin-top: -1px;
+}
+
+.menustack .step1 a {
+  color: #fff;
+  font-size: 0.83em;
+  font-weight: 400;
+  display: flex;
+  padding: 12px 17px;
+}
+
+.menustack .step1 a:after {
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 400;
+  content: "\f107";
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font-size: 0.75em;
+  color: #bbb;
+  align-items: center;
+  right: 6px;
+  position: absolute;
+  top: 14px;
+}
+
+.menustack .step1 a:hover {
+  background: #fff;
+  color: #000;
+}
+
+.menustack .step1 {
+  position: relative;
+}
+
+.menustack .step1:hover a {
+  background: #fff;
+  color: #000;
+}
+
+.menustack .step1:hover .open {
+  display: flex;
+}
+
+.menustack .step1 .open {
+  position: absolute;
+  background: #fff;
+  width: 350px;
+  display: flex;
+  padding: 15px;
+  top: 37px;
+  justify-content: space-evenly;
+  display: none;
+  box-shadow: 0 0.125rem 0.375rem rgba(0,0,0,0.05),0 0.5rem 1.2rem rgba(0,0,0,0.1)!important;
+}
+
+.menustack .step1 .open .left_con {
+  width: 88%;
+}
+
+.menustack .step1 .open .left_con ul {
+}
+
+.menustack .step1 .open .left_con ul li {
+  width: 100%;
+}
+
+.menustack .step1 .open .left_con ul li a {
+  color: #000;
+  padding: 0px;
+  width: 100%;
+  display: block;
+  padding: 5px 0px;
+  float: left;
+  background: transparent;
+}
+
+.menustack .step1 .open .left_con ul li a:hover {
+  color: #f7931e;
+}
+
+.menustack .step1 .open .right_con {
+  padding-left: 15px;
+  border-left: 1px solid #eee;
+  width: 36%;
+}
+
+.menustack .step1 .open .right_con .title {
+  font-weight: 500;
+  font-size: 0.91em;
+  margin-bottom: 11px;
+}
+
+.menustack .step1 .open .right_con ul {
+  max-height: 150px;
+  overflow-x: hidden;
+}
+
+.menustack .step1 .open .right_con ul li {
+  display: block;
+  float: left;
+  width: 100%;
+}
+
+.menustack .step1 .open .right_con ul li a {
+  color: #000;
+  padding: 5px 0px;
+  font-size: 0.70em;
+  background: transparent;
+}
+
+.menustack .step1 .open .right_con ul li a:hover {
+  color: #f7931e;
+}
+
+.menustack .step1:hover:nth-child(8) .open {
+  margin-left: -80px;
+}
+
+.menustack .step1:hover:nth-child(9) .open {
+  margin-left: -150px;
+}
+
+.menustack .step1:hover:nth-child(10) .open {
+  margin-left: -236px;
+}
+
+.menustack .step1 .open .right_con ul::-webkit-scrollbar {
+  height: 12px;
+  width: 5px;
+  background: #f1f1f1b3;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.menustack .step1 .open .right_con ul::-webkit-scrollbar-thumb {
+  background: #ff6a21;
+}
+
+.menustack .step1 .open .right_con ul::-webkit-scrollbar-corner {
+  background: #cec6c6;
+}
+
+#imobile {
+  position: fixed;
+  background: #fff;
+  width: 100%;
+  max-width: 250px;
+  padding: 0;
+  z-index: 999999;
+  height: 100vh;
+  overflow: auto;
+  left: -300px;
+  overflow-x: hidden;
+  top: 0;
+  transition: all .2s ease-in-out
+}
+#imobile ul {
+  display: block;
+  float: left
+}
+
+#imobile ul li {
+  display: block;
+  float: left;
+  width: 100%;
+  padding: 0px
+}
+
+#imobile ul li a {
+  display: block;
+  float: left;
+  width: 100%;
+  font-size: 13px;
+  padding: 6px 9px
+}
+
+/**/
 
 html {
   font-family: sans-serif;

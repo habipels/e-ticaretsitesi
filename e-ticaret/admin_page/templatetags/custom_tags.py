@@ -102,3 +102,39 @@ def carpma(a,b):
 @register.simple_tag
 def sepet_toplam_tutar(bilgi):
     return 0
+
+
+@register.simple_tag
+def kategoi_bilgisi_duzednleme(id):
+    veri = ''
+    if id == "":
+        a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None)
+        for i  in a:
+            z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id)
+            
+            if z.count() > 0:
+                veri = veri+ '''<div class="nav-item dropdown">
+                            <a href="#" class="nav-link" data-toggle="dropdown">{} <i class="fa fa-angle-down float-right mt-1"></i></a>
+                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">'''.format(str(i.kategori))
+                for j in z:
+                    veri = veri+'<a href="" class="dropdown-item">{}</a>'.format(str(kategoi_bilgisi_duzednleme(j.id)))
+                veri = veri + '''</div>
+                        </div>'''
+            else:
+                veri = veri+ '<a href="" class="nav-item nav-link">{} </a>'.format(str(i.kategori))
+    else:
+        a = Meslek.objects.filter(silinme_bilgisi = False,id = id)    
+        for i  in a:
+            z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id)
+            
+            if z.count() > 0:
+                veri = veri+ '''<div class="nav-item dropdown">
+                            <a href="#" class="nav-link" data-toggle="dropdown"> {} <i class="fa fa-angle-down float-right mt-1"></i></a>
+                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">'''.format(str(i.kategori))
+                for j in z:
+                    veri = veri+'<a href="" class="dropdown-item">{}</a>'.format(str(kategoi_bilgisi_duzednleme(j.id)))
+                veri = veri + '''</div>
+                        </div>'''
+            else:
+                veri = veri+ '<a href="" class="nav-item nav-link">{}</a>'.format(str(i.kategori))
+    return  mark_safe(veri)
