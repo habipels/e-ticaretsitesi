@@ -79,7 +79,7 @@
                 <a href="" class="btn border">Logout</a>
                 <a href="/sepetebak" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge">{{ request.user | sepetteki_urun_sayisi}}</span>
+                    <span style="color: black !important" class="badge">{{ request.user | sepetteki_urun_sayisi}}</span>
                 </a>
                 {% else %}
                 <a href="" class="btn border">Login</a>
@@ -90,7 +90,7 @@
                 </a>
                 <a href="/sepetebak" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge">{{ request | sepetteki_urun_sayisi_kullan}}</span>
+                    <span style="color: black !important" class="badge">{{ request | sepetteki_urun_sayisi_kullan}}</span>
                 </a>
                 {% endif %}
                 

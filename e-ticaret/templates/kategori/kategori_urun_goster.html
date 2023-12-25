@@ -1,0 +1,70 @@
+{% extends "homebase.html" %}
+{% load custom_tags %}
+
+{% block slider %}
+    
+    <!-- Products Start -->
+    <div class="container-fluid pt-5 mt-2">
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">Ürünler</span></h2>
+        </div>
+        <div class="row px-xl-5 pb-3">
+            
+            {% for i in santiyeler %}
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="card product-item border-0 mb-4">
+                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                        <img style="max-height: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
+                    </div>
+                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                        <h6 class="text-truncate mb-3">{{i.urun_adi}}</h6>
+                        <div class="d-flex justify-content-center">
+                            <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between bg-light border">
+                        <a href="/urun/{{i.id}}/{{i.urun_adi}}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ürünü Gör</a>
+                        <a href="/sepet/{{i.id}}/{{i.urun_adi}}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="pagination-wrap hstack gap-2 container">
+                                            <ul class="pagination pagination-m justify-content-center">
+
+                                                {% if medya.has_previous %}
+                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">« Previous page</a></li>
+                                                
+                                                  {% if medya.number > 3 %}
+                                                
+                                                    <li class="page-item"><a class="page-link" href="?page=1{{ medya.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">1</a></li>
+                                                    {% if medya.number > 4 %}
+                                                      <li class="page-item"><span class="page-link">...</span></li>
+                                                    {% endif %}
+                                                  {% endif %}
+                                                {% endif %}
+                                                
+                                                {% for num in medya.paginator.page_range %}
+                                                  {% if medya.number == num %}
+                                                    <li class="page-item"><a class="page-link " style="color:black;" href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ num }}</a></li>
+                                                  {% elif num > medya.number|add:'-3' and num < medya.number|add:'3' %}
+                                                    <li class="page-item"><a class="page-link" href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ num }}</a></li>
+                                                  {% endif %}
+                                                {% endfor %}
+                                                
+                                                {% if medya.has_next %}
+                                                  {% if medya.number < medya.paginator.num_pages|add:'-3' %}
+                                                    <li class="page-item"><span class="page-link">...</span></li>
+                                                    <li class="page-item"><a class="page-link" href="?page={{ medya.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ medya.paginator.num_pages }}</a></li>
+                                                  {% elif medya.number < medya.paginator.num_pages|add:'-2' %}
+                                                    <li class="page-item"><a class="page-link" href="?page={{ medya.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ medya.paginator.num_pages }}</a></li>
+                                                  {% endif %}
+                                                
+                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">Next Page »</a></li>
+                                                {% endif %}
+                                                </ul>
+                                        </div>
+    <!-- Products End -->
+{% endblock slider %}

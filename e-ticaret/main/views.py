@@ -201,3 +201,31 @@ def sepete_urun_ekleme_sepette_silme(request,id,slug):
             sepetteki_urunler.objects.create(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) )
     return redirect("/sepetebak")
+
+def kategori_ver_urunleri_gosterme(request,id,slug):
+    content = site_bilgileri()
+    
+    kategorileri = []
+    a = get_object_or_404(Meslek,id = id)
+    tum_kategoriler = []
+    for i in Meslek.objects.filter(silinme_bilgisi = False):
+        if a.kategori in i.__str__() :
+            tum_kategoriler.append(i.id)
+    profile = urun.objects.filter(urun_stok__gte=1,kategori__id__in = tum_kategoriler).distinct()
+    if request.GET.get("search"):
+        search = request.GET.get("search")
+        profile = urun.objects.filter(Q(kategori__id__in = tum_kategoriler)&Q(urun_adi__icontains = search)  & Q(urun_stok__gte=1) ).distinct()
+    page_num = request.GET.get('page', 1)
+    paginator = Paginator(profile, 20) # 6 employees per page
+    try:
+        page_obj = paginator.page(page_num)
+    except PageNotAnInteger:
+            # if page is not an integer, deliver the first page
+        page_obj = paginator.page(1)
+    except EmptyPage:
+            # if the page is out of range, deliver the last page
+        page_obj = paginator.page(paginator.num_pages)
+    content["santiyeler"] = page_obj
+    content["top"]  = profile
+    content["medya"] = page_obj
+    return render(request,"kategori/kategori_urun_goster.html",content)

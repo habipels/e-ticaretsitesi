@@ -64,7 +64,7 @@
 .menustack .level0 .allcats .open li .open2{display:block;float:left;width:100%;}
 .menustack .level0 .allcats .open li .open2 li{display:block;float:left;width:100%;}
 .menustack .level0 .allcats .open li .open2 li a{display:block;width:100%;font-weight:normal;font-size:0.78em;padding:0px 0px;height:auto;color:#5c636e;line-height:17px;padding-left:10px;position:relative;}
-.menustack .level0 .allcats .open li .open2 li a:before{font-family:"Font Awesome 5 Pro";font-weight:400;content:"\f105";display:inline-block;font-style:normal;font-variant:normal;text-rendering:auto;-webkit-font-smoothing:antialiased;font-size:0.75em;color:#bbb;align-items:center;top:14px;margin-left:0px;margin-right:6px;}
+.menustack .level0 .allcats .open li .open2 li a:before{font-family:"Font Awesome 5 Pro";font-weight:400;display:inline-block;font-style:normal;font-variant:normal;text-rendering:auto;-webkit-font-smoothing:antialiased;font-size:0.75em;color:#bbb;align-items:center;top:14px;margin-left:0px;margin-right:6px;}
 .menustack .level0 .allcats .open li .open2 li a:hover{color:#f7931e;}
 .menustack .step1{display:flex;margin-top:-1px;}
 .menustack .step1 a{color:#fff;font-size:0.83em;font-weight:400;display:flex;padding:12px 17px;}
@@ -122,146 +122,38 @@
 .mainmenu ul.menu .allc .open li{display:block;float:left;width:200px;}
 .mainmenu ul.menu .allc .open li a{text-align:left;padding-left:0px;display:block;float:left;border:none;padding:9px 0px;}
 .mainmenu ul.menu .allc .open li .open2{display:block;float:left;width:100%;}
-.mainmenu ul.menu .allc .open li .open2 li{width:100%;}
+.mainmenu ul.menu .allc .open li .open2 li{width:100%; margin-left: 0px !important;}
 .mainmenu ul.menu .allc .open li .open2 li a{padding:0;text-align:left;text-transform:capitalize;font-weight:normal;font-size:13px;line-height:21px;color:#000;border:none;}
 .mainmenu ul.menu .allc .open li .open2 li a:hover{color:#e9290f;}
-#imobile{display: none;}
-#imobile {
-  position: fixed;
-  background: #fff;
-  width: 100%;
-  max-width: 250px;
-  padding: 0;
-  z-index: 999999;
-  height: 100vh;
-  overflow: auto;
-  left: -300px;
-  overflow-x: hidden;
-  top: 0;
-  transition: all .2s ease-in-out
+#imobile{
+  display: none;
 }
-#imobile ul {
-  display: block;
-  float: left
+@media screen and (max-width: 1024px) {
+  #iopen {
+    display: block;
+    z-index: 99999999999999;
+    position: fixed;
+    top: 10px;
+   
+}
+#imobile{display: block;}
+}
+@media screen and (max-width: 600px) {
+
+  #iopen {
+    display: block;
+    z-index: 9999;
+    position: fixed;
+    top: 10px;
+}
+#imobile{display: block;}
 }
 
-#imobile ul li {
-  display: block;
-  float: left;
-  width: 100%;
-  padding: 0px
-}
-
-#imobile ul li a {
-  display: block;
-  float: left;
-  width: 100%;
-  font-size: 13px;
-  padding: 6px 9px
-}
-.overback {
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  background: #0000008f;
-  z-index: 999999;
-  display: none
-}
-.overback {
-  backdrop-filter: none !important
-}
-.overback{display: none;}
-#imobmenu {
-}
-
-#imobmenu ul {
-    width: 100%
-}
-
-#imobmenu ul li {
-    width: 100%
-}
-
-#imobmenu ul li a {
-}
-
-#imobmenu ul li ul {
-}
-
-#imobmenu ul li ul li {
-}
-
-#imobmenu ul li ul li a {
-}
-
-#imobmenu .step1 a {
-    font-size: 14px;
-    font-weight: 600;
-    color: #000;
-    padding: 10px;
-    border-bottom: 1px solid #eee
-}
-
-#imobmenu .step2 a {
-    font-size: 13px;
-    font-weight: 600;
-    padding: 10px 11px
-}
-
-#imobmenu .step3 a {
-    font-size: 12px;
-    font-weight: normal;
-    padding-left: 26px
-}
-
-#imobmenu .step4 a {
-    font-size: 11px;
-    padding-left: 41px
-}
-
-#imobmenu ul li.step1 {
-}
-
-#imobmenu ul li.step1 {
-}
-
-#imobmenu .sub1 {
-    display: none
-}
-
-#imobmenu .sub2 {
-    display: none
-}
-
-#imobmenu .sub3 {
-    display: none
-}
-
-#imobmenu .sub4 {
-    display: none
-}
-
-#imobmenu .backtomain {
-    color: #ffffff !important;
-    background: #bbb;
-    border-bottom: none !important;
-    text-align: center
-}
-
-#imobmenu .viewall {
-    text-align: center;
-    color: #294c8c !important;
-    font-size: 14px !important;
-    background: #dddddd52
-}
-
-#imobmenu .fa-angle-down {
-    float: right
-}
 @media screen and (max-width:1200px){
   .menustack{display: none;}
-  #imobile{display: block;}
+ 
   .overback{display: block ;}
+  #imobile{display: block;}
 }
 
 

@@ -113,28 +113,22 @@ def kategoi_bilgisi_duzednleme(id):
             z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id)
             
             if z.count() > 0:
-                veri = veri+ '''<div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown">{} <i class="fa fa-angle-down float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">'''.format(str(i.kategori))
+                veri = veri+ '<li class="allcats"><a class="full_cats" href="/kategori/{}/{}/"> <i class="fas fa fa-sort-down"></i> {}</a><div class="opener"><ul class="open">'.format(str(i.id),str(i.link),str(i.kategori))
                 for j in z:
-                    veri = veri+'<a href="" class="dropdown-item">{}</a>'.format(str(kategoi_bilgisi_duzednleme(j.id)))
-                veri = veri + '''</div>
-                        </div>'''
+                    veri = veri+str(kategoi_bilgisi_duzednleme(j.id))
+                veri = veri + '</ul></div></li>'
             else:
-                veri = veri+ '<a href="" class="nav-item nav-link">{} </a>'.format(str(i.kategori))
+                veri = veri+ '<li class="allcats"><a class="full_cats" href="/kategori/{}/{}/">{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
     else:
         a = Meslek.objects.filter(silinme_bilgisi = False,id = id)    
         for i  in a:
             z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id)
             
             if z.count() > 0:
-                veri = veri+ '''<div class="nav-item dropdown">
-                            <a href="#" class="nav-link" data-toggle="dropdown"> {} <i class="fa fa-angle-down float-right mt-1"></i></a>
-                            <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">'''.format(str(i.kategori))
+                veri = veri+ '<li> <a href="/kategori/{}/{}/"><i class="fas fa fa-sort-down"></i> {}</a><ul class="open2">'.format(str(i.id),str(i.link),str(i.kategori))
                 for j in z:
-                    veri = veri+'<a href="" class="dropdown-item">{}</a>'.format(str(kategoi_bilgisi_duzednleme(j.id)))
-                veri = veri + '''</div>
-                        </div>'''
+                    veri = veri+'{}'.format(str(kategoi_bilgisi_duzednleme(j.id)))
+                veri = veri + "</ul></li>"
             else:
-                veri = veri+ '<a href="" class="nav-item nav-link">{}</a>'.format(str(i.kategori))
+                veri = veri+ '<li class="allcats"><a class="full_cats" href="/kategori/{}/{}/"><i class="fas fa fa-sort-down"></i> {}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
     return  mark_safe(veri)
