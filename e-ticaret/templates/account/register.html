@@ -1,0 +1,63 @@
+{% extends 'homebase.html' %}
+{% load static %}
+
+
+{% block title %}Sign Up{% endblock title %}
+    
+{% block content %}
+                        <div class="p-lg-5 p-4">
+                            <div>
+                                <h5 class="text-primary">Kayıt Ol</h5>
+                                <p class="text-muted">Giriş Yapabilmek İçin Kayıt Ol</p>
+                            </div>
+
+                            <div class="mt-4">
+                                <form class="needs-validation" novalidate method="post" action="">
+                                    {% for message in messages %}
+                                        <div class="alert {{ message.tags }} mb-4" role="alert">
+                                            <strong>{{ message }}</strong>
+                                        </div>
+                                    {% endfor %} 
+                                    {% if field.help_text %}
+                                        <div class="alert alert-danger mb-4" role="alert">
+                                            <strong>{{ field.help_text }}</strong>
+                                        </div>
+                                    {% endif %}
+                                    {% if redirect_field_value %}
+                                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                    {% endif %}
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        {{form.email_address }}
+                                    </div>
+                                    <div class="mb-3">
+                                        {{form.username }}
+                                    </div>
+                                    
+                                    <div class="mb-2">
+                                        {{form.password }}
+                                    </div>
+
+                                    <div class="mb-2">
+                                        {{form.confirm }}
+                                    </div>
+
+                                    <div class="mb-4">
+                                        
+                                        <p class="mb-0 fs-12 text-muted fst-italic"> <input type="radio" class=""> <a href="#" class="text-primary text-decoration-underline fst-normal fw-medium">Üyelik koşullarını ve kişisel verilerimin korunmasını kabul ediyorum.</a></p>
+                                    </div>
+                                    
+                                    <div class="mt-4">
+                                        <button class="btn btn-success w-100" type="submit">Kayıt Ol</button>
+                                    </div>
+                                </form>
+                                <div class="mt-4 text-center">
+                                    
+                                </div>
+                            </div>
+
+                            <div class="mt-5 text-center">
+                                <p class="mb-0">Hesabın Var Mı ? <a href="/users/login/" class="fw-semibold text-primary text-decoration-underline"> Giriş Yap</a> </p>
+                            </div>
+                        </div>
+{% endblock content %}
