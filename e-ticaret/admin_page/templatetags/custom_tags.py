@@ -100,10 +100,68 @@ def sepetteki_urun_sayisi_kullan(stok_kart):
 def carpma(a,b):
     return round(float(a*b), 2)
 @register.simple_tag
-def sepet_toplam_tutar(bilgi):
-    return 0
+def sepet_toplam_tutar(request):
+    if request.user.is_authenticated:
+        try:
+            sepet_olusturma.objects.get(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
+        except:
+            sepet_olusturma.objects.create(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
+        veriler = sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user).last() )
+    else:
+        try:
+            sepet_olusturma_ip.objects.get(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
+        except:
+            sepet_olusturma_ip.objects.create(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
+        veriler =sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last() )
+    toplam_tutar = 0
+    for i in veriler:
+        toplam_tutar = toplam_tutar+ (i.urun_adedi * i.urun_bilgisi.fiyat)
+    return round(float(toplam_tutar), 2)
 
-
+@register.simple_tag
+def sepet_toplam_tutar_k(request):
+    if request.user.is_authenticated:
+        try:
+            sepet_olusturma.objects.get(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
+        except:
+            sepet_olusturma.objects.create(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
+        veriler = sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user).last() )
+    else:
+        try:
+            sepet_olusturma_ip.objects.get(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
+        except:
+            sepet_olusturma_ip.objects.create(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
+        veriler =sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last() )
+    toplam_tutar = 0
+    for i in veriler:
+        toplam_tutar = toplam_tutar+ (i.urun_adedi * i.urun_bilgisi.fiyat)
+    if toplam_tutar > 350:
+        toplam_tutar = "<del>150 TL </del>"
+    else:
+        toplam_tutar = "150 TL "
+    return mark_safe(toplam_tutar)
+@register.simple_tag
+def sepet_toplam_tutar_t(request):
+    if request.user.is_authenticated:
+        try:
+            sepet_olusturma.objects.get(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
+        except:
+            sepet_olusturma.objects.create(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
+        veriler = sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user).last() )
+    else:
+        try:
+            sepet_olusturma_ip.objects.get(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
+        except:
+            sepet_olusturma_ip.objects.create(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
+        veriler =sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last() )
+    toplam_tutar = 0
+    for i in veriler:
+        toplam_tutar = toplam_tutar+ (i.urun_adedi * i.urun_bilgisi.fiyat)
+    if toplam_tutar > 350:
+        toplam_tutar = toplam_tutar
+    else:
+        toplam_tutar = toplam_tutar + 350
+    return round(float(toplam_tutar), 2)
 @register.simple_tag
 def kategoi_bilgisi_duzednleme(id):
     veri = ''
