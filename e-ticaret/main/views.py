@@ -234,3 +234,21 @@ def kategori_ver_urunleri_gosterme(request,id,slug):
     content["top"]  = profile
     content["medya"] = page_obj
     return render(request,"kategori/kategori_urun_goster.html",content)
+
+
+def odeme_sayfasi(request):
+    content = site_bilgileri()
+    if request.user.is_authenticated:
+        try:
+            sepet_olusturma.objects.get(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
+        except:
+            sepet_olusturma.objects.create(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
+        veriler = sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user).last() )
+    else:
+        try:
+            sepet_olusturma_ip.objects.get(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
+        except:
+            sepet_olusturma_ip.objects.create(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
+        veriler =sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last() )
+    content["sepet_urunleri"] =veriler
+    return render(request,"odeme/odeme.html",content)

@@ -1,28 +1,8 @@
-<li class="allcats"><a class="full_cats" href="javascript:void(0);">Tüm Kategoriler</a>
-                <div class="opener">
-                    <ul class="open">
-                        <li> <a href="fren-sistemi">Fren Sistemi</a>
-                            <ul class="open2">
-                                <li><a href="fren-ana-merkez">Fren Ana Merkez</a></li>
-                                <li><a href="fren-diski">Fren Diski</a></li>
-                                <li><a href="fren-hidrovak-westinghouse-servo">Fren Hidrovak, Westinghouse,
-                                        Servo</a></li>
-                                <li><a href="fren-hortumu">Fren Hortumu</a></li>
-                                <li><a href="fren-sistemi" style="font-size: 0.65em; color: #f1a355;">Tümünü Gör</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li> <a href="teker-aks-ve-suspansiyon">Teker,Aks ve Süspansiyon</a>
-                            <ul class="open2">
-                                <li><a href="porya-poyra">Porya, Poyra</a></li>
-                                <li><a href="bijon-saplamasi-somunu">Bijon Saplaması, Somunu</a></li>
-                                <li><a href="teker-ve-porya-rulmanlari">Teker ve Porya Rulmanları</a></li>
-                                <li><a href="amortisor-arka">Amortisör Arka</a></li>
-                                <li><a href="teker-aks-ve-suspansiyon" style="font-size: 0.65em; color: #f1a355;">Tümünü
-                                        Gör</a></li>
-                            </ul>
-                        </li>
+kalan
+************
 
-                    </ul>
-                </div>
-            </li>
+kategoride sol filtre 
+girişliyken profil ve geçmiş siparişler olayı ekleme 
+sipariş ödeme sayfası 
+
+bu olayı adminde gösterme olayı 
