@@ -116,9 +116,11 @@ def sepete_urun_ekleme_sepette(request,id,slug):
             a = sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) ).last()
             adet = a.urun_adedi +1
-            sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
-                                         urun_bilgisi = get_object_or_404(urun,id = id) ).update(urun_adedi = adet)
-            
+            try:
+                sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
+                                         urun_bilgisi = get_object_or_404(urun,id = id,urun_stok__gte = adet) ).update(urun_adedi = adet)
+            except:
+                pass
         except:
             sepetteki_urunler.objects.create(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) )
@@ -132,8 +134,11 @@ def sepete_urun_ekleme_sepette(request,id,slug):
             a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) ).last()
             adet = a.urun_adedi +1
-            sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last(),
-                                         urun_bilgisi = get_object_or_404(urun,id = id) ).update(urun_adedi = adet)
+            try:
+                sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last(),
+                                         urun_bilgisi = get_object_or_404(urun,id = id,urun_stok__gte = adet) ).update(urun_adedi = adet)
+            except:
+                pass
         except:
             sepetteki_urunler.objects.create(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) )
