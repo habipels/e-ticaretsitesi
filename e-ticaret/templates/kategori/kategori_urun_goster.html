@@ -10,8 +10,8 @@ a {font-size: small; margin-top: 10px; position: relative; display: inline-block
 .min-max-slider {position: relative; width: 200px; text-align: center; margin-bottom: 50px;}
 .min-max-slider > label {display: none;}
 span.value {height: 1.7em; font-weight: bold; display: inline-block;}
-span.value.lower::before {content: "TL "; display: inline-block;}
-span.value.upper::before {content: "- TL "; display: inline-block; margin-left: 0.4em;}
+span.value.lower::before {content: "₺ "; display: inline-block;}
+span.value.upper::before {content: "- ₺ "; display: inline-block; margin-left: 0.4em;}
 .min-max-slider > .legend {display: flex; justify-content: space-between;}
 .min-max-slider > .legend > * {font-size: small; opacity: 0.25;}
 .min-max-slider > input {cursor: pointer; position: absolute;}
@@ -42,6 +42,7 @@ span.value.upper::before {content: "- TL "; display: inline-block; margin-left: 
             <!-- Shop Sidebar Start -->
             <div class="col-lg-3 col-md-12">
                 <!-- Price Start -->
+                <form>
                 <div class="border-bottom mb-4 pb-4">
                     <h5 class="font-weight-semi-bold mb-4">Fiyat Aralığı</h5>
                     <div class="min-max-slider" data-legendnum="2">
@@ -55,8 +56,8 @@ span.value.upper::before {content: "- TL "; display: inline-block; margin-left: 
                 
                 <!-- Color Start -->
                 <div class="border-bottom mb-4 pb-4">
-                    <h5 class="font-weight-semi-bold mb-4">Filter by color</h5>
-                    <form>
+                    <h5 class="font-weight-semi-bold mb-4">Marka</h5>
+                    
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="checkbox" class="custom-control-input" checked id="color-all">
                             <label class="custom-control-label" for="price-all">All Color</label>
@@ -87,50 +88,15 @@ span.value.upper::before {content: "- TL "; display: inline-block; margin-left: 
                             <label class="custom-control-label" for="color-5">Green</label>
                             <span class="badge border font-weight-normal">168</span>
                         </div>
+                        <div class="border-bottom mt-4 pb-4">
+                          <button class="btn btn-info"  type="submit">ARA</button>
+                      </div>
+                        
                     </form>
                 </div>
                 <!-- Color End -->
 
-                <!-- Size Start -->
-                <div class="mb-5">
-                    <h5 class="font-weight-semi-bold mb-4">Filter by size</h5>
-                    <form>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="size-all">
-                            <label class="custom-control-label" for="size-all">All Size</label>
-                            <span class="badge border font-weight-normal">1000</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-1">
-                            <label class="custom-control-label" for="size-1">XS</label>
-                            <span class="badge border font-weight-normal">150</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-2">
-                            <label class="custom-control-label" for="size-2">S</label>
-                            <span class="badge border font-weight-normal">295</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-3">
-                            <label class="custom-control-label" for="size-3">M</label>
-                            <span class="badge border font-weight-normal">246</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="size-4">
-                            <label class="custom-control-label" for="size-4">L</label>
-                            <span class="badge border font-weight-normal">145</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                            <input type="checkbox" class="custom-control-input" id="size-5">
-                            <label class="custom-control-label" for="size-5">XL</label>
-                            <span class="badge border font-weight-normal">168</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                          <button>Ara</button>
-                      </div>
-                    </form>
-                </div>
-                <!-- Size End -->
+
             </div>
             <!-- Shop Sidebar End -->
 
@@ -172,7 +138,7 @@ span.value.upper::before {content: "- TL "; display: inline-block; margin-left: 
                             <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                                 <h6 class="text-truncate mb-3">{{i.urun_adi}}</h6>
                                 <div class="d-flex justify-content-center">
-                                    <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
+                                    <h6>₺ {{i.fiyat}} </h6><h6 class="text-muted ml-2"><del></del></h6>
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-between bg-light border">
