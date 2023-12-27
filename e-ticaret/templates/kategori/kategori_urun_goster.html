@@ -3,8 +3,7 @@
 
 {% block slider %}
 <style>
-  * {padding: 0; margin: 0;}
-body {padding: 40px;}
+
 a {font-size: small; margin-top: 10px; position: relative; display: inline-block;}
 
 .min-max-slider {position: relative; width: 200px; text-align: center; margin-bottom: 50px;}
@@ -57,43 +56,22 @@ span.value.upper::before {content: "- ₺ "; display: inline-block; margin-left:
                 <!-- Color Start -->
                 <div class="border-bottom mb-4 pb-4">
                     <h5 class="font-weight-semi-bold mb-4">Marka</h5>
-                    
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="color-all">
-                            <label class="custom-control-label" for="price-all">All Color</label>
-                            <span class="badge border font-weight-normal">1000</span>
+                        {% for i in filtre %}
+                          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" name="marka" value="{{i.id}}"  id="color-all{{i.id}}">
+                            <label class="custom-control-label" for="color-all{{i.id}}">{{i.filtre_adi}}</label>
+                            
                         </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-1">
-                            <label class="custom-control-label" for="color-1">Black</label>
-                            <span class="badge border font-weight-normal">150</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-2">
-                            <label class="custom-control-label" for="color-2">White</label>
-                            <span class="badge border font-weight-normal">295</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-3">
-                            <label class="custom-control-label" for="color-3">Red</label>
-                            <span class="badge border font-weight-normal">246</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="color-4">
-                            <label class="custom-control-label" for="color-4">Blue</label>
-                            <span class="badge border font-weight-normal">145</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                            <input type="checkbox" class="custom-control-input" id="color-5">
-                            <label class="custom-control-label" for="color-5">Green</label>
-                            <span class="badge border font-weight-normal">168</span>
-                        </div>
+                        {% endfor %}
+                        
+                        
                         <div class="border-bottom mt-4 pb-4">
                           <button class="btn btn-info"  type="submit">ARA</button>
                       </div>
                         
-                    </form>
+                   
                 </div>
+                 </form>
                 <!-- Color End -->
 
 

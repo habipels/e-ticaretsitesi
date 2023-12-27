@@ -220,6 +220,7 @@ def kategori_ver_urunleri_gosterme(request,id,slug):
     if request.GET.get("search"):
         search = request.GET.get("search")
         profile = urun.objects.filter(Q(kategori__id__in = tum_kategoriler)&Q(urun_adi__icontains = search)  & Q(urun_stok__gte=1) ).distinct()
+    content["filtre"] = filtre_icerigi.objects.filter(filtre_bagli_oldu_filtre__filtre_adi = "MARKA",filtre_bagli_oldu_filtre__filtre_bagli_oldu_kategori__id__in=tum_kategoriler)
     page_num = request.GET.get('page', 1)
     paginator = Paginator(profile, 20) # 6 employees per page
     try:
