@@ -2,37 +2,189 @@
 {% load custom_tags %}
 
 {% block slider %}
-    
-    <!-- Products Start -->
-    <div class="container-fluid pt-5 mt-2">
-        <div class="text-center mb-4">
-            <h2 class="section-title px-5"><span class="px-2">Ürünler</span></h2>
-        </div>
-        <div class="row px-xl-5 pb-3">
-            
-            {% for i in santiyeler %}
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img style="max-height: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-                    </div>
-                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <h6 class="text-truncate mb-3">{{i.urun_adi}}</h6>
-                        <div class="d-flex justify-content-center">
-                            <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
+<style>
+  * {padding: 0; margin: 0;}
+body {padding: 40px;}
+a {font-size: small; margin-top: 10px; position: relative; display: inline-block;}
+
+.min-max-slider {position: relative; width: 200px; text-align: center; margin-bottom: 50px;}
+.min-max-slider > label {display: none;}
+span.value {height: 1.7em; font-weight: bold; display: inline-block;}
+span.value.lower::before {content: "TL "; display: inline-block;}
+span.value.upper::before {content: "- TL "; display: inline-block; margin-left: 0.4em;}
+.min-max-slider > .legend {display: flex; justify-content: space-between;}
+.min-max-slider > .legend > * {font-size: small; opacity: 0.25;}
+.min-max-slider > input {cursor: pointer; position: absolute;}
+
+/* webkit specific styling */
+.min-max-slider > input {
+  -webkit-appearance: none;
+  outline: none!important;
+  background: transparent;
+  background-image: linear-gradient(to bottom, transparent 0%, transparent 30%, silver 30%, silver 60%, transparent 60%, transparent 100%);
+}
+.min-max-slider > input::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 14px; /* Set a specific slider handle width */
+  height: 14px; /* Slider handle height */
+  background: #eee; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  border: 1px solid gray;
+  border-radius: 100%;
+}
+.min-max-slider > input::-webkit-slider-runnable-track {cursor: pointer;}
+</style>
+
+        <!-- Shop Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <!-- Shop Sidebar Start -->
+            <div class="col-lg-3 col-md-12">
+                <!-- Price Start -->
+                <div class="border-bottom mb-4 pb-4">
+                    <h5 class="font-weight-semi-bold mb-4">Fiyat Aralığı</h5>
+                    <div class="min-max-slider" data-legendnum="2">
+                      <label for="min">Minimum price</label>
+                      <input id="min" class="min" name="min" type="range" step="1" min="0" max="10000" />
+                      <label for="max">Maximum price</label>
+                      <input id="max" class="max" name="max" type="range" step="1" min="0" max="10000" />
+                  </div>
+                </div>
+                <!-- Price End -->
+                
+                <!-- Color Start -->
+                <div class="border-bottom mb-4 pb-4">
+                    <h5 class="font-weight-semi-bold mb-4">Filter by color</h5>
+                    <form>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" checked id="color-all">
+                            <label class="custom-control-label" for="price-all">All Color</label>
+                            <span class="badge border font-weight-normal">1000</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="color-1">
+                            <label class="custom-control-label" for="color-1">Black</label>
+                            <span class="badge border font-weight-normal">150</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="color-2">
+                            <label class="custom-control-label" for="color-2">White</label>
+                            <span class="badge border font-weight-normal">295</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="color-3">
+                            <label class="custom-control-label" for="color-3">Red</label>
+                            <span class="badge border font-weight-normal">246</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="color-4">
+                            <label class="custom-control-label" for="color-4">Blue</label>
+                            <span class="badge border font-weight-normal">145</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                            <input type="checkbox" class="custom-control-input" id="color-5">
+                            <label class="custom-control-label" for="color-5">Green</label>
+                            <span class="badge border font-weight-normal">168</span>
+                        </div>
+                    </form>
+                </div>
+                <!-- Color End -->
+
+                <!-- Size Start -->
+                <div class="mb-5">
+                    <h5 class="font-weight-semi-bold mb-4">Filter by size</h5>
+                    <form>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" checked id="size-all">
+                            <label class="custom-control-label" for="size-all">All Size</label>
+                            <span class="badge border font-weight-normal">1000</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="size-1">
+                            <label class="custom-control-label" for="size-1">XS</label>
+                            <span class="badge border font-weight-normal">150</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="size-2">
+                            <label class="custom-control-label" for="size-2">S</label>
+                            <span class="badge border font-weight-normal">295</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="size-3">
+                            <label class="custom-control-label" for="size-3">M</label>
+                            <span class="badge border font-weight-normal">246</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="size-4">
+                            <label class="custom-control-label" for="size-4">L</label>
+                            <span class="badge border font-weight-normal">145</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                            <input type="checkbox" class="custom-control-input" id="size-5">
+                            <label class="custom-control-label" for="size-5">XL</label>
+                            <span class="badge border font-weight-normal">168</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                          <button>Ara</button>
+                      </div>
+                    </form>
+                </div>
+                <!-- Size End -->
+            </div>
+            <!-- Shop Sidebar End -->
+
+
+            <!-- Shop Product Start -->
+            <div class="col-lg-9 col-md-12">
+                <div class="row pb-3">
+                    <div class="col-12 pb-1">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <form action="">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search by name">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text bg-transparent text-primary">
+                                            <i class="fa fa-search"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="dropdown ml-4">
+                                <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                            Sort by
+                                        </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
+                                    <a class="dropdown-item" href="#">Latest</a>
+                                    <a class="dropdown-item" href="#">Popularity</a>
+                                    <a class="dropdown-item" href="#">Best Rating</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
-                        <a href="/urun/{{i.id}}/{{i.urun_adi}}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ürünü Gör</a>
+                    {% for i in santiyeler %}
+                    <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                        <div class="card product-item border-0 mb-4">
+                            <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                <img class="img-fluid w-100" style="max-height: 200px;" src="{{ i|urun_resimleri_alma }}" alt="">
+                            </div>
+                            <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                <h6 class="text-truncate mb-3">{{i.urun_adi}}</h6>
+                                <div class="d-flex justify-content-center">
+                                    <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between bg-light border">
+                                <a href="/urun/{{i.id}}/{{i.urun_adi}}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ürünü Gör</a>
                         <a href="/sepet/{{i.id}}/{{i.urun_adi}}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    <div class="pagination-wrap hstack gap-2 container">
-                                            <ul class="pagination pagination-m justify-content-center">
+                     {% endfor %}
+                    <div class="col-12 pb-1">
+                        <nav aria-label="Page navigation">
+                          <ul class="pagination pagination-m justify-content-center">
 
                                                 {% if medya.has_previous %}
                                                   <li class="page-item"><a class="page-link" href="?page={{ medya.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">« Previous page</a></li>
@@ -65,6 +217,131 @@
                                                   <li class="page-item"><a class="page-link" href="?page={{ medya.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">Next Page »</a></li>
                                                 {% endif %}
                                                 </ul>
-                                        </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Shop Product End -->
+        </div>
+    </div>
+    <!-- Shop End -->
+    <!-- Products Start -->
+
+
     <!-- Products End -->
+  
+    <script>
+      var thumbsize = 14;
+    
+    function draw(slider,splitvalue) {
+    
+        /* set function vars */
+        var min = slider.querySelector('.min');
+        var max = slider.querySelector('.max');
+        var lower = slider.querySelector('.lower');
+        var upper = slider.querySelector('.upper');
+        var legend = slider.querySelector('.legend');
+        var thumbsize = parseInt(slider.getAttribute('data-thumbsize'));
+        var rangewidth = parseInt(slider.getAttribute('data-rangewidth'));
+        var rangemin = parseInt(slider.getAttribute('data-rangemin'));
+        var rangemax = parseInt(slider.getAttribute('data-rangemax'));
+    
+        /* set min and max attributes */
+        min.setAttribute('max',splitvalue);
+        max.setAttribute('min',splitvalue);
+    
+        /* set css */
+        min.style.width = parseInt(thumbsize + ((splitvalue - rangemin)/(rangemax - rangemin))*(rangewidth - (2*thumbsize)))+'px';
+        max.style.width = parseInt(thumbsize + ((rangemax - splitvalue)/(rangemax - rangemin))*(rangewidth - (2*thumbsize)))+'px';
+        min.style.left = '0px';
+        max.style.left = parseInt(min.style.width)+'px';
+        min.style.top = lower.offsetHeight+'px';
+        max.style.top = lower.offsetHeight+'px';
+        legend.style.marginTop = min.offsetHeight+'px';
+        slider.style.height = (lower.offsetHeight + min.offsetHeight + legend.offsetHeight)+'px';
+        
+        /* correct for 1 off at the end */
+        if(max.value>(rangemax - 1)) max.setAttribute('data-value',rangemax);
+    
+        /* write value and labels */
+        max.value = max.getAttribute('data-value'); 
+        min.value = min.getAttribute('data-value');
+        lower.innerHTML = min.getAttribute('data-value');
+        upper.innerHTML = max.getAttribute('data-value');
+    
+    }
+    
+    function init(slider) {
+        /* set function vars */
+        var min = slider.querySelector('.min');
+        var max = slider.querySelector('.max');
+        var rangemin = parseInt(min.getAttribute('min'));
+        var rangemax = parseInt(max.getAttribute('max'));
+        var avgvalue = (rangemin + rangemax)/2;
+        var legendnum = slider.getAttribute('data-legendnum');
+    
+        /* set data-values */
+        min.setAttribute('data-value',rangemin);
+        max.setAttribute('data-value',rangemax);
+        
+        /* set data vars */
+        slider.setAttribute('data-rangemin',rangemin); 
+        slider.setAttribute('data-rangemax',rangemax); 
+        slider.setAttribute('data-thumbsize',thumbsize); 
+        slider.setAttribute('data-rangewidth',slider.offsetWidth);
+    
+        /* write labels */
+        var lower = document.createElement('span');
+        var upper = document.createElement('span');
+        lower.classList.add('lower','value');
+        upper.classList.add('upper','value');
+        lower.appendChild(document.createTextNode(rangemin));
+        upper.appendChild(document.createTextNode(rangemax));
+        slider.insertBefore(lower,min.previousElementSibling);
+        slider.insertBefore(upper,min.previousElementSibling);
+        
+        /* write legend */
+        var legend = document.createElement('div');
+        legend.classList.add('legend');
+        var legendvalues = [];
+        for (var i = 0; i < legendnum; i++) {
+            legendvalues[i] = document.createElement('div');
+            var val = Math.round(rangemin+(i/(legendnum-1))*(rangemax - rangemin));
+            legendvalues[i].appendChild(document.createTextNode(val));
+            legend.appendChild(legendvalues[i]);
+    
+        } 
+        slider.appendChild(legend);
+    
+        /* draw */
+        draw(slider,avgvalue);
+    
+        /* events */
+        min.addEventListener("input", function() {update(min);});
+        max.addEventListener("input", function() {update(max);});
+    }
+    
+    function update(el){
+        /* set function vars */
+        var slider = el.parentElement;
+        var min = slider.querySelector('#min');
+        var max = slider.querySelector('#max');
+        var minvalue = Math.floor(min.value);
+        var maxvalue = Math.floor(max.value);
+        
+        /* set inactive values before draw */
+        min.setAttribute('data-value',minvalue);
+        max.setAttribute('data-value',maxvalue);
+    
+        var avgvalue = (minvalue + maxvalue)/2;
+    
+        /* draw */
+        draw(slider,avgvalue);
+    }
+    
+    var sliders = document.querySelectorAll('.min-max-slider');
+    sliders.forEach( function(slider) {
+        init(slider);
+    });
+    </script>
 {% endblock slider %}
