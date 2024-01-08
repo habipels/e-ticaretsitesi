@@ -175,7 +175,14 @@ class urun_ekle(ModelForm):
             "urun_aciklama"
 
         ]
+class yasal_ekle(ModelForm):
+    class Meta:
+        model = yasal_metinler
+        fields = [
+            'yasal_metin_basligi',
+            'yasalmetin'
 
+        ]
 
 from django import forms
 

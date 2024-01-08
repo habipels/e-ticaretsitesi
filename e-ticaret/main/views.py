@@ -23,6 +23,8 @@ def site_bilgileri():
     sozluk["kategoriler"] = Meslek.objects.all()
     sozluk["banner"] = banner.objects.filter(banner_gosterme = True).order_by("banner_sira")    
     sozluk["site_adi"] = site_adi.objects.last()
+    sozluk["email"] = email_adres.objects.last()
+    sozluk["telefon"] = numara.objects.last()
     return sozluk
 # Create your views here.
 def homepage(request):

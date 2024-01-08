@@ -94,3 +94,11 @@ class hakkimizda(models.Model):
 class anasayfa(models.Model):
     
     hakkimizda_tr = RichTextField(verbose_name="Anasayfa Yazısı Türkçe")
+class odeme_ayarlari_paytr(models.Model):
+    magaza_adi = models.CharField(max_length = 200,verbose_name = "Mağaza Adı")
+    magaza_parolasi = models.CharField(max_length = 400,verbose_name = "Mağaza Parolası")
+    magaza_gizli_anahtar = models.CharField(max_length = 400,verbose_name = "Mağaza Gizli Anahtar")
+
+class yasal_metinler(models.Model):
+    yasal_metin_basligi = models.CharField(max_length = 200,verbose_name = "yasal Metin Başlığı")
+    yasalmetin = RichTextField(verbose_name="Yasal Metin İçeriği")

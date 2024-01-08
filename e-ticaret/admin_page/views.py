@@ -765,3 +765,34 @@ def filtreye_icerik_ekle(request,id):
     else:
         return redirect("/")
     return render(request,"filtreye_icerik_ekle.html",content)
+
+def yasal_metin_ekleme(request):
+    content = {}
+
+    if True:
+
+        Email_ekleme= yasal_ekle(request.POST or None,request.FILES or None)
+
+        content["Email"] = yasal_metinler.objects.order_by("-id").all()  
+    return render(request,"admin_page/yasal_metin.html",content)
+
+def yasal_metin_ekle(request):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+
+    form = yasal_ekle(request.POST or None,request.FILES or None)
+    content = {}
+    content["Email_ekle"] = form
+    if form.is_valid():
+        article = form.save(commit=False)
+        article.save()
+        return redirect("/yonetim/yasalmetin")
+    return render(request,"admin_page/bannerduzenle.html",content)
+
+def yasal_metin_sil(request,id):
+    yasal_metinler.objects.filter(id = id).delete()
+    return redirect("/yonetim/yasalmetin")
