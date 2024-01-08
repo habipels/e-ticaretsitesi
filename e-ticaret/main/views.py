@@ -25,6 +25,8 @@ def site_bilgileri():
     sozluk["site_adi"] = site_adi.objects.last()
     sozluk["email"] = email_adres.objects.last()
     sozluk["telefon"] = numara.objects.last()
+    sozluk["hakkimizda"] = hakkimizda.objects.last()
+    sozluk["anasayfa"] = anasayfa.objects.last()
     return sozluk
 # Create your views here.
 def homepage(request):
@@ -47,6 +49,10 @@ def homepage(request):
     content["top"]  = profile
     content["medya"] = page_obj
     return render(request,"index.html",content)
+def hakkimizda_sayfasi(request):
+    content = site_bilgileri()
+    
+    return render(request,"hakkimizda.html",content)
 
 def urunler_tekli_sayfa (request,id,slug):
     content = site_bilgileri()
