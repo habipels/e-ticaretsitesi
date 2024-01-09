@@ -1,0 +1,29 @@
+{% extends "homebase.html" %}
+{% load custom_tags %}
+
+{% block slider %}
+        <!-- Contact Start -->
+    <div class="container-fluid pt-5">
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">İletişim Kanalları</span></h2>
+        </div>
+        <div class="row px-xl-5">
+            <div class="col-lg-5 mb-5">
+                  <h5 class="font-weight-semi-bold mb-3">İletişim</h5>
+                <p><span>Her kilometrede güvenliği ve performansı bir arada sunan, tutkuyla seçilmiş oto yedek parçalarıyla sizin yanınızdayız.</span></p>
+                <hr>
+                <div class="d-flex flex-column mb-3">
+
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>{{adres.sirket_adresi_tr}}</p>
+                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i><a href="mailto:{{email.sirket_email_adresi}}">{{email.sirket_email_adresi}}</a></p>
+                <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i><a href="tel:+{{telefon.sirket_numarasi}}">{{telefon.sirket_numarasi_gosterilecek_metin}}</a></p>
+                </div>
+            </div>
+            <div class="col-lg-7 mb-5">
+                <iframe src="https://www.google.com/maps/embed?pb={{gomulu.sirket_adresi_tr}}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->
+{% endblock slider %}

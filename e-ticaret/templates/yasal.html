@@ -1,0 +1,14 @@
+{% extends "homebase.html" %}
+{% load custom_tags %}
+
+{% block slider %}
+    
+
+    <div class="container">
+    <div class="row">
+        <h1 class="text-center">{{yasal_metin.yasal_metin_basligi}}</h1>
+        {{yasal_metin.yasalmetin|safe}}
+    </div>
+    </div>
+    <!-- Products End -->
+{% endblock slider %}

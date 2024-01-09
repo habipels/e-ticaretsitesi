@@ -10,7 +10,7 @@
                         {% endif %}
                 </a>
                 <p><b>Her kilometrede güvenliği ve performansı bir arada sunan, tutkuyla seçilmiş oto yedek parçalarıyla sizin yanınızdayız.</b></p>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA</p>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>{{adres.sirket_adresi_tr}}</p>
                 <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i><a href="mailto:{{email.sirket_email_adresi}}">{{email.sirket_email_adresi}}</a></p>
                 <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i><a href="tel:+{{telefon.sirket_numarasi}}">{{telefon.sirket_numarasi_gosterilecek_metin}}</a></p>
             </div>
@@ -21,22 +21,22 @@
                         <div class="d-flex flex-column justify-content-start">
                             <a class="text-dark mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Anasayfa</a>
                             <a class="text-dark mb-2" href="/hakkimizda"><i class="fa fa-angle-right mr-2"></i>Hakkımızda</a>
-                            <a class="text-dark mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>İletişim</a>
+                            <a class="text-dark mb-2" href="/iletisim"><i class="fa fa-angle-right mr-2"></i>İletişim</a>
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">
                         <h5 class="font-weight-bold text-dark mb-4">Genel</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>Değişim İade</a>
-                            <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>KVKK</a>
-
+                            {% for i in yasal_metinler %}
+                                <a class="text-dark mb-2" href="/yasalmetinler/{{i.id}}/{{i.yasal_metin_basligi}}"><i class="fa fa-angle-right mr-2"></i>{{i.yasal_metin_basligi}}</a>
+                            {% endfor %}
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">
                         <h5 class="font-weight-bold text-dark mb-4">Bize Ulaşın</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-dark mb-2" href="index.html"><i class="fa fa-angle-right mr-2"></i>İletişim</a>
-                            <a class="text-dark mb-2" href="shop.html"><i class="fa fa-angle-right mr-2"></i>Whatsapp</a>
+                            <a class="text-dark mb-2" href="/iletisim"><i class="fa fa-angle-right mr-2"></i>İletişim</a>
+                            <a class="text-dark mb-2" target="_blank" href="https://api.whatsapp.com/send?phone={{telefon.sirket_numarasi}}&text=Merhaba!"><i class="fa fa-angle-right mr-2"></i>Whatsapp</a>
 
                         </div>
                     </div>

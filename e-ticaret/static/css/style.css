@@ -43,7 +43,7 @@
 }
 /**/
 
-.menustack{display:flex;float:left;width:100%;position:relative;z-index:20;background:#4c4c4c;align-items:center;height:37px;transition:ease-in-out all .1s;z-index: 999;}
+.menustack{display:flex;float:left;width:100%;position:relative;z-index:20;background:#4c4c4c;align-items:center;height:50px;transition:ease-in-out all .1s;z-index: 999;}
 .menustack a{transition:ease-in-out all .1s;}
 .menustack a:hover{transition:ease-in-out all .1s;}
 .menustack ul{}

@@ -27,6 +27,8 @@ def site_bilgileri():
     sozluk["telefon"] = numara.objects.last()
     sozluk["hakkimizda"] = hakkimizda.objects.last()
     sozluk["anasayfa"] = anasayfa.objects.last()
+    sozluk["yasal_metinler"] = yasal_metinler.objects.all()
+    sozluk["adres"] = adres.objects.last()
     return sozluk
 # Create your views here.
 def homepage(request):
@@ -53,7 +55,14 @@ def hakkimizda_sayfasi(request):
     content = site_bilgileri()
     
     return render(request,"hakkimizda.html",content)
-
+def yasal_metinler_sayfasi(request,id,slug):
+    content = site_bilgileri()
+    content["yasal_metin"] = get_object_or_404(yasal_metinler,id = id)
+    return render(request,"yasal.html",content)
+def iletisim_sayfasi(request):
+    content = site_bilgileri()
+    content["gomulu"] = gomulu_adres.objects.last()
+    return render(request,"iletisim.html",content)
 def urunler_tekli_sayfa (request,id,slug):
     content = site_bilgileri()
     content["urun_"] = get_object_or_404(urun,id = id)
@@ -260,4 +269,15 @@ def odeme_sayfasi(request):
             sepet_olusturma_ip.objects.create(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
         veriler =sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last() )
     content["sepet_urunleri"] =veriler
+    turkey_cities = [
+    "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Amasya", "Ankara", "Antalya", "Artvin", "Aydın", "Balıkesir",
+    "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa", "Çanakkale", "Çankırı", "Çorum", "Denizli", "Diyarbakır",
+    "Edirne", "Elazığ", "Erzincan", "Erzurum", "Eskişehir", "Gaziantep", "Giresun", "Gümüşhane", "Hakkari", "Hatay",
+    "Isparta", "Mersin", "İstanbul", "İzmir", "Kars", "Kastamonu", "Kayseri", "Kırklareli", "Kırşehir", "Kocaeli",
+    "Konya", "Kütahya", "Malatya", "Manisa", "Kahramanmaraş", "Mardin", "Muğla", "Muş", "Nevşehir", "Niğde", "Ordu",
+    "Rize", "Sakarya", "Samsun", "Siirt", "Sinop", "Sivas", "Tekirdağ", "Tokat", "Trabzon", "Tunceli", "Şanlıurfa",
+    "Uşak", "Van", "Yozgat", "Zonguldak", "Aksaray", "Bayburt", "Karaman", "Kırıkkale", "Batman", "Şırnak", "Bartın",
+    "Ardahan", "Iğdır", "Yalova", "Karabük", "Kilis", "Osmaniye", "Düzce"
+    ]
+    content["turkey_cities"] =turkey_cities
     return render(request,"odeme/odeme.html",content)
