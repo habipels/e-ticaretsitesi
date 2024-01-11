@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     #crispy forms form düzenleme içerir
     'crispy_forms',
     #
+    "odeme_kisimlari",
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'

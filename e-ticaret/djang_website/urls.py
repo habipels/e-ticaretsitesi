@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("yonetim/",include("admin_page.urls")),
     path('users/',include("users.urls", namespace='users')),
+    path('pay/', include('odeme_kisimlari.urls',namespace='pay')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
