@@ -14,5 +14,6 @@ urlpatterns = [
     path("hakkimizda", views.hakkimizda_sayfasi, name="hakkimizda_sayfasi"),
     path("yasalmetinler/<int:id>/<str:slug>", views.yasal_metinler_sayfasi, name="yasal_metinler_sayfasi"),
     path("iletisim", views.iletisim_sayfasi, name="iletisim_sayfasi"),
+    path("odeme/bilgilerikaydet/", views.odeme_sayfasi_bilgileri_kaydet, name="odeme_sayfasi_bilgileri_kaydet"),
 ]
 #

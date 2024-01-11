@@ -281,3 +281,19 @@ def odeme_sayfasi(request):
     ]
     content["turkey_cities"] =turkey_cities
     return render(request,"odeme/odeme.html",content)
+
+
+def odeme_sayfasi_bilgileri_kaydet(request):
+    if request.POST:
+        isim = request.POST.get("isim")
+        soyisim = request.POST.get("soyisim")
+        vergi_kimlik_no = request.POST.get("vergi_kimlik_no")
+        eposta = request.POST.get("eposta")
+        telefon = request.POST.get("telefon")
+        adres = request.POST.get("adres")
+        ulke = request.POST.get("ulke")
+        sehirler = request.POST.get("sehirler")
+        zip_kodu = request.POST.get("zip_kodu")
+        payment = request.POST.get("payment")
+        print(request.POST)
+    return redirect("/odeme")

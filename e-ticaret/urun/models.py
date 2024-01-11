@@ -82,3 +82,18 @@ class sepetteki_urunler(models.Model):
     kayitli_olmayan_kullanici = models.ForeignKey(sepet_olusturma_ip,blank = True,null = True,on_delete = models.SET_NULL)
     urun_bilgisi = models.ForeignKey(urun,blank = True,null = True,on_delete = models.SET_NULL)
     urun_adedi = models.BigIntegerField(default = 1,verbose_name="ürün Adedi")
+
+
+class sepet_sahibi_bilgileri(models.Model):
+    kayitli_kullanici = models.ForeignKey(sepet_olusturma,blank = True,null = True,on_delete = models.SET_NULL)
+    kayitli_olmayan_kullanici = models.ForeignKey(sepet_olusturma_ip,blank = True,null = True,on_delete = models.SET_NULL)
+    isim =  models.CharField(max_length = 200,verbose_name="İsim ",blank = True,null = True)
+    soyisim =  models.CharField(max_length = 200,verbose_name="Soysisim ",blank = True,null = True)
+    vergi_tc =  models.CharField(max_length = 200,verbose_name="vergi_tc ",blank = True,null = True)
+    email =  models.EmailField(max_length = 200,verbose_name="email ",blank = True,null = True)
+    telefon =  models.CharField(max_length = 200,verbose_name="telefon ",blank = True,null = True)
+    adres = models.TextField(verbose_name ="ADres",blank = True,null = True)
+    ulke =  models.CharField(max_length = 200,verbose_name="ulke ",blank = True,null = True)
+    sehirler =  models.CharField(max_length = 200,verbose_name="sehirler ",blank = True,null = True)
+    zip_kodu =  models.CharField(max_length = 200,verbose_name="Zip_kodu ",blank = True,null = True)
+    payment = models.CharField(verbose_name="Ödeme Şekli",blank = True,null = True,max_length = 200)

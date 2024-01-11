@@ -2,7 +2,8 @@
 {% load custom_tags %}
 {% block slider %}
    <!-- Checkout Start -->
-   <form  method="post">
+   <form  method="post" action="/odeme/bilgilerikaydet/">
+   {% csrf_token %}
     <div class="container-fluid pt-5">
         <div class="row px-xl-5">
             <div class="col-lg-8">
@@ -11,32 +12,32 @@
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label>İsim</label>
-                            <input required class="form-control" required type="text" placeholder="isim">
+                            <input required class="form-control" name="isim" required type="text" placeholder="isim">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Soyad</label>
-                            <input required class="form-control" required type="text" placeholder="soyad">
+                            <input required class="form-control" name="soyisim" required type="text" placeholder="soyad">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>TC / Vergi Kimlik No</label>
-                            <input required name="tc" class="form-control"  required type="text" placeholder="TC KİMLİK">
+                            <input required name="tc" class="form-control" name="vergi_kimlik_no"  required type="text" placeholder="TC KİMLİK">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>E-posta</label>
-                            <input required class="form-control" required type="text" placeholder="ornek@email.com">
+                            <input required class="form-control" name="eposta" required type="text" placeholder="ornek@email.com">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Telefon Numarası</label>
-                            <input required class="form-control" required type="text" placeholder="+905000000000">
+                            <input required class="form-control" name="telefon" required type="text" placeholder="+905000000000">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Addres</label>
-                            <input required class="form-control" required type="text" placeholder="adres">
+                            <input required class="form-control" name="adres" required type="text" placeholder="adres">
                         </div>
                         
                         <div class="col-md-6 form-group">
                             <label>Ülke</label>
-                            <input required class="form-control"  value="Türkiye" required type="text" placeholder="Türkiye">
+                            <input required class="form-control" name="ulke"  value="Türkiye" required type="text" placeholder="Türkiye">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Şehir</label>
@@ -49,7 +50,7 @@
                         </div>
                         <div class="col-md-6 form-group">
                             <label>ZIP Kodu</label>
-                            <input required class="form-control" type="text" placeholder="123">
+                            <input required name="zip_kodu" class="form-control" type="text" placeholder="123">
                         </div>
                        
                     </div>
