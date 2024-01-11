@@ -97,3 +97,4 @@ class sepet_sahibi_bilgileri(models.Model):
     sehirler =  models.CharField(max_length = 200,verbose_name="sehirler ",blank = True,null = True)
     zip_kodu =  models.CharField(max_length = 200,verbose_name="Zip_kodu ",blank = True,null = True)
     payment = models.CharField(verbose_name="Ödeme Şekli",blank = True,null = True,max_length = 200)
+    faturatipi = models.BooleanField(default = False,verbose_name = "False İse Bireyseldir")

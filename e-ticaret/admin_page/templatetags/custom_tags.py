@@ -190,3 +190,11 @@ def kategoi_bilgisi_duzednleme(id):
             else:
                 veri = veri+ '<li class="allcats"><a class="full_cats" href="/kategori/{}/{}/"><i class="fas fa fa-sort-down"></i> {}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
     return  mark_safe(veri)
+
+@register.simple_tag
+def sepet_id_gonder(a):
+    for i in a:
+        if i.kayitli_kullanici:
+            return  "kayitli"+str(i.kayitli_kullanici.id)
+        else:
+            return "ip"+str(i.kayitli_olmayan_kullanici.id)

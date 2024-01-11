@@ -262,13 +262,22 @@ def odeme_sayfasi(request):
         except:
             sepet_olusturma.objects.create(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
         veriler = sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user).last() )
+        try:
+            a = sepet_sahibi_bilgileri.objects.get(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user).last())
+        except:
+            a = ""
     else:
         try:
             sepet_olusturma_ip.objects.get(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
         except:
             sepet_olusturma_ip.objects.create(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
         veriler =sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last() )
-    content["sepet_urunleri"] =veriler
+        try:
+            a = sepet_sahibi_bilgileri.objects.get(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last())
+        except:
+            a = ""
+    content["adresler"] = a
+    content["sepet_urunleri"] = veriler
     turkey_cities = [
     "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Amasya", "Ankara", "Antalya", "Artvin", "Aydın", "Balıkesir",
     "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa", "Çanakkale", "Çankırı", "Çorum", "Denizli", "Diyarbakır",
@@ -285,6 +294,7 @@ def odeme_sayfasi(request):
 
 def odeme_sayfasi_bilgileri_kaydet(request):
     if request.POST:
+        sepet = str(request.POST.get("sepet"))
         isim = request.POST.get("isim")
         soyisim = request.POST.get("soyisim")
         vergi_kimlik_no = request.POST.get("vergi_kimlik_no")
@@ -295,5 +305,58 @@ def odeme_sayfasi_bilgileri_kaydet(request):
         sehirler = request.POST.get("sehirler")
         zip_kodu = request.POST.get("zip_kodu")
         payment = request.POST.get("payment")
+        faturatipi = request.POST.get("faturatipi")
+        if faturatipi == "kurumsal":
+            faturatipi = True
+        else:
+            faturatipi = False
         print(request.POST)
+        if "ip" in sepet:
+            sepet = sepet.replace("ip","")
+            sepet = int(sepet)
+            if sepet_sahibi_bilgileri.objects.get(kayitli_olmayan_kullanici = get_object_or_404(sepet_olusturma_ip,id = sepet)):
+                sepet_sahibi_bilgileri.objects.filter(kayitli_olmayan_kullanici = get_object_or_404(sepet_olusturma_ip,id = sepet)).update(                 
+                    isim = isim,soyisim = soyisim,
+                    vergi_tc = vergi_kimlik_no,email = eposta,
+                    telefon = telefon,adres = adres, ulke = ulke,
+                    sehirler = sehirler,
+                    zip_kodu = zip_kodu,
+                    payment = payment,
+                   faturatipi = faturatipi
+                )
+            else:
+                sepet_sahibi_bilgileri.objects.create(
+                    kayitli_olmayan_kullanici = get_object_or_404(sepet_olusturma_ip,id = sepet),
+                    isim = isim,soyisim = soyisim,
+                    vergi_tc = vergi_kimlik_no,email = eposta,
+                    telefon = telefon,adres = adres, ulke = ulke,
+                    sehirler = sehirler,
+                    zip_kodu = zip_kodu,
+                    payment = payment,
+                   faturatipi = faturatipi
+                )
+        elif "kayitli" in sepet:
+            sepet = sepet.replace("kayitli","")
+            sepet = int(sepet)
+            if sepet_sahibi_bilgileri.objects.get(kayitli_kullanici = get_object_or_404(sepet_olusturma,id = sepet)):
+                sepet_sahibi_bilgileri.objects.filter(kayitli_kullanici = get_object_or_404(sepet_olusturma,id = sepet)).update(
+                    isim = isim,soyisim = soyisim,
+                    vergi_tc = vergi_kimlik_no,email = eposta,
+                    telefon = telefon,adres = adres, ulke = ulke,
+                    sehirler = sehirler,
+                    zip_kodu = zip_kodu,
+                    payment = payment,
+                   faturatipi = faturatipi
+                )
+            else:
+                sepet_sahibi_bilgileri.objects.create(
+                    kayitli_kullanici = get_object_or_404(sepet_olusturma,id = sepet),
+                    isim = isim,soyisim = soyisim,
+                    vergi_tc = vergi_kimlik_no,email = eposta,
+                    telefon = telefon,adres = adres, ulke = ulke,
+                    sehirler = sehirler,
+                    zip_kodu = zip_kodu,
+                    payment = payment,
+                   faturatipi = faturatipi
+                )
     return redirect("/odeme")
