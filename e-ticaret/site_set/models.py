@@ -102,3 +102,7 @@ class odeme_ayarlari_paytr(models.Model):
 class yasal_metinler(models.Model):
     yasal_metin_basligi = models.CharField(max_length = 200,verbose_name = "yasal Metin Başlığı")
     yasalmetin = RichTextField(verbose_name="Yasal Metin İçeriği")
+
+class kargo_tutari(models.Model):
+    min_siparis_tutari = models.FloatField(default = 0)
+    eklenecek_kargo_tutari = models.FloatField(default = 0)

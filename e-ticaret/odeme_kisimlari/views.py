@@ -49,7 +49,7 @@ def home(request):
         a = sepetteki_urunler.objects.filter(kayitli_kullanici = user_sepet)
         toplam_fiyat = 0
         for i in a:
-            sepetteki_urunler_getir.append([str(i.urun_bilgisi.urun_adi),str(i.urun_bilgisi.fiyat),str(i.urun_adedi)])
+            sepetteki_urunler_getir.append([str(i.urun_bilgisi.urun_adi),str(i.urun_bilgisi.fiyat),int(i.urun_adedi)])
             toplam_fiyat = toplam_fiyat+ (float(i.urun_bilgisi.fiyat)*int(i.urun_adedi))
     else:
         ads = get_object_or_404(sepet_sahibi_bilgileri,kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last())
@@ -58,9 +58,10 @@ def home(request):
         a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = user_sepet)
         toplam_fiyat = 0
         for i in a:
-            sepetteki_urunler_getir.append([str(i.urun_bilgisi.urun_adi),str(i.urun_bilgisi.fiyat),str(i.urun_adedi)])
+            sepetteki_urunler_getir.append([str(i.urun_bilgisi.urun_adi),str(i.urun_bilgisi.fiyat),int(i.urun_adedi)])
             toplam_fiyat = toplam_fiyat+ (float(i.urun_bilgisi.fiyat)*int(i.urun_adedi))
-    user_basket = base64.b64encode(json.dumps([sepetteki_urunler_getir]).encode())
+    print(sepetteki_urunler_getir)
+    user_basket = base64.b64encode(json.dumps(sepetteki_urunler_getir).encode())
 
     merchant_oid ='OS' + random.randint(1, 9999999).__str__()+"ID"+ str(user_sepet.id)
     test_mode = '1'
@@ -191,7 +192,7 @@ def callback(request):
 def success(request):
     context = dict()
     messages.success(request, f"Paket Satın Alma Başarılı")
-    return HttpResponse("Paket Satın Alma Başarılı")
+    return redirect("/")
 
 
 def fail(request):

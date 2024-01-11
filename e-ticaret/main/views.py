@@ -310,11 +310,10 @@ def odeme_sayfasi_bilgileri_kaydet(request):
             faturatipi = True
         else:
             faturatipi = False
-        print(request.POST)
         if "ip" in sepet:
             sepet = sepet.replace("ip","")
             sepet = int(sepet)
-            if sepet_sahibi_bilgileri.objects.get(kayitli_olmayan_kullanici = get_object_or_404(sepet_olusturma_ip,id = sepet)):
+            if sepet_sahibi_bilgileri.objects.filter(kayitli_olmayan_kullanici__id = sepet).count() > 0:
                 sepet_sahibi_bilgileri.objects.filter(kayitli_olmayan_kullanici = get_object_or_404(sepet_olusturma_ip,id = sepet)).update(                 
                     isim = isim,soyisim = soyisim,
                     vergi_tc = vergi_kimlik_no,email = eposta,
@@ -359,4 +358,4 @@ def odeme_sayfasi_bilgileri_kaydet(request):
                     payment = payment,
                    faturatipi = faturatipi
                 )
-    return redirect("/odeme")
+    return redirect("/pay/payment/")
