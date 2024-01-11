@@ -1,6 +1,7 @@
 from django import template
 from urun.models import *
 from django.shortcuts import render,HttpResponse,get_object_or_404,redirect
+from site_set.models import *
 register = template.Library()
 
 @register.filter
@@ -135,10 +136,11 @@ def sepet_toplam_tutar_k(request):
     toplam_tutar = 0
     for i in veriler:
         toplam_tutar = toplam_tutar+ (i.urun_adedi * i.urun_bilgisi.fiyat)
-    if toplam_tutar > 350:
-        toplam_tutar = "<del>150 TL </del>"
+    a = kargo_tutari.objects.last()
+    if toplam_tutar > a.min_siparis_tutari:
+        toplam_tutar = "<del>{} TL </del>".format(a.eklenecek_kargo_tutari)
     else:
-        toplam_tutar = "150 TL "
+        toplam_tutar = "{} TL ".format(a.eklenecek_kargo_tutari)
     return mark_safe(toplam_tutar)
 @register.simple_tag
 def sepet_toplam_tutar_t(request):
@@ -157,10 +159,11 @@ def sepet_toplam_tutar_t(request):
     toplam_tutar = 0
     for i in veriler:
         toplam_tutar = toplam_tutar+ (i.urun_adedi * i.urun_bilgisi.fiyat)
-    if toplam_tutar > 350:
+    a = kargo_tutari.objects.last()
+    if toplam_tutar > a.min_siparis_tutari:
         toplam_tutar = toplam_tutar
     else:
-        toplam_tutar = toplam_tutar + 350
+        toplam_tutar = toplam_tutar + a.eklenecek_kargo_tutari
     return round(float(toplam_tutar), 2)
 @register.simple_tag
 def kategoi_bilgisi_duzednleme(id):

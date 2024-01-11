@@ -60,7 +60,12 @@ def home(request):
         for i in a:
             sepetteki_urunler_getir.append([str(i.urun_bilgisi.urun_adi),str(i.urun_bilgisi.fiyat),int(i.urun_adedi)])
             toplam_fiyat = toplam_fiyat+ (float(i.urun_bilgisi.fiyat)*int(i.urun_adedi))
-    print(sepetteki_urunler_getir)
+    a = kargo_tutari.objects.last()
+    if toplam_fiyat > a.min_siparis_tutari:
+        toplam_fiyat = toplam_fiyat
+    else:
+        toplam_fiyat = toplam_fiyat + a.eklenecek_kargo_tutari
+        sepetteki_urunler_getir.append([str("Kargo Tutarı"),str(a.eklenecek_kargo_tutari),1])
     user_basket = base64.b64encode(json.dumps(sepetteki_urunler_getir).encode())
 
     merchant_oid ='OS' + random.randint(1, 9999999).__str__()+"ID"+ str(user_sepet.id)
@@ -79,6 +84,7 @@ def home(request):
     email = str(ads.email)
 
     # 100.99 TL ödeme
+   
     payment_amount = str(int(toplam_fiyat)*100)
     currency = 'TL'
     payment_type = 'card'
