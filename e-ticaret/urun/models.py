@@ -98,3 +98,13 @@ class sepet_sahibi_bilgileri(models.Model):
     zip_kodu =  models.CharField(max_length = 200,verbose_name="Zip_kodu ",blank = True,null = True)
     payment = models.CharField(verbose_name="Ödeme Şekli",blank = True,null = True,max_length = 200)
     faturatipi = models.BooleanField(default = False,verbose_name = "False İse Bireyseldir")
+from datetime import datetime
+class satin_alinanlar(models.Model):
+    siparis_sahibi_bilgileri = models.ForeignKey(sepet_sahibi_bilgileri,blank = True,null = True,on_delete = models.SET_NULL)
+    kayitli_kullanici = models.ForeignKey(sepet_olusturma,blank = True,null = True,on_delete = models.SET_NULL)
+    siparis_numarasi = models.CharField(max_length= 200, verbose_name="Kargo Takip Numarası",blank = True,null = True)
+    kayitli_olmayan_kullanici = models.ForeignKey(sepet_olusturma_ip,blank = True,null = True,on_delete = models.SET_NULL)
+    kargo = models.CharField(max_length= 200, verbose_name="Kargo Takip Numarası",blank = True,null = True)
+    kargo_sirketi = models.CharField(max_length= 200, verbose_name="Kargo Şirketi",blank = True,null = True)
+    silinme_bilgisi = models.BooleanField(default=False,verbose_name="Silinme Bilgisi")
+    kayit_tarihi = models.DateTimeField(default=datetime.now,null=True)

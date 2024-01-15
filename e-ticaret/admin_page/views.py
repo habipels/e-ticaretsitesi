@@ -796,3 +796,10 @@ def yasal_metin_ekle(request):
 def yasal_metin_sil(request,id):
     yasal_metinler.objects.filter(id = id).delete()
     return redirect("/yonetim/yasalmetin")
+
+
+def satin_alinan_siparisler(request):
+    if True:
+        content = {}
+        content["alinan_siparisler"] = satin_alinanlar.objects.all().order_by("-id")
+        return render(request,"admin_page/alinan_siparisler.html",content)

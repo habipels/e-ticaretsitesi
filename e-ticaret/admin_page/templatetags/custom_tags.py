@@ -138,9 +138,9 @@ def sepet_toplam_tutar_k(request):
         toplam_tutar = toplam_tutar+ (i.urun_adedi * i.urun_bilgisi.fiyat)
     a = kargo_tutari.objects.last()
     if toplam_tutar > a.min_siparis_tutari:
-        toplam_tutar = "<del>{} TL </del>".format(a.eklenecek_kargo_tutari)
+        toplam_tutar = "Size Ait".format(a.eklenecek_kargo_tutari)
     else:
-        toplam_tutar = "{} TL ".format(a.eklenecek_kargo_tutari)
+        toplam_tutar = "Size Ait".format(a.eklenecek_kargo_tutari)
     return mark_safe(toplam_tutar)
 @register.simple_tag
 def sepet_toplam_tutar_t(request):
@@ -163,7 +163,7 @@ def sepet_toplam_tutar_t(request):
     if toplam_tutar > a.min_siparis_tutari:
         toplam_tutar = toplam_tutar
     else:
-        toplam_tutar = toplam_tutar + a.eklenecek_kargo_tutari
+        toplam_tutar = toplam_tutar 
     return round(float(toplam_tutar), 2)
 @register.simple_tag
 def kategoi_bilgisi_duzednleme(id):
@@ -201,3 +201,14 @@ def sepet_id_gonder(a):
             return  "kayitli"+str(i.kayitli_kullanici.id)
         else:
             return "ip"+str(i.kayitli_olmayan_kullanici.id)
+        
+
+@register.simple_tag
+def urun_gosterecek_kayitli(bilgi):
+    a = sepetteki_urunler.objects.filter(kayitli_kullanici  = bilgi)
+    b = ""
+    for i in a:
+        if i.urun_adedi > 0:
+            isi = "/urun/{}/{}".format(i.urun_bilgisi.id,i.urun_bilgisi.urun_adi)
+            b = b+ '<a href="{}" target="_blank" rel="noopener noreferrer">{} - {}</a> <br>'.format(isi,i.urun_adedi,i.urun_bilgisi.urun_adi)
+    return mark_safe(b)

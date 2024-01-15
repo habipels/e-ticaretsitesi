@@ -1,43 +1,50 @@
 {% extends "leyout.html" %}
 {% load crispy_forms_tags %}
+{% load custom_tags %}
 {% block slider %}
 <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             Şirketin {{sosyalmedya}}   (Her zaman Durumu True Olan )
+                             
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#logo">{{sosyalmedya}}  Ekle</button>
                                     <thead>
                                         <tr>
-                                            <th>{{sosyalmedya}} Resmi</th>
-                                            <th>{{sosyalmedya}} İsim Soyisim</th>
-                                            <th>{{sosyalmedya}} Yorum</th>
-
+                                            <th>Sipariş Numarası</th>
+                                            <th>Sipariş Tarihi</th>
+                                            <th>İsim Soyisim</th>
+                                            <th>TC</th>
+                                            <th>Telefon</th>
+                                            <th>Adres , Şehir , Posta Kodu</th>
+                                            <th>Fatura Tipi</th>
+                                            <th>Ürünler</th>
                                             
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    {% for i in medya %}
+                                    {% for i in alinan_siparisler %}
 
                                         <tr class="odd gradeX">
-                                            {% if i.image %}
-                                                <td><img width="300" src="{{i.image.url}}" alt=""> </td>
+                                            <td>{{i.siparis_numarasi}}</td>
+                                            <td>{{i.kayit_tarihi}}</td>
+                                            <td>{{i.siparis_sahibi_bilgileri.isim}} {{i.siparis_sahibi_bilgileri.soyisim}}</td>                  
+                                            <td>{{i.siparis_sahibi_bilgileri.vergi_tc}}</td>
+                                            <td>{{i.siparis_sahibi_bilgileri.telefon}}</td>
+                                            <td>{{i.siparis_sahibi_bilgileri.adres}} , {{i.siparis_sahibi_bilgileri.sehirler}} , {{i.siparis_sahibi_bilgileri.zip_kodu}}</td>
+                                            <td>{% if i.siparis_sahibi_bilgileri.faturatipi %}
+                                              Kurumsal Fatura
                                             {% else %}
-                                            <td>Resim Ekleyin Hata Alırsınız Yoksa</td>
-                                            {% endif %}
-                                            
-                                            <td>{{i.isim_soyisim}}</td>
-                                            <td>{{i.yorumu}}</td>
-                                            
-                                            <td><a  href="/yonetim/yorumduzenle/{{i.id}}" class="btn btn-primary">{{sosyalmedya}} Düzenle</a></td>
-                                            <td><a  href="/yonetim/{{sosyalmedyaa}}/{{i.id}}" class="btn btn-primary">{{sosyalmedya}} Sil</a></td>
-                                           
-                                        </tr>
+                                            Bireysel Fatura
+                                            {% endif %}</td>
+                                            <td>{% if i.siparis_sahibi_bilgileri.kayitli_kullanici %}
+                                              {% urun_gosterecek_kayitli i.siparis_sahibi_bilgileri.kayitli_kullanici %}
+                                            {% else %}
+                                            {% endif %}</td>
+                                          </tr>
                                         {% endfor %}
                                     </tbody>
                                 </table>

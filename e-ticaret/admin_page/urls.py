@@ -30,6 +30,7 @@ urlpatterns = [
     path("fiyatdegisikligi",views.urun_kategori_bazli_fiyat_degisikligi,name="urun_kategori_bazli_fiyat_degisikligi"),
     path("yasalmetin",views.yasal_metin_ekleme,name="yasal_metin_ekleme"),
     path("yasalmetinekle",views.yasal_metin_ekle,name="yasal_metin_ekle"),
+    path("satinalinansiparisler",views.satin_alinan_siparisler,name="satin_alinan_siparisler"),
     #silme işlemleri
     #
     path("yasalmetinsil/<int:id>",views.yasal_metin_sil,name="yasal_metin_sil"),
