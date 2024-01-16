@@ -69,6 +69,9 @@ def logo_sil(request,id):
     sayfa_logosu.objects.filter(id = id).delete()
     return redirect("/yonetim/siteayarlari")
 
+def musteriler(request):
+    if True:
+        return render(request,"admin_page/ekip.html")
 
 @login_required
 def site_settings_index_icon(request):
@@ -580,7 +583,42 @@ def kategorisil (request,id):
         return redirect("/")
     Meslek.objects.filter(id = id).update(silinme_bilgisi = True)
     return redirect("/yonetim/kategori")
+def kategori_urun_gosterduzenle(request,id):
 
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    bannner_duzenle = get_object_or_404(Meslek,id = id)
+    form = kategori_ekle(request.POST or None,request.FILES or None,instance = bannner_duzenle)
+    content = {}
+    content["Email_ekle"] = form
+    if form.is_valid():
+        article = form.save(commit=False)
+        article.save()
+        return redirect("/yonetim/kategori")
+    return render(request,"admin_page/bannerduzenle.html",content)
+def filtre_urun_gosterduzenle(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    bannner_duzenle = get_object_or_404(filtre,id = id)
+    form = filtre_ekle(request.POST or None,request.FILES or None,instance = bannner_duzenle)
+    content = {}
+    content["Email_ekle"] = form
+    if form.is_valid():
+        article = form.save(commit=False)
+        article.save()
+        return redirect("/yonetim/filtreayarlari")
+    return render(request,"admin_page/bannerduzenle.html",content)
+
+def filtre_icerigisil(request,id):
+    filtre_icerigi.objects.filter(id = id).delete()
+    return redirect("/yonetim/filtreayarlari")
 
 @login_required
 def urun_ekle_settings(request):
@@ -803,3 +841,29 @@ def satin_alinan_siparisler(request):
         content = {}
         content["alinan_siparisler"] = satin_alinanlar.objects.all().order_by("-id")
         return render(request,"admin_page/alinan_siparisler.html",content)
+def korgolanan_tumsiparisler(request):
+    if True:
+        content = {}
+        content["alinan_siparisler"] = satin_alinanlar.objects.exclude(kargo = None).order_by("-id")
+        return render(request,"admin_page/alinan_siparisler.html",content) 
+def korgolanmayi_bekleyen (request):
+    if True:
+        content = {}
+        content["alinan_siparisler"] = satin_alinanlar.objects.filter(kargo = None).order_by("-id")
+        return render(request,"admin_page/alinan_siparisler.html",content) 
+def korgolamaislemi(request,id):
+
+    content = {}
+    if True:
+        pass
+    else:
+        return redirect("/")
+    bannner_duzenle = get_object_or_404(satin_alinanlar,id = id)
+    form = kargola(request.POST or None,request.FILES or None,instance = bannner_duzenle)
+    content = {}
+    content["Email_ekle"] = form
+    if form.is_valid():
+        article = form.save(commit=False)
+        article.save()
+        return redirect("/yonetim/satinalinansiparisler")
+    return render(request,"admin_page/bannerduzenle.html",content)

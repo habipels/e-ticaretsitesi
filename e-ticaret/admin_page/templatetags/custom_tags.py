@@ -9,9 +9,10 @@ def Filtre_icerikleri_alma(stok_kart):
     
     satis_fiyati = filtre_icerigi.objects.filter(filtre_bagli_oldu_filtre=stok_kart.id)
     icerikler = ""
+    #
     for i in satis_fiyati:
-        icerikler = icerikler+","+i.filtre_adi+"\n"
-    return icerikler if icerikler else 0
+        icerikler = icerikler+'<a  href="/yonetim/filtreicerigisil/{}" class="btn btn-primary">{}</a>'.format(i.id,i.filtre_adi)
+    return mark_safe(icerikler)
 from django.utils.safestring import mark_safe
 @register.filter
 def Filtre_icerikleri_almaa(stok_kart):
@@ -222,3 +223,82 @@ def urun_gosterecek_kayitli_bilgi(bilgi):
             isi = "/urun/{}/{}".format(i.urun_bilgisi.id,i.urun_bilgisi.urun_adi)
             b = b+ '<a href="{}" target="_blank" rel="noopener noreferrer">{} - {}</a> <br>'.format(isi,i.urun_adedi,i.urun_bilgisi.urun_adi)
     return mark_safe(b)
+
+@register.simple_tag
+def kullanici_sayisi():
+    a =CustomUser.objects.all().count()
+    return a
+@register.simple_tag
+def urun_sayisi():
+    a =urun.objects.all().count()
+    return a
+@register.simple_tag
+def alinansiparisler():
+    a =satin_alinanlar.objects.all().count()
+    return a
+
+@register.simple_tag
+def bugunsiparis():
+    bugunku_tarih_ve_saat = datetime.now()
+    a =satin_alinanlar.objects.filter(kayit_tarihi__gte=bugunku_tarih_ve_saat.replace(hour=0, minute=0, second=0, microsecond=0)).count()
+    return a
+@register.simple_tag
+def bugunsiparistutar():
+    bugunku_tarih_ve_saat = datetime.now()
+    a =satin_alinanlar.objects.filter(kayit_tarihi__gte=bugunku_tarih_ve_saat.replace(hour=0, minute=0, second=0, microsecond=0))
+    toplam = 0
+    for i in a:
+        if i.siparis_sahibi_bilgileri.kayitli_kullanici:
+            k =sepetteki_urunler.objects.filter(kayitli_kullanici =i.siparis_sahibi_bilgileri.kayitli_kullanici )
+            for j in k:
+                toplam = toplam+(j.urun_adedi* j.urun_bilgisi.fiyat)
+        else:
+            k =sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici =i.siparis_sahibi_bilgileri.kayitli_olmayan_kullanici )
+            for j in k:
+                toplam = toplam+(j.urun_adedi* j.urun_bilgisi.fiyat)
+    return str(toplam)
+from datetime import datetime, timedelta
+@register.simple_tag
+def ayliksiparistutar():
+    bugunku_tarih_ve_saat = datetime.now()
+    ay_baslangici = bugunku_tarih_ve_saat.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    
+    aylar_ara = ay_baslangici - timedelta(days=1)
+    aylar_ara = aylar_ara.replace(day=1)
+
+    a = satin_alinanlar.objects.filter(kayit_tarihi__gte=aylar_ara, kayit_tarihi__lte=bugunku_tarih_ve_saat)
+    toplam = 0
+    
+    for i in a:
+        if i.siparis_sahibi_bilgileri.kayitli_kullanici:
+            k = sepetteki_urunler.objects.filter(kayitli_kullanici=i.siparis_sahibi_bilgileri.kayitli_kullanici)
+            for j in k:
+                toplam = toplam + (j.urun_adedi * j.urun_bilgisi.fiyat)
+        else:
+            k = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici=i.siparis_sahibi_bilgileri.kayitli_olmayan_kullanici)
+            for j in k:
+                toplam = toplam + (j.urun_adedi * j.urun_bilgisi.fiyat)
+
+    return str(toplam)
+@register.simple_tag
+def yilliksiparistutar():
+    bugunku_tarih_ve_saat = datetime.now()
+    yil_baslangici = bugunku_tarih_ve_saat.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
+    
+    aylar_ara = yil_baslangici - timedelta(days=1)
+    aylar_ara = aylar_ara.replace(month=1, day=1)
+
+    a = satin_alinanlar.objects.filter(kayit_tarihi__gte=aylar_ara, kayit_tarihi__lte=bugunku_tarih_ve_saat)
+    toplam = 0
+    
+    for i in a:
+        if i.siparis_sahibi_bilgileri.kayitli_kullanici:
+            k = sepetteki_urunler.objects.filter(kayitli_kullanici=i.siparis_sahibi_bilgileri.kayitli_kullanici)
+            for j in k:
+                toplam = toplam + (j.urun_adedi * j.urun_bilgisi.fiyat)
+        else:
+            k = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici=i.siparis_sahibi_bilgileri.kayitli_olmayan_kullanici)
+            for j in k:
+                toplam = toplam + (j.urun_adedi * j.urun_bilgisi.fiyat)
+
+    return str(toplam)

@@ -31,8 +31,15 @@ urlpatterns = [
     path("yasalmetin",views.yasal_metin_ekleme,name="yasal_metin_ekleme"),
     path("yasalmetinekle",views.yasal_metin_ekle,name="yasal_metin_ekle"),
     path("satinalinansiparisler",views.satin_alinan_siparisler,name="satin_alinan_siparisler"),
+    path("kargolanmayibekleyensiparisler",views.korgolanmayi_bekleyen,name="korgolanmayi_bekleyen"),
+    path("ekip",views.musteriler,name="musteriler"),
+    path("korgolanansiparisler",views.korgolanan_tumsiparisler,name="korgolanan_tumsiparisler"),
     #silme işlemleri
     #
+    path("korgolamaislemi/<int:id>",views.korgolamaislemi,name="korgolamaislemi"),
+    path("filtreduzenle/<int:id>",views.filtre_urun_gosterduzenle,name="filtre_urun_gosterduzenle"),
+    path("filtreicerigisil/<int:id>",views.filtre_icerigisil,name="filtre_icerigisil"),
+    path("kategoriduzenle/<int:id>",views.kategori_urun_gosterduzenle,name="kategori_urun_gosterduzenle"),
     path("yasalmetinsil/<int:id>",views.yasal_metin_sil,name="yasal_metin_sil"),
     path("urunfiltre/<int:id>",views.urun_filre_ve_resim_ekleme,name="urun_filre_ve_resim_ekleme"),
     path("filtresil/<int:id>",views.filtresil,name="filtresil"),

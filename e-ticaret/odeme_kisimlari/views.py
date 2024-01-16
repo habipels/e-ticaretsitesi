@@ -43,7 +43,7 @@ def home(request):
     merchant_fail_url = 'http://127.0.0.1:8000/pay/result?basari=NO'
     context = dict()
     if request.user.is_authenticated:
-        ads =  get_object_or_404(sepet_sahibi_bilgileri,kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user).last())
+        ads =sepet_sahibi_bilgileri.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last()).last()
         user_sepet = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last()
         sepetteki_urunler_getir = []
         a = sepetteki_urunler.objects.filter(kayitli_kullanici = user_sepet)
@@ -196,7 +196,7 @@ def callback(request):
 def success(request):
     context = dict()
     if request.user.is_authenticated:
-        ads =  get_object_or_404(sepet_sahibi_bilgileri,kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user).last())
+        ads =  sepet_sahibi_bilgileri.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last()).last()
         user_sepet = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last()
         satin_alinanlar.objects.create(siparis_numarasi = "ID"+str(user_sepet.id),siparis_sahibi_bilgileri = ads,kayitli_kullanici = user_sepet,)
         sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).update(sepet_satin_alma_durumu = True)

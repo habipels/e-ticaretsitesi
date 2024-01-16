@@ -183,7 +183,14 @@ class yasal_ekle(ModelForm):
             'yasalmetin'
 
         ]
+class kargola(ModelForm):
+    class Meta:
+        model = satin_alinanlar
+        fields = [
+            'kargo',
+            'kargo_sirketi'
 
+        ]
 from django import forms
 
 class MultipleImageUploadForm(forms.Form):

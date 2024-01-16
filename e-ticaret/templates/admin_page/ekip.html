@@ -14,13 +14,10 @@
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#logo">{{sosyalmedya}}  Ekle</button>
                                     <thead>
                                         <tr>
-                                            <th>{{sosyalmedya}} Resmi</th>
+                                            
                                             <th>{{sosyalmedya}} İsim Soyisim</th>
-                                            <th>{{sosyalmedya}} Meslek</th>
-                                            <th>{{sosyalmedya}} tw adresi</th>
-                                            <th>{{sosyalmedya}} Facebook adresi</th>
-                                            <th>{{sosyalmedya}} İnstagram adresi</th>
-                                            <th>{{sosyalmedya}} Linkedin adresi</th>
+                                            <th>{{sosyalmedya}} Mail</th>
+                                       
                                             
                                         </tr>
                                     </thead>
@@ -28,19 +25,10 @@
                                     {% for i in medya %}
 
                                         <tr class="odd gradeX">
-                                            {% if i.image %}
-                                                <td><img width="300" src="{{i.image.url}}" alt=""> </td>
-                                            {% else %}
-                                            <td>Resim Ekleyin Hata Alırsınız Yoksa</td>
-                                            {% endif %}
-                                            
+                                         
                                             <td>{{i.isim_soyisim}}</td>
-                                            <td>{{i.meslek}}</td>
-                                            <td><a  href="{{i.tw}}" target="_blank" class="btn btn-primary">{{i.tw}}</a></td>
-                                            <td><a  href="{{i.face}}" target="_blank" class="btn btn-primary">{{i.face}}</a></td>
-                                            <td><a  href="{{i.insta}}" target="_blank" class="btn btn-primary">{{i.insta}}</a></td>
-                                            <td><a  href="{{i.linkd}}" target="_blank" class="btn btn-primary">{{i.linkd}}</a></td>
-                                            <td><a  href="/yonetim/ekipduzenle/{{i.id}}" class="btn btn-primary">{{sosyalmedya}} Düzenle</a></td>
+                                            <td>{{i.email}}</td>
+                                         
                                             <td><a  href="/yonetim/{{sosyalmedyaa}}/{{i.id}}" class="btn btn-primary">{{sosyalmedya}} Sil</a></td>
                                            
                                         </tr>

@@ -48,7 +48,12 @@
                                             {% else %}
                                             {% urun_gosterecek_kayitli_bilgi i.siparis_sahibi_bilgileri.kayitli_olmayan_kullanici %}
                                             {% endif %}</td>
-                                             <td></td>
+                                            {% if i.kargo %}
+                                              <td><a style="color:red;" href="/yonetim/korgolamaislemi/{{i.id}}">Kargola</a> </td>
+                                            {% else %}
+                                            <td><a href="/yonetim/korgolamaislemi/{{i.id}}">Kargola</a> </td>
+                                            {% endif %}
+                                             
                                           </tr>
                                         {% endfor %}
                                     </tbody>
