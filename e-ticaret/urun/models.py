@@ -108,3 +108,8 @@ class satin_alinanlar(models.Model):
     kargo_sirketi = models.CharField(max_length= 200, verbose_name="Kargo Şirketi",blank = True,null = True)
     silinme_bilgisi = models.BooleanField(default=False,verbose_name="Silinme Bilgisi")
     kayit_tarihi = models.DateTimeField(default=datetime.now,null=True)
+
+class banka_bilgileri(models.Model):
+    banka = models.CharField(max_length = 200,verbose_name = "Banka Adı",blank=True,null = True)
+    isim_soyisim = models.CharField(max_length = 400,verbose_name = "Adı Soyadı",blank=True,null = True)
+    iban = models.CharField(max_length = 200,verbose_name = "iban",blank=True,null = True)

@@ -12,8 +12,10 @@ urlpatterns = [
     path("kategori/<int:id>/<str:slug>/", views.kategori_ver_urunleri_gosterme, name="kategori_ver_urunleri_gosterme"),
     path("odeme", views.odeme_sayfasi, name="odeme_sayfasi"),
     path("hakkimizda", views.hakkimizda_sayfasi, name="hakkimizda_sayfasi"),
+    path("urunekle/", views.sepete_urun_ekleme_toplu, name="sepete_urun_ekleme_toplu"),
     path("yasalmetinler/<int:id>/<str:slug>", views.yasal_metinler_sayfasi, name="yasal_metinler_sayfasi"),
     path("iletisim", views.iletisim_sayfasi, name="iletisim_sayfasi"),
     path("odeme/bilgilerikaydet/", views.odeme_sayfasi_bilgileri_kaydet, name="odeme_sayfasi_bilgileri_kaydet"),
+    path("odeme/havale/", views.havale_sayfasi, name="havale_sayfasi"),
 ]
 #

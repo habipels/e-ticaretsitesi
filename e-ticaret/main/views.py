@@ -104,6 +104,45 @@ def sepete_urun_ekleme(request,id,slug):
                                          urun_bilgisi = get_object_or_404(urun,id = id) )
     return redirect("/")
 
+def sepete_urun_ekleme_toplu(request):
+    if request.POST:
+        b = int(request.POST.get("adet"))
+        id = request.POST.get("urun")
+        urunadi = request.POST.get("urunadi")
+        if request.user.is_authenticated:
+            
+            try:
+                sepet_olusturma.objects.get(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
+            except:
+                sepet_olusturma.objects.create(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
+            
+            try:
+                a = sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
+                                            urun_bilgisi = get_object_or_404(urun,id = id) ).last()
+                adet = a.urun_adedi +b
+                sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
+                                            urun_bilgisi = get_object_or_404(urun,id = id) ).update(urun_adedi = adet)
+                
+            except:
+                sepetteki_urunler.objects.create(urun_adedi =b,kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
+                                            urun_bilgisi = get_object_or_404(urun,id = id) )
+        else:
+            try:
+                sepet_olusturma_ip.objects.get(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
+            except:
+                sepet_olusturma_ip.objects.create(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
+            
+            try:
+                a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last(),
+                                            urun_bilgisi = get_object_or_404(urun,id = id) ).last()
+                adet = a.urun_adedi +b
+                sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last(),
+                                            urun_bilgisi = get_object_or_404(urun,id = id) ).update(urun_adedi = adet)
+            except:
+                sepetteki_urunler.objects.create(urun_adedi =b,kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last(),
+                                            urun_bilgisi = get_object_or_404(urun,id = id) )
+    z = "/urun/{}/{}".format(id,urunadi)
+    return redirect(z)
 
 def sepet_git(request):
     content = site_bilgileri()
@@ -337,7 +376,7 @@ def odeme_sayfasi_bilgileri_kaydet(request):
         elif "kayitli" in sepet:
             sepet = sepet.replace("kayitli","")
             sepet = int(sepet)
-            if sepet_sahibi_bilgileri.objects.get(kayitli_kullanici = get_object_or_404(sepet_olusturma,id = sepet)):
+            if sepet_sahibi_bilgileri.objects.filter(kayitli_kullanici = get_object_or_404(sepet_olusturma,id = sepet)).count() >1:
                 sepet_sahibi_bilgileri.objects.filter(kayitli_kullanici = get_object_or_404(sepet_olusturma,id = sepet)).update(
                     isim = isim,soyisim = soyisim,
                     vergi_tc = vergi_kimlik_no,email = eposta,
@@ -358,4 +397,45 @@ def odeme_sayfasi_bilgileri_kaydet(request):
                     payment = payment,
                    faturatipi = faturatipi
                 )
-    return redirect("/pay/payment/")
+        if payment == "Havale":
+            return redirect("/odeme/havale/")
+        else:
+            return redirect("/pay/payment/")
+
+def havale_sayfasi(request):
+    content = site_bilgileri()
+    if request.user.is_authenticated:
+        try:
+            sepet_olusturma.objects.get(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
+        except:
+            sepet_olusturma.objects.create(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
+        veriler = sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user).last() )
+        try:
+            a = sepet_sahibi_bilgileri.objects.get(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user).last())
+        except:
+            a = ""
+    else:
+        try:
+            sepet_olusturma_ip.objects.get(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
+        except:
+            sepet_olusturma_ip.objects.create(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
+        veriler =sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last() )
+        try:
+            a = sepet_sahibi_bilgileri.objects.get(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last())
+        except:
+            a = ""
+    content["adresler"] = a
+    content["sepet_urunleri"] = veriler
+    turkey_cities = [
+    "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Amasya", "Ankara", "Antalya", "Artvin", "Aydın", "Balıkesir",
+    "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa", "Çanakkale", "Çankırı", "Çorum", "Denizli", "Diyarbakır",
+    "Edirne", "Elazığ", "Erzincan", "Erzurum", "Eskişehir", "Gaziantep", "Giresun", "Gümüşhane", "Hakkari", "Hatay",
+    "Isparta", "Mersin", "İstanbul", "İzmir", "Kars", "Kastamonu", "Kayseri", "Kırklareli", "Kırşehir", "Kocaeli",
+    "Konya", "Kütahya", "Malatya", "Manisa", "Kahramanmaraş", "Mardin", "Muğla", "Muş", "Nevşehir", "Niğde", "Ordu",
+    "Rize", "Sakarya", "Samsun", "Siirt", "Sinop", "Sivas", "Tekirdağ", "Tokat", "Trabzon", "Tunceli", "Şanlıurfa",
+    "Uşak", "Van", "Yozgat", "Zonguldak", "Aksaray", "Bayburt", "Karaman", "Kırıkkale", "Batman", "Şırnak", "Bartın",
+    "Ardahan", "Iğdır", "Yalova", "Karabük", "Kilis", "Osmaniye", "Düzce"
+    ]
+    content["turkey_cities"] =turkey_cities
+    content["banka"] = banka_bilgileri.objects.last()
+    return render(request,"odeme/odeme_havale.html",content)

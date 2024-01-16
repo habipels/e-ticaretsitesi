@@ -15,6 +15,7 @@
                                     <thead>
                                         <tr>
                                             <th>Sipariş Numarası</th>
+                                            <th>Ödeme Tipi</th>
                                             <th>Sipariş Tarihi</th>
                                             <th>İsim Soyisim</th>
                                             <th>TC</th>
@@ -22,6 +23,7 @@
                                             <th>Adres , Şehir , Posta Kodu</th>
                                             <th>Fatura Tipi</th>
                                             <th>Ürünler</th>
+                                            <th>Kargola</th>
                                             
                                         </tr>
                                     </thead>
@@ -30,6 +32,7 @@
 
                                         <tr class="odd gradeX">
                                             <td>{{i.siparis_numarasi}}</td>
+                                            <td>{{i.siparis_sahibi_bilgileri.payment}}</td>
                                             <td>{{i.kayit_tarihi}}</td>
                                             <td>{{i.siparis_sahibi_bilgileri.isim}} {{i.siparis_sahibi_bilgileri.soyisim}}</td>                  
                                             <td>{{i.siparis_sahibi_bilgileri.vergi_tc}}</td>
@@ -43,7 +46,9 @@
                                             <td>{% if i.siparis_sahibi_bilgileri.kayitli_kullanici %}
                                               {% urun_gosterecek_kayitli i.siparis_sahibi_bilgileri.kayitli_kullanici %}
                                             {% else %}
+                                            {% urun_gosterecek_kayitli_bilgi i.siparis_sahibi_bilgileri.kayitli_olmayan_kullanici %}
                                             {% endif %}</td>
+                                             <td></td>
                                           </tr>
                                         {% endfor %}
                                     </tbody>

@@ -1,0 +1,68 @@
+{% extends "homebase.html" %}
+{% load custom_tags %}
+{% block slider %}
+   <!-- Checkout Start -->
+   <form  method="post" action="/odeme/bilgilerikaydet/">
+   {% csrf_token %}
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <div class="mb-4">
+                    <h4 class="font-weight-semi-bold mb-4">Havale Ödemesi Yapımı</h4>
+                    <div class="row">
+                        <p>SN : {{adresler.isim}} {{adresler.soyisim}}</p>
+                        
+                        <p>Ödeme Yaptıktan Sonra Aşağıda Bulunan Ödemeyi Yaptım'a Tıkladıktan Sonra 24 Saat İçerisnde Aranacaksınız</p>
+                       <p>Banka Adı : {{banka.banka}}</p>
+                        <p>Adı Soyadı : {{banka.isim_soyisim}}</p>
+                        <p>IBAN  :  {{banka.iban}}</p>
+                        
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-4">
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Sipariş Detayı</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="font-weight-medium mb-3">Ürünler</h5>
+                        {% for i in  sepet_urunleri %}
+                            <div class="d-flex justify-content-between">
+                            <p>{{i.urun_bilgisi.urun_adi}}</p>
+                            <p>{{i.urun_adedi}} X {{i.urun_bilgisi.fiyat}} TL</p>
+                        </div>
+                        {% endfor %}
+                        <hr class="mt-0">
+                        <div class="d-flex justify-content-between mb-3 pt-1">
+                            <h6 class="font-weight-medium">Sipariş Tutarı </h6>
+                            <h6 class="font-weight-medium">{% sepet_toplam_tutar request %} TL </h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium">Kargo Ücreti</h6>
+                            <h6 class="font-weight-medium">{% sepet_toplam_tutar_k request %}</h6>
+                        </div>
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5 class="font-weight-bold">Genel Tolam</h5>
+                            <h5 class="font-weight-bold">{% sepet_toplam_tutar_t request %} TL</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0">Ödeme Türü</h4>
+                    </div>
+                
+                    <div class="card-footer border-secondary bg-transparent">
+                        <button type="submit" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Ödeme Yaptım</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Checkout End -->
+</form>
+{% endblock slider %}
