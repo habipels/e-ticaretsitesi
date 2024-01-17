@@ -13,13 +13,14 @@ class user_adi(models.CharField):
     def __init__(self, *args, **kwargs):
         super(user_adi, self).__init__(*args, **kwargs)
     def get_prep_value(self, value):
-        return str(value).upper()
+        return str(value)
 class Meslek(models.Model):
     kategori= user_adi(verbose_name="Kategori Adı Türkçe",max_length=100)
     ust_kategory = models.ForeignKey('self',blank=True,null=True,verbose_name="Üst Kategori Bilgisi",related_name='children',on_delete=models.CASCADE)
     link = kategory_link_ayari(max_length=200)
     keywords = models.CharField(max_length=255)
     silinme_bilgisi = models.BooleanField(default=False,verbose_name="Silinme Bilgisi")
+    numarasi = models.IntegerField(default = 0 ,verbose_name="sıralaması")
     def __str__(self):
         full_path = [self.kategori]                  # post.  use __unicode__ in place of
         k = self.ust_kategory

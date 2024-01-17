@@ -141,7 +141,8 @@ class kategori_ekle(ModelForm):
             'kategori',
             'ust_kategory',
             'link',
-            'keywords'
+            'keywords',
+            "numarasi"
 
         ]
 
