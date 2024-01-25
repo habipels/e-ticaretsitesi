@@ -305,4 +305,4 @@ def yilliksiparistutar():
 
 @register.simple_tag
 def duzenle(a):
-    return a.replace("/","-")
+    return a.replace("/","-").replace(" ","_")

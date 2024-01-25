@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>{{site_adi.site_adi_sekme_tr}}</title>
+    
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -30,8 +30,12 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <!-- jQuery kütüphanesini dahil edin -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- jQuery Sticky eklentisini dahil edin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.sticky/1.0.4/jquery.sticky.min.js"></script>
     {% block head %}
-    
+    <title>{{site_adi.site_adi_sekme_tr}}</title>
     {% endblock head %}
 </head>
     {% block header %}
@@ -90,6 +94,78 @@
 
     <!-- Template Javascript -->
     <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var babyHeader = document.getElementById('baby_header');
+          
+          // Sticky özelliğini uygulamak için scroll olayını dinleme
+          window.addEventListener('scroll', function() {
+            var height = window.pageYOffset;
+            var width = window.innerWidth;
+        
+            if(width > 1024) {
+              if(height >= 200) {
+                babyHeader.style.display = 'block';
+              } else {
+                babyHeader.style.display = 'none';
+              }
+            } else {
+              // Eğer ek bir işlem yapılacaksa, buraya ekleyebilirsiniz.
+            }
+          });
+        
+          // Sayfa yüklendiğinde sticky özelliğini uygula
+          window.addEventListener('load', function() {
+            var babyHeaderTop = babyHeader.offsetTop;
+            window.addEventListener('scroll', function() {
+              if (window.pageYOffset > babyHeaderTop) {
+                babyHeader.classList.add('sticky');
+              } else {
+                babyHeader.classList.remove('sticky');
+              }
+            });
+          });
+        });
+        </script>
+
+    {% block whatsap %}
+    <script>
+    var url = 'https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?46735';
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = url;
+    var options = {
+  "enabled":true,
+  "chatButtonSetting":{
+      "backgroundColor":"#4dc247",
+      "ctaText":"",
+      "borderRadius":"25",
+      "marginLeft":"0",
+      "marginBottom":"100",
+      "marginRight":"50",
+      "position":"right"
+  },
+  "brandSetting":{
+      "brandName":"{{site_adi.site_adi_sekme_tr}}",
+      "brandSubTitle":"Çevrimiçi",
+      "brandImg":"{{pencere_icon.sayfa_icon.url}}",
+      "welcomeText":"Merhaba!\nNasıl Yardımcı Olabilirim",
+      "messageText":"Merhaba ",
+      "backgroundColor":"#008000",
+      "ctaText":"Mesaj Gönder",
+      "borderRadius":"25",
+      "autoShow":false,
+      "phoneNumber":"+{{telefon.sirket_numarasi}}"
+  }
+};
+    s.onload = function() {
+        CreateWhatsappChatWidget(options);
+    };
+    var x = document.getElementsByTagName('script')[0];
+    x.parentNode.insertBefore(s, x);
+</script>
+    {% endblock whatsap %}
 </body>
 
 </html>
