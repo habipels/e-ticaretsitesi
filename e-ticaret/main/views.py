@@ -21,7 +21,7 @@ def site_bilgileri():
     sozluk["logo"] = sayfa_logosu.objects.last()
     sozluk["pencere_icon"] = sayfa_iconu.objects.last()
     sozluk["kategoriler"] = Meslek.objects.all()
-    sozluk["banner"] = banner.objects.filter(banner_gosterme = True).order_by("banner_sira")    
+    sozluk["banner"] = banner.objects.filter(banner_gosterme = True).order_by("banner_sira")
     sozluk["site_adi"] = site_adi.objects.last()
     sozluk["email"] = email_adres.objects.last()
     sozluk["telefon"] = numara.objects.last()
@@ -33,10 +33,10 @@ def site_bilgileri():
 # Create your views here.
 def homepage(request):
     content = site_bilgileri()
-    profile = urun.objects.filter(urun_stok__gte=1)
+    profile = urun.objects.filter(urun_stok__gte=1,silinme_bilgisi = False)
     if request.GET.get("search"):
         search = request.GET.get("search")
-        profile = urun.objects.filter(Q(urun_adi__icontains = search)  & Q(urun_stok__gte=1) )
+        profile = urun.objects.filter(Q(urun_adi__icontains = search)  & Q(urun_stok__gte=1),Q(silinme_bilgisi = False) )
     page_num = request.GET.get('page', 1)
     paginator = Paginator(profile, 20) # 6 employees per page
     try:
@@ -53,7 +53,7 @@ def homepage(request):
     return render(request,"index.html",content)
 def hakkimizda_sayfasi(request):
     content = site_bilgileri()
-    
+
     return render(request,"hakkimizda.html",content)
 def yasal_metinler_sayfasi(request,id,slug):
     content = site_bilgileri()
@@ -76,14 +76,14 @@ def sepete_urun_ekleme(request,id,slug):
             sepet_olusturma.objects.get(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
         except:
             sepet_olusturma.objects.create(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
-        
+
         try:
             a = sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) ).last()
             adet = a.urun_adedi +1
             sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) ).update(urun_adedi = adet)
-            
+
         except:
             sepetteki_urunler.objects.create(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) )
@@ -92,7 +92,7 @@ def sepete_urun_ekleme(request,id,slug):
             sepet_olusturma_ip.objects.get(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
         except:
             sepet_olusturma_ip.objects.create(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
-        
+
         try:
             a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) ).last()
@@ -110,19 +110,19 @@ def sepete_urun_ekleme_toplu(request):
         id = request.POST.get("urun")
         urunadi = request.POST.get("urunadi")
         if request.user.is_authenticated:
-            
+
             try:
                 sepet_olusturma.objects.get(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
             except:
                 sepet_olusturma.objects.create(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
-            
+
             try:
                 a = sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
                                             urun_bilgisi = get_object_or_404(urun,id = id) ).last()
                 adet = a.urun_adedi +b
                 sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
                                             urun_bilgisi = get_object_or_404(urun,id = id) ).update(urun_adedi = adet)
-                
+
             except:
                 sepetteki_urunler.objects.create(urun_adedi =b,kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
                                             urun_bilgisi = get_object_or_404(urun,id = id) )
@@ -131,7 +131,7 @@ def sepete_urun_ekleme_toplu(request):
                 sepet_olusturma_ip.objects.get(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
             except:
                 sepet_olusturma_ip.objects.create(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
-            
+
             try:
                 a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last(),
                                             urun_bilgisi = get_object_or_404(urun,id = id) ).last()
@@ -167,7 +167,7 @@ def sepete_urun_ekleme_sepette(request,id,slug):
             sepet_olusturma.objects.get(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
         except:
             sepet_olusturma.objects.create(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
-        
+
         try:
             a = sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) ).last()
@@ -185,7 +185,7 @@ def sepete_urun_ekleme_sepette(request,id,slug):
             sepet_olusturma_ip.objects.get(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
         except:
             sepet_olusturma_ip.objects.create(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
-        
+
         try:
             a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) ).last()
@@ -206,14 +206,14 @@ def sepete_urun_ekleme_sepette_azaltma(request,id,slug):
             sepet_olusturma.objects.get(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
         except:
             sepet_olusturma.objects.create(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
-        
+
         try:
             a = sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) ).last()
             adet = a.urun_adedi -1
             sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) ).update(urun_adedi = adet)
-            
+
         except:
             sepetteki_urunler.objects.create(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) )
@@ -222,7 +222,7 @@ def sepete_urun_ekleme_sepette_azaltma(request,id,slug):
             sepet_olusturma_ip.objects.get(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
         except:
             sepet_olusturma_ip.objects.create(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
-        
+
         try:
             a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) ).last()
@@ -241,11 +241,11 @@ def sepete_urun_ekleme_sepette_silme(request,id,slug):
             sepet_olusturma.objects.get(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
         except:
             sepet_olusturma.objects.create(sepet_sahibi = request.user,sepet_satin_alma_durumu = False)
-        
+
         try:
             a = sepetteki_urunler.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) ).last().delete()
-            
+
         except:
             sepetteki_urunler.objects.create(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) )
@@ -254,7 +254,7 @@ def sepete_urun_ekleme_sepette_silme(request,id,slug):
             sepet_olusturma_ip.objects.get(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
         except:
             sepet_olusturma_ip.objects.create(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False)
-        
+
         try:
             a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last(),
                                          urun_bilgisi = get_object_or_404(urun,id = id) ).last().delete()
@@ -265,17 +265,17 @@ def sepete_urun_ekleme_sepette_silme(request,id,slug):
 
 def kategori_ver_urunleri_gosterme(request,id,slug):
     content = site_bilgileri()
-    
+
     kategorileri = []
     a = get_object_or_404(Meslek,id = id)
     tum_kategoriler = []
     for i in Meslek.objects.filter(silinme_bilgisi = False):
         if a.kategori in i.__str__() :
             tum_kategoriler.append(i.id)
-    profile = urun.objects.filter(urun_stok__gte=1,kategori__id__in = tum_kategoriler).distinct()
+    profile = urun.objects.filter(urun_stok__gte=1,kategori__id__in = tum_kategoriler,silinme_bilgisi = False).distinct()
     if request.GET.get("search"):
         search = request.GET.get("search")
-        profile = urun.objects.filter(Q(kategori__id__in = tum_kategoriler)&Q(urun_adi__icontains = search)  & Q(urun_stok__gte=1) ).distinct()
+        profile = urun.objects.filter(Q(silinme_bilgisi = False),Q(kategori__id__in = tum_kategoriler)&Q(urun_adi__icontains = search)  & Q(urun_stok__gte=1) ).distinct()
     content["filtre"] = filtre_icerigi.objects.filter(filtre_bagli_oldu_filtre__filtre_adi = "MARKA",filtre_bagli_oldu_filtre__filtre_bagli_oldu_kategori__id__in=tum_kategoriler)
     page_num = request.GET.get('page', 1)
     paginator = Paginator(profile, 20) # 6 employees per page
@@ -353,7 +353,7 @@ def odeme_sayfasi_bilgileri_kaydet(request):
             sepet = sepet.replace("ip","")
             sepet = int(sepet)
             if sepet_sahibi_bilgileri.objects.filter(kayitli_olmayan_kullanici__id = sepet).count() > 0:
-                sepet_sahibi_bilgileri.objects.filter(kayitli_olmayan_kullanici = get_object_or_404(sepet_olusturma_ip,id = sepet)).update(                 
+                sepet_sahibi_bilgileri.objects.filter(kayitli_olmayan_kullanici = get_object_or_404(sepet_olusturma_ip,id = sepet)).update(
                     isim = isim,soyisim = soyisim,
                     vergi_tc = vergi_kimlik_no,email = eposta,
                     telefon = telefon,adres = adres, ulke = ulke,

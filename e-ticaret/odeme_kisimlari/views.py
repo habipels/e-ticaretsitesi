@@ -39,8 +39,8 @@ def home(request):
     merchant_id = odeme_ayarlari_paytr.objects.last().magaza_adi
     merchant_key = bytes(odeme_ayarlari_paytr.objects.last().magaza_parolasi, 'utf-8')
     merchant_salt = bytes(odeme_ayarlari_paytr.objects.last().magaza_gizli_anahtar, 'utf-8')
-    merchant_ok_url = "http://127.0.0.1:8000/pay/success/"
-    merchant_fail_url = 'http://127.0.0.1:8000/pay/result?basari=NO'
+    merchant_ok_url = "https://www.trakyaotoyedekparca.com/pay/success/"
+    merchant_fail_url = 'https://www.trakyaotoyedekparca.com/pay/result?basari=NO'
     context = dict()
     if request.user.is_authenticated:
         ads =sepet_sahibi_bilgileri.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last()).last()
@@ -66,7 +66,7 @@ def home(request):
         merchant_oid ='OS' + random.randint(1, 9999999).__str__()+"KayitsizID"+ str(user_sepet.id)
     user_basket = base64.b64encode(json.dumps(sepetteki_urunler_getir).encode())
 
-    
+
     test_mode = '1'
     debug_on = '1'
 
@@ -82,7 +82,7 @@ def home(request):
     email = str(ads.email)
 
     # 100.99 TL ödeme
-   
+
     payment_amount = str(int(toplam_fiyat)*100)
     currency = 'TL'
     payment_type = 'card'

@@ -171,6 +171,7 @@ class urun_ekle(ModelForm):
         fields = [
             'kategori',
             'urun_adi',
+            "partikodu",
             'fiyat',
             'urun_stok',
             "urun_aciklama"
