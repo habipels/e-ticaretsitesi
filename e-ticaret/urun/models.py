@@ -21,6 +21,7 @@ class Meslek(models.Model):
     keywords = models.CharField(max_length=255)
     silinme_bilgisi = models.BooleanField(default=False,verbose_name="Silinme Bilgisi")
     numarasi = models.IntegerField(default = 0 ,verbose_name="sıralaması")
+    headerda_gosterme = models.BooleanField(default = False,verbose_name = "headerda Görünsün")
     def __str__(self):
         full_path = [self.kategori]                  # post.  use __unicode__ in place of
         k = self.ust_kategory
@@ -53,6 +54,7 @@ class urun(models.Model):
     kategori = models.ManyToManyField(Meslek,blank=True,null=True)
     urun_adi  = models.CharField(max_length=200,verbose_name="Ürün Adı",blank=True,null=True)
     partikodu  = models.CharField(max_length=200,verbose_name="ürün partikodu",blank=True,null=True)
+    eski_fiyat = models.FloatField(verbose_name="Fiyat Bilgisi", blank=True,null=True)
     fiyat = models.FloatField(verbose_name="Fiyat Bilgisi", blank=True,null=True)
     urun_stok = models.FloatField(blank=True,null=True,verbose_name="Stok Bilgisi")
     urun_aciklama = RichTextField(verbose_name="Ürün Açıklama")

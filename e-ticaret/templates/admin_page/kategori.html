@@ -48,7 +48,7 @@
 
 <!-- The Modal -->
 <div class="modal" id="logo">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
       <!-- Modal Header -->
@@ -58,15 +58,16 @@
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body" style="height: 300px;">
+      <div class="modal-body" >
         <form method = "post" enctype="multipart/form-data">
           {% csrf_token %}
             {{Email_ekle.media}}
             {{Email_ekle|crispy}}
-            <br><br><br>
+           
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">iptal</button>
             <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Ekle</button>    
         </form>
+        
       </div>
 
       </div>

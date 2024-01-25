@@ -43,16 +43,16 @@
 }
 /**/
 
-.menustack{display:flex;float:left;width:100%;position:relative;z-index:20;background:#4c4c4c;align-items:center;height:50px;transition:ease-in-out all .1s;z-index: 999;}
+.menustack{display:flex;float:left;width:100%;position:relative;z-index:20;background:#4c4c4c;align-items:center; margin-bottom: 7px;height:40px;transition:ease-in-out all .1s;z-index: 999;}
 .menustack a{transition:ease-in-out all .1s;}
 .menustack a:hover{transition:ease-in-out all .1s;}
 .menustack ul{}
 .menustack ul li{display:block;float:left;}
-.menustack .wrapping{display:block;max-width:1200px;margin:auto;}
-.menustack .level0{margin-top: 5px;display:flex;float:left;width:100%;justify-content:flex-start;align-items:center;flex-wrap:wrap;flex-direction:row;}
+.menustack .wrapping{display:block;max-width:1200px; margin: auto;}
+.menustack .level0{margin-top: 5px !important; margin-bottom: 5px !important;display:flex;float:left;width:100%;justify-content:flex-start;align-items:center;flex-wrap:wrap;flex-direction:row;}
 .menustack .level0 .allcats{}
 .menustack .level0 .allcats:hover a{background:#fff;height:38px;border-radius:0px;color:#000;}
-.menustack .level0 .allcats a{padding:3px 15px;height:37px;display:flex;align-items:center;}
+.menustack .level0 .allcats a{padding:3px 15px;align-items:center;}
 .menustack .level0 .allcats .full_cats{background:#686868;color:#fff;border-radius:40px;font-size:0.80em;font-weight:500;height:27px;}
 .menustack .level0 .allcats:hover .opener{display:flex;}
 .menustack .level0 .allcats .full_cats:hover{background:#fff;height:38px;border-radius:0px;color:#000;}

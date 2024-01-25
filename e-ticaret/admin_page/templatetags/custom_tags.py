@@ -170,12 +170,12 @@ def sepet_toplam_tutar_t(request):
 def kategoi_bilgisi_duzednleme(id):
     veri = ''
     if id == "":
-        a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None)
+        a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None,headerda_gosterme = True)
         for i  in a:
             z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id)
             
             if z.count() > 0:
-                veri = veri+ '<li class="allcats"><a class="full_cats" href="/kategori/{}/{}/"> <i class="fas fa fa-sort-down"></i> {}</a><div class="opener"><ul class="open">'.format(str(i.id),str(i.link),str(i.kategori))
+                veri = veri+ '<li class="allcats"><a class="full_cats" href="/kategori/{}/{}/"> <i class="fas fa fa-plus"></i> {}</a><div class="opener"><ul class="open">'.format(str(i.id),str(i.link),str(i.kategori))
                 for j in z:
                     veri = veri+str(kategoi_bilgisi_duzednleme(j.id))
                 veri = veri + '</ul></div></li>'
@@ -187,12 +187,12 @@ def kategoi_bilgisi_duzednleme(id):
             z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id)
             
             if z.count() > 0:
-                veri = veri+ '<li> <a href="/kategori/{}/{}/"><i class="fas fa fa-sort-down"></i> {}</a><ul class="open2">'.format(str(i.id),str(i.link),str(i.kategori))
+                veri = veri+ '<li> <a href="/kategori/{}/{}/"><i class="fas fa fa-plus"></i> {}</a><ul class="open2">'.format(str(i.id),str(i.link),str(i.kategori))
                 for j in z:
                     veri = veri+'{}'.format(str(kategoi_bilgisi_duzednleme(j.id)))
                 veri = veri + "</ul></li>"
             else:
-                veri = veri+ '<li class="allcats"><a class="full_cats" href="/kategori/{}/{}/"><i class="fas fa fa-sort-down"></i> {}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
+                veri = veri+ '<li class="allcats"><a class="full_cats" href="/kategori/{}/{}/"><i class="fas fa fa-minus"></i> {}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
     return  mark_safe(veri)
 
 @register.simple_tag
@@ -302,3 +302,7 @@ def yilliksiparistutar():
                 toplam = toplam + (j.urun_adedi * j.urun_bilgisi.fiyat)
 
     return str(toplam)
+
+@register.simple_tag
+def duzenle(a):
+    return a.replace("/","-")

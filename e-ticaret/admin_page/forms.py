@@ -135,14 +135,19 @@ class gomuluadres_ekle(ModelForm):
         ]
 
 class kategori_ekle(ModelForm):
+    kategori = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Kategori Adı','style':'min-width:300px !important; '}),
+        label="Kategori Adı")
     class Meta:
+        
         model = Meslek
         fields = [
             'kategori',
             'ust_kategory',
             'link',
             'keywords',
-            "numarasi"
+            "numarasi",
+            "headerda_gosterme"
 
         ]
 
