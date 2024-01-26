@@ -170,30 +170,74 @@ def sepet_toplam_tutar_t(request):
 def kategoi_bilgisi_duzednleme(id):
     veri = ''
     if id == "":
-        a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None,headerda_gosterme = True)
+        a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None,headerda_gosterme = True).order_by("numarasi")
         for i  in a:
-            z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id)
+            z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id).order_by("numarasi")
             
             if z.count() > 0:
-                veri = veri+ '<li class="allcats"><a class="full_cats" href="/kategori/{}/{}/"> <i class="fas fa fa-plus"></i> {}</a><div class="opener"><ul class="open">'.format(str(i.id),str(i.link),str(i.kategori))
+                veri = veri+ '<li class="step1"><a href="/kategori/{}/{}/"> <i class="fas fa fa-plus"></i> {}</a><div class="open"><div class="left_con"><ul class="">'.format(str(i.id),str(i.link),str(i.kategori))
                 for j in z:
                     veri = veri+str(kategoi_bilgisi_duzednleme(j.id))
-                veri = veri + '</ul></div></li>'
+                veri = veri + '</ul></div></div></li>'
             else:
-                veri = veri+ '<li class="allcats"><a class="full_cats" href="/kategori/{}/{}/">{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
+                veri = veri+ '<li class=""><a class="" href="/kategori/{}/{}/">{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
     else:
-        a = Meslek.objects.filter(silinme_bilgisi = False,id = id)    
+        a = Meslek.objects.filter(silinme_bilgisi = False,id = id).order_by("numarasi")   
         for i  in a:
-            z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id)
+            z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id).order_by("numarasi")
             
             if z.count() > 0:
-                veri = veri+ '<li> <a href="/kategori/{}/{}/"><i class="fas fa fa-plus"></i> {}</a><ul class="open2">'.format(str(i.id),str(i.link),str(i.kategori))
+                veri = veri+ '<li> <a href="/kategori/{}/{}/"><i class="fas fa fa-plus"></i> {}</a> <div class="left_con"><ul class="open2">'.format(str(i.id),str(i.link),str(i.kategori))
                 for j in z:
                     veri = veri+'{}'.format(str(kategoi_bilgisi_duzednleme(j.id)))
-                veri = veri + "</ul></li>"
+                veri = veri + "</ul></li></div>"
             else:
-                veri = veri+ '<li class="allcats"><a class="full_cats" href="/kategori/{}/{}/"><i class="fas fa fa-minus"></i> {}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
+                veri = veri+ '<li class=""><a class="" href="/kategori/{}/{}/"><i class="fas fa fa-minus"></i> {}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
     return  mark_safe(veri)
+@register.simple_tag
+def kategoi_bilgisi_duzednleme2(id):
+    
+    veri = ''
+    if id == "":
+        a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None,headerda_gosterme = True).order_by("numarasi")
+        for i  in a:
+            z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id).order_by("numarasi")
+            
+            if z.count() > 0:
+                veri = veri+'<li><a href="/kategori/{}/{}/"" title="{}">{}</a><div class="sub1"><div class="wrap"><div class="left"><ul>'.format(str(i.id),str(i.link),str(i.kategori),str(i.kategori))
+                for j in z:
+                    veri = veri+str(kategoi_bilgisi_duzednleme(j.id))
+                veri = veri + '</ul></div></div></div></li>'
+            else:
+                veri = veri+ '<li class=""><a class="" href="/kategori/{}/{}/">{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
+    else:
+        a = Meslek.objects.filter(silinme_bilgisi = False,id = id).order_by("numarasi")   
+        for i  in a:
+            z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id).order_by("numarasi")
+            
+            if z.count() > 0:
+                veri = veri+ '<li> <a href="/kategori/{}/{}/"><i class="fas fa fa-plus"></i> {}</a> <div class="left_con"><ul class="open2">'.format(str(i.id),str(i.link),str(i.kategori))
+                for j in z:
+                    veri = veri+'{}'.format(str(kategoi_bilgisi_duzednleme(j.id)))
+                veri = veri + "</ul></li></div>"
+            else:
+                veri = veri+ '<li class=""><a class="" href="/kategori/{}/{}/"><i class="fas fa fa-minus"></i> {}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
+    return  mark_safe(veri)
+@register.simple_tag
+def getir(id):
+    b = ""
+    z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = id).order_by("numarasi")
+    for i in z:
+        b = b+'<li><a href="/kategori/{}/{}/">{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
+    return b
+@register.simple_tag
+def tumkategoriler(bilgi):
+    a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None,headerda_gosterme = True).order_by("numarasi")
+    bilgi = ""
+    for i in a:
+        bilgi = bilgi+'<li> <a href="/kategori/{}/{}/">{}</a><ul class="open2">'.format(str(i.id),str(i.link),str(i.kategori))
+        bilgi = bilgi+getir(i.id)+'</ul></li>'
+    return mark_safe(bilgi)
 
 @register.simple_tag
 def sepet_id_gonder(a):

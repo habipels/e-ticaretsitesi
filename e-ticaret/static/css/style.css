@@ -53,7 +53,11 @@
   display: none;
   border-bottom: 1px solid #eee;
   overflow: visible!important;
-  height: 50px;
+margin: auto;
+}
+.fa, .fab, .fad, .fal, .far, .fas {
+
+  line-height: 1.5 !important; 
 }
 .menustack{display:flex;float:left;width:100%;position:relative;z-index:20;background:#4c4c4c;align-items:center; margin-bottom: 7px;height:40px;transition:ease-in-out all .1s;z-index: 999;}
 .menustack a{transition:ease-in-out all .1s;}
@@ -65,7 +69,7 @@
 .menustack .level0 .allcats{}
 .menustack .level0 .allcats:hover a{background:#fff;height:38px;border-radius:0px;color:#000;}
 .menustack .level0 .allcats a{padding:3px 15px;align-items:center;}
-.menustack .level0 .allcats .full_cats{background:#686868;color:#fff;border-radius:40px;font-size:0.80em;font-weight:500;height:27px;}
+.menustack .level0 .allcats .full_cats{color:#fff;font-weight:500;height:27px;}
 .menustack .level0 .allcats:hover .opener{display:flex;}
 .menustack .level0 .allcats .full_cats:hover{background:#fff;height:38px;border-radius:0px;color:#000;}
 .menustack .level0 .allcats a:hover{}
@@ -80,7 +84,7 @@
 .menustack .level0 .allcats .open li .open2 li a:hover{color:#f7931e;}
 .menustack .step1{display:flex;margin-top:-1px;}
 .menustack .step1 a{color:#fff;font-size:0.83em;font-weight:400;display:flex;padding:12px 17px;}
-.menustack .step1 a:after{font-family:"Font Awesome 5 Pro";font-weight:400;content:"\f107";display:inline-block;font-style:normal;font-variant:normal;text-rendering:auto;-webkit-font-smoothing:antialiased;font-size:0.75em;color:#bbb;align-items:center;right:6px;position:absolute;top:14px;}
+.menustack .step1 a:after{font-family:"Font Awesome 5 Pro";font-weight:400;display:inline-block;font-style:normal;font-variant:normal;text-rendering:auto;-webkit-font-smoothing:antialiased;font-size:0.75em;color:#bbb;align-items:center;right:6px;position:absolute;top:14px;}
 .menustack .step1 a:hover{background:#fff;color:#000;}
 .menustack .step1{position:relative;}
 .menustack .step1:hover a{background:#fff;color:#000;}
@@ -109,7 +113,7 @@
 
 
 /* MENULER */
-.mainmenu ul.menu{display:block;float:left;width:100%;text-align:center;font-weight:600;padding-top:13px;text-transform:uppercase;}
+.mainmenu ul.menu{display:block;float:left;padding-top: 30px; width:100%;text-align:center;font-weight:600;text-transform:uppercase;}
 .mainmenu ul.menu li{display:inline-block;}
 .mainmenu ul.menu li:hover .sub1{display:block;}
 .mainmenu ul.menu li:hover a{border-bottom:2px solid #ef5f00;color:#ef5f00;}
