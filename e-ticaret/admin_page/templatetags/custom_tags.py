@@ -180,7 +180,7 @@ def kategoi_bilgisi_duzednleme(id):
                     veri = veri+str(kategoi_bilgisi_duzednleme(j.id))
                 veri = veri + '</ul></div></div></li>'
             else:
-                veri = veri+ '<li class=""><a class="" href="/kategori/{}/{}/">{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
+                veri = veri+ '<li class="step1"><a href="/kategori/{}/{}/">{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
     else:
         a = Meslek.objects.filter(silinme_bilgisi = False,id = id).order_by("numarasi")   
         for i  in a:
@@ -232,7 +232,7 @@ def getir(id):
     return b
 @register.simple_tag
 def tumkategoriler(bilgi):
-    a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None,headerda_gosterme = True).order_by("numarasi")
+    a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None).order_by("numarasi")
     bilgi = ""
     for i in a:
         bilgi = bilgi+'<li> <a href="/kategori/{}/{}/">{}</a><ul class="open2">'.format(str(i.id),str(i.link),str(i.kategori))
