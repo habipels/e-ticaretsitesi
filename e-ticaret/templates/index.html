@@ -159,7 +159,7 @@
         <div class="container pt-5 mt-2">
             <div class="text-center mb-4">
                 {% if populer %}
-                 <h2 class="section-title px-5"><a href=""><span class="px-2">Popüler Ürünler</span></a></h2>
+                 <h2 class="section-title px-5"><span class="px-2">Popüler Ürünler</span></h2>
                 {% else %}
                 {% endif %}
                
@@ -177,7 +177,7 @@
     
                         </div>
                         <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                            <h6 class="text-truncate mb-3">{% duzenle i.urun_adi %}</h6>
+                            <h6 class="text-truncate mb-3">{{ i.urun_adi }}</h6>
                             <div class="d-flex justify-content-center">
                                 <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
                             </div>

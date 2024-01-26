@@ -353,3 +353,14 @@ def duzenle(a):
 @register.simple_tag
 def indirim_orani(a,b):
     return 100 - int(b*100/a)
+
+
+@register.simple_tag
+def benzer_urunler(id):
+    a = get_object_or_404(Meslek,id = id)
+    tum_kategoriler = []
+    for i in Meslek.objects.filter(silinme_bilgisi = False):
+        if a.kategori in i.__str__() :
+            tum_kategoriler.append(i.id)
+    profile = urun.objects.filter(urun_stok__gte=1,kategori__id__in = tum_kategoriler,silinme_bilgisi = False).distinct()
+    return profile
