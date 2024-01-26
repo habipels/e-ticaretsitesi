@@ -350,3 +350,6 @@ def yilliksiparistutar():
 @register.simple_tag
 def duzenle(a):
     return a.replace("/","-").replace(" ","_")
+@register.simple_tag
+def indirim_orani(a,b):
+    return 100 - int(b*100/a)

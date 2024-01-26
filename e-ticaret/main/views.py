@@ -4,6 +4,7 @@ from site_set.models import *
 from urun.models import *
 from django.core.paginator import Paginator , EmptyPage, PageNotAnInteger
 from django.db.models.query_utils import Q
+from django.db.models import F
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
@@ -48,6 +49,8 @@ def homepage(request):
             # if the page is out of range, deliver the last page
         page_obj = paginator.page(paginator.num_pages)
     content["santiyeler"] = page_obj
+    content["indirimdekiurunler"] = urun.objects.filter(urun_stok__gte=1,eski_fiyat__gt=F('fiyat'),silinme_bilgisi = False)
+    content["populer"] = urun.objects.filter(urun_stok__gte=1,silinme_bilgisi = False).order_by("-urun_bakma_saysi")
     content["top"]  = profile
     content["medya"] = page_obj
     return render(request,"index.html",content)
@@ -66,6 +69,8 @@ def iletisim_sayfasi(request):
 def urunler_tekli_sayfa (request,id,slug):
     content = site_bilgileri()
     content["urun_"] = get_object_or_404(urun,id = id)
+    a  = get_object_or_404(urun,id = id).urun_bakma_saysi+1
+    urun.objects.filter(id = id).update(urun_bakma_saysi = a)
     content["urun_resimleri"] = urun_resimleri.objects.filter(urun_bilgisi = get_object_or_404(urun,id = id))
     return render(request,"urunlist/urun_goster.html",content)
 
@@ -141,7 +146,7 @@ def sepete_urun_ekleme_toplu(request):
             except:
                 sepetteki_urunler.objects.create(urun_adedi =b,kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last(),
                                             urun_bilgisi = get_object_or_404(urun,id = id) )
-    z = "/urun/{}/{}".format(id,urunadi)
+    z = "/urun/{}/{}".format(id,urunadi.replace("/",""))
     return redirect(z)
 
 def sepet_git(request):

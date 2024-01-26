@@ -34,13 +34,19 @@ from django.shortcuts import render, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from site_set.models import *
 from urun.models import *
+def bugunsiparis():
+    bugunku_tarih_ve_saat = datetime.now()
+    a =satin_alinanlar.objects.filter(kayit_tarihi__gte=bugunku_tarih_ve_saat.replace(hour=0, minute=0, second=0, microsecond=0)).count()
+    b = str(bugunku_tarih_ve_saat.day)+str(bugunku_tarih_ve_saat.month)+str(bugunku_tarih_ve_saat.year)+str(a)
+
+    return b
 def home(request):
     content = dict()
     merchant_id = odeme_ayarlari_paytr.objects.last().magaza_adi
     merchant_key = bytes(odeme_ayarlari_paytr.objects.last().magaza_parolasi, 'utf-8')
     merchant_salt = bytes(odeme_ayarlari_paytr.objects.last().magaza_gizli_anahtar, 'utf-8')
-    merchant_ok_url = "https://www.trakyaotoyedekparca.com/pay/success/"
-    merchant_fail_url = 'https://www.trakyaotoyedekparca.com/pay/result?basari=NO'
+    merchant_ok_url = "http://127.0.0.1:8000/pay/success/"
+    merchant_fail_url = 'http://127.0.0.1:8000/pay/result?basari=NO'
     context = dict()
     if request.user.is_authenticated:
         ads =sepet_sahibi_bilgileri.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last()).last()
@@ -52,7 +58,7 @@ def home(request):
             if i.urun_adedi > 0:
                 sepetteki_urunler_getir.append([str(i.urun_bilgisi.urun_adi),str(i.urun_bilgisi.fiyat),int(i.urun_adedi)])
                 toplam_fiyat = toplam_fiyat+ (float(i.urun_bilgisi.fiyat)*int(i.urun_adedi))
-        merchant_oid ='OS' + random.randint(1, 9999999).__str__()+"ID"+ str(user_sepet.id)
+        merchant_oid =bugunsiparis()+'OS' + random.randint(1, 9999999).__str__()+"ID"+ str(user_sepet.id)
     else:
         ads = get_object_or_404(sepet_sahibi_bilgileri,kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last())
         user_sepet = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last()
@@ -63,7 +69,7 @@ def home(request):
             if i.urun_adedi > 0:
                 sepetteki_urunler_getir.append([str(i.urun_bilgisi.urun_adi),str(i.urun_bilgisi.fiyat),int(i.urun_adedi)])
                 toplam_fiyat = toplam_fiyat+ (float(i.urun_bilgisi.fiyat)*int(i.urun_adedi))
-        merchant_oid ='OS' + random.randint(1, 9999999).__str__()+"KayitsizID"+ str(user_sepet.id)
+        merchant_oid =bugunsiparis()+'OS' + random.randint(1, 9999999).__str__()+"KayitsizID"+ str(user_sepet.id)
     user_basket = base64.b64encode(json.dumps(sepetteki_urunler_getir).encode())
 
 
@@ -198,7 +204,7 @@ def success(request):
     if request.user.is_authenticated:
         ads =  sepet_sahibi_bilgileri.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last()).last()
         user_sepet = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last()
-        satin_alinanlar.objects.create(siparis_numarasi = "ID"+str(user_sepet.id),siparis_sahibi_bilgileri = ads,kayitli_kullanici = user_sepet,)
+        satin_alinanlar.objects.create(siparis_numarasi = bugunsiparis()+"ID"+str(user_sepet.id),siparis_sahibi_bilgileri = ads,kayitli_kullanici = user_sepet,)
         sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).update(sepet_satin_alma_durumu = True)
         a = sepetteki_urunler.objects.filter(kayitli_kullanici = user_sepet)
         toplam_fiyat = 0
@@ -208,7 +214,7 @@ def success(request):
     else:
         ads = get_object_or_404(sepet_sahibi_bilgileri,kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last())
         user_sepet = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last()
-        satin_alinanlar.objects.create(siparis_numarasi = "KayitsizID"+str(user_sepet.id),siparis_sahibi_bilgileri = ads,kayitli_olmayan_kullanici = user_sepet,)
+        satin_alinanlar.objects.create(siparis_numarasi = bugunsiparis()+"KayitsizID"+str(user_sepet.id),siparis_sahibi_bilgileri = ads,kayitli_olmayan_kullanici = user_sepet,)
         sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).update(sepet_satin_alma_durumu = True)
         a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = user_sepet)
         toplam_fiyat = 0

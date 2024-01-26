@@ -722,15 +722,17 @@ def urun_kategori_bazli_fiyat_degisikligi(request):
             for i in tum_urun:
                 id = i.id
                 urun_fiyat = i.fiyat
+                a = i.fiyat
                 urun_fiyat = ((urun_fiyat *oran)/100)+urun_fiyat
-                urun.objects.filter(id = id).update(fiyat = urun_fiyat)
+                urun.objects.filter(id = id).update(fiyat = urun_fiyat,eski_fiyat = a)
         else:
             urun_fiyat = 0
             for i in tum_urun:
                 id = i.id
                 urun_fiyat = i.fiyat
+                a = i.fiyat
                 urun_fiyat = urun_fiyat-((urun_fiyat *oran)/100)
-                urun.objects.filter(id = id).update(fiyat = urun_fiyat)
+                urun.objects.filter(id = id).update(fiyat = urun_fiyat,eski_fiyat = a)
         return redirect("/yonetim/urunekle")
     return render (request,"admin_page/kategori_bazli_fiyat_destirme.html",content)
 @login_required
