@@ -1,0 +1,22 @@
+{% extends "leyout.html" %}
+{% block head %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+{% endblock head %}
+{% load crispy_forms_tags %}
+{% load custom_tags %}
+{% block slider %}
+
+<form method = "post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% for i in filtreler %}
+          {{i.filtre_adi}}
+            <select name="{{i.filtre_linki}}" id="{{i.filtre_linki}}">
+            {{i |Filtre_icerikleri_almaa}}
+                
+            </select><br>
+            {% endfor %}
+            {{form}}
+            <a href="/yonetim/filtreayarlari" class="btn btn-danger" >iptal</a>
+            <button type="submit" class="btn btn-success" >Eklemeye Devam Et</button>    
+        </form>
+{% endblock slider %}

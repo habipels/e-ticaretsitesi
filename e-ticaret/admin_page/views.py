@@ -5,6 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import *
 from site_set.models  import *
+from django.db.models.query_utils import Q
 from django.contrib.auth.decorators import login_required
 def AdminLogin(request):
     if request.method == "POST":
@@ -662,6 +663,28 @@ def urun_ekleme_yap(request):
         return render (request,"admin_page/filtreye_icerik_ekle.html",content)
     else:
         return redirect("/")
+@login_required
+def urun_duzenleme_yap(request,id):
+
+    content = {}
+    if True:
+        annner_duzenle = get_object_or_404(urun,id = id)
+        Email_ekleme= urun_ekle(request.POST or None,request.FILES or None,instance = annner_duzenle)
+
+        content["medya"] = urun.objects.order_by("-id").filter(silinme_bilgisi =False).all()
+        content["Email_ekle"] = Email_ekleme
+        content["sosyalmedya"] = "Ürün"
+        content ["sosyalmedyaa"] = "urunsil"
+        if Email_ekleme.is_valid():
+
+            l = Email_ekleme.save(commit=False)
+            l.save()
+            Email_ekleme.save_m2m()
+            x = "/yonetim/urunduzenlemefitre/"+str(l.id)
+            return redirect(x)
+        return render (request,"admin_page/filtreye_icerik_ekle.html",content)
+    else:
+        return redirect("/")
 def urun_filre_ve_resim_ekleme(request,id):
     content = {}
     form = MultipleImageUploadForm(request.POST, request.FILES)
@@ -681,7 +704,8 @@ def urun_filre_ve_resim_ekleme(request,id):
             else:
                 tum_kategoriler.append(z.id)
             z =  z.ust_kategory
-    file = filtre.objects.filter(filtre_bagli_oldu_kategori__id__in = tum_kategoriler)
+    file = filtre.objects.filter(Q(filtre_bagli_oldu_kategori__id__in = tum_kategoriler) | Q(filtre_bagli_oldu_kategori = None))
+    print(file,tum_kategoriler)
     if request.POST:
         if form.is_valid():
             images = request.FILES.getlist('images')
@@ -696,6 +720,41 @@ def urun_filre_ve_resim_ekleme(request,id):
     content["filtreler"] = file
     content["kategoriler"] = kategorileri
     return render (request,"admin_page/urun_alt_ozellik.html",content)
+def urun_filre_ve_resim_duzenle(request,id):
+    content = {}
+    form = MultipleImageUploadForm(request.POST, request.FILES)
+    content["form"] =form
+    urun_bilgisi =get_object_or_404(urun,id = id)
+    kategorileri = []
+    filtreler =[] 
+    tum_kategoriler = []
+    a = urun_bilgisi.kategori.all()
+    for i in a :
+        kategorileri.append(i)
+    for i in kategorileri:
+        z = i
+        while z:    
+            if z.ust_kategory :
+                tum_kategoriler.append(z.id)
+            else:
+                tum_kategoriler.append(z.id)
+            z =  z.ust_kategory
+    file = filtre.objects.filter(Q(filtre_bagli_oldu_kategori__id__in = tum_kategoriler) | Q(filtre_bagli_oldu_kategori = None))
+    print(file,tum_kategoriler)
+    if request.POST:
+        if form.is_valid():
+            images = request.FILES.getlist('images')
+            for images in images:
+                urun_resimleri.objects.create(image=images,urun_bilgisi = get_object_or_404(urun,id = id))  # Urun_resimleri modeline resimleri kaydet
+        for j in file:
+            if request.POST.get(j.filtre_linki):
+                urun_filtre_tercihi.objects.create(urun = get_object_or_404(urun,id = id),filtre_bilgisi = get_object_or_404(filtre_icerigi,id = request.POST.get(j.filtre_linki)))
+            print(request.POST.get(j.filtre_linki))
+        return redirect("/yonetim/urunekle") 
+    content["fil"] = tum_kategoriler
+    content["filtreler"] = file
+    content["kategoriler"] = kategorileri
+    return render (request,"admin_page/urun_alt_ozellik_duzelt.html",content)
 def urunsil (request,id):
 
     content = {}

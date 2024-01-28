@@ -57,7 +57,7 @@ class urun(models.Model):
     eski_fiyat = models.FloatField(verbose_name="Fiyat Bilgisi", blank=True,null=True)
     fiyat = models.FloatField(verbose_name="Fiyat Bilgisi", blank=True,null=True)
     urun_stok = models.FloatField(blank=True,null=True,verbose_name="Stok Bilgisi")
-    urun_aciklama = RichTextField(verbose_name="Ürün Açıklama")
+    urun_aciklama = RichTextField(verbose_name="Ürün Açıklama",blank = True,null = True)
     silinme_bilgisi = models.BooleanField(default=False,verbose_name="Silinme Bilgisi")
     urun_bakma_saysi = models.BigIntegerField(verbose_name="Ürün Bakma Sayısı" ,default=0)
 from PIL import Image

@@ -21,7 +21,7 @@
                                             <th>{{sosyalmedya}} Stoğu </th>
                                             <th>{{sosyalmedya}} Filtreleri </th>
                                             <th>{{sosyalmedya}} Linki</th>
-                                            <th>{{sosyalmedya}} Kelimeleri</th>
+                                            <th>{{sosyalmedya}} Parti Kodu</th>
                                             <th>Düzelt</th>
                                             <th>Sil</th>
                                             
@@ -42,9 +42,9 @@
                                               <td>{{i.fiyat}}</td>
                                               <td>{{i.urun_stok}}</td>
                                               <td>{{i|urun_filtre_icerigi}}</td>
-                                              <td>{{i.urun_stok}}</td>
-                                              <td>{{i.urun_stok}}</td>
-                                              <td>{{i.urun_stok}}</td>
+                                              <td> <a target="_blank" href="/urun/{{i.id}}/{% duzenle i.urun_adi %}">Ürünü Gör</a> </td>
+                                              <td>{{i.partikodu}}</td>
+                                              <td><a href="/yonetim/urunduzenleme/{{i.id}}" target="_blank" rel="noopener noreferrer">Düzelt</a></td>
                                             <td><a  href="/yonetim/{{sosyalmedyaa}}/{{i.id}}" class="btn btn-primary">{{sosyalmedya}} Adresini Sil</a></td>
                                             
                                             
