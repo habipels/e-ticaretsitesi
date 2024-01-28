@@ -9,13 +9,42 @@
 <form method = "post" enctype="multipart/form-data">
           {% csrf_token %}
           {% for i in filtreler %}
-          {{i.filtre_adi}}
+              {{i.filtre_adi}}
             <select name="{{i.filtre_linki}}" id="{{i.filtre_linki}}">
+            {% for j in kayitlifiltreler %}
+            {% if i.id == j.filtre_bilgisi.filtre_bagli_oldu_filtre.id %}
+                <option value="{{i.id}}">{{j.filtre_bilgisi.filtre_adi}}</option>
+            {% else %}
+            {% endif %}
+              
+            {% endfor %}
+            
             {{i |Filtre_icerikleri_almaa}}
                 
             </select><br>
             {% endfor %}
             {{form}}
+            {% for k in resimler %}
+            {% if k.image %}
+              <div class = "resimKapsayici" style="max-width: 200px; max-height: 200px; float: left; margin-left: 10px;" class="bilgi">
+                <label for="vehicle{{k.id}}">
+                <img style="max-width: 200px; max-height: 200px;" src="{{k.image.url}}" alt="">
+                  <div class="resimYazisi"><input style="width: 30px;height: 30px;" checked type="checkbox" id="vehicle{{k.id}}" name="vehicle" value="{{k.id}}">
+                  </label> </div>
+                  <style>
+                    .resimKapsayici {position:relative}
+                    .resimYazisi {position:absolute;left:10px;top:10px;width: 50px;
+                        height: 50px;
+                       /* Kırmızı renk */
+                        }
+                    </style>
+                </div>
+            {% else %}
+            {% endif %}
+              
+            {% endfor %}
+            
+            <div style="clear: both;" ></div>
             <a href="/yonetim/filtreayarlari" class="btn btn-danger" >iptal</a>
             <button type="submit" class="btn btn-success" >Eklemeye Devam Et</button>    
         </form>

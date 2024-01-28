@@ -722,9 +722,14 @@ def urun_filre_ve_resim_ekleme(request,id):
     return render (request,"admin_page/urun_alt_ozellik.html",content)
 def urun_filre_ve_resim_duzenle(request,id):
     content = {}
+    
     form = MultipleImageUploadForm(request.POST, request.FILES)
     content["form"] =form
     urun_bilgisi =get_object_or_404(urun,id = id)
+    urun_tum_resimleri = urun_resimleri.objects.filter(urun_bilgisi = urun_bilgisi)
+    content["resimler"] = urun_tum_resimleri
+    content["kayitlifiltreler"] =  urun_filtre_tercihi.objects.filter(urun = urun_bilgisi)
+
     kategorileri = []
     filtreler =[] 
     tum_kategoriler = []
@@ -742,14 +747,24 @@ def urun_filre_ve_resim_duzenle(request,id):
     file = filtre.objects.filter(Q(filtre_bagli_oldu_kategori__id__in = tum_kategoriler) | Q(filtre_bagli_oldu_kategori = None))
     print(file,tum_kategoriler)
     if request.POST:
+        vehicle = request.POST.getlist("vehicle")
+        y = urun_resimleri.objects.filter(urun_bilgisi = urun_bilgisi)
+        for k in y:
+            if str(k.id) in vehicle:
+                pass
+            else:
+                urun_resimleri.objects.filter(id = k.id).delete()
         if form.is_valid():
+            
             images = request.FILES.getlist('images')
             for images in images:
                 urun_resimleri.objects.create(image=images,urun_bilgisi = get_object_or_404(urun,id = id))  # Urun_resimleri modeline resimleri kaydet
         for j in file:
             if request.POST.get(j.filtre_linki):
-                urun_filtre_tercihi.objects.create(urun = get_object_or_404(urun,id = id),filtre_bilgisi = get_object_or_404(filtre_icerigi,id = request.POST.get(j.filtre_linki)))
-            print(request.POST.get(j.filtre_linki))
+                #urun_filtre_tercihi.objects.create(urun = get_object_or_404(urun,id = id),filtre_bilgisi = get_object_or_404(filtre_icerigi,id = request.POST.get(j.filtre_linki)))
+                pass
+        print(request.POST.get(j.filtre_linki),vehicle,"bilgi")
+        
         return redirect("/yonetim/urunekle") 
     content["fil"] = tum_kategoriler
     content["filtreler"] = file

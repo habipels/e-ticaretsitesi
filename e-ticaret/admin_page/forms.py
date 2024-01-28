@@ -201,4 +201,4 @@ class kargola(ModelForm):
 from django import forms
 
 class MultipleImageUploadForm(forms.Form):
-    images = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+    images = forms.ImageField(required=False,widget=forms.ClearableFileInput(attrs={'multiple': True}))
