@@ -55,16 +55,16 @@
   overflow: visible!important;
 margin: auto;
 }
-.fa, .fab, .fad, .fal, .far, .fas {
+.fa, .fas {
 
-  line-height: 1.5 !important; 
+  margin-right: 5px !important;
 }
 .menustack{display:flex;float:left;width:100%;position:relative;z-index:20;background:#4c4c4c;align-items:center; margin-bottom: 7px;height:40px;transition:ease-in-out all .1s;z-index: 999;}
 .menustack a{transition:ease-in-out all .1s;}
 .menustack a:hover{transition:ease-in-out all .1s;}
 .menustack ul{}
 .menustack ul li{display:block;float:left;}
-.menustack .wrapping{display:block;max-width:1200px;}
+.menustack .wrapping{display:block;max-width:1200px;margin-left:auto;margin-right:auto;}
 .menustack .level0{margin-top: 5px !important; margin-bottom: 5px !important;display:flex;float:left;width:100%;justify-content:flex-start;align-items:center;flex-wrap:wrap;flex-direction:row;}
 .menustack .level0 .allcats{}
 .menustack .level0 .allcats:hover a{background:#fff;height:38px;border-radius:0px;color:#000;}
