@@ -15,8 +15,8 @@
                             <img style="max-height: 400px;" class="w-100 h-100" src="{{i.image.url}}" alt="Image">
                         </div>
                         {% endfor %}
-                        
-                        
+
+
                     </div>
                     <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
                         <i class="fa fa-2x fa-angle-left text-dark"></i>
@@ -30,7 +30,7 @@
             <div class="col-lg-7 pb-5">
                 <h3 class="font-weight-semi-bold">{{urun_.urun_adi}}</h3>
                 <div class="d-flex mb-3">
-                    
+
                 </div>
                 <h3 class="font-weight-semi-bold mb-4">{{urun_.fiyat}} TL</h3>
                 <p class="mb-4"></p>
@@ -47,8 +47,8 @@
                             </button>
                         </div>
                         <input type="text" class="form-control bg-secondary text-center" name="adet" value="1">
-                        
-                        
+
+
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-primary btn-plus">
                                 <i class="fa fa-plus"></i>
@@ -59,7 +59,7 @@
                 </div>
             </form>
                 <div class="d-flex pt-2">
-                    
+
 
                 </div>
             </div>
@@ -68,7 +68,7 @@
             <div class="col">
                 <div class="nav nav-tabs justify-content-center border-secondary mb-4">
                     <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Ürün Açıklaması</a>
-                    
+
                     <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3"></a>
                 </div>
                 <div class="tab-content">
@@ -93,7 +93,7 @@
                                     <li class="list-group-item px-0">
                                         Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
                                     </li>
-                                  </ul> 
+                                  </ul>
                             </div>
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
@@ -109,7 +109,7 @@
                                     <li class="list-group-item px-0">
                                         Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
                                     </li>
-                                  </ul> 
+                                  </ul>
                             </div>
                         </div>
                     </div>
@@ -172,8 +172,8 @@
     <!-- Shop Detail End -->
 
 
-    
-    
+
+
     <!-- Products Start -->
     <div class="container-fluid py-5">
         <div class="text-center mb-4">
@@ -181,19 +181,19 @@
         </div>
         <div class="row px-xl-5">
             <div class="col">
-             
-               
-               
+
+
+
                 <div class="owl-carousel related-carousel">
                 {% for i in urun_.kategori.all %}
                         {% benzer_urunler i.id  as d %}
-                    
+
                {% for i in d %}
                     <div class="card product-item border-0">
                         <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                             <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
                             <img style="max-height: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-                            
+
                             </a>
                         </div>
                         <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
@@ -210,7 +210,7 @@
  {% endfor %}
                 {% endfor %}
                 </div>
-               
+
             </div>
         </div>
     </div>
@@ -244,7 +244,7 @@
       "ctaText":"Mesaj Gönder",
       "borderRadius":"25",
       "autoShow":false,
-      "phoneNumber":"+{{telefon.sirket_numarasi}}"
+      "phoneNumber":" +{{telefon.sirket_numarasi}}"
   }
 };
     s.onload = function() {

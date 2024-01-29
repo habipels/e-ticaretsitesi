@@ -138,8 +138,14 @@ class kategori_ekle(ModelForm):
     kategori = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Kategori Adı','style':'min-width:300px !important; '}),
         label="Kategori Adı")
+    link = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Link','style':'min-width:300px !important; '}),
+        label="Link")
+    keywords = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'keywords','style':'min-width:300px !important; '}),
+        label="keywords")
     class Meta:
-        
+
         model = Meslek
         fields = [
             'kategori',
