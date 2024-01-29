@@ -403,3 +403,46 @@ def benzer_urunler(id):
             tum_kategoriler.append(i.id)
     profile = urun.objects.filter(urun_stok__gte=1,kategori__id__in = tum_kategoriler,silinme_bilgisi = False).distinct()
     return profile
+
+@register.simple_tag
+def kategoimobil(id):
+    veri = ''
+    if id == "":
+        a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None).order_by("numarasi")
+        for i  in a:
+            z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id).order_by("numarasi")
+            
+            if z.count() > 0:
+                veri = veri+ '''<li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/kategori/{}/{}/" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {}
+                        </a>
+                        <ul class="dropdown-menu">
+                            
+                        '''.format(str(i.id),str(i.link),str(i.kategori))
+                for j in z:
+                    veri = veri+str(kategoimobil(j.id))
+                veri = veri + '</ul></li>'
+            else:
+                veri = veri+ '<li><a class="dropdown-item" href="/kategori/{}/{}/">{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
+    else:
+        a = Meslek.objects.filter(silinme_bilgisi = False,id = id).order_by("numarasi")   
+        for i  in a:
+            z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id).order_by("numarasi")
+            
+            if z.count() > 0:
+                veri = veri+'''<li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/kategori/{}/{}/" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {}
+                        </a>
+                        <ul class="dropdown-menu">
+                            
+                        '''.format(str(i.id),str(i.link),str(i.kategori))
+                for j in z:
+                    veri = veri+'{}'.format(str(kategoimobil(j.id)))
+                veri = veri + "</ul></li>"
+            else:
+                veri = veri+ '<li><a class="dropdown-item" href="/kategori/{}/{}/">{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
+    return  mark_safe(veri)

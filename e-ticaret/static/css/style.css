@@ -163,6 +163,9 @@ margin: auto;
     top: 10px;
 }
 #imobile{display: block;}
+.gosterme{
+  display: none !important;
+}
 }
 
 @media screen and (max-width:1200px){
@@ -170,6 +173,9 @@ margin: auto;
  
   .overback{display: block ;}
   #imobile{display: block;}
+  .gosterme{
+    display: none !important;
+  }
 }
 
 
