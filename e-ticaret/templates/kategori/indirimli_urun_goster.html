@@ -112,9 +112,18 @@ span.value.upper::before {content: "- ₺ "; display: inline-block; margin-left:
                     <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                         <div class="card product-item border-0 mb-4">
                             <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
+                             <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
                                 <img class="img-fluid w-100" style="max-height: 200px;" src="{{ i|urun_resimleri_alma }}" alt="">
-                                </a>
+
+                              <div class="resimYazisi">%{% indirim_orani  i.eski_fiyat i.fiyat %} İndirim</div>
+                            <style>
+                        .resimKapsayici {position:relative}
+                        .resimYazisi {position:absolute;left:10px;top:10px;width: 50px;
+                            height: 50px;
+                            background-color: rgb(255, 136, 0); /* Kırmızı renk */
+                            border-radius: 50%; color: white;}
+                        </style>
+                        </a>
                             </div>
                             <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                                 <h6 class="text-truncate mb-3">{{i.urun_adi }}</h6>

@@ -297,6 +297,29 @@ def kategori_ver_urunleri_gosterme(request,id,slug):
     content["medya"] = page_obj
     return render(request,"kategori/kategori_urun_goster.html",content)
 
+def indirimli_urunleri_gosterme(request):
+    content = site_bilgileri()
+
+    profile = urun.objects.filter(urun_stok__gte=1,silinme_bilgisi = False).distinct()
+    if request.GET:
+        search = request.GET.get("search")
+        profile = urun.objects.filter(Q(silinme_bilgisi = False)&Q(urun_adi__icontains = search)  & Q(urun_stok__gte=1,eski_fiyat__gt=F('fiyat')) ).distinct()
+    content["filtre"] = filtre_icerigi.objects.filter(filtre_bagli_oldu_filtre__filtre_adi = "MARKA")
+    page_num = request.GET.get('page', 1)
+    paginator = Paginator(profile, 20) # 6 employees per page
+    try:
+        page_obj = paginator.page(page_num)
+    except PageNotAnInteger:
+            # if page is not an integer, deliver the first page
+        page_obj = paginator.page(1)
+    except EmptyPage:
+            # if the page is out of range, deliver the last page
+        page_obj = paginator.page(paginator.num_pages)
+    content["santiyeler"] = page_obj
+    content["top"]  = profile
+    content["medya"] = page_obj
+    return render(request,"kategori/indirimli_urun_goster.html",content)
+
 
 def odeme_sayfasi(request):
     content = site_bilgileri()

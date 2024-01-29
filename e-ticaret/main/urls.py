@@ -18,5 +18,6 @@ urlpatterns = [
     path("odeme/bilgilerikaydet/", views.odeme_sayfasi_bilgileri_kaydet, name="odeme_sayfasi_bilgileri_kaydet"),
     path("odeme/havale/", views.havale_sayfasi, name="havale_sayfasi"),
     path("havale/havale/", views.success, name="success"),
+    path("indirimdeolanurunler/", views.indirimli_urunleri_gosterme, name="indirimli_urunleri_gosterme"),
 ]
-#success
+#

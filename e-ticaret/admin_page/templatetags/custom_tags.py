@@ -69,10 +69,10 @@ def Filtre_icerikleri_almaa(stok_kart):
 @register.filter
 def urun_filtre_icerigi(stok_kart):
     
-    satis_fiyati = urun_filtre_tercihi.objects.filter(urun=stok_kart.id)
+    satis_fiyati = urun_filtre_tercihi.objects.filter(urun=stok_kart)
     icerikler = ""
     for i in satis_fiyati:
-        icerikler = icerikler+","+i.filtre_bilgisi.filtre_adi+"\n"
+        icerikler = icerikler+","+str(i.filtre_bilgisi)+"\n"
         
     return icerikler if icerikler else "Filtre Seçilmemiş"
 
