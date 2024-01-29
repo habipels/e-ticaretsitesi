@@ -11,7 +11,46 @@ def Filtre_icerikleri_alma(stok_kart):
     icerikler = ""
     #
     for i in satis_fiyati:
-        icerikler = icerikler+'<a  href="/yonetim/filtreicerigisil/{}" class="btn btn-primary">{}</a>'.format(i.id,i.filtre_adi)
+        icerikler = icerikler+'<button  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#logogeldi{}"">{}</button>'.format(i.id,i.filtre_adi)
+    return mark_safe(icerikler)
+
+@register.filter
+def filtre_silmek_icin(stok_kart):
+    satis_fiyati = filtre_icerigi.objects.filter(filtre_bagli_oldu_filtre=stok_kart.id)
+    icerikler =""
+    a = """<div class="modal" id="logogeldi{}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">İçeriği Sil</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" style="height: 100px;">
+
+            Bu {} Filtre İçeriğini Silmek İstediğinden Emin misin ? 
+            
+            
+
+      </div>
+
+      
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">iptal</button>
+            <a href="/yonetim/filtreicerigisil/{}"  class="btn btn-success" >sil</a>    
+    </div></div>
+
+    </div>
+  </div>
+</div>"""
+    #
+    for i in satis_fiyati:
+        icerikler = icerikler+a.format(i.id,str(i.filtre_adi),i.id)
     return mark_safe(icerikler)
 from django.utils.safestring import mark_safe
 @register.filter

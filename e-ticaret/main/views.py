@@ -444,3 +444,33 @@ def havale_sayfasi(request):
     content["turkey_cities"] =turkey_cities
     content["banka"] = banka_bilgileri.objects.last()
     return render(request,"odeme/odeme_havale.html",content)
+def bugunsiparis():
+    bugunku_tarih_ve_saat = datetime.now()
+    a =satin_alinanlar.objects.filter(kayit_tarihi__gte=bugunku_tarih_ve_saat.replace(hour=0, minute=0, second=0, microsecond=0)).count()
+    b = str(bugunku_tarih_ve_saat.day)+str(bugunku_tarih_ve_saat.month)+str(bugunku_tarih_ve_saat.year)+str(a+1)
+
+    return b
+def success(request):
+    context = dict()
+    if request.user.is_authenticated:
+        ads =  sepet_sahibi_bilgileri.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last()).last()
+        user_sepet = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last()
+        satin_alinanlar.objects.create(siparis_numarasi = bugunsiparis()+"IHavale"+str(user_sepet.id),siparis_sahibi_bilgileri = ads,kayitli_kullanici = user_sepet,)
+        sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).update(sepet_satin_alma_durumu = True)
+        a = sepetteki_urunler.objects.filter(kayitli_kullanici = user_sepet)
+        toplam_fiyat = 0
+        for i in a:
+            isilem = get_object_or_404(urun,id = i.urun_bilgisi.id).urun_stok-i.urun_adedi
+            urun.objects.filter(id = i.urun_bilgisi.id).update(urun_stok = isilem)
+    else:
+        ads = get_object_or_404(sepet_sahibi_bilgileri,kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last())
+        user_sepet = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last()
+        satin_alinanlar.objects.create(siparis_numarasi = bugunsiparis()+"KHavale"+str(user_sepet.id),siparis_sahibi_bilgileri = ads,kayitli_olmayan_kullanici = user_sepet,)
+        sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).update(sepet_satin_alma_durumu = True)
+        a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = user_sepet)
+        toplam_fiyat = 0
+        for i in a:
+            isilem = get_object_or_404(urun,id = i.urun_bilgisi.id).urun_stok-i.urun_adedi
+            urun.objects.filter(id = i.urun_bilgisi.id).update(urun_stok = isilem)
+
+    return redirect("/")

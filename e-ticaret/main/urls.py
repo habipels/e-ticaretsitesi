@@ -17,5 +17,6 @@ urlpatterns = [
     path("iletisim", views.iletisim_sayfasi, name="iletisim_sayfasi"),
     path("odeme/bilgilerikaydet/", views.odeme_sayfasi_bilgileri_kaydet, name="odeme_sayfasi_bilgileri_kaydet"),
     path("odeme/havale/", views.havale_sayfasi, name="havale_sayfasi"),
+    path("havale/havale/", views.success, name="success"),
 ]
-#
+#success

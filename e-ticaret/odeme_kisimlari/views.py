@@ -37,7 +37,7 @@ from urun.models import *
 def bugunsiparis():
     bugunku_tarih_ve_saat = datetime.now()
     a =satin_alinanlar.objects.filter(kayit_tarihi__gte=bugunku_tarih_ve_saat.replace(hour=0, minute=0, second=0, microsecond=0)).count()
-    b = str(bugunku_tarih_ve_saat.day)+str(bugunku_tarih_ve_saat.month)+str(bugunku_tarih_ve_saat.year)+str(a)
+    b = str(bugunku_tarih_ve_saat.day)+str(bugunku_tarih_ve_saat.month)+str(bugunku_tarih_ve_saat.year)+str(a+1)
 
     return b
 def home(request):
