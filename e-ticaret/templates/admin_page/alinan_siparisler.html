@@ -43,7 +43,7 @@
                                             {% else %}
                                             Bireysel Fatura
                                             {% endif %}</td>
-                                            <td></td>
+                                            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#logo{{i.id}}">Alınan Ürünleri Göster</button></td>
                                             {% if i.kargo %}
                                               <td><a style="color:red;" href="/yonetim/korgolamaislemi/{{i.id}}">Kargola</a> </td>
                                             {% else %}
@@ -61,40 +61,68 @@
                     <!--End Advanced Tables -->
                 </div>
             </div>
-
+{% for i in alinan_siparisler %}
 <!-- The Modal -->
-<div class="modal" id="logo">
+<div class="modal" id="logo{{i.id}}">
   <div class="modal-dialog">
     <div class="modal-content">
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">{{sosyalmedya}} Ekle</h4>
+        <h4 class="modal-title">Alınan ürünler</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body" >
-        <form method = "post" enctype="multipart/form-data">
-          {% csrf_token %}
-            {{Email_ekle.media}}
-            {{Email_ekle|crispy}}
-            <br><br><br>
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">iptal</button>
-            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Ekle</button>    
-        </form>
+        <b>#Şipariş Numarası : {{i.siparis_numarasi}}</b>
+        <br>
+        <b>#Sipariş Sahibinin Bilgileri : {{i.siparis_sahibi_bilgileri.payment}}</b>
+        <br>
+        <b>#Şipariş Oluşturulma Tarihi : {{i.kayit_tarihi}}</b>
+        <br>
+        <b>#Sipariş Sahibinin Adı Soyadı : {{i.siparis_sahibi_bilgileri.isim}} {{i.siparis_sahibi_bilgileri.soyisim}}</b>
+        <br>
+        <b>#Şipariş Veren Vergi Veya Tc : {{i.siparis_sahibi_bilgileri.vergi_tc}}</b>
+        <br>
+        <b>#Telefon Numarası : {{i.siparis_sahibi_bilgileri.telefon}}</b>
+        <br>
+        <b>#Adres Bilgisi : {{i.siparis_sahibi_bilgileri.adres}} , {{i.siparis_sahibi_bilgileri.sehirler}} , {{i.siparis_sahibi_bilgileri.zip_kodu}}</b>
+        
+        <br>
+        <b>Fatura Tipi : {% if i.siparis_sahibi_bilgileri.faturatipi %}
+          Kurumsal Fatura
+        {% else %}
+        Bireysel Fatura
+        {% endif %}</b>
+        <br>
+        <hr>
+          <h4 class="text-center">Ürünler </h4>
+        {% if i.kayitli_kullanici %}
+          {% urun_gosterecek_kayitli i.kayitli_kullanici.id %}
+        {% else %}
+          {% urun_gosterecek_kayitli_bilgi i.kayitli_olmayan_kullanici.id %}
+        {% endif %}
+              
+        
       </div>
 
-      </div>
+      
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">iptal</button>
+        {% if i.kargo %}
+            
+          {% else %}
+          <a class="btn btn-success"  href="/yonetim/korgolamaislemi/{{i.id}}">Kargola</a>
+          {% endif %}
+      </div>
     </div>
-
     </div>
   </div>
+  {% endfor %}
 </div>
-<hr>
+
 
 {% endblock slider %}

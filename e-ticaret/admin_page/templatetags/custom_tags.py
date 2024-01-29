@@ -250,22 +250,22 @@ def sepet_id_gonder(a):
 
 @register.simple_tag
 def urun_gosterecek_kayitli(bilgi):
-    a = sepetteki_urunler.objects.filter(kayitli_kullanici  = bilgi)
+    a = sepetteki_urunler.objects.filter(kayitli_kullanici_id  = bilgi)
     b = ""
     for i in a:
         if i.urun_adedi > 0:
-            isi = "/urun/{}/{}".format(i.urun_bilgisi.id,i.urun_bilgisi.urun_adi)
-            b = b+ '<a href="{}" target="_blank" rel="noopener noreferrer">{} - {}</a> <br>'.format(isi,i.urun_adedi,i.urun_bilgisi.urun_adi)
+            isi = "/urun/{}/{}".format(i.urun_bilgisi.id,str(i.urun_bilgisi.urun_adi).replace("/","_").replace(" ","_"))
+            b = b+ '<a href="{}" target="_blank" rel="noopener noreferrer">Adet :{} - Ürün : {}</a> <br>'.format(isi,i.urun_adedi,i.urun_bilgisi.urun_adi)
     return mark_safe(b)
 
 @register.simple_tag
 def urun_gosterecek_kayitli_bilgi(bilgi):
-    a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici  = bilgi)
+    a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici_id  = bilgi)
     b = ""
     for i in a:
         if i.urun_adedi > 0:
-            isi = "/urun/{}/{}".format(i.urun_bilgisi.id,i.urun_bilgisi.urun_adi)
-            b = b+ '<a href="{}" target="_blank" rel="noopener noreferrer">{} - {}</a> <br>'.format(isi,i.urun_adedi,i.urun_bilgisi.urun_adi)
+            isi = "/urun/{}/{}".format(i.urun_bilgisi.id,str(i.urun_bilgisi.urun_adi).replace("/","_").replace(" ","_"))
+            b = b+ '<a href="{}" target="_blank" rel="noopener noreferrer">Adet : {} - Ürün : {}</a> <br>'.format(isi,i.urun_adedi,i.urun_bilgisi.urun_adi)
     return mark_safe(b)
 
 @register.simple_tag
