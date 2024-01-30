@@ -8,15 +8,13 @@ from .models import *
 from .decorators import user_not_authenticated
 from .tokens import account_activation_token
 from django.contrib.auth.decorators import login_required
+from main.views import site_bilgileri
 # Create your views here.
 @user_not_authenticated
 def register(request):
-
+    context = site_bilgileri()
     form = RegisterForm(request.POST or None)
-    context = {
-
-        "form":form
-    }
+    context["form"] = form
 
     if form.is_valid():
         username = form.cleaned_data.get("username")
@@ -36,13 +34,11 @@ def register(request):
 
 @user_not_authenticated
 def loginUser(request):
+    context = site_bilgileri()
     form = LoginForm(request.POST or None)
 
 
-    context = {
-
-        "form":form
-    }
+    context["form"] = form
 
     if form.is_valid():
         username = form.cleaned_data.get("username")
