@@ -56,7 +56,7 @@
 margin: auto;
 }
 .fa, .fas {
-
+  
   margin-right: 5px !important;
 }
 .menustack{display:flex;float:left;width:100%;position:relative;z-index:20;background:#4c4c4c;align-items:center; margin-bottom: 7px;height:40px;transition:ease-in-out all .1s;z-index: 999;}

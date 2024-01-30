@@ -36,11 +36,19 @@ span.value.upper::before {content: "- ₺ "; display: inline-block; margin-left:
 </style>
 
         <!-- Shop Start -->
-    <div class="container-fluid pt-5">
+    <div class="container pt-5">
         <div class="row px-xl-5">
             <!-- Shop Sidebar Start -->
             <div class="col-lg-3 col-md-12">
                 <!-- Price Start -->
+                <div class="border-bottom mb-4 pb-4">
+                <ul class="menu" style="list-style-type:none;">
+                  {% getir_kategorileri kategorisi.id %}
+                    
+                </ul>
+                    
+                  
+                </div>
                 <form>
                 <div class="border-bottom mb-4 pb-4">
                     <h5 class="font-weight-semi-bold mb-4">Fiyat Aralığı</h5>
@@ -109,21 +117,21 @@ span.value.upper::before {content: "- ₺ "; display: inline-block; margin-left:
                         </div>
                     </div>
                     {% for i in santiyeler %}
-                    <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                    <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                         <div class="card product-item border-0 mb-4">
                             <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                                 <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                                <img class="img-fluid w-100" style="max-height: 200px;" src="{{ i|urun_resimleri_alma }}" alt="">
+                                <img  style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" style="max-height: 200px;" src="{{ i|urun_resimleri_alma }}" alt="">
                                 </a>
                             </div>
                             <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                <h6 class="text-truncate mb-3">{{i.urun_adi }}</h6>
+                                <h6 class="text-truncate mb-3"> <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">{{i.urun_adi }}</a></h6>
                                 <div class="d-flex justify-content-center">
                                     <h6>₺ {{i.fiyat}} </h6><h6 class="text-muted ml-2"><del></del></h6>
                                 </div>
                             </div>
-                            <div class="card-footer d-flex justify-content-between bg-light border">
-                                <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ürünü Gör</a>
+                            <div class="card-footer d-flex justify-content-center bg-light border">
+                               
                         <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
                             </div>
                         </div>

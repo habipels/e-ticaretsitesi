@@ -5,11 +5,12 @@
     {% endblock head %}
 {% block slider %}
         <!-- Shop Detail Start -->
-    <div class="container-fluid py-5">
+    <div class="container py-5">
         <div class="row px-xl-5">
             <div class="col-lg-5 pb-5">
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner border">
+                        
                         {% for i in urun_resimleri %}
                             <div class="carousel-item active_ver">
                             <img style="max-height: 400px;" class="w-100 h-100" src="{{i.image.url}}" alt="Image">
@@ -18,19 +19,23 @@
 
 
                     </div>
+                    {% if urun_resimleri.count  > 1 %}
                     <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
                         <i class="fa fa-2x fa-angle-left text-dark"></i>
                     </a>
                     <a class="carousel-control-next" href="#product-carousel" data-slide="next">
                         <i class="fa fa-2x fa-angle-right text-dark"></i>
                     </a>
+                    {% else %}
+                    {% endif %}
+                    
                 </div>
             </div>
 
             <div class="col-lg-7 pb-5">
                 <h3 class="font-weight-semi-bold">{{urun_.urun_adi}}</h3>
                 <div class="d-flex mb-3">
-
+                     {{urun_.urun_aciklama |safe}}
                 </div>
                 <h3 class="font-weight-semi-bold mb-4">{{urun_.fiyat}} TL</h3>
                 <p class="mb-4"></p>
@@ -67,13 +72,11 @@
         <div class="row px-xl-5">
             <div class="col">
                 <div class="nav nav-tabs justify-content-center border-secondary mb-4">
-                    <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Ürün Açıklaması</a>
-
-                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3"></a>
+                    
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
-                        {{urun_.urun_aciklama |safe}}
+                       
                     </div>
                     <div class="tab-pane fade" id="tab-pane-2">
                         <h4 class="mb-3">Additional Information</h4>
@@ -175,7 +178,7 @@
 
 
     <!-- Products Start -->
-    <div class="container-fluid py-5">
+    <div class="container py-5">
         <div class="text-center mb-4">
             <h2 class="section-title px-5"><span class="px-2">Benzer Ürünler</span></h2>
         </div>
@@ -185,30 +188,31 @@
 
 
                 <div class="owl-carousel related-carousel">
-                {% for i in urun_.kategori.all %}
-                        {% benzer_urunler i.id  as d %}
+                
+                {% benzer_urunler urun_.kategori.all.0.id  as d %}
 
                {% for i in d %}
-                    <div class="card product-item border-0">
-                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                    <div class="card product-item border-2">
+                        <div class="card-header d-flex justify-content-center product-img position-relative overflow-hidden bg-transparent border p-0">
                             <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                            <img style="max-height: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-
+                            <img style="max-height: 200px;max-width: 200px;min-height: 200px;min-width: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
+                            
                             </a>
                         </div>
                         <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                            <h6 class="text-truncate mb-3">{{ i.urun_adi }}</h6>
+                            
+                            <h6 class="text-truncate mb-3"><a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"></a>{{ i.urun_adi }}</a></h6>
                             <div class="d-flex justify-content-center">
-                                 <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
+                                 <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del>{{i.eski_fiyat}} TL</del></h6>
                             </div>
                         </div>
-                        <div class="card-footer d-flex justify-content-between bg-light border">
-                           <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ürünü Gör</a>
+                        <div class="card-footer d-flex justify-content-center bg-light border">
+                           
                             <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
                         </div>
                     </div>
- {% endfor %}
-                {% endfor %}
+            {% endfor %}
+               
                 </div>
 
             </div>

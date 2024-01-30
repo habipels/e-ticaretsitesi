@@ -177,6 +177,12 @@ class filtre_icerigi_ekle(ModelForm):
         ]
 
 class urun_ekle(ModelForm):
+    urun_adi = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Ürün Adı','style':'min-width:300px !important; '}),
+        label="Ürün Adı")
+    partikodu = forms.CharField(widget=forms.TextInput(
+        attrs={'class': 'form-control', 'placeholder': 'Parti Kodu','style':'min-width:300px !important; '}),
+        label="Parti Kodu")
     class Meta:
         model = urun
         fields = [

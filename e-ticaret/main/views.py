@@ -292,6 +292,7 @@ def kategori_ver_urunleri_gosterme(request,id,slug):
     except EmptyPage:
             # if the page is out of range, deliver the last page
         page_obj = paginator.page(paginator.num_pages)
+    content["kategorisi"] = a
     content["santiyeler"] = page_obj
     content["top"]  = profile
     content["medya"] = page_obj

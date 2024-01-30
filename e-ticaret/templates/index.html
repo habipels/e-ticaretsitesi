@@ -47,56 +47,7 @@
 {% endblock site %}
 {% block slider %}
 
-           <!-- Products Start -->
-    <div class="container py-5">
-        <div class="text-center mb-4">
-            {% if indirimdekiurunler %}
-                 <h2 class="section-title px-5"><a href="/indirimdeolanurunler/"><span class="px-2">İndirimde Olan Ürünler</span></a></h2>
-                {% else %}
-                {% endif %}
-        </div>
-        <div class="row px-xl-5">
-            <div class="col">
-             
-               
-               
-                <div class="owl-carousel related-carousel">
 
-                    
-               {% for i in indirimdekiurunler %}
-                    <div class="card product-item border-0">
-                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                            <img style="max-height: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-                            <div class="resimYazisi">%{% indirim_orani  i.eski_fiyat i.fiyat %} İndirim</div>
-                            <style>
-                        .resimKapsayici {position:relative}
-                        .resimYazisi {position:absolute;left:10px;top:10px;width: 50px;
-                            height: 50px;
-                            background-color: rgb(255, 136, 0); /* Kırmızı renk */
-                            border-radius: 50%; color: white;}
-                        </style>
-                            </a>
-                        </div>
-                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                            <h6 class="text-truncate mb-3">{{ i.urun_adi }}</h6>
-                            <div class="d-flex justify-content-center">
-                                 <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
-                            </div>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between bg-light border">
-                           <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ürünü Gör</a>
-                            <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                        </div>
-                    </div>
-            {% endfor %}
-
-                </div>
-               
-            </div>
-        </div>
-    </div>
-    <!-- Products End -->
     <!-- Products Start -->
     <div class="container pt-5 mt-2">
         <div class="text-center mb-4">
@@ -106,23 +57,23 @@
             
             {% for i in santiyeler %}
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                <div class="card product-item border-2 mb-4">
+                    <div class="card-header d-flex justify-content-center product-img position-relative overflow-hidden bg-transparent border p-0">
                     <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                        <img style="max-height: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
+                        <img style="max-height: 200px;max-width: 200px;min-height: 200px;min-width: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
                       
                         </a>
 
                     </div>
                                  
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <h6 class="text-truncate mb-3">{% duzenle i.urun_adi %}</h6>
+                        <h6 class="text-truncate mb-3"><a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">{{i.urun_adi }}</a></h6>
                         <div class="d-flex justify-content-center">
                             <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
                         </div>
                     </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
-                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ürünü Gör</a>
+                    <div class="card-footer d-flex justify-content-center bg-light border">
+                        
                         <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
                     </div>
                 </div>
@@ -166,42 +117,99 @@
                                                 </ul>
                                         </div>
     <!-- Products End -->
- <!-- Products Start -->
-        <div class="container pt-5 mt-2">
-            <div class="text-center mb-4">
-                {% if populer %}
+      <!-- Products Start -->
+      <div class="container py-5">
+        <div class="text-center mb-4">
+            {% if populer %}
                  <h2 class="section-title px-5"><span class="px-2">Popüler Ürünler</span></h2>
                 {% else %}
                 {% endif %}
+        </div>
+        <div class="row px-xl-5">
+            <div class="col">
+             
                
-            </div>
-            <div class="row px-xl-5 pb-3">
-                
-                {% for i in populer %}
-                <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                    <div class="card product-item border-0 mb-4">
-                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                            <img style="max-height: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
+               
+                <div class="owl-carousel related-carousel">
+
+                    
+               {% for i in populer %}
+                    <div class="card product-item border-2">
+                        <div class="card-header d-flex justify-content-center product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
+                            <img style="max-height: 200px;max-width: 200px;min-height: 200px;min-width: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
                             
                             </a>
-    
                         </div>
                         <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                            <h6 class="text-truncate mb-3">{{ i.urun_adi }}</h6>
+                            
+                            <h6 class="text-truncate mb-3"><a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"></a>{{ i.urun_adi }}</a></h6>
                             <div class="d-flex justify-content-center">
-                                <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
+                                 <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del>{{i.eski_fiyat}} TL</del></h6>
                             </div>
                         </div>
-                        <div class="card-footer d-flex justify-content-between bg-light border">
-                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Ürünü Gör</a>
+                        <div class="card-footer d-flex justify-content-center bg-light border">
+                           
                             <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
                         </div>
                     </div>
+            {% endfor %}
+
                 </div>
-                {% endfor %}
+               
             </div>
         </div>
-
+    </div>
+    <!-- Products End -->
+           <!-- Products Start -->
+           <div class="container py-5">
+            <div class="text-center mb-4">
+                {% if indirimdekiurunler %}
+                     <h2 class="section-title px-5"><a href="/indirimdeolanurunler/"><span class="px-2">İndirimde Olan Ürünler</span></a></h2>
+                    {% else %}
+                    {% endif %}
+            </div>
+            <div class="row px-xl-5">
+                <div class="col">
+                 
+                   
+                   
+                    <div class="owl-carousel related-carousel">
+    
+                        
+                   {% for i in indirimdekiurunler %}
+                        <div class="card product-item border-2">
+                            <div class="card-header d-flex justify-content-center product-img position-relative overflow-hidden bg-transparent border p-0">
+                                <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
+                                <img style="max-height: 200px;max-width: 200px;min-height: 200px;min-width: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
+                                <div class="resimYazisi">%{% indirim_orani  i.eski_fiyat i.fiyat %} İndirim</div>
+                                <style>
+                            .resimKapsayici {position:relative}
+                            .resimYazisi {position:absolute;left:10px;top:10px;width: 50px;
+                                height: 50px;
+                                background-color: rgb(255, 136, 0); /* Kırmızı renk */
+                                border-radius: 50%; color: white;}
+                            </style>
+                                </a>
+                            </div>
+                            <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                
+                                <h6 class="text-truncate mb-3"><a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"></a>{{ i.urun_adi }}</a></h6>
+                                <div class="d-flex justify-content-center">
+                                     <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del>{{i.eski_fiyat}} TL</del></h6>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-center bg-light border">
+                               
+                                <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
+                            </div>
+                        </div>
+                {% endfor %}
+               
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
         <!-- Products End -->
 {% endblock slider %}

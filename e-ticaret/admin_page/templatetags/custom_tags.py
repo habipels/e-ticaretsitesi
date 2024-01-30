@@ -99,10 +99,13 @@ def urun_filteleri_alma_bilgisi(stok_kart):
                     
                 </div>
 """
-    veri_bir = urun_filtre_tercihi.objects.filter(urun = stok_kart.id )
-    veri_gonder = ""
-    for z in veri_bir:
-        veri_gonder = veri_gonder+class_yapisi+str(z.filtre_bilgisi.filtre_bagli_oldu_filtre.filtre_adi)+": </p><span>"+str(z.filtre_bilgisi.filtre_adi)+"</span>"+class_yapisi_devam
+    try:
+        veri_bir = urun_filtre_tercihi.objects.filter(urun = stok_kart.id )
+        veri_gonder = ""
+        for z in veri_bir:
+            veri_gonder = veri_gonder+class_yapisi+str(z.filtre_bilgisi.filtre_bagli_oldu_filtre.filtre_adi)+": </p><span>"+str(z.filtre_bilgisi.filtre_adi)+"</span>"+class_yapisi_devam
+    except:
+        pass
     return mark_safe(veri_gonder)
 
 
@@ -215,8 +218,13 @@ def kategoi_bilgisi_duzednleme(id):
             z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id).order_by("numarasi")
             if z.count() > 0:
                 veri = veri+ '<li class="step1"><a href="/kategori/{}/{}/"> <i class="fas fa fa-sort-down">  </i> {}</a><div class="open"><div class="left_con"><ul class="">'.format(str(i.id),str(i.link),str(i.kategori))
+                k = 0
                 for j in z:
                     veri = veri+str(kategoi_bilgisi_duzednleme(j.id))
+                    k = k+1
+                    if k >=5:
+                        veri = veri+ '<li class="step1"><a style="color: var(--orange);font-size: small;" href="/kategori/{}/{}/">Tümünü Gör</a></li>'.format(str(i.id),str(i.link))
+                        break
                 veri = veri + '</ul></div></div></li>'
             else:
                 veri = veri+ '<li class="step1"><a href="/kategori/{}/{}/">{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
@@ -241,13 +249,19 @@ def kategoi_bilgisi_duzednleme2(id):
     veri = ''
     if id == "":
         a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None,headerda_gosterme = True).order_by("numarasi")
+        y = 0
         for i  in a:
             z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id).order_by("numarasi")
             
             if z.count() > 0:
                 veri = veri+'<li><a href="/kategori/{}/{}/"" title="{}">{}</a><div class="sub1"><div class="wrap"><div class="left"><ul>'.format(str(i.id),str(i.link),str(i.kategori),str(i.kategori))
+                k = 0
                 for j in z:
                     veri = veri+str(kategoi_bilgisi_duzednleme(j.id))
+                    k = k+1
+                    if k >=5:
+                        veri = veri+ '<li class="step1"><a style="color: var(--orange);font-size: small;" href="/kategori/{}/{}/">Tümünü Gör</a></li>'.format(str(i.id),str(i.link))
+                        break
                 veri = veri + '</ul></div></div></div></li>'
             else:
                 veri = veri+ '<li class=""><a class="" href="/kategori/{}/{}/">{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
@@ -264,13 +278,21 @@ def kategoi_bilgisi_duzednleme2(id):
                 veri = veri + "</ul></li></div>"
             else:
                 veri = veri+ '<li class=""><a class="" href="/kategori/{}/{}/"><i class="fas fa-angle-right"></i> {}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
+            y = y+1
+            if y >= 5:
+                break
     return  mark_safe(veri)
 @register.simple_tag
 def getir(id):
     b = ""
     z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = id).order_by("numarasi")
+    y = 0
     for i in z:
-        b = b+'<li><a href="/kategori/{}/{}/">{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
+        b = b+'<li><a href="/kategori/{}/{}/"><i class="fas fa-angle-right"></i>{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
+        y = y+1
+        if y >= 5:
+            b = b+'<li><a href="/kategori/{}/{}/" style="color: var(--orange);font-size: small;">Tümünü Gör</a></li>'.format(str(i.ust_kategory.id),str(i.ust_kategory.link))
+            break
     return b
 @register.simple_tag
 def tumkategoriler(bilgi):
@@ -405,6 +427,7 @@ def benzer_urunler(id):
         if a.kategori in i.__str__() :
             tum_kategoriler.append(i.id)
     profile = urun.objects.filter(urun_stok__gte=1,kategori__id__in = tum_kategoriler,silinme_bilgisi = False).distinct()
+    print(profile)
     return profile
 
 @register.simple_tag
@@ -449,3 +472,12 @@ def kategoimobil(id):
             else:
                 veri = veri+ '<li><a class="dropdown-item" href="/kategori/{}/{}/">{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
     return  mark_safe(veri)
+
+@register.simple_tag
+def getir_kategorileri(id):
+    b = ""
+    z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = id).order_by("numarasi")
+    y = 0
+    for i in z:
+        b = b+'<li ><a style="color: black !important;" href="/kategori/{}/{}/"><i style="color: black !important;" class="fas fa-angle-right"></i>{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
+    return mark_safe(b)
