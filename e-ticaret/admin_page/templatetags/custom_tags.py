@@ -319,7 +319,11 @@ def urun_gosterecek_kayitli(bilgi):
     for i in a:
         if i.urun_adedi > 0:
             isi = "/urun/{}/{}".format(i.urun_bilgisi.id,str(i.urun_bilgisi.urun_adi).replace("/","_").replace(" ","_"))
-            b = b+ '<a href="{}" target="_blank" rel="noopener noreferrer">Adet :{} - Ürün : {}</a> <br>'.format(isi,i.urun_adedi,i.urun_bilgisi.urun_adi)
+            b = b+''''<tr>
+                <td><img src="{}" style="max-width: 50px !important; max-height: 50px !important;" alt=""></td>
+                <td>{}</td>
+                <td><a href="{}" target="_blank" rel="noopener noreferrer">{}</a></td>
+              </tr>'''.format(urun_resimleri_alma(i.urun_bilgisi),i.urun_adedi,isi,i.urun_bilgisi.urun_adi)
     return mark_safe(b)
 
 @register.simple_tag
@@ -329,7 +333,11 @@ def urun_gosterecek_kayitli_bilgi(bilgi):
     for i in a:
         if i.urun_adedi > 0:
             isi = "/urun/{}/{}".format(i.urun_bilgisi.id,str(i.urun_bilgisi.urun_adi).replace("/","_").replace(" ","_"))
-            b = b+ '<a href="{}" target="_blank" rel="noopener noreferrer">Adet : {} - Ürün : {}</a> <br>'.format(isi,i.urun_adedi,i.urun_bilgisi.urun_adi)
+            b = b+ ''''<tr>
+                <td>{}</td>
+                <td>{}</td>
+                <td><a href="{}" target="_blank" rel="noopener noreferrer">{}</a></td>
+              </tr>'''.format(urun_resimleri_alma(i.urun_bilgisi),i.urun_adedi,isi,i.urun_bilgisi.urun_adi)
     return mark_safe(b)
 
 @register.simple_tag

@@ -75,11 +75,7 @@
 
       <!-- Modal body -->
       <div class="modal-body" >
-        <b>#Şipariş Numarası : {{i.siparis_numarasi}}</b>
-        <br>
         <b>#Sipariş Sahibinin Bilgileri : {{i.siparis_sahibi_bilgileri.payment}}</b>
-        <br>
-        <b>#Şipariş Oluşturulma Tarihi : {{i.kayit_tarihi}}</b>
         <br>
         <b>#Sipariş Sahibinin Adı Soyadı : {{i.siparis_sahibi_bilgileri.isim}} {{i.siparis_sahibi_bilgileri.soyisim}}</b>
         <br>
@@ -88,21 +84,28 @@
         <b>#Telefon Numarası : {{i.siparis_sahibi_bilgileri.telefon}}</b>
         <br>
         <b>#Adres Bilgisi : {{i.siparis_sahibi_bilgileri.adres}} , {{i.siparis_sahibi_bilgileri.sehirler}} , {{i.siparis_sahibi_bilgileri.zip_kodu}}</b>
-        
-        <br>
-        <b>Fatura Tipi : {% if i.siparis_sahibi_bilgileri.faturatipi %}
-          Kurumsal Fatura
-        {% else %}
-        Bireysel Fatura
-        {% endif %}</b>
         <br>
         <hr>
           <h4 class="text-center">Ürünler </h4>
-        {% if i.kayitli_kullanici %}
-          {% urun_gosterecek_kayitli i.kayitli_kullanici.id %}
-        {% else %}
-          {% urun_gosterecek_kayitli_bilgi i.kayitli_olmayan_kullanici.id %}
-        {% endif %}
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Fotoğrafı</th>
+                <th>Adet</th>
+                <th>Ürün</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if i.kayitli_kullanici %}
+              {% urun_gosterecek_kayitli i.kayitli_kullanici.id %}
+            {% else %}
+              {% urun_gosterecek_kayitli_bilgi i.kayitli_olmayan_kullanici.id %}
+            {% endif %}
+              
+            </tbody>
+          </table>
+        
               
         
       </div>
