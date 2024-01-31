@@ -426,8 +426,14 @@ def benzer_urunler(id):
     for i in Meslek.objects.filter(silinme_bilgisi = False):
         if a.kategori in i.__str__() :
             tum_kategoriler.append(i.id)
-    profile = urun.objects.filter(urun_stok__gte=1,kategori__id__in = tum_kategoriler,silinme_bilgisi = False).distinct()
-    print(profile)
+    profile1 = urun.objects.filter(urun_stok__gte=1,kategori__id__in = tum_kategoriler,silinme_bilgisi = False).distinct()[0:4]
+    profile2 = urun.objects.filter(urun_stok__gte=1,kategori__id__in = tum_kategoriler,silinme_bilgisi = False).distinct()[4:8]
+    profile3 = urun.objects.filter(urun_stok__gte=1,kategori__id__in = tum_kategoriler,silinme_bilgisi = False).distinct()[8:12]
+    profile={
+        "profile1":profile1,
+        "profile2":profile2,
+        "profile3":profile3,
+    }
     return profile
 
 @register.simple_tag

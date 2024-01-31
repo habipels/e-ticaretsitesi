@@ -49,7 +49,9 @@ def homepage(request):
             # if the page is out of range, deliver the last page
         page_obj = paginator.page(paginator.num_pages)
     content["santiyeler"] = page_obj
-    content["indirimdekiurunler"] = urun.objects.filter(urun_stok__gte=1,eski_fiyat__gt=F('fiyat'),silinme_bilgisi = False)
+    content["indirimdekiurunler1"] = urun.objects.filter(urun_stok__gte=1,eski_fiyat__gt=F('fiyat'),silinme_bilgisi = False)[0:4]
+    content["indirimdekiurunler2"] = urun.objects.filter(urun_stok__gte=1,eski_fiyat__gt=F('fiyat'),silinme_bilgisi = False)[4:8]
+    content["indirimdekiurunler3"] = urun.objects.filter(urun_stok__gte=1,eski_fiyat__gt=F('fiyat'),silinme_bilgisi = False)[8:12]
     content["populer"] = urun.objects.filter(urun_stok__gte=1,silinme_bilgisi = False).order_by("-urun_bakma_saysi")
     content["top"]  = profile
     content["medya"] = page_obj
