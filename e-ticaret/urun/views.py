@@ -59,3 +59,26 @@ def logoutUser(request):
     logout(request)
     messages.success(request,"Başarıyla Çıkış Yaptınız")
     return redirect("/")
+
+def login_yaptir(request):
+    if request.POST:
+        emailkullaniciadi = request.POST.get("emailkullaniciadi")
+        sifresi = request.POST.get("sifresi")
+        user = authenticate(username = emailkullaniciadi,password = sifresi)
+        if user is None:
+            messages.info(request,"Kullanıcı Adı veya Parola Hatalı")
+            return redirect("/users/login/")
+        login(request,user)
+        return redirect("/")
+    
+
+def kayit_ol(request):
+    if request.POST:
+        emailkullaniciadi = request.POST.get("emailkullaniciadi")
+        sifresi = request.POST.get("sifresi")
+        newUser = CustomUser(username =emailkullaniciadi,email = emailkullaniciadi)
+        newUser.set_password(sifresi)
+
+        newUser.save()
+        login(request,newUser)
+        return redirect("/")

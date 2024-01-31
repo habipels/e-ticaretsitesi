@@ -28,7 +28,7 @@
         }
         </style>
     <div class="container-fluid">
-        <div class="row bg-secondary py-2 px-xl-5">
+        <div style="background-color: #3652AD !important;" class="row bg-secondary py-2 px-xl-5">
             <div class="col-lg-6 d-none d-lg-block">
                 <div class="d-inline-flex align-items-center">
                     
@@ -37,32 +37,32 @@
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
                     {% if facebook %}
-                        <a class="text-dark px-2" href="{{facebook.link}}">
-                        <i class="fab fa-facebook-f"></i>
+                        <a style="color: white !important;" class="text-dark px-2" href="{{facebook.link}}">
+                        <i  style="color: white !important;"  class="fab fa-facebook-f"></i>
                     </a>
                     {% else %}
                     {% endif %}
                     {% if tw %}
-                        <a class="text-dark px-2" href="{{tw.link}}">
-                        <i class="fab fa-twitter"></i>
+                        <a  style="color: white !important;"  class="text-dark px-2" href="{{tw.link}}">
+                        <i  style="color: white !important;"  class="fab fa-twitter"></i>
                     </a>
                     {% else %}
                     {% endif %}
                     {% if link %}
-                        <a class="text-dark px-2" href="{{link.link}}">
-                        <i class="fab fa-linkedin-in"></i>
+                        <a  style="color: white !important;"  class="text-dark px-2" href="{{link.link}}">
+                        <i  style="color: white !important;"  class="fab fa-linkedin-in"></i>
                     </a>
                     {% else %}
                     {% endif %}
                     {% if insta %}
-                        <a class="text-dark px-2" href="{{insta.link}}">
-                        <i class="fab fa-instagram"></i>
+                        <a  style="color: white !important;"  class="text-dark px-2" href="{{insta.link}}">
+                        <i  style="color: white !important;"  class="fab fa-instagram"></i>
                     </a>
                     {% else %}
                     {% endif %}
                     {% if youtube %}
-                        <a class="text-dark pl-2" href="{{youtube.link}}">
-                        <i class="fab fa-youtube"></i>
+                        <a  style="color: white !important;"  class="text-dark pl-2" href="{{youtube.link}}">
+                        <i  style="color: white !important;"  class="fab fa-youtube"></i>
                     </a>
                     {% else %}
                     {% endif %}
@@ -94,7 +94,7 @@
             <div class="col-lg-4 col-6 text-left gosterme">
                 <form action="">
                     <div id="box">
-                        <input type="text" id="search" name="search" class="form-control" placeholder="Ara..">
+                        <input style="width: 100% !important;" type="text" id="search" name="search" class="form-control" placeholder="Ara..">
                         <i class="fa fa-search"></i>
                     </div>
                    
@@ -112,7 +112,6 @@
                 </a>
                 {% else %}
                 <a href="/users/login/" style="font-size: 15px;" class="btn border">Giriş Yap</a>
-                <a href="/users/register/" style="font-size: 15px;"  class="btn border">Kayıt Ol</a>
                 
                 <a href="/sepetebak" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
