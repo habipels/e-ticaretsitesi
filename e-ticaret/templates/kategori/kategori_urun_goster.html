@@ -79,7 +79,7 @@ span.value.upper::before {content: "- ₺ "; display: inline-block; margin-left:
                         
                    
                 </div>
-                 </form>
+                 
                 <!-- Color End -->
 
 
@@ -92,30 +92,29 @@ span.value.upper::before {content: "- ₺ "; display: inline-block; margin-left:
                 <div class="row pb-3">
                     <div class="col-12 pb-1">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <form action="">
+                           
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search by name">
+                                    <input type="text" name="search" class="form-control" placeholder="Ara ..">
                                     <div class="input-group-append">
                                         <span class="input-group-text bg-transparent text-primary">
                                             <i class="fa fa-search"></i>
                                         </span>
                                     </div>
                                 </div>
-                            </form>
+                            
                             <div class="dropdown ml-4">
-                                <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                            Sırala
-                                        </button>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                                    <a class="dropdown-item" href="#">Artan Fiyata</a>
-                                    <a class="dropdown-item" href="#">Azalan Fiyata</a>
-                                    <a class="dropdown-item" href="#">A 'dan Z 'ye</a>
-                                    <a class="dropdown-item" href="#">En son Eklenenler</a>
-                                </div>
+                                <select name="siralama" id="">
+                                  <option value="0">Sırala</option>
+                                  <option value="1">Artan Fiyata</option>
+                                  <option value="2">Azalan Fiyata</option>
+                                  <option value="3">A 'dan Z 'ye</option>
+                                  <option value="4">En son Eklenenler</option>
+                                </select>
+                                
                             </div>
                         </div>
                     </div>
+                    </form>
                     {% for i in santiyeler %}
                     <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                         <div class="card product-item border-0 mb-4">
@@ -142,11 +141,11 @@ span.value.upper::before {content: "- ₺ "; display: inline-block; margin-left:
                           <ul class="pagination pagination-m justify-content-center">
 
                                                 {% if medya.has_previous %}
-                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">« Previous page</a></li>
+                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.previous_page_number }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">« Previous page</a></li>
                                                 
                                                   {% if medya.number > 3 %}
                                                 
-                                                    <li class="page-item"><a class="page-link" href="?page=1{{ medya.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">1</a></li>
+                                                    <li class="page-item"><a class="page-link" href="?page=1{{ medya.previous_page_number }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">1</a></li>
                                                     {% if medya.number > 4 %}
                                                       <li class="page-item"><span class="page-link">...</span></li>
                                                     {% endif %}
@@ -155,21 +154,21 @@ span.value.upper::before {content: "- ₺ "; display: inline-block; margin-left:
                                                 
                                                 {% for num in medya.paginator.page_range %}
                                                   {% if medya.number == num %}
-                                                    <li class="page-item"><a class="page-link " style="color:black;" href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ num }}</a></li>
+                                                    <li class="page-item"><a class="page-link " style="color:black;" href="?page={{ num }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">{{ num }}</a></li>
                                                   {% elif num > medya.number|add:'-3' and num < medya.number|add:'3' %}
-                                                    <li class="page-item"><a class="page-link" href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ num }}</a></li>
+                                                    <li class="page-item"><a class="page-link" href="?page={{ num }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">{{ num }}</a></li>
                                                   {% endif %}
                                                 {% endfor %}
                                                 
                                                 {% if medya.has_next %}
                                                   {% if medya.number < medya.paginator.num_pages|add:'-3' %}
                                                     <li class="page-item"><span class="page-link">...</span></li>
-                                                    <li class="page-item"><a class="page-link" href="?page={{ medya.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ medya.paginator.num_pages }}</a></li>
+                                                    <li class="page-item"><a class="page-link" href="?page={{ medya.paginator.num_pages }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">{{ medya.paginator.num_pages }}</a></li>
                                                   {% elif medya.number < medya.paginator.num_pages|add:'-2' %}
-                                                    <li class="page-item"><a class="page-link" href="?page={{ medya.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ medya.paginator.num_pages }}</a></li>
+                                                    <li class="page-item"><a class="page-link" href="?page={{ medya.paginator.num_pages }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">{{ medya.paginator.num_pages }}</a></li>
                                                   {% endif %}
                                                 
-                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">Next Page »</a></li>
+                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.next_page_number }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">Next Page »</a></li>
                                                 {% endif %}
                                                 </ul>
                         </nav>

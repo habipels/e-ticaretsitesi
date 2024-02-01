@@ -100,24 +100,38 @@
                    
                 </form>
             </div>
-            <div class="col-lg-1 col-6 text-left">
-               
-            </div>
-            <div class="col-lg-3 col-6 text-right gosterme">
-             {% if request.user.is_authenticated %}
-                <a href="/users/logout/" style="font-size: 15px;"  class="btn border">Çıkış Yap</a>
+            <div class="col-lg-2 col-6 text-right">
+                {% if request.user.is_authenticated %}
                 <a href="/sepetebak" style="font-size: 15px;"  class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
                     <span style="color: black !important" class="badge">{{ request.user | sepetteki_urun_sayisi}}</span>
                 </a>
                 {% else %}
-                <a href="/users/login/" style="font-size: 15px;" class="btn border">Giriş Yap</a>
-                
                 <a href="/sepetebak" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
                     <span style="color: black !important" class="badge">{{ request | sepetteki_urun_sayisi_kullan}}</span>
                 </a>
                 {% endif %}
+            </div>
+            <div class="col-lg-2 col-6 text-right gosterme">
+            <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                      Hesabım
+                    </button>
+                    <ul class="dropdown-menu" style="z-index: 9999;">
+                        {% if request.user.is_authenticated %}
+                      
+                      <li><a class="dropdown-item" href="/sepetebak"><i class="fas fa-shopping-cart text-primary"></i><span style="color: black !important" class="badge">Sepetim {{ request.user | sepetteki_urun_sayisi}}</span></a></li>
+                      <li><a class="dropdown-item" href="/users/logout/" >Çıkış Yap</a></li>
+                      {% else %}
+                      
+                      <li><a class="dropdown-item" href="/sepetebak"><i class="fas fa-shopping-cart text-primary"></i><span style="color: black !important" class="badge">Sepetim {{ request | sepetteki_urun_sayisi_kullan}}</span></a></li>
+                      <li><a class="dropdown-item" href="/users/login/">Giriş Yap / Kayıt Ol</a></li>
+                      {% endif %}
+                      <li><a class="dropdown-item" href="siparislerim/">Siparişlerim</a></li>
+                    </ul>
+                  </div>
+             
                 
             </div>
         </div>

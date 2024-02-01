@@ -204,23 +204,28 @@ def success(request):
     if request.user.is_authenticated:
         ads =  sepet_sahibi_bilgileri.objects.filter(kayitli_kullanici = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last()).last()
         user_sepet = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).last()
-        satin_alinanlar.objects.create(siparis_numarasi = bugunsiparis()+"ID"+str(user_sepet.id),siparis_sahibi_bilgileri = ads,kayitli_kullanici = user_sepet,)
+        
         sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = False).update(sepet_satin_alma_durumu = True)
         a = sepetteki_urunler.objects.filter(kayitli_kullanici = user_sepet)
         toplam_fiyat = 0
         for i in a:
             isilem = get_object_or_404(urun,id = i.urun_bilgisi.id).urun_stok-i.urun_adedi
+            toplam_fiyat = toplam_fiyat+get_object_or_404(urun,id = i.urun_bilgisi.id).fiyat
             urun.objects.filter(id = i.urun_bilgisi.id).update(urun_stok = isilem)
+        satin_alinanlar.objects.create(siparis_numarasi = bugunsiparis()+"ID"+str(user_sepet.id),siparis_sahibi_bilgileri = ads,kayitli_kullanici = user_sepet,tutar = toplam_fiyat)
     else:
         ads = get_object_or_404(sepet_sahibi_bilgileri,kayitli_olmayan_kullanici = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last())
         user_sepet = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).last()
-        satin_alinanlar.objects.create(siparis_numarasi = bugunsiparis()+"KayitsizID"+str(user_sepet.id),siparis_sahibi_bilgileri = ads,kayitli_olmayan_kullanici = user_sepet,)
+        
         sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = False).update(sepet_satin_alma_durumu = True)
         a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = user_sepet)
         toplam_fiyat = 0
         for i in a:
+            
             isilem = get_object_or_404(urun,id = i.urun_bilgisi.id).urun_stok-i.urun_adedi
+            toplam_fiyat = toplam_fiyat + get_object_or_404(urun,id = i.urun_bilgisi.id).fiyat
             urun.objects.filter(id = i.urun_bilgisi.id).update(urun_stok = isilem)
+        satin_alinanlar.objects.create(siparis_numarasi = bugunsiparis()+"KayitsizID"+str(user_sepet.id),siparis_sahibi_bilgileri = ads,kayitli_olmayan_kullanici = user_sepet,tutar = toplam_fiyat )
     messages.success(request, f"Satın Alma Başarılı")
     return redirect("/")
 

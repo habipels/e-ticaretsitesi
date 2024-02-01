@@ -1,0 +1,67 @@
+{% extends "homebase.html" %}
+{% load custom_tags %}
+
+{% block slider %}
+
+
+  <!-- Cart Start -->
+    <div class="container pt-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-8 table-responsive mb-5">
+                <table class="table table-bordered text-center mb-0">
+                    <thead class="bg-secondary text-dark">
+                        <tr>
+                            <th>Ürün</th>
+                            <th>Fiyatı</th>
+                            <th>Miktarı</th>
+                            <th>Toplam</th>
+                            <th>Kargo Şirketi</th>
+                            <th>Takip Kodu</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                        {% for i in sepet_urunleri %}
+                        
+                        
+                        <tr>
+                            <td class="align-middle"><img src="{{i.urun_bilgisi | urun_resimleri_alma}}" alt="" style="width: 50px;"> {{i.urun_bilgisi.urun_adi}}</td>
+                            <td class="align-middle"> {{i.urun_bilgisi.fiyat}} TL</td>
+                            <td class="align-middle">
+                                {{i.urun_adedi}}
+                            </td>
+                            <td class="align-middle"> {% carpma i.urun_bilgisi.fiyat  i.urun_adedi %} TL</td>
+                            <td class="align-middle" style="max-width: 100px !important;">
+                                {% if a.kargo_sirketi %}
+                                <a class="btn btn-primary" href="{{a.kargo_sirketi}}">Kargo Şirketi</a>
+                            {% else %}
+                            {% endif %}
+                                </td>
+                            <td class="align-middle"> {% if a.kargo %}
+                                {{a.kargo}}
+                            {% else %}
+                            {% endif %}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-4">
+                
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                    <ul class="menu" style="list-style-type:none;">
+                    {% for i in siparis_detaylari %}
+                    
+                   
+                    <li ><a style="color: black !important;" href="/siparislerim/{{i.id}}/"><i style="color: black !important;" class="fas fa-angle-right"> {{i.tutar}} TL >>  {{i.kayit_tarihi |date:'Y-m-d'}}</i></a></li>
+                     {% endfor %}
+                </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cart End -->
+
+{% endblock slider %}

@@ -495,3 +495,5 @@ def getir_kategorileri(id):
     for i in z:
         b = b+'<li ><a style="color: black !important;" href="/kategori/{}/{}/"><i style="color: black !important;" class="fas fa-angle-right"></i>{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
     return mark_safe(b)
+
+

@@ -4,86 +4,99 @@
    <!-- Checkout Start -->
    <form  method="post" action="/odeme/bilgilerikaydet/">
    {% csrf_token %}
-    <div class="container-fluid pt-5">
+    <div class="container pt-5">
         <div class="row px-xl-5">
             <div class="col-lg-8">
                 <div class="mb-4">
-                    <h4 class="font-weight-semi-bold mb-4">Teslimat Adresi </h4>
+                    <h4 class="font-weight-semi-bold mb-4 text-center ">Teslimat Bilgileri </h4>
                     <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label>İsim</label>
-                            <input required class="form-control" value="{% sepet_id_gonder sepet_urunleri %}" name="sepet" required hidden>
-                            <input required class="form-control" name="isim" value="{{adresler.isim}}" required type="text" placeholder="isim">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Soyad</label>
-                            <input required class="form-control" name="soyisim" value="{{adresler.soyisim}}" required type="text" placeholder="soyad">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>TC / Vergi Kimlik No</label>
-                            <input required  class="form-control" value="{{adresler.vergi_tc}}" name="vergi_kimlik_no"  required type="text" placeholder="TC KİMLİK">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>E-posta</label>
-                            <input required class="form-control" value="{{adresler.email}}" name="eposta" required type="text" placeholder="ornek@email.com">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Telefon Numarası</label>
-                            <input required class="form-control" value="{{adresler.telefon}}" name="telefon" required type="text" placeholder="+905000000000">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Addres</label>
-                            <input required class="form-control" value="{{adresler.adres}}" name="adres" required type="text" placeholder="adres">
-                        </div>
-                        
-                        <div class="col-md-6 form-group">
-                            <label>Ülke</label>
-                            <input required class="form-control" name="ulke"  value="Türkiye" required type="text" placeholder="Türkiye">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Şehir</label>
-                           <select name="sehirler" class="form-control">
-                            <option value="{{adresler.sehirler}}">{{adresler.sehirler}}</option>
-                           {% for i in turkey_cities %}
-                            <option value="{{i}}">{{i}}</option>
-                           {% endfor %}
-                            
-                           </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>ZIP Kodu</label>
-                            <input required name="zip_kodu" value="{{adresler.zip_kodu}}" class="form-control" type="text" placeholder="123">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            {% if adresler.faturatipi %}
-                                <div class="form-group">
+                    {% if adresler.faturatipi %}
+                                <div class="col-md-6 form-group"><div class="form-group">
                                 <div class="custom-control custom-radio">
                                     <input type="radio"  required class="custom-control-input" value="bireysel" name="faturatipi" id="Bireysel">
                                     <label class="custom-control-label"  for="Bireysel">Bireysel</label>
                                 </div>
-                            </div>
-                            <div class="form-group">
+                                </div></div>
+                        <div class="col-md-6 form-group">
+                        <div class="form-group">
                                 <div class="custom-control custom-radio">
                                     <input type="radio" checked required class="custom-control-input" value="kurumsal" name="faturatipi" id="Kurumsal">
                                     <label class="custom-control-label" for="Kurumsal">Kurumsal Fatura</label>
                                 </div>
-                            </div>
+                            </div></div>
+                            
                             {% else %}
-                            <div class="form-group">
+                        
+                        <div class="col-md-6 form-group"><div class="form-group">
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" checked required class="custom-control-input" value="bireysel" name="faturatipi" id="Bireysel">
+                                    <input type="radio"  checked required class="custom-control-input" value="bireysel" name="faturatipi" id="Bireysel">
                                     <label class="custom-control-label"  for="Bireysel">Bireysel</label>
                                 </div>
-                            </div>
-                            <div class="form-group">
+                                </div></div>
+                        <div class="col-md-6 form-group">
+                        <div class="form-group">
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" required class="custom-control-input" value="kurumsal" name="faturatipi" id="Kurumsal">
+                                    <input type="radio"  required class="custom-control-input" value="kurumsal" name="faturatipi" id="Kurumsal">
                                     <label class="custom-control-label" for="Kurumsal">Kurumsal Fatura</label>
                                 </div>
-                            </div>
+                            </div></div>
                             {% endif %}
-                            
+                        <div class="row" style="padding: 5px !important; border: 1px solid black; margin-bottom: 5px !important;" >
+                            <h4 class="text-center" >Kişisel Bilgiler</h4>
+                            <div class="col-md-6 form-group">
+                                <label>İsim</label>
+                                <input required class="form-control" value="{% sepet_id_gonder sepet_urunleri %}" name="sepet" required hidden>
+                                <input required class="form-control" name="isim" value="{{adresler.isim}}" required type="text" placeholder="isim">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Soyad</label>
+                                <input required class="form-control" name="soyisim" value="{{adresler.soyisim}}" required type="text" placeholder="soyad">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>TC / Vergi Kimlik No</label>
+                                <input required  class="form-control" value="{{adresler.vergi_tc}}" name="vergi_kimlik_no"  required type="text" placeholder="TC KİMLİK">
+                            </div>
                         </div>
+                        <div class="row" style="padding: 5px !important; border: 1px solid black; margin-bottom: 5px !important;" >
+                            <h4 class="text-center" >İletişim Adresi</h4>
+                            <div class="col-md-6 form-group">
+                                <label>E-posta</label>
+                                <input required class="form-control" value="{{adresler.email}}" name="eposta" required type="text" placeholder="ornek@email.com">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Telefon Numarası</label>
+                                <input required class="form-control" value="{{adresler.telefon}}" name="telefon" required type="text" placeholder="+905000000000">
+                            </div>
+                        </div>
+                        <div class="row" style="padding: 5px !important; border: 1px solid black;" >
+                            <h4 class="text-center" >Adres Bilgileri</h4>
+                            <div class="col-md-6 form-group">
+                                <label>Addres</label>
+                                <input required class="form-control" value="{{adresler.adres}}" name="adres" required type="text" placeholder="adres">
+                            </div>
+                            
+                            <div class="col-md-6 form-group">
+                                <label>Ülke</label>
+                                <input required class="form-control" name="ulke"  value="Türkiye" required type="text" placeholder="Türkiye">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Şehir</label>
+                               <select name="sehirler" class="form-control">
+                                <option value="{{adresler.sehirler}}">{{adresler.sehirler}}</option>
+                               {% for i in turkey_cities %}
+                                <option value="{{i}}">{{i}}</option>
+                               {% endfor %}
+                                
+                               </select>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>ZIP Kodu</label>
+                                <input required name="zip_kodu" value="{{adresler.zip_kodu}}" class="form-control" type="text" placeholder="123">
+                            </div>
+                        </div>
+                        
+                        
+                        
                     </div>
                 </div>
 

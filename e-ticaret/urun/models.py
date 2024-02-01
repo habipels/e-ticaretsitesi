@@ -110,6 +110,7 @@ class satin_alinanlar(models.Model):
     kayitli_olmayan_kullanici = models.ForeignKey(sepet_olusturma_ip,blank = True,null = True,on_delete = models.SET_NULL)
     kargo = models.CharField(max_length= 200, verbose_name="Kargo Takip Numarası",blank = True,null = True)
     kargo_sirketi = models.CharField(max_length= 200, verbose_name="Kargo Şirketi",blank = True,null = True)
+    tutar = models.FloatField(default = 0,verbose_name="Tutar")
     silinme_bilgisi = models.BooleanField(default=False,verbose_name="Silinme Bilgisi")
     kayit_tarihi = models.DateTimeField(default=datetime.now,null=True)
 

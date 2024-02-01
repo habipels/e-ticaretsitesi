@@ -52,7 +52,9 @@ def homepage(request):
     content["indirimdekiurunler1"] = urun.objects.filter(urun_stok__gte=1,eski_fiyat__gt=F('fiyat'),silinme_bilgisi = False)[0:4]
     content["indirimdekiurunler2"] = urun.objects.filter(urun_stok__gte=1,eski_fiyat__gt=F('fiyat'),silinme_bilgisi = False)[4:8]
     content["indirimdekiurunler3"] = urun.objects.filter(urun_stok__gte=1,eski_fiyat__gt=F('fiyat'),silinme_bilgisi = False)[8:12]
-    content["populer"] = urun.objects.filter(urun_stok__gte=1,silinme_bilgisi = False).order_by("-urun_bakma_saysi")
+    content["populer1"] = urun.objects.filter(urun_stok__gte=1,silinme_bilgisi = False).order_by("-urun_bakma_saysi")[0:4]
+    content["populer2"] = urun.objects.filter(urun_stok__gte=1,silinme_bilgisi = False).order_by("-urun_bakma_saysi")[4:8]
+    content["populer3"] = urun.objects.filter(urun_stok__gte=1,silinme_bilgisi = False).order_by("-urun_bakma_saysi")[8:12]
     content["top"]  = profile
     content["medya"] = page_obj
     return render(request,"index.html",content)
@@ -280,9 +282,29 @@ def kategori_ver_urunleri_gosterme(request,id,slug):
         if a.kategori in i.__str__() :
             tum_kategoriler.append(i.id)
     profile = urun.objects.filter(urun_stok__gte=1,kategori__id__in = tum_kategoriler,silinme_bilgisi = False).distinct()
-    if request.GET.get("search"):
+    if request.GET:
+        min_fiyat = request.GET.get("min")
+        max_fiyat = request.GET.get("max")
         search = request.GET.get("search")
-        profile = urun.objects.filter(Q(silinme_bilgisi = False),Q(kategori__id__in = tum_kategoriler)&Q(urun_adi__icontains = search)  & Q(urun_stok__gte=1) ).distinct()
+        siralama = request.GET.get("siralama")
+        profile = urun.objects.filter(Q(fiyat__gt = min_fiyat ),Q(fiyat__lte = max_fiyat),Q(silinme_bilgisi = False),Q(kategori__id__in = tum_kategoriler)  & Q(urun_stok__gte=1) )
+        if search:
+            profile = profile.filter(urun_adi__icontains = search)
+        if siralama == "0":
+            pass
+        elif siralama == "1":
+            profile = profile.order_by("fiyat")
+
+        elif siralama == "2":
+            profile = profile.order_by("-fiyat")
+
+        elif siralama == "3":
+            profile = profile.order_by("urun_adi")
+
+        elif siralama == "4":
+            profile = profile.order_by("-id")
+
+        profile = profile.distinct()
     content["filtre"] = filtre_icerigi.objects.filter(filtre_bagli_oldu_filtre__filtre_adi = "MARKA",filtre_bagli_oldu_filtre__filtre_bagli_oldu_kategori__id__in=tum_kategoriler)
     page_num = request.GET.get('page', 1)
     paginator = Paginator(profile, 20) # 6 employees per page
@@ -305,8 +327,29 @@ def indirimli_urunleri_gosterme(request):
 
     profile = urun.objects.filter(urun_stok__gte=1,silinme_bilgisi = False).distinct()
     if request.GET:
+        min_fiyat = request.GET.get("min")
+        max_fiyat = request.GET.get("max")
         search = request.GET.get("search")
-        profile = urun.objects.filter(Q(silinme_bilgisi = False)&Q(urun_adi__icontains = search)  & Q(urun_stok__gte=1,eski_fiyat__gt=F('fiyat')) ).distinct()
+        siralama = request.GET.get("siralama")
+        search = request.GET.get("search")
+        profile = urun.objects.filter(Q(fiyat__gt = min_fiyat ),Q(fiyat__lte = max_fiyat),Q(silinme_bilgisi = False)  & Q(urun_stok__gte=1,eski_fiyat__gt=F('fiyat')) ).distinct()
+        if search:
+            profile = profile.filter(urun_adi__icontains = search)
+        if siralama == "0":
+            pass
+        elif siralama == "1":
+            profile = profile.order_by("fiyat")
+
+        elif siralama == "2":
+            profile = profile.order_by("-fiyat")
+
+        elif siralama == "3":
+            profile = profile.order_by("urun_adi")
+
+        elif siralama == "4":
+            profile = profile.order_by("-id")
+
+        profile = profile.distinct()
     content["filtre"] = filtre_icerigi.objects.filter(filtre_bagli_oldu_filtre__filtre_adi = "MARKA")
     page_num = request.GET.get('page', 1)
     paginator = Paginator(profile, 20) # 6 employees per page
@@ -322,6 +365,50 @@ def indirimli_urunleri_gosterme(request):
     content["top"]  = profile
     content["medya"] = page_obj
     return render(request,"kategori/indirimli_urun_goster.html",content)
+
+def popiler_urunleri_gosterme(request):
+    content = site_bilgileri()
+
+    profile = urun.objects.filter(urun_stok__gte=1,silinme_bilgisi = False).distinct()
+    if request.GET:
+        min_fiyat = request.GET.get("min")
+        max_fiyat = request.GET.get("max")
+        search = request.GET.get("search")
+        siralama = request.GET.get("siralama")
+        search = request.GET.get("search")
+        profile = urun.objects.filter(Q(fiyat__gt = min_fiyat ),Q(fiyat__lte = max_fiyat),Q(silinme_bilgisi = False)  ).order_by("-urun_bakma_saysi").distinct()
+        if search:
+            profile = profile.filter(urun_adi__icontains = search)
+        if siralama == "0":
+            pass
+        elif siralama == "1":
+            profile = profile.order_by("fiyat")
+
+        elif siralama == "2":
+            profile = profile.order_by("-fiyat")
+
+        elif siralama == "3":
+            profile = profile.order_by("urun_adi")
+
+        elif siralama == "4":
+            profile = profile.order_by("-id")
+
+        profile = profile.distinct()
+    content["filtre"] = filtre_icerigi.objects.filter(filtre_bagli_oldu_filtre__filtre_adi = "MARKA")
+    page_num = request.GET.get('page', 1)
+    paginator = Paginator(profile, 20) # 6 employees per page
+    try:
+        page_obj = paginator.page(page_num)
+    except PageNotAnInteger:
+            # if page is not an integer, deliver the first page
+        page_obj = paginator.page(1)
+    except EmptyPage:
+            # if the page is out of range, deliver the last page
+        page_obj = paginator.page(paginator.num_pages)
+    content["santiyeler"] = page_obj
+    content["top"]  = profile
+    content["medya"] = page_obj
+    return render(request,"kategori/popiler.html",content)
 
 
 def odeme_sayfasi(request):
@@ -500,3 +587,40 @@ def success(request):
             urun.objects.filter(id = i.urun_bilgisi.id).update(urun_stok = isilem)
 
     return redirect("/")
+
+
+def gecmis_siparislerim(request):
+    content = site_bilgileri()
+    if request.user.is_authenticated:
+        content["siparisler"] = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = True)
+        content["siparis_detaylari"] =satin_alinanlar.objects.filter(kayitli_kullanici__in = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = True)).order_by("-id")
+        a = satin_alinanlar.objects.filter(kayitli_kullanici__in = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = True)).order_by("-id").first()
+        veriler = sepetteki_urunler.objects.filter(kayitli_kullanici = a.kayitli_kullanici)
+        content["sepet_urunleri"] =veriler
+        content["a"] = a
+    else:
+        content["siparisler"] = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = True)
+        content["siparis_detaylari"] =satin_alinanlar.objects.filter(kayitli_olmayan_kullanici__in = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = True)).order_by("-id")
+        a =satin_alinanlar.objects.filter(kayitli_olmayan_kullanici__in = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = True)).order_by("-id").first()
+        veriler = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = a.kayitli_olmayan_kullanici)
+        content["sepet_urunleri"] =veriler
+        content["a"] = a
+    return render(request,"urunlist/gecmis_siparislerim.html",content)
+
+def gecmis_siparislerim_iki(request,id):
+    content = site_bilgileri()
+    if request.user.is_authenticated:
+        content["siparisler"] = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = True)
+        content["siparis_detaylari"] =satin_alinanlar.objects.filter(kayitli_kullanici__in = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = True)).order_by("-id")
+        a =get_object_or_404(satin_alinanlar,id = id) 
+        veriler = sepetteki_urunler.objects.filter(kayitli_kullanici = a.kayitli_kullanici)
+        content["sepet_urunleri"] =veriler
+        content["a"] = a
+    else:
+        content["siparisler"] = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = True)
+        content["siparis_detaylari"] =satin_alinanlar.objects.filter(kayitli_olmayan_kullanici__in = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = True)).order_by("-id")
+        a =get_object_or_404(satin_alinanlar,id = id) 
+        veriler = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = a.kayitli_olmayan_kullanici)
+        content["sepet_urunleri"] =veriler
+        content["a"] = a
+    return render(request,"urunlist/gecmis_siparislerim.html",content)

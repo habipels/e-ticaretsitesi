@@ -14,14 +14,15 @@
         </ul>
     </div>
 </div>
-<div class="container-fluid fluid" id="baby_header" style="width: 100%;display: none; position: fixed; top: 0px; left: 0px;">
+<div class="container-fluid fluid" id="baby_header"
+    style="width: 100%;display: none; position: fixed; top: 0px; left: 0px;">
     <div class="wrapping">
         <div class="grid row">
             <div class="logo " style="max-width: 100px;margin-top: 10px !important;">
                 {% if logo %}
-                        <a href="/"><img style="max-width: 100px;" class="mainlogo" src="{{logo.image.url}}" alt=""></a>
-                        {% else %}
-                        {% endif %}
+                <a href="/"><img style="max-width: 100px;" class="mainlogo" src="{{logo.image.url}}" alt=""></a>
+                {% else %}
+                {% endif %}
 
             </div>
             <div class="mainmenu ">
@@ -39,10 +40,10 @@
                     {% kategoi_bilgisi_duzednleme2 "" %}
                     <li>
                         <form action="">
-                           <div id="box">
-                        <input type="text" id="search" name="search" class="form-control" placeholder="Ara..">
-                        <i class="fa fa-search"></i>
-                    </div>
+                            <div id="box">
+                                <input type="text" id="search" name="search" class="form-control" placeholder="Ara..">
+                                <i class="fa fa-search"></i>
+                            </div>
                         </form>
                     </li>
                 </ul>
@@ -53,59 +54,54 @@
 </div>
 <nav class="navbar bg-light fixed-top imobile" id="imobile">
     <div class="container-fluid">
-         <a href="/" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold">
-                        {% if logo %}
-                            <img style="max-width: 150px;" src="{{logo.image.url}}" alt="">
-                        {% else %}
-                        {% endif %}
-                        </h1>
-                </a>
+        <a href="/" class="text-decoration-none">
+            <h1 class="m-0 display-5 font-weight-semi-bold">
+                {% if logo %}
+                <img style="max-width: 150px;" src="{{logo.image.url}}" alt="">
+                {% else %}
+                {% endif %}
+            </h1>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
             aria-controls="offcanvasNavbar">
             <i class="fas fa-solid fa-bars"></i>
         </button>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
-                 <a href="/" class="text-decoration-none">
+                <a href="/" class="text-decoration-none">
                     <h1 class="m-0 display-5 font-weight-semi-bold">
                         {% if logo %}
-                            <img style="max-width: 150px;" src="{{logo.image.url}}" alt="">
+                        <img style="max-width: 150px;" src="{{logo.image.url}}" alt="">
                         {% else %}
                         {% endif %}
-                        </h1>
+                    </h1>
                 </a>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 
-                    {% if request.user.is_authenticated %}
-                 <li class="nav-item">
-                     <a href="/users/logout/" class="nav-link active" aria-current="page">Çıkış Yap</a>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                            Hesabım
+                        </button>
+                        <ul class="dropdown-menu" style="z-index: 9999;">
+                            {% if request.user.is_authenticated %}
 
-                    </li>
+                            <li><a class="dropdown-item" href="/sepetebak"><i
+                                        class="fas fa-shopping-cart text-primary"></i><span
+                                        style="color: black !important" class="badge">Sepetim {{ request.user |sepetteki_urun_sayisi}}</span></a></li>
+                            <li><a class="dropdown-item" href="/users/logout/">Çıkış Yap</a></li>
+                            {% else %}
 
-                    <li href="/sepetebak" class="nav-link active" aria-current="page"><i class="fas fa-shopping-cart text-primary"></i>
-                    <span style="color: black !important" class="badge">{{ request.user | sepetteki_urun_sayisi}}</span></a>
-
-                    </li>
-                {% else %}
-                <li class="nav-item">
-                     <a href="/users/login/" class="nav-link active" aria-current="page">Giriş Yap</a>
-
-                    </li>
-                    <li class="nav-item">
-                     <a  href="/users/register/" class="nav-link active" aria-current="page">Kayıt Ol</a>
-
-                    </li>
-                <li href="/sepetebak" class="nav-link active" aria-current="page"><i class="fas fa-shopping-cart text-primary"></i>
-                    <span style="color: black !important" class="badge">{{ request | sepetteki_urun_sayisi_kullan}}</span></a>
-
-                    </li>
-
-
-                {% endif %}
+                            <li><a class="dropdown-item" href="/sepetebak"><i
+                                        class="fas fa-shopping-cart text-primary"></i><span
+                                        style="color: black !important" class="badge">Sepetim {{ request |sepetteki_urun_sayisi_kullan}}</span></a></li>
+                            <li><a class="dropdown-item" href="/users/login/">Giriş Yap / Kayıt Ol</a></li>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="siparislerim/">Siparişlerim</a></li>
+                        </ul>
+                    </div>
 
                     {% kategoimobil "" %}
                 </ul>
