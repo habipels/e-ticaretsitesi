@@ -5,15 +5,15 @@
         <div class="row px-xl-5 pt-5">
             <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                 <a href="/" class="text-decoration-none">
-                    {% if logo %}
-                            <img style="max-width: 150px; margin-bottom: 5px;;" src="{{logo.image.url}}" alt="">
+                    {% if content.logo %}
+                            <img style="max-width: 150px; margin-bottom: 5px;;" src="{{content.logo.image.url}}" alt="">
                         {% else %}
                         {% endif %}
                 </a>
                 <p style="color: white !important;"><b>Her kilometrede güvenliği ve performansı bir arada sunan, tutkuyla seçilmiş oto yedek parçalarıyla sizin yanınızdayız.</b></p>
-                <p style="color: white !important;" class="mb-2"><i style="color: white !important;" class="fa fa-map-marker-alt text-primary mr-3"></i>{{adres.sirket_adresi_tr}}</p>
-                <p style="color: white !important;" class="mb-2"><i style="color: white !important;" class="fa fa-envelope text-primary mr-3"></i><a style="color: white !important;" href="mailto:{{email.sirket_email_adresi}}">{{email.sirket_email_adresi}}</a></p>
-                <p style="color: white !important;" class="mb-0"><i style="color: white !important;" class="fa fa-phone-alt text-primary mr-3"></i><a style="color: white !important;" href="tel:+{{telefon.sirket_numarasi}}">{{telefon.sirket_numarasi_gosterilecek_metin}}</a></p>
+                <p style="color: white !important;" class="mb-2"><i style="color: white !important;" class="fa fa-map-marker-alt text-primary mr-3"></i>{{content.adres.sirket_adresi_tr}}</p>
+                <p style="color: white !important;" class="mb-2"><i style="color: white !important;" class="fa fa-envelope text-primary mr-3"></i><a style="color: white !important;" href="mailto:{{content.email.sirket_email_adresi}}">{{content.email.sirket_email_adresi}}</a></p>
+                <p style="color: white !important;" class="mb-0"><i style="color: white !important;" class="fa fa-phone-alt text-primary mr-3"></i><a style="color: white !important;" href="tel:+{{content.telefon.sirket_numarasi}}">{{content.telefon.sirket_numarasi_gosterilecek_metin}}</a></p>
             </div>
             <div class="col-lg-8 col-md-12">
                 <div class="row">
@@ -28,7 +28,7 @@
                     <div class="col-md-4 mb-5">
                         <h5 style="color: white !important;" class="font-weight-bold text-dark mb-4">Genel</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            {% for i in yasal_metinler %}
+                            {% for i in content.yasal_metinler %}
                                 <a style="color: white !important;" class="text-dark mb-2" href="/yasalmetinler/{{i.id}}/{{i.yasal_metin_basligi}}"><i class="fa fa-angle-right mr-2"></i>{{i.yasal_metin_basligi}}</a>
                             {% endfor %}
                         </div>

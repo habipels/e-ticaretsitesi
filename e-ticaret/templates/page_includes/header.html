@@ -36,32 +36,32 @@
             </div>
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
-                    {% if facebook %}
-                        <a style="color: white !important;" class="text-dark px-2" href="{{facebook.link}}">
+                    {% if content.facebook %}
+                        <a style="color: white !important;" class="text-dark px-2" href="{{content.facebook.link}}">
                         <i  style="color: white !important;"  class="fab fa-facebook-f"></i>
                     </a>
                     {% else %}
                     {% endif %}
-                    {% if tw %}
-                        <a  style="color: white !important;"  class="text-dark px-2" href="{{tw.link}}">
+                    {% if content.tw %}
+                        <a  style="color: white !important;"  class="text-dark px-2" href="{{content.tw.link}}">
                         <i  style="color: white !important;"  class="fab fa-twitter"></i>
                     </a>
                     {% else %}
                     {% endif %}
-                    {% if link %}
-                        <a  style="color: white !important;"  class="text-dark px-2" href="{{link.link}}">
+                    {% if content.link %}
+                        <a  style="color: white !important;"  class="text-dark px-2" href="{{content.link.link}}">
                         <i  style="color: white !important;"  class="fab fa-linkedin-in"></i>
                     </a>
                     {% else %}
                     {% endif %}
-                    {% if insta %}
-                        <a  style="color: white !important;"  class="text-dark px-2" href="{{insta.link}}">
+                    {% if content.insta %}
+                        <a  style="color: white !important;"  class="text-dark px-2" href="{{content.insta.link}}">
                         <i  style="color: white !important;"  class="fab fa-instagram"></i>
                     </a>
                     {% else %}
                     {% endif %}
-                    {% if youtube %}
-                        <a  style="color: white !important;"  class="text-dark pl-2" href="{{youtube.link}}">
+                    {% if content.youtube %}
+                        <a  style="color: white !important;"  class="text-dark pl-2" href="{{content.youtube.link}}">
                         <i  style="color: white !important;"  class="fab fa-youtube"></i>
                     </a>
                     {% else %}
@@ -75,32 +75,30 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container" id="gosterme">
         
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a href="/" class="text-decoration-none">
                     <h1 class="m-0 display-5 font-weight-semi-bold">
-                        {% if logo %}
-                            <img style="max-width: 150px;" src="{{logo.image.url}}" alt="">
+                        {% if content.logo %}
+                            <img style="max-width: 150px;" src="{{content.logo.image.url}}" alt="">
                         {% else %}
                         {% endif %}
                         </h1>
                 </a>
             </div>
-            <div class="col-lg-1 col-6 text-left">
-               
-            </div>
+            
             <div class="col-lg-4 col-6 text-left gosterme">
-                <form action="">
+                <form action="/tumurunler/" method="get">
                     <div id="box">
-                        <input style="width: 100% !important;" type="text" id="search" name="search" class="form-control" placeholder="Ara..">
+                        <input style="width: 100% !important;" type="text" value="{% if request.GET.search1 %}{{request.GET.search1}}{% endif %}" id="search" name="search1" class="form-control" placeholder="Ara..">
                         <i class="fa fa-search"></i>
                     </div>
                    
                 </form>
             </div>
-            <div class="col-lg-2 col-6 text-right">
+            <div class="col-lg-1 col-6 text-right">
                 {% if request.user.is_authenticated %}
                 <a href="/sepetebak" style="font-size: 15px;"  class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
@@ -113,7 +111,8 @@
                 </a>
                 {% endif %}
             </div>
-            <div class="col-lg-2 col-6 text-right gosterme">
+            <div class="col-lg-4 col-6 text-right gosterme">
+            {% if request.user.is_authenticated %}
             <div class="dropdown">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
                       Hesabım
@@ -131,9 +130,14 @@
                       <li><a class="dropdown-item" href="siparislerim/">Siparişlerim</a></li>
                     </ul>
                   </div>
-             
+             {% else %}
+             <a href="/users/login/" class="btn border">Giriş Yap/Kayıt Ol</a>
+                <a href="/siparislerim/" class="btn border">Siparişlerim</a>
+
+            {% endif %}
                 
             </div>
+            
         </div>
     </div>
     <!-- Topbar End -->

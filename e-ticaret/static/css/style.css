@@ -143,6 +143,11 @@ margin: auto;
 .mainmenu ul.menu .allc .open li .open2 li a:hover{color:#e9290f;}
 #imobile{
   display: none;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 9999;
 }
 @media screen and (max-width: 1024px) {
   #iopen {
@@ -152,7 +157,7 @@ margin: auto;
     top: 10px;
    
 }
-#imobile{display: block;}
+#imobile{display: block;}#gosterme{display:none;}
 }
 @media screen and (max-width: 600px) {
 
@@ -162,7 +167,7 @@ margin: auto;
     position: fixed;
     top: 10px;
 }
-#imobile{display: block;}
+#imobile{display: block;}#gosterme{display:none;}
 .gosterme{
   display: none !important;
 }
@@ -172,7 +177,7 @@ margin: auto;
   .menustack{display: none;}
  
   .overback{display: block ;}
-  #imobile{display: block;}
+  #imobile{display: block;}#gosterme{display:none;}
   .gosterme{
     display: none !important;
   }

@@ -12,7 +12,7 @@ import requests
 from django.contrib import messages
 import pprint
 from .models import *
-
+from main.views import site_bilgileri
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
@@ -41,7 +41,23 @@ def bugunsiparis():
 
     return b
 def home(request):
-    content = dict()
+    sozluk = {}
+    sozluk["facebook"] = sosyalmedyaFace.objects.last()
+    sozluk["tw"] = sosyalmedyatw.objects.last()
+    sozluk["insta"] = sosyalmedyaInsgr.objects.last()
+    sozluk["link"] = sosyalmedyalinkd.objects.last()
+    sozluk["youtube"] = sosyalmedyayoutube.objects.last()
+    sozluk["logo"] = sayfa_logosu.objects.last()
+    sozluk["pencere_icon"] = sayfa_iconu.objects.last()
+    sozluk["kategoriler"] = Meslek.objects.all()
+    sozluk["banner"] = banner.objects.filter(banner_gosterme = True).order_by("banner_sira")
+    sozluk["site_adi"] = site_adi.objects.last()
+    sozluk["email"] = email_adres.objects.last()
+    sozluk["telefon"] = numara.objects.last()
+    sozluk["hakkimizda"] = hakkimizda.objects.last()
+    sozluk["anasayfa"] = anasayfa.objects.last()
+    sozluk["yasal_metinler"] = yasal_metinler.objects.all()
+    sozluk["adres"] = adres.objects.last()
     merchant_id = odeme_ayarlari_paytr.objects.last().magaza_adi
     merchant_key = bytes(odeme_ayarlari_paytr.objects.last().magaza_parolasi, 'utf-8')
     merchant_salt = bytes(odeme_ayarlari_paytr.objects.last().magaza_gizli_anahtar, 'utf-8')
@@ -143,7 +159,7 @@ def home(request):
 
     else:
         print(result.text)
-    return render(request, 'odeme/payment.html', res)
+    return render(request, 'odeme/payment.html',{"res":res,"content":sozluk})
 
 @csrf_exempt
 def callback(request):

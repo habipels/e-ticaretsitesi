@@ -18,9 +18,9 @@
     style="width: 100%;display: none; position: fixed; top: 0px; left: 0px;">
     <div class="wrapping">
         <div class="grid row">
-            <div class="logo " style="max-width: 100px;margin-top: 10px !important;">
-                {% if logo %}
-                <a href="/"><img style="max-width: 100px;" class="mainlogo" src="{{logo.image.url}}" alt=""></a>
+            <div class="logo " style="margin-left: 5%; max-width: 100px;margin-top: 10px !important;">
+                {% if content.logo %}
+                <a href="/"><img style="max-width: 100px;" class="mainlogo" src="{{content.logo.image.url}}" alt=""></a>
                 {% else %}
                 {% endif %}
 
@@ -52,26 +52,28 @@
         </div>
     </div>
 </div>
-<nav class="navbar bg-light fixed-top imobile" id="imobile">
+<nav class="navbar bg-dark imobile" id="imobile">
     <div class="container-fluid">
-        <a href="/" class="text-decoration-none">
-            <h1 class="m-0 display-5 font-weight-semi-bold">
-                {% if logo %}
-                <img style="max-width: 150px;" src="{{logo.image.url}}" alt="">
-                {% else %}
-                {% endif %}
-            </h1>
+        <a href="/tumurunler/" class="text-decoration-none text-center">
+            <i class="fas fa fa-binoculars text-primary"></i>
+            <p>KEŞFET</p>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+        <a href="/sepetebak/" class="text-decoration-none text-center">
+            <i class="fas fa-shopping-cart text-primary"></i>
+            <p>SEPETİM</p>
+        </a>
+        <a style="font-size: 15px !important; color: #FE7A36 !important;" class="navbar-toggler text-decoration-none text-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
             aria-controls="offcanvasNavbar">
             <i class="fas fa-solid fa-bars"></i>
-        </button>
+            
+            <p >KATEGORİLER</p>
+    </a>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
                 <a href="/" class="text-decoration-none">
                     <h1 class="m-0 display-5 font-weight-semi-bold">
-                        {% if logo %}
-                        <img style="max-width: 150px;" src="{{logo.image.url}}" alt="">
+                        {% if content.logo %}
+                        <img style="max-width: 150px;" src="{{content.logo.image.url}}" alt="">
                         {% else %}
                         {% endif %}
                     </h1>
