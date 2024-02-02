@@ -287,7 +287,11 @@ def kategori_ver_urunleri_gosterme(request,id,slug):
         max_fiyat = request.GET.get("max")
         search = request.GET.get("search")
         siralama = request.GET.get("siralama")
-        profile = urun.objects.filter(Q(fiyat__gt = min_fiyat ),Q(fiyat__lte = max_fiyat),Q(silinme_bilgisi = False),Q(kategori__id__in = tum_kategoriler)  & Q(urun_stok__gte=1) )
+        profile = urun.objects.filter(Q(silinme_bilgisi = False),Q(kategori__id__in = tum_kategoriler)  & Q(urun_stok__gte=1) )
+        if max_fiyat and int(max_fiyat ) < 9999:
+            profile = profile.filter(fiyat__lte = max_fiyat)
+        if min_fiyat and min_fiyat != 0:
+            profile = profile.filter(fiyat__gt = min_fiyat)
         if search:
             profile = profile.filter(urun_adi__icontains = search)
         if siralama == "0":
@@ -304,7 +308,8 @@ def kategori_ver_urunleri_gosterme(request,id,slug):
         elif siralama == "4":
             profile = profile.order_by("-id")
 
-        profile = profile.distinct()
+
+        profile = profile
     content["filtre"] = filtre_icerigi.objects.filter(filtre_bagli_oldu_filtre__filtre_adi = "MARKA",filtre_bagli_oldu_filtre__filtre_bagli_oldu_kategori__id__in=tum_kategoriler)
     page_num = request.GET.get('page', 1)
     paginator = Paginator(profile, 20) # 6 employees per page
@@ -332,7 +337,11 @@ def indirimli_urunleri_gosterme(request):
         search = request.GET.get("search")
         siralama = request.GET.get("siralama")
         search = request.GET.get("search")
-        profile = urun.objects.filter(Q(fiyat__gt = min_fiyat ),Q(fiyat__lte = max_fiyat),Q(silinme_bilgisi = False)  & Q(urun_stok__gte=1,eski_fiyat__gt=F('fiyat')) ).distinct()
+        profile = urun.objects.filter(Q(silinme_bilgisi = False)  & Q(urun_stok__gte=1,eski_fiyat__gt=F('fiyat')) ).distinct()
+        if max_fiyat and int(max_fiyat ) < 9999:
+            profile = profile.filter(fiyat__lte = max_fiyat)
+        if min_fiyat and min_fiyat != 0:
+            profile = profile.filter(fiyat__gt = min_fiyat)
         if search:
             profile = profile.filter(urun_adi__icontains = search)
         if siralama == "0":
@@ -348,6 +357,7 @@ def indirimli_urunleri_gosterme(request):
 
         elif siralama == "4":
             profile = profile.order_by("-id")
+
 
         profile = profile.distinct()
     content["filtre"] = filtre_icerigi.objects.filter(filtre_bagli_oldu_filtre__filtre_adi = "MARKA")
@@ -376,7 +386,11 @@ def popiler_urunleri_gosterme(request):
         search = request.GET.get("search")
         siralama = request.GET.get("siralama")
         search = request.GET.get("search")
-        profile = urun.objects.filter(Q(fiyat__gt = min_fiyat ),Q(fiyat__lte = max_fiyat),Q(silinme_bilgisi = False)  ).order_by("-urun_bakma_saysi").distinct()
+        profile = urun.objects.filter(Q(silinme_bilgisi = False)  ).order_by("-urun_bakma_saysi").distinct()
+        if max_fiyat and int(max_fiyat ) < 9999:
+            profile = profile.filter(fiyat__lte = max_fiyat)
+        if min_fiyat and min_fiyat != 0:
+            profile = profile.filter(fiyat__gt = min_fiyat)
         if search:
             profile = profile.filter(urun_adi__icontains = search)
         if siralama == "0":
@@ -612,14 +626,14 @@ def gecmis_siparislerim_iki(request,id):
     if request.user.is_authenticated:
         content["siparisler"] = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = True)
         content["siparis_detaylari"] =satin_alinanlar.objects.filter(kayitli_kullanici__in = sepet_olusturma.objects.filter(sepet_sahibi = request.user,sepet_satin_alma_durumu = True)).order_by("-id")
-        a =get_object_or_404(satin_alinanlar,id = id) 
+        a =get_object_or_404(satin_alinanlar,id = id)
         veriler = sepetteki_urunler.objects.filter(kayitli_kullanici = a.kayitli_kullanici)
         content["sepet_urunleri"] =veriler
         content["a"] = a
     else:
         content["siparisler"] = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = True)
         content["siparis_detaylari"] =satin_alinanlar.objects.filter(kayitli_olmayan_kullanici__in = sepet_olusturma_ip.objects.filter(sepet_sahibi = get_client_ip(request),sepet_satin_alma_durumu = True)).order_by("-id")
-        a =get_object_or_404(satin_alinanlar,id = id) 
+        a =get_object_or_404(satin_alinanlar,id = id)
         veriler = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = a.kayitli_olmayan_kullanici)
         content["sepet_urunleri"] =veriler
         content["a"] = a

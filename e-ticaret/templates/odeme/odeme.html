@@ -24,9 +24,9 @@
                                     <label class="custom-control-label" for="Kurumsal">Kurumsal Fatura</label>
                                 </div>
                             </div></div>
-                            
+
                             {% else %}
-                        
+
                         <div class="col-md-6 form-group"><div class="form-group">
                                 <div class="custom-control custom-radio">
                                     <input type="radio"  checked required class="custom-control-input" value="bireysel" name="faturatipi" id="Bireysel">
@@ -61,7 +61,7 @@
                             <h4 class="text-center" >İletişim Adresi</h4>
                             <div class="col-md-6 form-group">
                                 <label>E-posta</label>
-                                <input required class="form-control" value="{{adresler.email}}" name="eposta" required type="text" placeholder="ornek@email.com">
+                                <input required class="form-control" value="{{adresler.email}}" name="eposta" required type="email" placeholder="ornek@email.com">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Telefon Numarası</label>
@@ -74,7 +74,7 @@
                                 <label>Addres</label>
                                 <input required class="form-control" value="{{adresler.adres}}" name="adres" required type="text" placeholder="adres">
                             </div>
-                            
+
                             <div class="col-md-6 form-group">
                                 <label>Ülke</label>
                                 <input required class="form-control" name="ulke"  value="Türkiye" required type="text" placeholder="Türkiye">
@@ -86,7 +86,7 @@
                                {% for i in turkey_cities %}
                                 <option value="{{i}}">{{i}}</option>
                                {% endfor %}
-                                
+
                                </select>
                             </div>
                             <div class="col-md-6 form-group">
@@ -94,9 +94,9 @@
                                 <input required name="zip_kodu" value="{{adresler.zip_kodu}}" class="form-control" type="text" placeholder="123">
                             </div>
                         </div>
-                        
-                        
-                        
+
+
+
                     </div>
                 </div>
 
@@ -176,7 +176,7 @@
                             </div>
                         </div>
                         {% endif %}
-                        
+
                     </div>
                     <div class="card-footer border-secondary bg-transparent">
                         <button type="submit" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Ödemeye Geç</button>

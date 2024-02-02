@@ -8,9 +8,9 @@
                     <div class="carousel-inner">
                         {% for i in banner %}
                         {% if i.image %}
-                        
-                        
-                       
+
+
+
                         <div class="carousel-item active_ver" style="height: 410px;">
                             <img class="img-fluid" src="{{i.image.url}}" alt="Image">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
@@ -21,14 +21,14 @@
                                         <a href="{{i.banner_link}}" class="btn btn-light py-2 px-3">Ziyaret Et</a>
                                     {% else %}
                                     {% endif %}
-                                    
+
                                 </div>
                             </div>
                         </div>
                         {% else %}
                         {% endif %}
                          {% endfor %}
-                        
+
                     </div>
                     <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
                         <div class="btn btn-dark" style="width: 45px; height: 45px;">
@@ -71,7 +71,7 @@
         width: 100%;
         position: relative;
     }
-    .carousel .item img {	
+    .carousel .item img {
         max-width: 100%;
         max-height: 100%;
         display: inline-block;
@@ -120,7 +120,7 @@
     .carousel-control-prev, .carousel-control-next {
         height: 44px;
         width: 40px;
-        background: #7ac400;	
+        background: #7ac400;
         margin: auto 0;
         border-radius: 4px;
         opacity: 0.8;
@@ -147,7 +147,7 @@
     }
     .carousel-control-next i {
         margin-right: -4px;
-    }		
+    }
     .carousel-indicators {
         bottom: -50px;
     }
@@ -158,10 +158,10 @@
         border-radius: 50%;
         border: none;
     }
-    .carousel-indicators li {	
+    .carousel-indicators li {
         background: rgba(0, 0, 0, 0.2);
     }
-    .carousel-indicators li.active {	
+    .carousel-indicators li.active {
         background: rgba(0, 0, 0, 0.6);
     }
     .carousel .wish-icon {
@@ -189,7 +189,7 @@
         $(".wish-icon i").click(function(){
             $(this).toggleClass("fa-heart fa-heart-o");
         });
-    });	
+    });
     </script>
 
     <!-- Products Start -->
@@ -198,18 +198,18 @@
             <h2 class="section-title px-5"><span class="px-2">Ürünler</span></h2>
         </div>
         <div class="row px-xl-5 pb-3">
-            
+
             {% for i in santiyeler %}
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-2 mb-4">
                     <div class="card-header d-flex justify-content-center product-img position-relative overflow-hidden bg-transparent border p-0">
                     <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
                         <img style="max-height: 200px;max-width: 200px;min-height: 200px;min-width: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-                      
+
                         </a>
 
                     </div>
-                                 
+
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                         <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
                         <div class="d-flex justify-content-center">
@@ -217,7 +217,7 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-center bg-light border">
-                        
+
                         <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
                     </div>
                 </div>
@@ -230,16 +230,16 @@
 
                                                 {% if medya.has_previous %}
                                                   <li class="page-item"><a class="page-link" href="?page={{ medya.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">« Previous page</a></li>
-                                                
+
                                                   {% if medya.number > 3 %}
-                                                
+
                                                     <li class="page-item"><a class="page-link" href="?page=1{{ medya.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">1</a></li>
                                                     {% if medya.number > 4 %}
                                                       <li class="page-item"><span class="page-link">...</span></li>
                                                     {% endif %}
                                                   {% endif %}
                                                 {% endif %}
-                                                
+
                                                 {% for num in medya.paginator.page_range %}
                                                   {% if medya.number == num %}
                                                     <li class="page-item"><a class="page-link " style="color:black;" href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ num }}</a></li>
@@ -247,7 +247,7 @@
                                                     <li class="page-item"><a class="page-link" href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ num }}</a></li>
                                                   {% endif %}
                                                 {% endfor %}
-                                                
+
                                                 {% if medya.has_next %}
                                                   {% if medya.number < medya.paginator.num_pages|add:'-3' %}
                                                     <li class="page-item"><span class="page-link">...</span></li>
@@ -255,7 +255,7 @@
                                                   {% elif medya.number < medya.paginator.num_pages|add:'-2' %}
                                                     <li class="page-item"><a class="page-link" href="?page={{ medya.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ medya.paginator.num_pages }}</a></li>
                                                   {% endif %}
-                                                
+
                                                   <li class="page-item"><a class="page-link" href="?page={{ medya.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">Next Page »</a></li>
                                                 {% endif %}
                                                 </ul>
@@ -270,7 +270,7 @@
                 {% else %}
                 {% endif %}
         </div>
-        
+
     </div>
     <!-- Products End -->
         <div class="container-xl">
@@ -282,15 +282,15 @@
                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                         <li data-target="#myCarousel" data-slide-to="1"></li>
                         <li data-target="#myCarousel" data-slide-to="2"></li>
-                    </ol>   
+                    </ol>
                     <!-- Wrapper for carousel items -->
                     <div class="carousel-inner">
-                        
-                        
+
+
                         <div class="item carousel-item active">
                             <div class="row">
-                                
-                                
+
+
                                {% for i in populer1 %}
                                 <div class="col-sm-3">
                                     <div class="thumb-wrapper">
@@ -298,22 +298,22 @@
                                         <div style="border-radius: 5% !important;" class="img-box d-flex justify-content-center">
                                             <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
                                                 <img style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-                                                
-                                                </a>									
+
+                                                </a>
                                         </div>
                                         <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>									
-                                            
+                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+
                                             <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
                                             <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                        </div>						
+                                        </div>
                                     </div>
                                 </div>
                                   {% endfor %}
                             </div>
                         </div>
 
-                       
+
                         <div class="item carousel-item ">
                             <div class="row">
                                 		{% for i in populer2 %}
@@ -322,18 +322,18 @@
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                                                
-                                                </a>									
+
+                                                </a>
                                         </div>
                                         <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>									
-                                            
+                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+
                                             <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
                                             <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                        </div>						
+                                        </div>
                                     </div>
                                 </div>
-                                  {% endfor %}			
+                                  {% endfor %}
                             </div>
                         </div>
                         <div class="item carousel-item">
@@ -344,18 +344,18 @@
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                                                
-                                                </a>									
+
+                                                </a>
                                         </div>
                                         <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>									
-                                            
+                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+
                                             <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
                                             <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                        </div>						
+                                        </div>
                                     </div>
                                 </div>
-                                  {% endfor %}			
+                                  {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -384,21 +384,21 @@
         <div class="container-xl">
             <div class="row">
                 <div class="col-md-12">
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                    <div id="myCarousel1" class="carousel slide" data-ride="carousel" data-interval="0">
                     <!-- Carousel indicators -->
                     <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                    </ol>   
+                        <li data-target="#myCarousel1" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel1" data-slide-to="1"></li>
+                        <li data-target="#myCarousel1" data-slide-to="2"></li>
+                    </ol>
                     <!-- Wrapper for carousel items -->
                     <div class="carousel-inner">
-                        
-                        
+
+
                         <div class="item carousel-item active">
                             <div class="row">
-                                
-                                
+
+
                                {% for i in indirimdekiurunler1 %}
                                 <div class="col-sm-3">
                                     <div class="thumb-wrapper">
@@ -414,21 +414,21 @@
                                                 background-color: rgb(255, 136, 0); /* Kırmızı renk */
                                                 border-radius: 50%; color: white;}
                                             </style>
-                                                </a>									
+                                                </a>
                                         </div>
                                         <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>									
-                                            
+                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+
                                             <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del>{{i.eski_fiyat}} TL</del></h6>
                                             <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                        </div>						
+                                        </div>
                                     </div>
                                 </div>
                                   {% endfor %}
                             </div>
                         </div>
 
-                       
+
                         <div class="item carousel-item ">
                             <div class="row">
                                 		{% for i in indirimdekiurunler2 %}
@@ -446,17 +446,17 @@
                                                 background-color: rgb(255, 136, 0); /* Kırmızı renk */
                                                 border-radius: 50%; color: white;}
                                             </style>
-                                                </a>									
+                                                </a>
                                         </div>
                                         <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>									
-                                            
+                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+
                                             <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del>{{i.eski_fiyat}} TL</del></h6>
                                             <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                        </div>						
+                                        </div>
                                     </div>
                                 </div>
-                                  {% endfor %}			
+                                  {% endfor %}
                             </div>
                         </div>
                         <div class="item carousel-item">
@@ -476,25 +476,25 @@
                                                 background-color: rgb(255, 136, 0); /* Kırmızı renk */
                                                 border-radius: 50%; color: white;}
                                             </style>
-                                                </a>									
+                                                </a>
                                         </div>
                                         <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>									
-                                            
+                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+
                                             <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del>{{i.eski_fiyat}} TL</del></h6>
                                             <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                        </div>						
+                                        </div>
                                     </div>
                                 </div>
-                                  {% endfor %}			
+                                  {% endfor %}
                             </div>
                         </div>
                     </div>
                     <!-- Carousel controls -->
-                    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                    <a class="carousel-control-prev" href="#myCarousel1" data-slide="prev">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                    <a class="carousel-control-next" href="#myCarousel1" data-slide="next">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 </div>

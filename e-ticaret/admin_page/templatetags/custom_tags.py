@@ -6,7 +6,7 @@ register = template.Library()
 
 @register.filter
 def Filtre_icerikleri_alma(stok_kart):
-    
+
     satis_fiyati = filtre_icerigi.objects.filter(filtre_bagli_oldu_filtre=stok_kart.id)
     icerikler = ""
     #
@@ -31,18 +31,18 @@ def filtre_silmek_icin(stok_kart):
       <!-- Modal body -->
       <div class="modal-body" style="height: 100px;">
 
-            Bu {} Filtre İçeriğini Silmek İstediğinden Emin misin ? 
-            
-            
+            Bu {} Filtre İçeriğini Silmek İstediğinden Emin misin ?
+
+
 
       </div>
 
-      
+
 
       <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">iptal</button>
-            <a href="/yonetim/filtreicerigisil/{}"  class="btn btn-success" >sil</a>    
+            <a href="/yonetim/filtreicerigisil/{}"  class="btn btn-success" >sil</a>
     </div></div>
 
     </div>
@@ -55,7 +55,7 @@ def filtre_silmek_icin(stok_kart):
 from django.utils.safestring import mark_safe
 @register.filter
 def Filtre_icerikleri_almaa(stok_kart):
-    
+
     satis_fiyati = filtre_icerigi.objects.filter(filtre_bagli_oldu_filtre=stok_kart.id)
     icerikler = "<option value='"
     a = icerikler
@@ -68,24 +68,24 @@ def Filtre_icerikleri_almaa(stok_kart):
 
 @register.filter
 def urun_filtre_icerigi(stok_kart):
-    
+
     satis_fiyati = urun_filtre_tercihi.objects.filter(urun=stok_kart)
     icerikler = ""
     for i in satis_fiyati:
         icerikler = icerikler+","+str(i.filtre_bilgisi)+"\n"
-        
+
     return icerikler if icerikler else "Filtre Seçilmemiş"
 
 @register.filter
 def urun_resimleri_alma(stok_kart):
-    
+
     satis_fiyati = urun_resimleri.objects.filter(urun_bilgisi=stok_kart.id).all()
     icerikler = ""
     for i in satis_fiyati:
         if i.image != None:
             icerikler = i.image.url
             break
-        
+
     return icerikler if icerikler else ""
 
 @register.filter
@@ -96,7 +96,7 @@ def urun_filteleri_alma_bilgisi(stok_kart):
 """
     class_yapisi_devam = """
 
-                    
+
                 </div>
 """
     try:
@@ -111,13 +111,13 @@ def urun_filteleri_alma_bilgisi(stok_kart):
 
 @register.filter
 def sepetteki_urun_sayisi(stok_kart):
-    
+
     satis_fiyati = sepet_olusturma.objects.filter(sepet_sahibi=stok_kart.id,sepet_satin_alma_durumu = False).last()
     a = sepetteki_urunler.objects.filter(kayitli_kullanici = satis_fiyati )
     icerikler = 0
     for i in a:
-        icerikler = icerikler + 1 
-        
+        icerikler = icerikler + 1
+
     return icerikler if icerikler else ""
 
 #
@@ -131,13 +131,18 @@ def get_client_ip(request):
 
 @register.filter
 def sepetteki_urun_sayisi_kullan(stok_kart):
-    
-    satis_fiyati = sepet_olusturma_ip.objects.filter(sepet_sahibi=get_client_ip(stok_kart),sepet_satin_alma_durumu = False).last()
-    a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = satis_fiyati )
+    x_forwarded_for = stok_kart.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = stok_kart.META.get('REMOTE_ADDR')
+    sepet_sahibi = sepet_olusturma_ip.objects.filter(sepet_sahibi=ip,sepet_satin_alma_durumu = False).last()
+    a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_sahibi )
     icerikler = 0
-    for i in a:
-        icerikler = icerikler + 1 
-        
+    if sepet_sahibi:
+        for i in a:
+            icerikler = icerikler + 1
+
     return icerikler if icerikler else ""
 
 @register.simple_tag
@@ -206,7 +211,7 @@ def sepet_toplam_tutar_t(request):
     if toplam_tutar > a.min_siparis_tutari:
         toplam_tutar = toplam_tutar
     else:
-        toplam_tutar = toplam_tutar 
+        toplam_tutar = toplam_tutar
     return round(float(toplam_tutar), 2)
 @register.simple_tag
 def kategoi_bilgisi_duzednleme(id):
@@ -232,7 +237,7 @@ def kategoi_bilgisi_duzednleme(id):
             if y >= 5:
                 break
     else:
-        a = Meslek.objects.filter(silinme_bilgisi = False,id = id).order_by("numarasi")   
+        a = Meslek.objects.filter(silinme_bilgisi = False,id = id).order_by("numarasi")
         for i  in a:
             z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id).order_by("numarasi")
             if z.count() > 0:
@@ -245,14 +250,14 @@ def kategoi_bilgisi_duzednleme(id):
     return  mark_safe(veri)
 @register.simple_tag
 def kategoi_bilgisi_duzednleme2(id):
-    
+
     veri = ''
     if id == "":
         a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None,headerda_gosterme = True).order_by("numarasi")
         y = 0
         for i  in a:
             z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id).order_by("numarasi")
-            
+
             if z.count() > 0:
                 veri = veri+'<li><a href="/kategori/{}/{}/"" title="{}">{}</a><div class="sub1"><div class="wrap"><div class="left"><ul>'.format(str(i.id),str(i.link),str(i.kategori),str(i.kategori))
                 k = 0
@@ -266,15 +271,15 @@ def kategoi_bilgisi_duzednleme2(id):
             else:
                 veri = veri+ '<li class=""><a class="" href="/kategori/{}/{}/">{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
     else:
-        a = Meslek.objects.filter(silinme_bilgisi = False,id = id).order_by("numarasi")   
+        a = Meslek.objects.filter(silinme_bilgisi = False,id = id).order_by("numarasi")
         for i  in a:
             z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id).order_by("numarasi")
-            
+
             if z.count() > 0:
                 veri = veri+ '<li> <a href="/kategori/{}/{}/"><i class="fas fa fa-sort-down"> </i> {}</a> <div class="left_con"><ul class="open2">'.format(str(i.id),str(i.link),str(i.kategori))
                 for j in z:
                     veri = veri+'{}'.format(str(kategoi_bilgisi_duzednleme(j.id)))
-                    
+
                 veri = veri + "</ul></li></div>"
             else:
                 veri = veri+ '<li class=""><a class="" href="/kategori/{}/{}/"><i class="fas fa-angle-right"></i> {}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
@@ -310,7 +315,7 @@ def sepet_id_gonder(a):
             return  "kayitli"+str(i.kayitli_kullanici.id)
         else:
             return "ip"+str(i.kayitli_olmayan_kullanici.id)
-        
+
 
 @register.simple_tag
 def urun_gosterecek_kayitli(bilgi):
@@ -378,13 +383,13 @@ from datetime import datetime, timedelta
 def ayliksiparistutar():
     bugunku_tarih_ve_saat = datetime.now()
     ay_baslangici = bugunku_tarih_ve_saat.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-    
+
     aylar_ara = ay_baslangici - timedelta(days=1)
     aylar_ara = aylar_ara.replace(day=1)
 
     a = satin_alinanlar.objects.filter(kayit_tarihi__gte=aylar_ara, kayit_tarihi__lte=bugunku_tarih_ve_saat)
     toplam = 0
-    
+
     for i in a:
         if i.siparis_sahibi_bilgileri.kayitli_kullanici:
             k = sepetteki_urunler.objects.filter(kayitli_kullanici=i.siparis_sahibi_bilgileri.kayitli_kullanici)
@@ -400,13 +405,13 @@ def ayliksiparistutar():
 def yilliksiparistutar():
     bugunku_tarih_ve_saat = datetime.now()
     yil_baslangici = bugunku_tarih_ve_saat.replace(month=1, day=1, hour=0, minute=0, second=0, microsecond=0)
-    
+
     aylar_ara = yil_baslangici - timedelta(days=1)
     aylar_ara = aylar_ara.replace(month=1, day=1)
 
     a = satin_alinanlar.objects.filter(kayit_tarihi__gte=aylar_ara, kayit_tarihi__lte=bugunku_tarih_ve_saat)
     toplam = 0
-    
+
     for i in a:
         if i.siparis_sahibi_bilgileri.kayitli_kullanici:
             k = sepetteki_urunler.objects.filter(kayitli_kullanici=i.siparis_sahibi_bilgileri.kayitli_kullanici)
@@ -451,7 +456,7 @@ def kategoimobil(id):
         a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None).order_by("numarasi")
         for i  in a:
             z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id).order_by("numarasi")
-            
+
             if z.count() > 0:
                 veri = veri+ '''<li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="/kategori/{}/{}/" role="button" data-bs-toggle="dropdown"
@@ -459,7 +464,7 @@ def kategoimobil(id):
                             {}
                         </a>
                         <ul class="dropdown-menu">
-                            
+
                         '''.format(str(i.id),str(i.link),str(i.kategori))
                 for j in z:
                     veri = veri+str(kategoimobil(j.id))
@@ -467,10 +472,10 @@ def kategoimobil(id):
             else:
                 veri = veri+ '<li><a class="dropdown-item" href="/kategori/{}/{}/">{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
     else:
-        a = Meslek.objects.filter(silinme_bilgisi = False,id = id).order_by("numarasi")   
+        a = Meslek.objects.filter(silinme_bilgisi = False,id = id).order_by("numarasi")
         for i  in a:
             z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id).order_by("numarasi")
-            
+
             if z.count() > 0:
                 veri = veri+'''<li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="/kategori/{}/{}/" role="button" data-bs-toggle="dropdown"
@@ -478,7 +483,7 @@ def kategoimobil(id):
                             {}
                         </a>
                         <ul class="dropdown-menu">
-                            
+
                         '''.format(str(i.id),str(i.link),str(i.kategori))
                 for j in z:
                     veri = veri+'{}'.format(str(kategoimobil(j.id)))
