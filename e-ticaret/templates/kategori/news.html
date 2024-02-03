@@ -129,7 +129,7 @@ span.value.upper::before {content: "- ₺ "; display: inline-block; margin-left:
                     {% for i in santiyeler %}
                     <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                         <div class="card product-item border-0 mb-4">
-                            <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <div class="d-flex justify-content-center card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                                 <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
                                 <img  style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" style="max-height: 200px;" src="{{ i|urun_resimleri_alma }}" alt="">
                                 </a>

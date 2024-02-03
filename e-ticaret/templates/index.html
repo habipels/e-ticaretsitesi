@@ -202,7 +202,7 @@
             {% for i in santiyeler %}
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-2 mb-4">
-                    <div class="card-header d-flex justify-content-center product-img position-relative overflow-hidden bg-transparent border p-0">
+                    <div class="d-flex justify-content-center card-header d-flex justify-content-center product-img position-relative overflow-hidden bg-transparent border p-0">
                     <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
                         <img style="max-height: 200px;max-width: 200px;min-height: 200px;min-width: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
 
