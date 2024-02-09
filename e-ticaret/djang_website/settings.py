@@ -26,7 +26,14 @@ SECRET_KEY = '(c@9=wl&3=c#nm@=5#hn$#dpw5zqm0vvmojfcr!d7%&7&ofz2n'
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
+# email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'info@karriereturk.com'
+EMAIL_HOST_PASSWORD = 'goxaleuggoyhzwme'
+# email
 
 # Application definition
 
