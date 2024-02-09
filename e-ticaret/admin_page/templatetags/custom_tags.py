@@ -319,30 +319,40 @@ def sepet_id_gonder(a):
 
 @register.simple_tag
 def urun_gosterecek_kayitli(bilgi):
-    a = sepetteki_urunler.objects.filter(kayitli_kullanici_id  = bilgi)
-    b = ""
-    for i in a:
-        if i.urun_adedi > 0:
-            isi = "/urun/{}/{}".format(i.urun_bilgisi.id,str(i.urun_bilgisi.urun_adi).replace("/","_").replace(" ","_"))
-            b = b+''''<tr>
-                <td><img src="{}" style="max-width: 50px !important; max-height: 50px !important;" alt=""></td>
-                <td>{}</td>
-                <td><a href="{}" target="_blank" rel="noopener noreferrer">{}</a></td>
-              </tr>'''.format(urun_resimleri_alma(i.urun_bilgisi),i.urun_adedi,isi,i.urun_bilgisi.urun_adi)
+    try:
+        a = sepetteki_urunler.objects.filter(kayitli_kullanici_id  = bilgi)
+        b = ""
+        for i in a:
+            if i.urun_adedi > 0:
+                isi = "/urun/{}/{}".format(i.urun_bilgisi.id,str(i.urun_bilgisi.urun_adi).replace("/","_").replace(" ","_"))
+                b = b+''''<tr>
+                    <td><img src="{}" style="max-width: 50px !important; max-height: 50px !important;" alt=""></td>
+                    <td>{}</td>
+                    <td><a href="{}" target="_blank" rel="noopener noreferrer">{}</a></td>
+                </tr>'''.format(urun_resimleri_alma(i.urun_bilgisi),i.urun_adedi,isi,i.urun_bilgisi.urun_adi)
+    except:
+        pass
     return mark_safe(b)
 
 @register.simple_tag
 def urun_gosterecek_kayitli_bilgi(bilgi):
-    a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici_id  = bilgi)
-    b = ""
-    for i in a:
-        if i.urun_adedi > 0:
-            isi = "/urun/{}/{}".format(i.urun_bilgisi.id,str(i.urun_bilgisi.urun_adi).replace("/","_").replace(" ","_"))
-            b = b+ ''''<tr>
-                <td>{}</td>
-                <td>{}</td>
-                <td><a href="{}" target="_blank" rel="noopener noreferrer">{}</a></td>
-              </tr>'''.format(urun_resimleri_alma(i.urun_bilgisi),i.urun_adedi,isi,i.urun_bilgisi.urun_adi)
+    try:
+        a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici_id  = bilgi)
+    
+        b = ""
+        for i in a:
+            if i.urun_adedi > 0:
+                try:
+                    isi = "/urun/{}/{}".format(i.urun_bilgisi.id,str(i.urun_bilgisi.urun_adi).replace("/","_").replace(" ","_"))
+                    b = b+ ''''<tr>
+                        <td>{}</td>
+                        <td>{}</td>
+                        <td><a href="{}" target="_blank" rel="noopener noreferrer">{}</a></td>
+                    </tr>'''.format(urun_resimleri_alma(i.urun_bilgisi),i.urun_adedi,isi,i.urun_bilgisi.urun_adi)
+                except:
+                    pass
+    except:
+        b = ""
     return mark_safe(b)
 
 @register.simple_tag
@@ -459,13 +469,13 @@ def kategoimobil(id):
 
             if z.count() > 0:
                 veri = veri+ '''<li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/kategori/{}/{}/" role="button" data-bs-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            {}
+                        {}
                         </a>
                         <ul class="dropdown-menu">
-
-                        '''.format(str(i.id),str(i.link),str(i.kategori))
+                            <li><a class="dropdown-item" href="/kategori/{}/{}/">{}</a></li>
+                        '''.format(str(i.kategori),str(i.id),str(i.link),str(i.kategori))
                 for j in z:
                     veri = veri+str(kategoimobil(j.id))
                 veri = veri + '</ul></li>'

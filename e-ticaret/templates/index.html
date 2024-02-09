@@ -273,7 +273,7 @@
 
     </div>
     <!-- Products End -->
-        <div class="container-xl">
+        <div class="container-xl populer">
             <div class="row">
                 <div class="col-md-12">
                     <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
@@ -381,6 +381,92 @@
                 </div>
             </div>
         </div>
+        <div class="container-xl populermobil">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="myCarouselpb" class="carousel slide" data-ride="carousel" data-interval="0">
+                    <!-- Carousel indicators -->
+                    <ol class="carousel-indicators">
+                    {% for  i in populer1 %}
+                    {% if forloop.counter  == 1 %}
+                        <li data-target="#myCarouselpb" data-slide-to="{{forloop.counter }}" class="active"></li>
+                    {% else %}
+                    <li data-target="#myCarouselpb" data-slide-to="{{forloop.counter }}" class=""></li>
+                    {% endif %}
+                        
+                    {% endfor %}
+                    
+                        
+                        
+                    </ol>
+                    <!-- Wrapper for carousel items -->
+                    <div class="carousel-inner">
+
+                         {% for  i in populer1 %}
+                         {% if forloop.counter  == 1 %}
+                        <div class="item carousel-item active">
+                            <div class="row">              
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                                        <div style="border-radius: 5% !important;" class="img-box d-flex justify-content-center">
+                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
+                                                <img style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
+
+                                                </a>
+                                        </div>
+                                        <div class="thumb-content">
+                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+
+                                            <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
+                                            <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                  
+                            </div>
+                        </div>
+                    {% else %}
+                    <div class="item carousel-item">
+                            <div class="row">
+
+
+                              
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                                        <div style="border-radius: 5% !important;" class="img-box d-flex justify-content-center">
+                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
+                                                <img style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
+
+                                                </a>
+                                        </div>
+                                        <div class="thumb-content">
+                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+
+                                            <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
+                                            <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                  
+                            </div>
+                        </div>
+                    {% endif %}
+                        
+                        {% endfor %}
+                    </div>
+                    <!-- Carousel controls -->
+                    <a class="carousel-control-prev" href="#myCarouselpb" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a class="carousel-control-next" href="#myCarouselpb" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+                </div>
+            </div>
+        </div>
     <!-- Products End -->
            <!-- Products Start -->
            <div class="container py-5">
@@ -392,7 +478,7 @@
             </div>
         </div>
         <!-- Products End -->
-        <div class="container-xl">
+        <div class="container-xl indirim">
             <div class="row">
                 <div class="col-md-12">
                     <div id="myCarousel1" class="carousel slide" data-ride="carousel" data-interval="0">
@@ -517,6 +603,107 @@
                         <i class="fa fa-angle-left"></i>
                     </a>
                     <a class="carousel-control-next" href="#myCarousel1" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-xl indirimmobil">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="myCarousel11" class="carousel slide" data-ride="carousel" data-interval="0">
+                    <!-- Carousel indicators -->
+                    <ol class="carousel-indicators">
+                    {% for i in indirimdekiurunler1 %}
+                        {% if forloop.counter  == 1 %}
+                        <li data-target="#myCarousel11" data-slide-to="{{forloop.counter }}" class="active"></li>
+                    {% else %}
+                    <li data-target="#myCarousel11" data-slide-to="{{forloop.counter }}" class=""></li>
+                    {% endif %}
+                    {% endfor %}
+                    </ol>
+                    <!-- Wrapper for carousel items -->
+                    <div class="carousel-inner">
+
+                        {% for i in indirimdekiurunler1 %}
+                        {% if forloop.counter  == 1 %}
+                       
+                    
+                        <div class="item carousel-item active">
+                            <div class="row">
+
+
+                               
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                                        <div style="border-radius: 5% !important;" class="img-box d-flex justify-content-center">
+                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
+                                                <img style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
+                                                <div class="resimYazisi">%{% indirim_orani  i.eski_fiyat i.fiyat %} İndirim</div>
+                                                <style>
+                                            .resimKapsayici {position:relative}
+                                            .resimYazisi {position:absolute;left:10px;top:10px;width: 50px;
+                                                height: 50px;
+                                                background-color: rgb(255, 136, 0); /* Kırmızı renk */
+                                                border-radius: 50%; color: white;}
+                                            </style>
+                                                </a>
+                                        </div>
+                                        <div class="thumb-content">
+                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+
+                                            <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del>{{i.eski_fiyat}} TL</del></h6>
+                                            <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                 
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="item carousel-item">
+                            <div class="row">
+
+
+                               
+                                <div class="col-sm-3">
+                                    <div class="thumb-wrapper">
+                                        <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                                        <div style="border-radius: 5% !important;" class="img-box d-flex justify-content-center">
+                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
+                                                <img style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
+                                                <div class="resimYazisi">%{% indirim_orani  i.eski_fiyat i.fiyat %} İndirim</div>
+                                                <style>
+                                            .resimKapsayici {position:relative}
+                                            .resimYazisi {position:absolute;left:10px;top:10px;width: 50px;
+                                                height: 50px;
+                                                background-color: rgb(255, 136, 0); /* Kırmızı renk */
+                                                border-radius: 50%; color: white;}
+                                            </style>
+                                                </a>
+                                        </div>
+                                        <div class="thumb-content">
+                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+
+                                            <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del>{{i.eski_fiyat}} TL</del></h6>
+                                            <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                 
+                            </div>
+                        </div>
+                    {% endif %}
+                         {% endfor %}
+
+                    </div>
+                    <!-- Carousel controls -->
+                    <a class="carousel-control-prev" href="#myCarousel11" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a class="carousel-control-next" href="#myCarousel11" data-slide="next">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 </div>

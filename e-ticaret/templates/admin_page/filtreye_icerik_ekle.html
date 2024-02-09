@@ -12,4 +12,25 @@
             <a href="/yonetim/filtreayarlari" class="btn btn-danger" >iptal</a>
             <button type="submit" class="btn btn-success" >Eklemeye Devam Et</button>    
         </form>
+<style>
+  .item-label{
+    font-size: 15px !important;
+  }
+</style>
+<script>
+ // id
+    new MultiSelectTag('id_kategori', {
+    rounded: true,    // default true
+    shadow: true,      // default false
+    placeholder: 'Search',  // default Search...
+    tagColor: {
+        textColor: '#327b2c',
+        borderColor: '#92e681',
+        bgColor: '#eaffe6',
+    },
+    onChange: function(values) {
+        console.log(values)
+    }
+})
+</script>
 {% endblock slider %}

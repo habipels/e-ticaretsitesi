@@ -141,6 +141,9 @@ margin: auto;
 .mainmenu ul.menu .allc .open li .open2 li{width:100%; margin-left: 0px !important;}
 .mainmenu ul.menu .allc .open li .open2 li a{padding:0;text-align:left;text-transform:capitalize;font-weight:normal;font-size:13px;line-height:21px;color:#000;border:none;}
 .mainmenu ul.menu .allc .open li .open2 li a:hover{color:#e9290f;}
+.populermobil{
+  display: none;
+}
 #imobile{
   display: none;
   position: fixed;
@@ -158,6 +161,18 @@ margin: auto;
    
 }
 #imobile{display: block;}#gosterme{display:none;}
+.populermobil{
+  display: block;
+}
+.indirimmobil{
+  display: block;
+}
+.populer{
+  display: none;
+}
+.indirim{
+  display: none;
+}
 }
 @media screen and (max-width: 600px) {
 
@@ -171,6 +186,18 @@ margin: auto;
 .gosterme{
   display: none !important;
 }
+.indirimmobil{
+  display: block;
+}
+.populermobil{
+  display: block;
+}
+.populer{
+  display: none;
+}
+.indirim{
+  display: none;
+}
 }
 
 @media screen and (max-width:1200px){
@@ -178,6 +205,18 @@ margin: auto;
  
   .overback{display: block ;}
   #imobile{display: block;}#gosterme{display:none;}
+  .populer{
+    display: none;
+  }
+  .populermobil{
+    display: block;
+  }
+  .indirimmobil{
+    display: block;
+  }
+  .indirim{
+    display: none;
+  }
   .gosterme{
     display: none !important;
   }
