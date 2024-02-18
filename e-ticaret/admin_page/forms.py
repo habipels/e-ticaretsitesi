@@ -171,8 +171,7 @@ class filtre_icerigi_ekle(ModelForm):
     class Meta:
         model = filtre_icerigi
         fields = [
-            'filtre_adi',
-            'filtre_renk_kodu'
+            'filtre_adi'
 
         ]
 

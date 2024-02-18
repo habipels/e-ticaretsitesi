@@ -704,8 +704,7 @@ def urun_filre_ve_resim_ekleme(request,id):
             else:
                 tum_kategoriler.append(z.id)
             z =  z.ust_kategory
-    file = filtre.objects.filter(Q(filtre_bagli_oldu_kategori__id__in = tum_kategoriler) | Q(filtre_bagli_oldu_kategori = None))
-    print(file,tum_kategoriler)
+    file = filtre.objects.filter(silinme_bilgisi = False).filter(Q(filtre_bagli_oldu_kategori__id__in = tum_kategoriler) | Q(filtre_bagli_oldu_kategori = None))
     if request.POST:
         if form.is_valid():
             images = request.FILES.getlist('images')
@@ -744,7 +743,7 @@ def urun_filre_ve_resim_duzenle(request,id):
             else:
                 tum_kategoriler.append(z.id)
             z =  z.ust_kategory
-    file = filtre.objects.filter(Q(filtre_bagli_oldu_kategori__id__in = tum_kategoriler) | Q(filtre_bagli_oldu_kategori = None))
+    file = filtre.objects.filter(silinme_bilgisi = False).filter(Q(filtre_bagli_oldu_kategori__id__in = tum_kategoriler) | Q(filtre_bagli_oldu_kategori = None))
     print(file,tum_kategoriler)
     if request.POST:
         vehicle = request.POST.getlist("vehicle")

@@ -229,7 +229,7 @@
                                             <ul class="pagination pagination-m justify-content-center">
 
                                                 {% if medya.has_previous %}
-                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">« Previous page</a></li>
+                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">« Öceki Sayfa</a></li>
 
                                                   {% if medya.number > 3 %}
 
@@ -256,7 +256,7 @@
                                                     <li class="page-item"><a class="page-link" href="?page={{ medya.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ medya.paginator.num_pages }}</a></li>
                                                   {% endif %}
 
-                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">Next Page »</a></li>
+                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">Sonraki Sayfa »</a></li>
                                                 {% endif %}
                                                 </ul>
                                         </div>
@@ -273,201 +273,205 @@
 
     </div>
     <!-- Products End -->
-        <div class="container-xl populer">
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-                    <!-- Carousel indicators -->
-                    <ol class="carousel-indicators">
-                    {% if populer1 %}
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    {% else %}
-                    {% endif %}
-                        {% if populer2 %}
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                    {% else %}
-                    {% endif %}
-                    {% if populer3 %}
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                    {% else %}
-                    {% endif %}
-                        
-                        
-                    </ol>
-                    <!-- Wrapper for carousel items -->
-                    <div class="carousel-inner">
-
-
-                        <div class="item carousel-item active">
-                            <div class="row">
-
-
-                               {% for i in populer1 %}
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                        <div style="border-radius: 5% !important;" class="img-box d-flex justify-content-center">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                                                <img style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-
-                                                </a>
-                                        </div>
-                                        <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
-
-                                            <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
-                                            <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                  {% endfor %}
-                            </div>
-                        </div>
-
-
-                        <div class="item carousel-item ">
-                            <div class="row">
-                                		{% for i in populer2 %}
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                        <div class="img-box">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-
-                                                </a>
-                                        </div>
-                                        <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
-
-                                            <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
-                                            <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                  {% endfor %}
-                            </div>
-                        </div>
-                        <div class="item carousel-item">
-                            <div class="row">
-                                		{% for i in populer3 %}
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                        <div class="img-box">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-
-                                                </a>
-                                        </div>
-                                        <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
-
-                                            <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
-                                            <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                  {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Carousel controls -->
-                    <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-xl populermobil">
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="myCarouselpb" class="carousel slide" data-ride="carousel" data-interval="0">
-                    <!-- Carousel indicators -->
-                    <ol class="carousel-indicators">
-                    {% for  i in populer1 %}
-                    {% if forloop.counter  == 1 %}
-                        <li data-target="#myCarouselpb" data-slide-to="{{forloop.counter }}" class="active"></li>
-                    {% else %}
-                    <li data-target="#myCarouselpb" data-slide-to="{{forloop.counter }}" class=""></li>
-                    {% endif %}
-                        
-                    {% endfor %}
+    {% if populer1 %}
+    <div class="container-xl populer">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                <!-- Carousel indicators -->
+                <ol class="carousel-indicators">
+                {% if populer1 %}
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                {% else %}
+                {% endif %}
+                    {% if populer2 %}
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                {% else %}
+                {% endif %}
+                {% if populer3 %}
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                {% else %}
+                {% endif %}
                     
-                        
-                        
-                    </ol>
-                    <!-- Wrapper for carousel items -->
-                    <div class="carousel-inner">
+                    
+                </ol>
+                <!-- Wrapper for carousel items -->
+                <div class="carousel-inner">
 
-                         {% for  i in populer1 %}
-                         {% if forloop.counter  == 1 %}
-                        <div class="item carousel-item active">
-                            <div class="row">              
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                        <div style="border-radius: 5% !important;" class="img-box d-flex justify-content-center">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                                                <img style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
 
-                                                </a>
-                                        </div>
-                                        <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+                    <div class="item carousel-item active">
+                        <div class="row">
 
-                                            <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
-                                            <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                        </div>
+
+                           {% for i in populer1 %}
+                            <div class="col-sm-3">
+                                <div class="thumb-wrapper">
+                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                                    <div style="border-radius: 5% !important;" class="img-box d-flex justify-content-center">
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
+                                            <img style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
+
+                                            </a>
+                                    </div>
+                                    <div class="thumb-content">
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+
+                                        <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
+                                        <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
                                     </div>
                                 </div>
-                                  
                             </div>
+                              {% endfor %}
                         </div>
-                    {% else %}
-                    <div class="item carousel-item">
-                            <div class="row">
-
-
-                              
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                        <div style="border-radius: 5% !important;" class="img-box d-flex justify-content-center">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                                                <img style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-
-                                                </a>
-                                        </div>
-                                        <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
-
-                                            <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
-                                            <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                  
-                            </div>
-                        </div>
-                    {% endif %}
-                        
-                        {% endfor %}
                     </div>
-                    <!-- Carousel controls -->
-                    <a class="carousel-control-prev" href="#myCarouselpb" data-slide="prev">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a class="carousel-control-next" href="#myCarouselpb" data-slide="next">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
+
+
+                    <div class="item carousel-item ">
+                        <div class="row">
+                                    {% for i in populer2 %}
+                            <div class="col-sm-3">
+                                <div class="thumb-wrapper">
+                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                                    <div class="img-box">
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
+
+                                            </a>
+                                    </div>
+                                    <div class="thumb-content">
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+
+                                        <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
+                                        <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
+                                    </div>
+                                </div>
+                            </div>
+                              {% endfor %}
+                        </div>
+                    </div>
+                    <div class="item carousel-item">
+                        <div class="row">
+                                    {% for i in populer3 %}
+                            <div class="col-sm-3">
+                                <div class="thumb-wrapper">
+                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                                    <div class="img-box">
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
+
+                                            </a>
+                                    </div>
+                                    <div class="thumb-content">
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+
+                                        <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
+                                        <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
+                                    </div>
+                                </div>
+                            </div>
+                              {% endfor %}
+                        </div>
+                    </div>
                 </div>
-                </div>
+                <!-- Carousel controls -->
+                <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
             </div>
         </div>
-    <!-- Products End -->
+    </div>
+    <div class="container-xl populermobil">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="myCarouselpb" class="carousel slide" data-ride="carousel" data-interval="0">
+                <!-- Carousel indicators -->
+                <ol class="carousel-indicators">
+                {% for  i in populer1 %}
+                {% if forloop.counter  == 1 %}
+                    <li data-target="#myCarouselpb" data-slide-to="{{forloop.counter }}" class="active"></li>
+                {% else %}
+                <li data-target="#myCarouselpb" data-slide-to="{{forloop.counter }}" class=""></li>
+                {% endif %}
+                    
+                {% endfor %}
+                
+                    
+                    
+                </ol>
+                <!-- Wrapper for carousel items -->
+                <div class="carousel-inner">
+
+                     {% for  i in populer1 %}
+                     {% if forloop.counter  == 1 %}
+                    <div class="item carousel-item active">
+                        <div class="row">              
+                            <div class="col-sm-3">
+                                <div class="thumb-wrapper">
+                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                                    <div style="border-radius: 5% !important;" class="img-box d-flex justify-content-center">
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
+                                            <img style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
+
+                                            </a>
+                                    </div>
+                                    <div class="thumb-content">
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+
+                                        <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
+                                        <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
+                                    </div>
+                                </div>
+                            </div>
+                              
+                        </div>
+                    </div>
+                {% else %}
+                <div class="item carousel-item">
+                        <div class="row">
+
+
+                          
+                            <div class="col-sm-3">
+                                <div class="thumb-wrapper">
+                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                                    <div style="border-radius: 5% !important;" class="img-box d-flex justify-content-center">
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
+                                            <img style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
+
+                                            </a>
+                                    </div>
+                                    <div class="thumb-content">
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+
+                                        <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
+                                        <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
+                                    </div>
+                                </div>
+                            </div>
+                              
+                        </div>
+                    </div>
+                {% endif %}
+                    
+                    {% endfor %}
+                </div>
+                <!-- Carousel controls -->
+                <a class="carousel-control-prev" href="#myCarouselpb" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="carousel-control-next" href="#myCarouselpb" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+            </div>
+        </div>
+    </div>
+<!-- Products End -->
+                {% else %}
+                {% endif %}
+        
            <!-- Products Start -->
            <div class="container py-5">
             <div class="text-center mb-4">
@@ -478,6 +482,7 @@
             </div>
         </div>
         <!-- Products End -->
+        {% if indirimdekiurunler1 %}
         <div class="container-xl indirim">
             <div class="row">
                 <div class="col-md-12">
@@ -710,4 +715,6 @@
                 </div>
             </div>
         </div>
+        {% else %}
+                {% endif %}
 {% endblock slider %}
