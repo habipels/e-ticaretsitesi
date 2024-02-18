@@ -43,7 +43,7 @@ class filtre_icerigi(models.Model):
     filtre_adi= user_adi(verbose_name="Filtre Adı Türkçe",max_length=100)
     filtre_bagli_oldu_filtre = models.ForeignKey(filtre,blank=True,null=True,verbose_name=" Kategori Bilgisi",on_delete=models.SET_NULL)
     silinme_bilgisi = models.BooleanField(default=False,verbose_name="Silinme Bilgisi")
-
+    filtre_renk_kodu = models.CharField(max_length = 200 , verbose_name = "filtre Renk Kodu",default = " ")
     def __str__(self):
         full_path = [self.filtre_adi]
         return ' --> '.join(full_path[::-1])
@@ -59,6 +59,7 @@ class urun(models.Model):
     urun_aciklama = RichTextField(verbose_name="Ürün Açıklama",blank = True,null = True)
     silinme_bilgisi = models.BooleanField(default=False,verbose_name="Silinme Bilgisi")
     urun_bakma_saysi = models.BigIntegerField(verbose_name="Ürün Bakma Sayısı" ,default=0)
+    updated_at = models.DateTimeField(auto_now=True)
 from PIL import Image
 from io import BytesIO
 class urun_resimleri(models.Model):

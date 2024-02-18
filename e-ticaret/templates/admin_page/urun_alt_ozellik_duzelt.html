@@ -48,4 +48,18 @@
             <a href="/yonetim/filtreayarlari" class="btn btn-danger" >iptal</a>
             <button type="submit" class="btn btn-success" >Eklemeye Devam Et</button>    
         </form>
+  
+<script>
+    // Birden çok dosya seçimini desteklemek için input alanını bulun
+    const fileInput = document.querySelector('input[type="file"]');
+
+    // Kullanıcı dosya seçimi yaptığında çalışacak olan event listener
+    fileInput.addEventListener('change', function() {
+        // Seçilen dosyaları alın
+        const files = fileInput.files;
+
+        // Dosya sayısını kontrol edin ve gerekli işlemleri yapın
+        console.log(files.length);
+    });
+</script>
 {% endblock slider %}
