@@ -311,7 +311,8 @@ def kategori_ver_urunleri_gosterme(request,id,slug):
 
 
         profile = profile
-    content["filtre"] = filtre_icerigi.objects.filter(filtre_bagli_oldu_filtre__filtre_adi = "MARKA",filtre_bagli_oldu_filtre__filtre_bagli_oldu_kategori__id__in=tum_kategoriler)
+    content["filtre_basliklari"] = filtre.objects.filter(silinme_bilgisi = False).filter(Q(filtre_bagli_oldu_kategori__id__in=tum_kategoriler) | Q(filtre_bagli_oldu_kategori = None)).order_by("filtre_adi")
+    content["filtre"] = filtre_icerigi.objects.filter(filtre_bagli_oldu_filtre__silinme_bilgisi = False).filter(Q(filtre_bagli_oldu_filtre__filtre_bagli_oldu_kategori__id__in=tum_kategoriler) | Q(filtre_bagli_oldu_filtre__filtre_bagli_oldu_kategori = None)).order_by("filtre_bagli_oldu_filtre__filtre_adi")
     page_num = request.GET.get('page', 1)
     paginator = Paginator(profile, 20) # 6 employees per page
     try:

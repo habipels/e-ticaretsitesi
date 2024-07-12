@@ -56,10 +56,11 @@ INSTALLED_APPS = [
     "site_set",
     #crispy forms form düzenleme içerir
     'crispy_forms',
+    'crispy_bootstrap4',
     #
     "odeme_kisimlari",
 ]
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
@@ -137,7 +138,7 @@ CKEDITOR_CONFIGS = {
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'TR-tr'
+LANGUAGE_CODE = 'en-en'
 
 TIME_ZONE = 'UTC'
 
