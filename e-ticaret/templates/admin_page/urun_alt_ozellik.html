@@ -5,7 +5,11 @@
 {% load crispy_forms_tags %}
 {% load custom_tags %}
 {% block slider %}
-
+<style>
+    .item-label{
+    font-size: 15px !important;
+  }
+</style>
 <form method = "post" enctype="multipart/form-data">
           {% csrf_token %}
           {% for i in filtreler %}
@@ -33,5 +37,24 @@
         // Dosya sayısını kontrol edin ve gerekli işlemleri yapın
         console.log(files.length);
     });
+</script>
+<script>
+ // id
+ {% for i in filtreler %}
+            new MultiSelectTag('{{i.filtre_linki}}', {
+    rounded: true,    // default true
+    shadow: true,      // default false
+    placeholder: 'Search',  // default Search...
+    tagColor: {
+        textColor: '#327b2c',
+        borderColor: '#92e681',
+        bgColor: '#eaffe6',
+    },
+    onChange: function(values) {
+        console.log(values)
+    }
+})
+            {% endfor %}
+
 </script>
 {% endblock slider %}
