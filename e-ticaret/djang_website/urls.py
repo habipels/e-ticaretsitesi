@@ -17,6 +17,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import handler404
+from django.views.generic.base import TemplateView #import TemplateView
 
 urlpatterns = [
     path("", include('main.urls')),
@@ -24,6 +26,8 @@ urlpatterns = [
     path("yonetim/",include("admin_page.urls")),
     path('users/',include("users.urls", namespace='users')),
     path('pay/', include('odeme_kisimlari.urls',namespace='pay')),
+    path("robots.txt",TemplateView.as_view(template_name="robot.txt", content_type="text/plain")),  #add the robots.txt file
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+handler404 = "main.views.page_not_found_view"

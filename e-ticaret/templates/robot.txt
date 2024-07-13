@@ -1,0 +1,7 @@
+User-Agent: *
+Disallow: /page
+
+Disallow: /staticfiles/
+Disallow: /static/
+
+Sitemap: https://trakyaotoyedekparca.com/sitemap.xml

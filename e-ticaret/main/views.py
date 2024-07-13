@@ -5,6 +5,8 @@ from urun.models import *
 from django.core.paginator import Paginator , EmptyPage, PageNotAnInteger
 from django.db.models.query_utils import Q
 from django.db.models import F
+def page_not_found_view(request, exception):
+    return render(request, '404.html')
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
