@@ -43,33 +43,40 @@ span.value.upper::before {content: "- ₺ "; display: inline-block; margin-left:
                 <!-- Price Start -->
                 <div class="border-bottom mb-4 pb-4">
                 <ul class="menu" style="list-style-type:none;">
-                  
+                  {% getir_kategorileri kategorisi.id %}
                     
                 </ul>
                     
                   
                 </div>
                 <form>
-                <div class="border-bottom mb-4 pb-4">
+                <div class="border-bottom mb-4 pb-4 ">
                     <h5 class="font-weight-semi-bold mb-4">Fiyat Aralığı</h5>
                   <label for="min">Minimum Fiyat</label>
                       <input id="min" class="min" name="min" value="{% if request.GET.min %}{{request.GET.min}}{% endif %}" type="number" step="1" min="0" max="1000000" />
-                      <br><label for="max">Maximum Fiyat</label>
+                      <label for="max">Maximum Fiyat</label>
                       <input id="max" class="max" name="max" value="{% if request.GET.max %}{{request.GET.max}}{% endif %}" type="number" step="1" min="0" max="1000000" />
                 </div>
                 <!-- Price End -->
                 
                 <!-- Color Start -->
                 <div class="border-bottom mb-4 pb-4">
-                    <h5 class="font-weight-semi-bold mb-4">Marka</h5>
+                        {% for j in filtre_basliklari %}
+                        
+                      <h5 class="font-weight-semi-bold mb-4">{{j.filtre_adi}}</h5>
                         {% for i in filtre %}
+                          {% if j == i.filtre_bagli_oldu_filtre %}
+                          
+                          
                           <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="checkbox" class="custom-control-input" name="marka" value="{{i.id}}"  id="color-all{{i.id}}">
                             <label class="custom-control-label" for="color-all{{i.id}}">{{i.filtre_adi}}</label>
                             
                         </div>
+                        {% else %}
+                          {% endif %}
                         {% endfor %}
-                        
+                        {% endfor %}
                         
                         <div class="border-bottom mt-4 pb-4">
                           <button class="btn btn-info"  type="submit">ARA</button>
@@ -127,61 +134,64 @@ span.value.upper::before {content: "- ₺ "; display: inline-block; margin-left:
                     </div>
                     </form>
                     {% for i in santiyeler %}
-                    <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                        <div class="card product-item border-0 mb-4">
-                            <div class="d-flex justify-content-center card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                                <img  style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" style="max-height: 200px;" src="{{ i|urun_resimleri_alma }}" alt="">
-                                </a>
-                            </div>
-                            <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
-                                <div class="d-flex justify-content-center">
-                                    <h6>₺ {{i.fiyat}} </h6><h6 class="text-muted ml-2"><del></del></h6>
-                                </div>
-                            </div>
-                            <div class="card-footer d-flex justify-content-center bg-light border">
-                               
-                        <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                      <div class="card product-item border-2 mb-4">
+                          <div class="d-flex justify-content-center card-header d-flex justify-content-center product-img position-relative overflow-hidden bg-transparent border p-0">
+                          <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
+                              <img style="max-height: 200px;max-width: 200px;min-height: 200px;min-width: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
+      
+                              </a>
+      
+                          </div>
+      
+                          <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                              <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":20"  }}</p></a>
+                              <div class="d-flex justify-content-center">
+                                  <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
+                              </div>
+                          </div>
+                          <div class="card-footer d-flex justify-content-center bg-light border">
+      
+                              <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
+                          </div>
+                      </div>
+                  </div>
                      {% endfor %}
                     <div class="col-12 pb-1">
                         <nav aria-label="Page navigation">
                           <ul class="pagination pagination-m justify-content-center">
 
-                            {% if medya.has_previous %}
-                              <li class="page-item"><a class="page-link" href="?page={{ medya.previous_page_number }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">« Öceki Sayfa</a></li>
-                            
-                              {% if medya.number > 3 %}
-                            
-                                <li class="page-item"><a class="page-link" href="?page=1{{ medya.previous_page_number }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">1</a></li>
-                                {% if medya.number > 4 %}
-                                  <li class="page-item"><span class="page-link">...</span></li>
-                                {% endif %}
-                              {% endif %}
-                            {% endif %}
-                            
-                            {% for num in medya.paginator.page_range %}
-                              {% if medya.number == num %}
-                                <li class="page-item"><a class="page-link " style="color:black;" href="?page={{ num }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">{{ num }}</a></li>
-                              {% elif num > medya.number|add:'-3' and num < medya.number|add:'3' %}
-                                <li class="page-item"><a class="page-link" href="?page={{ num }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">{{ num }}</a></li>
-                              {% endif %}
-                            {% endfor %}
-                            
-                            {% if medya.has_next %}
-                              {% if medya.number < medya.paginator.num_pages|add:'-3' %}
-                                <li class="page-item"><span class="page-link">...</span></li>
-                                <li class="page-item"><a class="page-link" href="?page={{ medya.paginator.num_pages }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">{{ medya.paginator.num_pages }}</a></li>
-                              {% elif medya.number < medya.paginator.num_pages|add:'-2' %}
-                                <li class="page-item"><a class="page-link" href="?page={{ medya.paginator.num_pages }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">{{ medya.paginator.num_pages }}</a></li>
-                              {% endif %}
-                            
-                              <li class="page-item"><a class="page-link" href="?page={{ medya.next_page_number }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">Sonraki Sayfa »</a></li>
-                            {% endif %}
-                            </ul>
+                                                {% if medya.has_previous %}
+                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.previous_page_number }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">« Önceki  Sayfa</a></li>
+                                                
+                                                  {% if medya.number > 3 %}
+                                                
+                                                    <li class="page-item"><a class="page-link" href="?page=1{{ medya.previous_page_number }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">1</a></li>
+                                                    {% if medya.number > 4 %}
+                                                      <li class="page-item"><span class="page-link">...</span></li>
+                                                    {% endif %}
+                                                  {% endif %}
+                                                {% endif %}
+                                                
+                                                {% for num in medya.paginator.page_range %}
+                                                  {% if medya.number == num %}
+                                                    <li class="page-item"><a class="page-link " style="color:black;" href="?page={{ num }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">{{ num }}</a></li>
+                                                  {% elif num > medya.number|add:'-3' and num < medya.number|add:'3' %}
+                                                    <li class="page-item"><a class="page-link" href="?page={{ num }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">{{ num }}</a></li>
+                                                  {% endif %}
+                                                {% endfor %}
+                                                
+                                                {% if medya.has_next %}
+                                                  {% if medya.number < medya.paginator.num_pages|add:'-3' %}
+                                                    <li class="page-item"><span class="page-link">...</span></li>
+                                                    <li class="page-item"><a class="page-link" href="?page={{ medya.paginator.num_pages }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">{{ medya.paginator.num_pages }}</a></li>
+                                                  {% elif medya.number < medya.paginator.num_pages|add:'-2' %}
+                                                    <li class="page-item"><a class="page-link" href="?page={{ medya.paginator.num_pages }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">{{ medya.paginator.num_pages }}</a></li>
+                                                  {% endif %}
+                                                
+                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.next_page_number }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">Sonraki Sayfa »</a></li>
+                                                {% endif %}
+                                                </ul>
                         </nav>
                     </div>
                 </div>

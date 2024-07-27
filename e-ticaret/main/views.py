@@ -32,6 +32,11 @@ def site_bilgileri():
     sozluk["anasayfa"] = anasayfa.objects.last()
     sozluk["yasal_metinler"] = yasal_metinler.objects.all()
     sozluk["adres"] = adres.objects.last()
+    sozluk["footeryazisi"] = sitefooteryazisiz.objects.last()
+    sozluk["banner2"] = Meslek.objects.filter(slaytta_gorunsun = True).order_by("numarasi")
+    print(Meslek.objects.filter(slaytta_gorunsun = True).order_by("numarasi"))
+    print("*"*50)
+    print(banner.objects.filter(banner_gosterme = True).order_by("banner_sira"))
     content = {"content":sozluk} 
     return content
 # Create your views here.

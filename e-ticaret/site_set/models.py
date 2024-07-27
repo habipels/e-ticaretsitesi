@@ -106,3 +106,6 @@ class yasal_metinler(models.Model):
 class kargo_tutari(models.Model):
     min_siparis_tutari = models.FloatField(default = 0)
     eklenecek_kargo_tutari = models.FloatField(default = 0)
+
+class sitefooteryazisiz(models.Model):
+    site_footer_yazisi = models.CharField(max_length=400,verbose_name="site Footer Yazısı")

@@ -706,14 +706,17 @@ def urun_filre_ve_resim_ekleme(request,id):
             z =  z.ust_kategory
     file = filtre.objects.filter(silinme_bilgisi = False).filter(Q(filtre_bagli_oldu_kategori__id__in = tum_kategoriler) | Q(filtre_bagli_oldu_kategori = None))
     if request.POST:
+        
         if form.is_valid():
             images = request.FILES.getlist('images')
             for images in images:
                 urun_resimleri.objects.create(image=images,urun_bilgisi = get_object_or_404(urun,id = id))  # Urun_resimleri modeline resimleri kaydet
         for j in file:
-            if request.POST.get(j.filtre_linki):
-                urun_filtre_tercihi.objects.create(urun = get_object_or_404(urun,id = id),filtre_bilgisi = get_object_or_404(filtre_icerigi,id = request.POST.get(j.filtre_linki)))
-            print(request.POST.get(j.filtre_linki))
+            ceme = request.POST.getlist(j.filtre_linki)
+            print(ceme)
+            for k in ceme:
+                urun_filtre_tercihi.objects.create(urun = get_object_or_404(urun,id = id),filtre_bilgisi = get_object_or_404(filtre_icerigi,id = k))
+            #print(request.POST.get(j.filtre_linki))
         return redirect("/yonetim/urunekle") 
     content["fil"] = tum_kategoriler
     content["filtreler"] = file
@@ -759,9 +762,11 @@ def urun_filre_ve_resim_duzenle(request,id):
             for images in images:
                 urun_resimleri.objects.create(image=images,urun_bilgisi = get_object_or_404(urun,id = id))  # Urun_resimleri modeline resimleri kaydet
         for j in file:
-            if request.POST.get(j.filtre_linki):
-                #urun_filtre_tercihi.objects.create(urun = get_object_or_404(urun,id = id),filtre_bilgisi = get_object_or_404(filtre_icerigi,id = request.POST.get(j.filtre_linki)))
-                pass
+            ceme = request.POST.getlist(j.filtre_linki)
+            print(ceme)
+            for k in ceme:
+                urun_filtre_tercihi.objects.create(urun = get_object_or_404(urun,id = id),filtre_bilgisi = get_object_or_404(filtre_icerigi,id = k))
+            #print(request.POST.get(j.filtre_linki))
         print(request.POST.get(j.filtre_linki),vehicle,"bilgi")
         
         return redirect("/yonetim/urunekle") 

@@ -21,13 +21,15 @@ def register(request):
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
         email_address = form.cleaned_data.get("email_address")
-        newUser = CustomUser(username =username,email = email_address)
-        newUser.set_password(password)
+        try:
+            newUser = CustomUser(username =username,email = email_address)
+            newUser.set_password(password)
 
-        newUser.save()
-        login(request,newUser)
-        messages.info(request,"Başarıyla Kayıt Oldunuz...")
-
+            newUser.save()
+            login(request,newUser)
+            messages.info(request,"Başarıyla Kayıt Oldunuz...")
+        except:
+            return redirect("users/login/")
         return redirect("/")
     
     return render(request,"account/register.html",context)

@@ -89,7 +89,7 @@
                 </a>
             </div>
             
-            <div class="col-lg-4 col-6 text-left gosterme">
+            <div class="col-lg-3 col-6 text-left gosterme">
                 <form action="/tumurunler/" method="get">
                     <div id="box">
                         <input style="width: 100% !important;" type="text" value="{% if request.GET.search1 %}{{request.GET.search1}}{% endif %}" id="search" name="search1" class="form-control" placeholder="Ara..">
@@ -98,7 +98,7 @@
                    
                 </form>
             </div>
-            <div class="col-lg-1 col-6 text-right">
+            <div class="col-lg-2 col-6 text-right">
                 {% if request.user.is_authenticated %}
                 <a href="/sepetebak" style="font-size: 15px;"  class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
@@ -120,7 +120,7 @@
                     <ul class="dropdown-menu" style="z-index: 9999;">
                         {% if request.user.is_authenticated %}
                       
-                      <li><a class="dropdown-item" href="/sepetebak"><i class="fas fa-shopping-cart text-primary"></i><span style="color: black !important" class="badge">Sepetim {{ request.user | sepetteki_urun_sayisi}}</span></a></li>
+                      <li><a class="dropdown-item" href="/sepetebak"><i class="fas fa-shopping-cart text-primary"></i>Sepetim {{ request.user | sepetteki_urun_sayisi}}</a></li>
                       <li><a class="dropdown-item" href="/users/logout/" >Çıkış Yap</a></li>
                       {% else %}
                       
@@ -131,8 +131,23 @@
                     </ul>
                   </div>
              {% else %}
-             <a href="/users/login/" class="btn border">Giriş Yap/Kayıt Ol</a>
-                <a href="/siparislerim/" class="btn border">Siparişlerim</a>
+             <div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                  Giriş Yap / Kayıt Ol
+                </button>
+                <ul class="dropdown-menu" style="z-index: 9999;">
+                    {% if request.user.is_authenticated %}
+                  
+                  <li><a class="dropdown-item" href="/sepetebak"><i class="fas fa-shopping-cart text-primary"></i><span style="color: black !important" class="badge">Sepetim {{ request.user | sepetteki_urun_sayisi}}</span></a></li>
+                  <li><a class="dropdown-item" href="/users/logout/" >Çıkış Yap</a></li>
+                  {% else %}
+                  
+                  <li><a class="dropdown-item" href="/sepetebak"><i class="fas fa-shopping-cart text-primary"></i><span style="color: black !important" class="badge">Sepetim {{ request | sepetteki_urun_sayisi_kullan}}</span></a></li>
+                  <li><a class="dropdown-item" href="/users/login/">Giriş Yap / Kayıt Ol</a></li>
+                  {% endif %}
+                  <li><a class="dropdown-item" href="siparislerim/">Siparişlerim</a></li>
+                </ul>
+              </div>
 
             {% endif %}
                 

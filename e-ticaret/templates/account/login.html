@@ -140,13 +140,13 @@ form.sign-in-form {
 }
 
 .social-icon:hover {
-  color: #F86F03;
-  border-color: #F86F03;
+  color: #3652AD;
+  border-color: #3652AD;
 }
 
 .btn {
   width: 150px;
-  background-color: #F86F03;
+  background-color: #3652AD;
   border: none;
   outline: none;
   height: 49px;
@@ -160,7 +160,7 @@ form.sign-in-form {
 }
 
 .btn:hover {
-  background-color: #f98c39;
+  background-color: #3652AD;
 }
 .panels-container {
   position: absolute;
@@ -180,7 +180,7 @@ form.sign-in-form {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background-image: linear-gradient(-45deg, #F86F03 0%, #FFA41B 100%);
+  background-image: linear-gradient(-45deg, #3652AD 0%, #6c8eff 100%);
   transition: 1.8s ease-in-out;
   border-radius: 50%;
   z-index: 6;
@@ -406,9 +406,10 @@ form.sign-in-form {
   }
 
   .container.sign-up-mode:before {
-    bottom: 28%;
+    bottom: 40%;
     left: 50%;
   }
+
 }
 	</style>
 </head>
@@ -441,13 +442,14 @@ form.sign-in-form {
 					<h2 class="title">Kayıt Ol</h2>
 					<div class="input-field">
 						<i class="fas fa-user"></i>
-						<input name="emailkullaniciadi" type="text"  placeholder="email" />
+						<input name="emailkullaniciadi" type="email"  placeholder="email" />
 					</div>
 					<div class="input-field">
 						<i class="fas fa-lock"></i>
 						<input type="password" name="sifresi" placeholder="Parola" />
 					</div>
 					<input type="submit" class="btn" value="Kayıt Ol" />
+          
 					<p class="social-text">Hesap Olmadan Devam Et</p>
 					<div class="social-media">
 						<a href="/" class="social-icon">

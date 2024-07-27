@@ -1,7 +1,7 @@
 {% load static %}
 
 <!-- Footer Start -->
-    <div style="background-color: #3652AD !important;" class="container-fluid bg-secondary text-dark mt-5 pt-5">
+    <div style="background-color: #3652AD !important; margin" class="container-fluid bg-secondary text-dark mt-5 pt-5">
         <div class="row px-xl-5 pt-5">
             <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                 <a href="/" class="text-decoration-none">
@@ -10,7 +10,7 @@
                         {% else %}
                         {% endif %}
                 </a>
-                <p style="color: white !important;"><b>Her kilometrede güvenliği ve performansı bir arada sunan, tutkuyla seçilmiş oto yedek parçalarıyla sizin yanınızdayız.</b></p>
+                <p style="color: white !important;"><b>{{footeryazisi}}</b></p>
                 <p style="color: white !important;" class="mb-2"><i style="color: white !important;" class="fa fa-map-marker-alt text-primary mr-3"></i>{{content.adres.sirket_adresi_tr}}</p>
                 <p style="color: white !important;" class="mb-2"><i style="color: white !important;" class="fa fa-envelope text-primary mr-3"></i><a style="color: white !important;" href="mailto:{{content.email.sirket_email_adresi}}">{{content.email.sirket_email_adresi}}</a></p>
                 <p style="color: white !important;" class="mb-0"><i style="color: white !important;" class="fa fa-phone-alt text-primary mr-3"></i><a style="color: white !important;" href="tel:+{{content.telefon.sirket_numarasi}}">{{content.telefon.sirket_numarasi_gosterilecek_metin}}</a></p>
@@ -54,6 +54,7 @@
             <div class="col-md-6 px-xl-0 text-center text-md-right">
                 <img class="img-fluid" style="max-width: 150px;" src="{% static 'odeme.jpg' %}" alt="">
             </div>
+            <div style="height: 25px !important;" ></div>
         </div>
     </div>
     <!-- Footer End -->

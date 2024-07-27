@@ -14,7 +14,7 @@
           {% csrf_token %}
           {% for i in filtreler %}
               {{i.filtre_adi}}
-            <select name="{{i.filtre_linki}}" id="{{i.filtre_linki}}">
+            <select multiple name="{{i.filtre_linki}}" id="{{i.filtre_linki}}">
             {% for j in kayitlifiltreler %}
             {% if i.id == j.filtre_bilgisi.filtre_bagli_oldu_filtre.id %}
                 <option value="{{i.id}}">{{j.filtre_bilgisi.filtre_adi}}</option>

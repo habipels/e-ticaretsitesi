@@ -56,25 +56,27 @@
     <div class="container-fluid">
         <a href="/tumurunler/" class="text-decoration-none text-center">
             <i class="fas fa fa-binoculars text-primary"></i>
-            <p>KEŞFET</p>
+            <p>Keşfet</p>
         </a>
         <a href="/sepetebak" class="text-decoration-none text-center">
             <i class="fas fa-shopping-cart text-primary"></i>
-            <p>SEPETİM</p>
+            <p>Sepetim</p>
         </a>
         {% if request.user.is_authenticated %}
         
         {% else %}
         <a href="/users/login/" class="text-decoration-none text-center">
             <i class="fas fa-user text-primary"></i>
+            
             <p>Giriş Yap</p>
         </a>
         {% endif %}
+        
         <a style="font-size: 15px !important; color: #FE7A36 !important;" class="navbar-toggler text-decoration-none text-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
             aria-controls="offcanvasNavbar">
-            <i class="fas fa-solid fa-bars"></i>
+            <i class="fas fa-solid fa-bars mb-2"></i>
             
-            <p >KATEGORİLER</p>
+            <p >Kategoriler</p>
     </a>
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">

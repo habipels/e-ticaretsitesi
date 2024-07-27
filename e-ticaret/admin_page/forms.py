@@ -153,7 +153,9 @@ class kategori_ekle(ModelForm):
             'link',
             'keywords',
             "numarasi",
-            "headerda_gosterme"
+            "headerda_gosterme",
+            "slaytta_gorunsun",
+            "image"
 
         ]
 

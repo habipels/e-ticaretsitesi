@@ -21,7 +21,8 @@
                         
                         
                         <tr>
-                            <td class="align-middle"><img src="{{i.urun_bilgisi | urun_resimleri_alma}}" alt="" style="width: 50px;"> {% duzenle i.urun_bilgisi.urun_adi %}</td>
+                            <td class="align-middle"><img src="{{i.urun_bilgisi | urun_resimleri_alma}}" alt="" style=" max-width: 50px;min-width: 50px;
+                            "> {{ i.urun_bilgisi.urun_adi }}</td>
                             <td class="align-middle"> {{i.urun_bilgisi.fiyat}} TL</td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">

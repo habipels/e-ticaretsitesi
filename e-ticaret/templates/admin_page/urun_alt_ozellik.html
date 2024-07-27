@@ -14,7 +14,7 @@
           {% csrf_token %}
           {% for i in filtreler %}
           {{i.filtre_adi}}
-            <select name="{{i.filtre_linki}}" id="{{i.filtre_linki}}">
+            <select multiple name="{{i.filtre_linki}}" id="{{i.filtre_linki}}">
             {{i |Filtre_icerikleri_almaa}}
                 
             </select><br>

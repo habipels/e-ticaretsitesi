@@ -134,7 +134,7 @@ span.value.upper::before {content: "- ₺ "; display: inline-block; margin-left:
                     </div>
                     </form>
                     {% for i in santiyeler %}
-                    <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                    <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                       <div class="card product-item border-2 mb-4">
                           <div class="d-flex justify-content-center card-header d-flex justify-content-center product-img position-relative overflow-hidden bg-transparent border p-0">
                           <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
@@ -145,7 +145,7 @@ span.value.upper::before {content: "- ₺ "; display: inline-block; margin-left:
                           </div>
       
                           <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                              <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+                              <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":20"  }}</p></a>
                               <div class="d-flex justify-content-center">
                                   <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
                               </div>
@@ -162,7 +162,7 @@ span.value.upper::before {content: "- ₺ "; display: inline-block; margin-left:
                           <ul class="pagination pagination-m justify-content-center">
 
                                                 {% if medya.has_previous %}
-                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.previous_page_number }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">« Öceki Sayfa</a></li>
+                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.previous_page_number }}{% if request.GET.min %}&min={{ request.GET.min }}{% endif %}{% if request.GET.max %}&max={{ request.GET.max }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.siralama %}&siralama={{ request.GET.siralama }}{% endif %}">« Önceki  Sayfa</a></li>
                                                 
                                                   {% if medya.number > 3 %}
                                                 

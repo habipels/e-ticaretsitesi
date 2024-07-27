@@ -1,12 +1,12 @@
 {% extends "homebase.html" %}
 {% load custom_tags %}
 {% block site %}
-{% if banner %}
+{% if banner2 %}
 
 
 <div id="header-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
-                        {% for i in banner %}
+                        {% for i in banner2 %}
                         {% if i.image %}
 
 
@@ -15,8 +15,8 @@
                             <img class="img-fluid" src="{{i.image.url}}" alt="Image">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px;">
-                                    <h4 class="text-light text-uppercase font-weight-medium mb-3">{{i.banner_aciklama_tr}}</h4>
-                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">{{i.banner_basligi_tr}}</h3>
+                                    <h4 class="text-light text-uppercase font-weight-medium mb-3">{{i.kategori}}</h4>
+                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">{{i.keywords}}</h3>
                                     {% if i.banner_link %}
                                         <a href="{{i.banner_link}}" class="btn btn-light py-2 px-3">Ziyaret Et</a>
                                     {% else %}
@@ -203,7 +203,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-2 mb-4">
                     <div class="d-flex justify-content-center card-header d-flex justify-content-center product-img position-relative overflow-hidden bg-transparent border p-0">
-                    <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
+                    <a alt='{{ i.urun_adi }}' href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
                         <img style="max-height: 200px;max-width: 200px;min-height: 200px;min-width: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
 
                         </a>
@@ -211,7 +211,7 @@
                     </div>
 
                     <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
                         <div class="d-flex justify-content-center">
                             <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
                         </div>
@@ -227,9 +227,10 @@
     </div>
     <div class="container">
                                             <ul class="pagination pagination-m justify-content-center">
-
+                                                
                                                 {% if medya.has_previous %}
-                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">« Öceki Sayfa</a></li>
+                                                    <li class="page-item"><a class="page-link" href="?page=1{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">İLK<<</a></li>
+                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">« Önceki  Sayfa</a></li>
 
                                                   {% if medya.number > 3 %}
 
@@ -257,13 +258,16 @@
                                                   {% endif %}
 
                                                   <li class="page-item"><a class="page-link" href="?page={{ medya.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">Sonraki Sayfa »</a></li>
+                                                  {% if medya.number < medya.paginator.num_pages|add:'-2' %}
+                                                    <li class="page-item"><a class="page-link" href="?page={{ medya.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"> >> Son</a></li>
+                                                  {% endif %}
                                                 {% endif %}
                                                 </ul>
                                         </div>
     <!-- Products End -->
       <!-- Products Start -->
-      <div class="container py-5">
-        <div class="text-center mb-4">
+      <div class="container mt-4">
+        <div class="text-center ">
             {% if populer1 %}
             <h2 class="section-title px-5"><a href="/populerurunler/"><span class="px-2">Popüler Ürünler</span></a></h2>
 
@@ -314,7 +318,7 @@
                                             </a>
                                     </div>
                                     <div class="thumb-content">
-                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
 
                                         <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
                                         <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
@@ -338,7 +342,7 @@
                                             </a>
                                     </div>
                                     <div class="thumb-content">
-                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
 
                                         <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
                                         <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
@@ -360,7 +364,7 @@
                                             </a>
                                     </div>
                                     <div class="thumb-content">
-                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
 
                                         <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
                                         <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
@@ -417,7 +421,7 @@
                                             </a>
                                     </div>
                                     <div class="thumb-content">
-                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
 
                                         <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
                                         <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
@@ -443,7 +447,7 @@
                                             </a>
                                     </div>
                                     <div class="thumb-content">
-                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
 
                                         <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
                                         <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
@@ -530,7 +534,7 @@
                                                 </a>
                                         </div>
                                         <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
 
                                             <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del>{{i.eski_fiyat}} TL</del></h6>
                                             <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
@@ -562,7 +566,7 @@
                                                 </a>
                                         </div>
                                         <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
 
                                             <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del>{{i.eski_fiyat}} TL</del></h6>
                                             <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
@@ -592,7 +596,7 @@
                                                 </a>
                                         </div>
                                         <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
+                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
 
                                             <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del>{{i.eski_fiyat}} TL</del></h6>
                                             <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>

@@ -147,7 +147,7 @@ margin: auto;
 #imobile{
   display: none;
   position: fixed;
-  bottom: 0px;
+  bottom: -25px;
   left: 0px;
   right: 0px;
   z-index: 9999;
@@ -202,9 +202,10 @@ margin: auto;
 
 @media screen and (max-width:1200px){
   .menustack{display: none;}
- 
+  
   .overback{display: block ;}
-  #imobile{display: block;}#gosterme{display:none;}
+  #imobile{display: block;}
+  #gosterme{display:none;}
   .populer{
     display: none;
   }

@@ -22,6 +22,8 @@ class Meslek(models.Model):
     silinme_bilgisi = models.BooleanField(default=False,verbose_name="Silinme Bilgisi")
     numarasi = models.IntegerField(default = 0 ,verbose_name="sıralaması")
     headerda_gosterme = models.BooleanField(default = False,verbose_name = "headerda Görünsün")
+    image = models.ImageField(upload_to='gallery/')
+    slaytta_gorunsun = models.BooleanField(default=False,verbose_name="Slaytta Görünme Bilgisi")
     def __str__(self):
         full_path = [self.kategori]                  # post.  use __unicode__ in place of
         k = self.ust_kategory

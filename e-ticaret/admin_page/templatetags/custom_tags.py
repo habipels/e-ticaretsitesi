@@ -253,7 +253,7 @@ def kategoi_bilgisi_duzednleme2(id):
 
     veri = ''
     if id == "":
-        a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None,headerda_gosterme = True).order_by("numarasi")
+        a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None,headerda_gosterme = True,slaytta_gorunsun = False).order_by("numarasi")
         y = 0
         for i  in a:
             z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id).order_by("numarasi")
@@ -271,7 +271,7 @@ def kategoi_bilgisi_duzednleme2(id):
             else:
                 veri = veri+ '<li class=""><a class="" href="/kategori/{}/{}/">{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
     else:
-        a = Meslek.objects.filter(silinme_bilgisi = False,id = id).order_by("numarasi")
+        a = Meslek.objects.filter(silinme_bilgisi = False,id = id,slaytta_gorunsun = False).order_by("numarasi")
         for i  in a:
             z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id).order_by("numarasi")
 
@@ -290,7 +290,7 @@ def kategoi_bilgisi_duzednleme2(id):
 @register.simple_tag
 def getir(id):
     b = ""
-    z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = id).order_by("numarasi")
+    z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = id,slaytta_gorunsun = False).order_by("numarasi")
     y = 0
     for i in z:
         b = b+'<li><a href="/kategori/{}/{}/"><i class="fas fa-angle-right"></i>{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
@@ -301,7 +301,7 @@ def getir(id):
     return b
 @register.simple_tag
 def tumkategoriler(bilgi):
-    a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None).order_by("numarasi")
+    a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None,slaytta_gorunsun = False).order_by("numarasi")
     bilgi = ""
     for i in a:
         bilgi = bilgi+'<li> <a href="/kategori/{}/{}/">{}</a><ul class="open2">'.format(str(i.id),str(i.link),str(i.kategori))
@@ -466,7 +466,7 @@ def benzer_urunler(id):
 def kategoimobil(id):
     veri = ''
     if id == "":
-        a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None).order_by("numarasi")
+        a = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = None,slaytta_gorunsun = False).order_by("numarasi")
         for i  in a:
             z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id).order_by("numarasi")
 
@@ -485,7 +485,7 @@ def kategoimobil(id):
             else:
                 veri = veri+ '<li><a class="dropdown-item" href="/kategori/{}/{}/">{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
     else:
-        a = Meslek.objects.filter(silinme_bilgisi = False,id = id).order_by("numarasi")
+        a = Meslek.objects.filter(silinme_bilgisi = False,id = id,slaytta_gorunsun = False).order_by("numarasi")
         for i  in a:
             z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = i.id).order_by("numarasi")
 
