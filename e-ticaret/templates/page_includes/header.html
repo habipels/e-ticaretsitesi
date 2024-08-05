@@ -1,158 +1,219 @@
     <!-- Topbar Start -->
     {% load custom_tags %}
-    <style>#box {
-        max-width: 300px;
-        position: relative;
-        }
-        #box .fa-search {
-        position: absolute;
-        top: 14px;
-        left: 12px;
-        font-size: 20px;
-        color:cornflowerblue;
-        }
-        #search {
-        width: 100px;
-        box-sizing: border-box;
-        border: 2px solid cornflowerblue;
-        border-radius: 4px;
-        font-size:18px;
-        padding: 12px 20px 12px 40px;
-        -moz-transition: width 0.4s ease-in-out;
-        -o-transition: width 0.4s ease-in-out;
-        -webkit-transition: width 0.4s ease-in-out;
-        transition: width 0.4s ease-in-out;
-        }
-        #search:focus {
-        width: 100%;
-        }
-        </style>
-    <div class="container-fluid">
-        <div style="background-color: #3652AD !important;" class="row bg-secondary py-2 px-xl-5">
-            <div class="col-lg-6 d-none d-lg-block">
-                <div class="d-inline-flex align-items-center">
-                    
-                </div>
-            </div>
-            <div class="col-lg-6 text-center text-lg-right">
-                <div class="d-inline-flex align-items-center">
-                    {% if content.facebook %}
-                        <a style="color: white !important;" class="text-dark px-2" href="{{content.facebook.link}}">
-                        <i  style="color: white !important;"  class="fab fa-facebook-f"></i>
-                    </a>
-                    {% else %}
-                    {% endif %}
-                    {% if content.tw %}
-                        <a  style="color: white !important;"  class="text-dark px-2" href="{{content.tw.link}}">
-                        <i  style="color: white !important;"  class="fab fa-twitter"></i>
-                    </a>
-                    {% else %}
-                    {% endif %}
-                    {% if content.link %}
-                        <a  style="color: white !important;"  class="text-dark px-2" href="{{content.link.link}}">
-                        <i  style="color: white !important;"  class="fab fa-linkedin-in"></i>
-                    </a>
-                    {% else %}
-                    {% endif %}
-                    {% if content.insta %}
-                        <a  style="color: white !important;"  class="text-dark px-2" href="{{content.insta.link}}">
-                        <i  style="color: white !important;"  class="fab fa-instagram"></i>
-                    </a>
-                    {% else %}
-                    {% endif %}
-                    {% if content.youtube %}
-                        <a  style="color: white !important;"  class="text-dark pl-2" href="{{content.youtube.link}}">
-                        <i  style="color: white !important;"  class="fab fa-youtube"></i>
-                    </a>
-                    {% else %}
-                    {% endif %}
-                    
-                    
-                    
-                    
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container" id="gosterme">
+
+    <header id="header" class="typeheader-5">
         
-        <div class="row align-items-center py-3 px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block">
-                <a href="/" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold">
-                        {% if content.logo %}
+        <!-- Header Top -->
+        <div class="header-top hidden-compact"> 
+            <div class="container">
+                <div class="row">
+                    <div class="header-top-left col-lg-3 col-md-4 hidden-sm hidden-xs">           
+                        <div class="telephone ">
+                            <i class="fa fa-phone"></i> Numaramız: <a style="color: white !important;" href="tel:+{{content.telefon.sirket_numarasi}}">{{content.telefon.sirket_numarasi_gosterilecek_metin}}</a>
+                        </div>
+                    </div>
+                    <div class="header-top-right col-lg-9 col-md-8 col-sm-12 col-xs-12">
+                        <ul class="top-link list-inline lang-curr">
+                            <li class="currency">
+                                <div class="btn-group currencies-block">
+                                    
+                                </div>
+                            </li>   
+                            <li class="language">
+                                <div class="btn-group languages-block ">
+                                    
+                                </div>
+                                
+                            </li>
+                        </ul>
+                        <ul class="top-log list-inline">                          
+                            <li><i class="fa fa-lock"></i><a href="/users/login/">Giriş Yap</a> / </li><li><a href="/users/login/">Kayıt Ol</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>      
+        </div>
+        <div class="header-middle hidden-compact">
+            <div class="container">
+                <div class="row">           
+                    <div class="logo-w col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                        <div class="logo">
+                        <a href="/">
+                         {% if content.logo %}
                             <img style="max-width: 150px;" src="{{content.logo.image.url}}" alt="">
                         {% else %}
                         {% endif %}
-                        </h1>
-                </a>
-            </div>
-            
-            <div class="col-lg-3 col-6 text-left gosterme">
-                <form action="/tumurunler/" method="get">
-                    <div id="box">
-                        <input style="width: 100% !important;" type="text" value="{% if request.GET.search1 %}{{request.GET.search1}}{% endif %}" id="search" name="search1" class="form-control" placeholder="Ara..">
-                        <i class="fa fa-search"></i>
+                            </a>
+                        </div>                        
                     </div>
-                   
-                </form>
-            </div>
-            <div class="col-lg-2 col-6 text-right">
-                {% if request.user.is_authenticated %}
-                <a href="/sepetebak" style="font-size: 15px;"  class="btn border">
-                    <i class="fas fa-shopping-cart text-primary"></i>
-                    <span style="color: black !important" class="badge">{{ request.user | sepetteki_urun_sayisi}}</span>
-                </a>
-                {% else %}
-                <a href="/sepetebak" class="btn border">
-                    <i class="fas fa-shopping-cart text-primary"></i>
-                    <span style="color: black !important" class="badge">{{ request | sepetteki_urun_sayisi_kullan}}</span>
-                </a>
-                {% endif %}
-            </div>
-            <div class="col-lg-4 col-6 text-right gosterme">
-            {% if request.user.is_authenticated %}
-            <div class="dropdown">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                      Hesabım
-                    </button>
-                    <ul class="dropdown-menu" style="z-index: 9999;">
-                        {% if request.user.is_authenticated %}
-                      
-                      <li><a class="dropdown-item" href="/sepetebak"><i class="fas fa-shopping-cart text-primary"></i>Sepetim {{ request.user | sepetteki_urun_sayisi}}</a></li>
-                      <li><a class="dropdown-item" href="/users/logout/" >Çıkış Yap</a></li>
-                      {% else %}
-                      
-                      <li><a class="dropdown-item" href="/sepetebak"><i class="fas fa-shopping-cart text-primary"></i><span style="color: black !important" class="badge">Sepetim {{ request | sepetteki_urun_sayisi_kullan}}</span></a></li>
-                      <li><a class="dropdown-item" href="/users/login/">Giriş Yap / Kayıt Ol</a></li>
-                      {% endif %}
-                      <li><a class="dropdown-item" href="siparislerim/">Siparişlerim</a></li>
-                    </ul>
-                  </div>
-             {% else %}
-             <div class="dropdown">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                  Giriş Yap / Kayıt Ol
-                </button>
-                <ul class="dropdown-menu" style="z-index: 9999;">
-                    {% if request.user.is_authenticated %}
-                  
-                  <li><a class="dropdown-item" href="/sepetebak"><i class="fas fa-shopping-cart text-primary"></i><span style="color: black !important" class="badge">Sepetim {{ request.user | sepetteki_urun_sayisi}}</span></a></li>
-                  <li><a class="dropdown-item" href="/users/logout/" >Çıkış Yap</a></li>
-                  {% else %}
-                  
-                  <li><a class="dropdown-item" href="/sepetebak"><i class="fas fa-shopping-cart text-primary"></i><span style="color: black !important" class="badge">Sepetim {{ request | sepetteki_urun_sayisi_kullan}}</span></a></li>
-                  <li><a class="dropdown-item" href="/users/login/">Giriş Yap / Kayıt Ol</a></li>
-                  {% endif %}
-                  <li><a class="dropdown-item" href="siparislerim/">Siparişlerim</a></li>
-                </ul>
-              </div>
+                    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 middle-right">
+                        <div class="main-menu-w">
+                            <div class="responsive so-megamenu megamenu-style-dev">
+                                <nav class="navbar-default">
+                                    <div class=" container-megamenu  horizontal open ">
+                                        <div class="navbar-header">
+                                            <button type="button" id="show-megamenu" data-toggle="collapse" class="navbar-toggle">
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="megamenu-wrapper">
+                                            <span id="remove-megamenu" class="fa fa-times"></span>
+                                            <div class="megamenu-pattern">
+                                                <div class="container-mega">
+                                                    <ul class="megamenu" data-transition="slide" data-animationtime="250">
+                                                        
+                                                        <li class="with-sub-menu hover">
+                                                            <p class="close-menu"></p>
+                                                            <a href="#" class="clearfix">
+                                                                <strong>Tüm Kategoriler</strong>                                                                
+                                                                <b class="caret"></b>
+                                                            </a>
+                                                            <div class="sub-menu" style="width: 100%; right: auto;">
+                                                                <div class="content" >
+                                                                    <div class="row">
+                                                                    {% tumkategoriler "" %}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        {% kategoi_bilgisi_duzednleme2 "" %}
+                                              
+                                                        
+                                                    </ul>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="search-header-w">
+                            <div class="ico-search"><i class="fa fa-search"></i></div>                                
+                              
+                            <div id="sosearchpro" class="sosearchpro-wrapper so-search ">
+                                <form  action="">
+                                    <div id="search0" class="search input-group form-group">
+                                        <div class="select_category filter_type  icon-select hidden-sm hidden-xs">
+                                         
+                                        </div>
 
-            {% endif %}
+                                        <input class="autosearch-input form-control" type="text" value="" size="50" autocomplete="off" placeholder="ARA " name="search">
+                                
+                                        <button type="submit" class="button-search btn btn-primary" name="submit_search"><i class="fa fa-search"></i></button>
+                                    
+                                    </div>
+                                    <input type="hidden" name="route" value="product/search" />
+                                </form>
+                            </div>
+                        </div>                                    
+                    </div>
+                </div>
+                <div class="shopping_cart">
+                    <div id="cart" class="btn-shopping-cart">
+                        <a href="/sepetebak" data-loading-text="Loading... " class="btn-group top_cart dropdown-toggle" >
+                            <div class="shopcart">
+                                <span class="icon-c">
+                                    <i class="fa fa-shopping-basket"></i>
+                                </span>
+                                <div class="shopcart-inner">
+                                    <p class="text-shopping-cart">
+                                        Sepetim
+                                    </p>
+
+                                    <span class="total-shopping-cart cart-total-full">
+                                    <span class="items_cart">
+                                    {% if request.user.is_authenticated %}
+                {{ request.user | sepetteki_urun_sayisi}}
+                {% else %}
+                {{ request | sepetteki_urun_sayisi_kullan}}
                 
+                {% endif %}</span><span class="items_cart2"> Ürün</span><span class="items_carts"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+
+                        <ul class="dropdown-menu pull-right shoppingcart-box" role="menu">
+                            <li>
+                                <table class="table table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-center" style="width:70px">
+                                                <a href="product.html">
+                                                    <img src="image/catalog/demo/product/80/1.jpg" style="width:70px" alt="Yutculpa ullamcon" title="Yutculpa ullamco" class="preview">
+                                                </a>
+                                            </td>
+                                            <td class="text-left"> <a class="cart_product_name" href="product.html">Yutculpa ullamco</a> 
+                                            </td>
+                                            <td class="text-center">x1</td>
+                                            <td class="text-center">$80.00</td>
+                                            <td class="text-right">
+                                                <a href="product.html" class="fa fa-edit"></a>
+                                            </td>
+                                            <td class="text-right">
+                                                <a onclick="cart.remove('2');" class="fa fa-times fa-delete"></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center" style="width:70px">
+                                                <a href="product.html">
+                                                    <img src="image/catalog/demo/product/80/2.jpg" style="width:70px" alt="Xancetta bresao" title="Xancetta bresao" class="preview">
+                                                </a>
+                                            </td>
+                                            <td class="text-left"> <a class="cart_product_name" href="product.html">Xancetta bresao</a> 
+                                            </td>
+                                            <td class="text-center">x1</td>
+                                            <td class="text-center">$60.00</td>
+                                            <td class="text-right">
+                                                <a href="product.html" class="fa fa-edit"></a>
+                                            </td>
+                                            <td class="text-right">
+                                                <a onclick="cart.remove('1');" class="fa fa-times fa-delete"></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </li>
+                            <li>
+                                <div>
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-left"><strong>Sub-Total</strong>
+                                                </td>
+                                                <td class="text-right">$140.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left"><strong>Eco Tax (-2.00)</strong>
+                                                </td>
+                                                <td class="text-right">$2.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left"><strong>VAT (20%)</strong>
+                                                </td>
+                                                <td class="text-right">$20.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left"><strong>Total</strong>
+                                                </td>
+                                                <td class="text-right">$162.00</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <p class="text-right"> <a class="btn view-cart" href="cart.html"><i class="fa fa-shopping-cart"></i>View Cart</a>&nbsp;&nbsp;&nbsp; <a class="btn btn-mega checkout-cart" href="checkout.html"><i class="fa fa-share"></i>Checkout</a> 
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div> 
             </div>
             
         </div>
-    </div>
-    <!-- Topbar End -->
+
+    </header>
+    <!-- //Header Container  -->

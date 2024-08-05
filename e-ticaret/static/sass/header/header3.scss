@@ -1,0 +1,400 @@
+
+
+
+//** simple and lightweight mixin library for Sass **
+//-- url : http://bourbon.io/docs ---
+@import 'bourbon/bourbon';
+
+//** Mixins for Rem Font Sizing **
+//-- url : http://hugogiraudel.com/2013/03/18/ultimate-rem-mixin/
+@import 'utilities/rem';
+
+//** Variables for responsive design in bootstrap with sass **
+//-- url : https://gist.github.com/webinfinita/11407836
+@import 'utilities/bootstrap_breakpoints';
+
+//** Makes supporting both left-to-right (LTR) and right-to-left (RTL) easy.**
+//-- url : https://github.com/tysonmatanich/directional-scss
+@import 'utilities/directional';
+
+//Mixins utilities
+@import 'utilities/theme_variables';
+@import 'utilities/utilities';
+
+/*===============================================
+    [SASS DIRECTORY ]
+    
+    [1] BLOCK HEADER
+
+    
+==============================================*/
+
+.typeheader-3{
+    background-color: #fff;
+
+    // MENU ON TOP
+    &.navbar-compact{
+        .header-middle{
+            
+        }
+    
+    }
+    .header-top{
+        font-size: 13px;
+        background-color: #282828;
+        .module{
+            display: table-cell;
+            margin-bottom: 0;
+        }
+
+        .dropdown-menu{
+            li{
+                line-height: 22px;
+            }
+        }    
+
+    }
+    ul.top-link{list-style: none;margin:0; vertical-align:top;
+        display: inline-flex;
+        .dropdown-menu{
+            #{$left}: 0; #{$right}: auto;
+        }
+        > li{                
+            line-height: 43px;
+            position: relative;           
+            list-style: none;            
+            margin-#{$left}: 0px;
+            padding-#{$right}: 10px; padding-#{$left}: 0px;
+            margin-#{$right}: 10px;
+            &:after{
+                position: absolute;
+                content: ""; width: 1px; height: 11px;
+                top: 17px; #{$right}: 0; background-color: rgba(255,255,255,0.2);
+            }
+            .btn-group{
+                line-height: 43px;
+                .btn-link{
+                    padding: 0; font-size: 13px;
+                    border: none;
+                    color: #878787;
+                }
+            }       
+            >   a {
+                color: #cccccc;
+                i{ margin-#{$right}: 5px; }
+            }
+     
+            &:last-child{
+                padding-#{$right}: 0px;
+                margin-#{$right}: 0px;
+                &:after{
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .lang-curr > li .btn-group .btn-link{
+        text-transform: uppercase; 
+    } 
+    .logo{
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
+        text-align: center;
+        padding: 35px 0;
+    }
+    .middle-right{
+        padding: 33px 15px;
+    }
+    .top-log li{
+        line-height: 43px; font-size: 13px;
+        &:first-child{ padding-#{$right}: 0; }
+        i{ margin-#{$right}: 5px; }
+    }
+    .header-bottom{
+       // display: inline-flex;
+        width: 100%;
+    }
+
+    .compare,
+    .top-link-wishlist { 
+        width: 44px; height: 44px;
+        border: 2px solid #e5e5e5;
+        font-size: 18px; color: #282828;
+        border-radius: 5px;
+        display: block;
+        text-align: center; line-height: 42px;
+    }
+
+    .header-top-right{
+        .lang-curr{ float: $right; }
+    }
+
+    .account{ float: $left; position: relative;  margin: 0 5px; padding: 20px 0;
+        > a{ display: block; line-height: 100%; }
+        i{ font-size: 24px; color: #222; }
+        .dropdown-menu{
+            #{$right}: -30px; #{$left}: auto;
+        }
+    }
+    .telephone{
+        padding: 7px 0 6px 0;
+        background-color: #424242;
+        text-align: center;
+    }
+    .socials{
+
+        li{
+            display: inline-block; margin: 0 2px;
+            a{ font-size: 14px; color: #bbbbbb;
+                width: 31px; height: 31px;
+                text-align: center; line-height: 31px;
+                border: 1px solid rgba(255,255,255,0.2);
+                border-radius: 3px;
+                display: block;
+                &:hover{
+                    color: #fff;
+                }
+            }
+        }
+    }
+    /*=====SEARCH ======*/
+    .search-header-w{
+        float: $left; width: 70%;
+    }
+    #sosearchpro{
+        .text-keyword{ 
+        }
+        .search{
+            position: relative;
+            margin: 0; 
+            border: 2px solid #e5e5e5;
+            border-radius: 5px;
+            width: 100%;
+            .select_category{
+                border: none;               
+                width: 180px;
+                background-color: #fff;
+                border-#{$right}: 1px solid #ddd;
+                border-top-#{$left}-radius: 5px;
+                border-bottom-#{$left}-radius: 5px;
+                
+                select{
+                    height: 40px;
+                    line-height: 40px;
+                    color: #484848;               
+                    font-size: 13px;         
+                    padding: 0 15px;   
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+                &.icon-select{
+                    &:after{
+                        color: #484848;               
+                        font-size: 14px;
+                        line-height: 40px;
+                        #{$right}: 0;
+                        #{$left}: auto;
+                        font-family: "FontAwesome";
+                        content: "\f0d7";
+                        position: absolute;
+                        height: 100%;
+                        width: 25px;
+                    }
+                }
+            } 
+      
+            button{
+                position: absolute;
+                top: -2px;
+                #{$right}: -2px;
+               
+                
+                height: 44px;
+                text-align: center;
+                line-height: 44px;
+                padding: 0 15px;
+                font-size: 18px;   
+                border-top-#{$right}-radius: 5px;
+                border-bottom-#{$right}-radius: 5px;
+  
+                i{
+                    font-size: 18px;
+                    color: #fff; 
+                }
+                span{ display: none; }
+            }
+            @-moz-document url-prefix() {
+                button{ 
+                    top: 0px;
+                    #{$right}: 0px;
+                }
+            }
+            input{
+                border: none;
+                border-radius: 5px;       
+                background-color: #fff;
+                z-index: 0;
+                height: 40px;
+                padding-#{$left}: 20px;     
+                width: 100%;
+                background-color: #fff;
+                color: #b8b8b8;
+                border-top-#{$right}-radius: 5px;
+                border-bottom-#{$right}-radius: 5px;
+                &::-moz-placeholder {
+                    color: #888888;
+                    opacity: 1; 
+                }
+                &:-ms-input-placeholder { color: #888888; } 
+                &::-webkit-input-placeholder  { color: #888888; } 
+                &:focus{
+                    z-index: 0;
+                }
+            }
+            
+        }
+    }  
+
+    .compare,
+    .wishlist{
+        float: $right; margin-#{$right}: 20px;
+    }
+    /*BLOCK CART*/
+    .shopping_cart{
+        float: $right;
+        position: relative;
+        .btn-shopping-cart .top_cart{
+            position: relative;
+            border: 2px solid #e5e5e5;
+            border-radius: 5px; 
+            .icon-c{
+                width: 44px;
+                height: 41px;   
+                line-height: 40px;        
+                float: $left;                
+                text-align: center;                
+                border-#{$right}: 2px solid #e5e5e5;
+                position: relative;
+                i{
+                    font-size: 18px; color: #282828;
+                }
+                svg{
+                    fill: #282828;
+                    position: absolute;
+                    top: 50%; #{$left}: 50%;
+                    margin-top: -9px; margin-#{$left}: -9px;
+                }
+                
+            }
+            .shopcart-inner{
+                float: $left;
+                color: #282828;
+                margin: side-values(13px 15px 15px 10px);
+                .text-shopping-cart{
+                    font-size: 13px;
+                    font-weight: 400;
+                    margin-top: 0px;
+                    margin-bottom: 0;
+                    line-height: 100%;
+                    text-transform: capitalize;
+                    float: $left;
+                    padding-#{$right}: 5px;                    
+                }
+                .total-shopping-cart{
+                    font-size: 12px;
+                    float: $left;
+                    line-height: 100%;
+                    .items_cart2{
+                        display: none;
+                    }
+                    .items_cart{
+                        width: 23px; 
+                        height: 23px;
+                        line-height: 23px;    
+                        text-align: center;
+                        @include border-radius(100%);
+                        position: absolute;
+                        top: -12px;
+                        #{$left}: 32px;
+                        font-size: 12px;
+                        color: #fff;
+                    }
+                    .items_carts{ font-size: 14px; font-weight: 500; }
+                }
+            } 
+                
+        } 
+        .dropdown-menu{ top: 100%; #{$right}: -15px; #{$left}: auto;
+            color: #666;
+        }
+        .shoppingcart-box:before{right: 50px;}
+    }
+
+
+    .main-menu-w{
+        
+    }
+    .logo{
+
+    }
+    
+
+    /*MENU MEGA*/
+    .megamenu-style-dev{
+        .navbar-default{ background: transparent; }
+    }
+    
+    .container-megamenu.vertical #menuHeading .megamenuToogle-pattern .container{
+        background: #282828;
+        color: #fff;
+        line-height: 51px;
+        border-radius: 0;
+        > div > span{
+            background-color: #fff;
+        }
+    }
+    .container-megamenu.horizontal ul.megamenu > li{
+        padding: 0 20px;
+        margin: 0;
+        &.with-sub-menu{
+            > a strong{
+                position: relative;
+                padding-#{$right}: 13px;
+                &::after{
+                    font-family: "FontAwesome";
+                    content: "\f107";
+                    font-size: 14px; color: #fff;
+                    top: 0; #{$right}: 0;
+                }
+            }
+        }
+        > a{
+            color: #fff;
+            position: relative;
+            padding: 0px;
+            line-height: 50px;
+            &:after{
+                position: absolute;
+                content: "";
+                width: 0px;
+                height: 4px;
+                bottom: -1px;
+                #{$left}: 50%; margin-#{$left}: -15px;
+                background-color: #fff;
+                @include transition(all 0.2s ease-in-out 0s);
+            }
+            &:hover:after{
+                width: 30px;
+               
+            }
+        }
+    } 
+
+
+
+}
+
+.common-home .typeheader-3 .container-megamenu.horizontal ul.megamenu > li.home > a::after{
+    width: 30px;
+}

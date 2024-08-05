@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>SuperMarket HTML Template Documentation</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="assets/css/bootstrap.css" rel="stylesheet">
+
+		<!-- Documentation extras -->
+		<link href="assets/css/docs.css" rel="stylesheet">
+		<link href="assets/css/prettify.css" rel="stylesheet">
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+		<![endif]-->
+
+  </head>
+  
+  <body>
+    <a class="sr-only" href="#content">Skip to main content</a>
+    <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+			<div class="container">
+				<div class="navbar-header">
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a href="#" class="navbar-brand">SuperMarket</a>
+				</div>
+				<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Documentation</a></li>
+						<li><a target="_blank" href="https://www.smartaddons.com/member-area/submit-a-ticket/submit-ticket">Support</a></li>
+						<li><a target="_blank" href="http://demo.smartaddons.com/templates/html/supermarket/">Demo</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+    <div class="bs-header" id="content">
+      <div class="container">
+        <h1>SuperMarket Documentation</h1>
+        <p style="opacity:.66;">An overview of the SuperMarket HTML Theme, Documentation of the HTML, CSS, jQuery, how to use, basic skills, examples, and more.</p>
+      </div>
+    </div>
+
+    <div class="bs-old-docs">
+			<div class="container">
+				<strong><a target="_blank" href="https://www.smartaddons.com/member-area/submit-a-ticket/submit-ticket">Got any Questions?</a></strong> So please use our Support Forum and don't use the comment Section on Themeforest
+			</div>
+		</div>
+
+    <div class="container bs-docs-container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="bs-sidebar hidden-print" role="complementary">
+            <ul class="nav bs-sidenav">
+              
+              <!-- ======================== SIDEBAR NAVIGATION ======================== -->
+              
+							<li class="active"><a href="#tips">Tips</a></li>
+							<li><a href="#file-structure">File Structure</a></li>
+							<li><a href="#html-structure">HTML Structure</a></li>
+							<li><a href="#css-structure">CSS Structure</a></li>
+							<li><a href="#sass-structure">SASS Structure</a></li>
+							<li><a href="#javascript-structure">Javascript Structure</a></li>
+							
+							<li>
+							  <a href="#main-styles">Customization and Styles</a>
+							  <ul class="nav">
+							    <li><a href="#main-general">General</a></li>
+							    <li><a href="#main-layout">Layout</a></li>
+							    <li><a href="#main-headers">Headers</a></li>
+							    
+							    <li><a href="#main-menus">Menus</a></li>
+							    
+							  </ul>
+							</li>
+							
+							<li>
+							  <a href="#main-features">Main Features</a>
+							  <ul class="nav">
+							    <li><a href="#icons">Icons</a></li>
+							    <li><a href="#sliders">Carousel &amp; Sliders</a></li>
+							    <li><a href="#lightbox">Lightbox</a></li>
+							    <li><a href="#animations">Banner Effect</a></li>
+							  
+							  </ul>
+							</li>
+							
+							<li><a href="#pages">Pages</a></li>
+							
+							<li><a href="#source-and-credits">Source and Credits</a></li>
+              
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-9" role="main">
+	
+	
+				<!-- ======================== TIPS ======================== -->
+				
+				<div class="bs-docs-section">
+					<div class="page-header"><h1 id="tips">Tips</h1></div>
+					
+					<p class="lead">Some very useful Tips how to work better with the Theme, please read!</p>
+					<div class="alert alert-info"><i class="fa fa-warning fa-lg"></i> Maybe many of the questions are already answered in the <a href="https://www.smartaddons.com/member-area/submit-a-ticket/submit-ticket" target="_blank">open Ticket System</a> </div>
+					<div class="alert alert-info"><i class="fa fa-warning fa-lg"></i> Do not start from scratch, use an existing page from the demo files and modify it to learn how the Theme works</div>
+					<div class="alert alert-info"><i class="fa fa-warning fa-lg"></i> Explore the live demo for page ideas and sample code</div>
+					<div class="alert alert-success"><i class="fa fa-warning fa-lg"></i> Use Firebug or Chrome Developer Tools to detect Classes and Javascript Conflicts</div>
+
+				</div>
+
+				<!-- ======================== FILE STRUCTURE ======================== -->
+
+				<div class="bs-docs-section">
+					<div class="page-header"><h1 id="file-structure">File Structure of the Theme</h1></div>
+					
+					<p class="lead">Within the download you'll find the following directories and files.</p>
+
+<div class="highlight">
+<pre>
+<code>
+HTML
+│
+├─ <i class="fa fa-folder-open fa-fw"></i> CSS
+│  │
+│  ├── <i class="fa fa-folder-open fa-fw"></i> font-awesome
+│  │
+│  └── <i class="fa fa-folder-open fa-fw"></i> font
+│  │ 
+│  └── <i class="fa fa-folder-open fa-fw"></i> themecss
+│
+├─ <i class="fa fa-folder-open fa-fw"></i> header
+│
+├─ <i class="fa fa-folder-open fa-fw"></i> ico
+│
+├─ <i class="fa fa-folder-open fa-fw"></i> image
+│  │
+│  ├─ <i class="fa fa-folder-open fa-fw"></i> demo
+│  │
+│  └─ <i class="fa fa-folder-open fa-fw"></i> theme
+│
+├─ <i class="fa fa-folder-open fa-fw"></i> js
+│  │
+│  ├─ <i class="fa fa-folder-open fa-fw"></i> bootstrap
+│  │
+│  └─ <i class="fa fa-folder-open fa-fw"></i> countdown
+│  │
+│  ├─ <i class="fa fa-folder-open fa-fw"></i> datetimepicker
+│  │
+│  ├─ <i class="fa fa-folder-open fa-fw"></i> dcjqaccordion
+│  │
+│  ├─ <i class="fa fa-folder-open fa-fw"></i> jquery-ui
+│  │
+│  ├─ <i class="fa fa-folder-open fa-fw"></i> lightslider
+│  │
+│  └─ <i class="fa fa-folder-open fa-fw"></i> owl-carousel
+│  │
+│  └─ <i class="fa fa-folder-open fa-fw"></i> themejs
+│  │
+│  └─ <i class="fa fa-folder-open fa-fw"></i> unveil
+│
+├─ <i class="fa fa-folder-open fa-fw"></i> SASS
+│
+├─ <i class="fa fa-folder-open fa-fw"></i> php
+│
+├─ <i class="fa fa-file fa-fw"></i> index.html
+│
+└─ <i class="fa fa-file fa-fw"></i> other-files.html
+
+</code>
+</pre>
+</div>
+
+				</div>
+
+				<!-- ======================== HTML STRUCTURE ======================== -->
+				
+				<div class="bs-docs-section">
+					<div class="page-header"><h1 id="html-structure">HTML Structure</h1></div>
+					<p class="lead">The template is based on <strong>Bootstrap 3</strong> Framework - <a target="_blnak" href="http://getbootstrap.com">http://getbootstrap.com</a></p>
+					
+<pre class="prettyprint lang-html linenums">
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-md-12&quot;&gt;
+        Level 1 column
+        &lt;div class=&quot;row&quot;&gt;
+            &lt;div class=&quot;col-md-6&quot;&gt;Level 2&lt;/div&gt;
+            &lt;div class=&quot;col-md-6&quot;&gt;Level 2&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>		
+					
+					<div class="alert alert-info"><i class="fa fa-warning fa-lg"></i> <b>Please note:</b> You can use all Classes and Scripts from Bootstrap 3, they will all work! Not only the grid!</div>
+					<p>Bootstrap includes a responsive, mobile first fluid grid system that appropriately scales up to 12 columns as the device or viewport size increases. If you need more information about the Main Grid, please visit this site: <a target="_blank" href="http://getbootstrap.com/css/#grid">http://getbootstrap.com/css/#grid</a></p>
+					
+				</div>
+
+				<!-- ======================== CSS STRUCTURE ======================== -->
+				
+				<div class="bs-docs-section">
+					<div class="page-header"><h1 id="css-structure">CSS Structure</h1></div>
+					<p class="lead">The organization of the CSS is one of our priorities. These are the CSS file we're using in the template.</p>	
+
+<h3>Content of the Folder css</h3>
+<p>Please note: all of these files below are <b>required</b> and always needed.</p>
+
+<div class="highlight">			
+<pre>
+<code>
+<i class="fa fa-file fa-fw"></i> bootstrap
+   This is the Main CSS File from Bootstrap3
+
+<i class="fa fa-file fa-fw"></i> font-awesome
+   This is the css file that will take care of the SuperMarket icons buil with Fontawesome.
+
+<i class="fa fa-folder-open fa-fw"></i> themecss
+   Here you'll find the CSS Files for Megamenu css, Listing tabs css and Lib css
+   
+<i class="fa fa-file fa-fw"></i> theme.css
+   This is the Main CSS File for the SuperMarket Theme with all necessary Styles and Overrides. For Colors of the Theme use "theme-blue.css" or "theme-red.css".
+
+
+</code>
+</pre>
+</div>
+
+<h3>Content of the Folder themecss</h3>
+<p>Please note: all of these files below are optional and not needed if you decide to drop one of these Features.</p>
+
+<div class="highlight">			
+<pre>
+<code>
+<i class="fa fa-file fa-fw"></i> so_megamenu.css
+   CSS File for the Module Megamenu
+
+<i class="fa fa-file fa-fw"></i> so-categories.css
+   CSS File for the Module Categories 
+
+<i class="fa fa-file fa-fw"></i> so-listing-tabs.css
+   CSS File for the Module Listing Tabs 
+
+<i class="fa fa-file fa-fw"></i> lib.css
+   Here you'll find the CSS Files for jGrowl css and Magnific Popup css
+
+   
+</code>
+</pre>
+</div>
+
+<div class="alert alert-success"><i class="fa fa-thumbs-up fa-lg"></i> Use Firebug or Chrome Developer Tools to detect the CSS Classes</div>
+
+				</div>
+				
+				<!-- ======================== SASS STRUCTURE ======================== -->
+				
+				<div class="bs-docs-section">
+					<div class="page-header"><h1 id="sass-structure">SASS Structure</h1></div>
+<p class="lead">These are the SASS file we're using in the template.</p>	
+
+<h3>Content of the Folder SASS</h3>
+<p>Please note: all of these files below are <b>required</b> and always needed.</p>
+
+<div class="highlight">			
+<pre>
+<code>
+<i class="fa fa-file fa-fw"></i> variables
+   Override Boostrap variables BEFORE calling _boostrap.scss
+   
+<i class="fa fa-file fa-fw"></i> Bourbon
+   A Lightweight Sass Tool Set - http://bourbon.io/
+
+<i class="fa fa-file fa-fw"></i> directional
+   Here you'll find the SASS Files for bootstrap_breakpoints SASS, Directional SASS and rem SASS
+   1.Bootstrap breakpoints - Variables for responsive design
+   2.Directional - Makes supporting both left-to-right (LTR) and right-to-left (RTL) easy
+   3.Rem - The ultimate PX/REM mixin
+
+<i class="fa fa-folder-open fa-fw"></i> homepage
+   Here you'll find the SASS Files for Header SASS, Home Page SASS. 
+Use separately for each Home page layout.
+
+<i class="fa fa-folder-open fa-fw"></i> theme
+   Here you'll find the CSS Files for _productlist.scss, _productdetail.sass, _module.scss ... It is a file that is common to layouts
+   
+   
+<i class="fa fa-file fa-fw"></i> theme.scss
+   This is the Main SASS File for Home page 1 with all necessary Styles and Overrides. 
+
+<i class="fa fa-file fa-fw"></i> home2.scss
+   This is the Main SASS File for Home page 2 with all necessary Styles and Overrides. 
+
+<i class="fa fa-file fa-fw"></i> home3.scss
+   This is the Main SASS File for Home page 3 with all necessary Styles and Overrides. 
+
+<i class="fa fa-file fa-fw"></i> home4.scss
+   This is the Main SASS File for Home page 4 with all necessary Styles and Overrides.
+   
+
+
+</code>
+</pre>
+</div>
+
+
+	<div class="alert alert-success"><i class="fa fa-thumbs-up fa-lg"></i> Use Firebug or Chrome Developer Tools to detect the CSS Classes</div>
+					
+				</div>
+				
+				<!-- ======================== JAVASCRIPT STRUCTURE ======================== -->
+				
+				<div class="bs-docs-section">
+					<div class="page-header"><h1 id="javascript-structure">Javascript Structure</h1></div>
+					<p class="lead">jQuery - is a Javascript library that greatly reduces the amount of code that you must write. For more information, please visit <a target="_blank" href="http://www.jquery.com/">jQuery.com</a>.</p>
+					<p>The initialization of the elements, libs and features is made by the file <span class="label label-warning">application.js</span>, in the JS folder.</p>
+
+<h3>Content of the Folder js</h3>
+<p>Please note: one of these files below (bootstrap or bootstrap.min.js) are <b>required</b> and always needed.</p>
+
+<div class="highlight">			
+<pre>
+<code>
+<i class="fa fa-file fa-fw"></i> Bootstrap
+   This is the Main jQuery File from Bootstrap3
+
+<i class="fa fa-folder-open fa-fw"></i> Countdown
+   Here you'll find the jQuery Files for the Countdown plugin
+
+<i class="fa fa-folder-open fa-fw"></i> owl-carousel
+   Here you'll find the jQuery Files for the Owl Carousel plugin
+
+<i class="fa fa-folder-open fa-fw"></i> Datetimepicker
+   Here you'll find the jQuery Files for the Datetimepicker plugin
+
+<i class="fa fa-folder-open fa-fw"></i> Dcjqaccordion
+   Here you'll find the jQuery Files for the Dcjqaccordion plugin
+
+<i class="fa fa-folder-open fa-fw"></i> Jquery-ui
+   Here you'll find the jQuery Files for the jquery-ui plugin
+
+<i class="fa fa-folder-open fa-fw"></i> Lightslider
+   Here you'll find the jQuery Files for the Lightslider plugin
+
+<i class="fa fa-folder-open fa-fw"></i> Unveil
+   Here you'll find the jQuery Files for the unveil plugin
+   
+<i class="fa fa-folder-open fa-fw"></i> themejs
+   Here you'll find the jQuery Files for Megamenu, Toppanel, Lib ...
+   
+</code>
+</pre>
+</div>
+
+<h3>Content of the Folder themejs</h3>
+<p>Please note: most of these files below are optional and not needed if you decide to drop one of these Features.</p>
+
+<div class="highlight">			
+<pre>
+<code>
+<i class="fa fa-file fa-fw"></i> application.js
+   VERY IMPORTANT: all jQuery Plugins are initialised within this File!
+
+<i class="fa fa-file fa-fw"></i> addtocart.js
+   jQuery File for the Addtocart - jQuery alerts and message box
+
+<i class="fa fa-file fa-fw"></i> so_megamenu.js
+   jQuery File for the Megamenu
+
+<i class="fa fa-file fa-fw"></i> toppanel.js
+  jQuery File for Top Menu
+
+<i class="fa fa-file fa-fw"></i> libs.js
+  Here you'll find the jQuery Files for Cookie Plugin, elevateZoom, Magnific Popup ...
+   
+   
+</code>
+</pre>
+</div>
+
+<div class="alert alert-success"><i class="fa fa-thumbs-up fa-lg"></i> Use Firebug or Chrome Developer Tools to detect jQuery Errors</div>
+
+				</div>				
+				
+				
+				
+				<!-- ======================== MAIN GENERAL - GENERAL ======================== -->
+				
+				<div class="bs-docs-section">
+					<div class="page-header"><h1 id="main-styles">Customization and Styles</h1></div>
+					<div class="page-header"><h1 id="main-general">General</h1></div>
+					<p class="lead">This Theme has various Style options for different Kinds of Layouts.</p>
+					
+					<p>SuperMarket comes with 5 predefined color schemes. Default color scheme already included in <span class="label label-warning">theme.css</span>. 
+					If you want to change scheme, then you should include one of CSS files from html/css/ into your markup:</p>
+
+					<pre class="prettyprint lang-html linenums">
+&lt;!-- styles Default = Orange --&gt;
+&lt;link rel="stylesheet" href="css/theme.css"&gt;
+
+&lt;!-- make sure that color scheme file new alternative main styles file --&gt;
+&lt;link rel="stylesheet" href="css/theme-blue.css"&gt;</pre>
+					<p>
+					Also you can create your own scheme. To do that you need to create a copy one of the color scheme files ( html/sass/variables/) and edit it by replacing color to another one.
+					</p>
+					<p>If you are familiar with SASS:</p>
+				
+					<h3>Right Way:</h3>
+					<p>
+								You need to change theme color variable
+								<span class="label label-warning">$linkColor: #F4A137</span> in
+								html/sass/variables/_orange.scss(import in file theme.scss) and compile
+								html/sass/theme.scss to
+								html/css.</p>
+					<hr />
+					
+					
+								
+					<h3>Fonts</h3>
+					<p>To use another Font, please choose your new Font at the <a href="http://www.google.com/fonts" target="_blank">Google Font Site</a>, include the given Style Tag inside the Head Section of the Theme.</p>
+
+<p>In the default Theme we have used this Code for example:</p>
+<pre class="prettyprint lang-html linenums">
+&lt;link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet' type='text/css'&gt;
+</pre>
+					
+				</div>
+
+				<!-- ======================== MAIN LAYOUT ======================== -->
+				
+				<div class="bs-docs-section">
+					<div class="page-header"><h1 id="main-layout">Layout</h1></div>
+					<p class="lead">The Main Layout of the Theme can easily be changed by adding or removing one CSS Class to the Body.</p>
+
+<p>Use this for the <b>Wide Version</b>:</p>
+<pre class="prettyprint lang-html linenums">
+&lt;body&gt;
+  &lt;div id="wrapper" class="wrapper-full"&gt;
+    ...
+  &lt;/div&gt;
+&lt;/body&gt;
+</pre>
+
+<p>Use this for the <b>Boxed Version</b>:</p>
+<pre class="prettyprint lang-html linenums">
+&lt;body&gt;
+  &lt;div id="wrapper" class="wrapper-boxed"&gt;
+    ...
+  &lt;/div&gt;
+&lt;/body&gt;
+</pre>
+
+					<div class="page-header"><h1>Backgrounds <small>(for boxed Version only)</small></h1></div>
+					<p class="lead">You can define the Background for the Boxed Version by adding a class to the Body.</p>
+					<p>Available Classes for the Body are <span class="label label-default">pattern-1</span> - <span class="label label-default">pattern-45</span>.</p>
+
+<pre class="prettyprint lang-html linenums">
+&lt;body class="pattern-1"&gt;
+  ...
+&lt;/body&gt;
+</pre>
+
+
+
+					
+				</div>
+
+				<!-- ======================== MAIN HEADER ======================== -->
+				
+				<div class="bs-docs-section">
+					<div class="page-header"><h1 id="main-headers">Headers</h1></div>
+					<p class="lead">The template has 8 headers. If you want to use any header you have to go, for example,  to html\header\header2.html. See demo for example: Header style > Custom header 1</p>
+					
+				</div>
+
+				
+
+				<!-- ======================== MAIN MENU ======================== -->
+				
+				<div class="bs-docs-section">
+					<div class="page-header"><h1 id="main-menus">Menus</h1></div>
+					<p class="lead">SuperMarket is using the default Bootstrap menu system with some changes for Mega Menu.</p>
+					
+					<p>The menu is well commented and you can understand the structure quite easy. Check one of the demo pages to see the structure.</p>
+				
+				</div>
+				
+				
+				<!-- ======================== MAIN FEATURES - ICONS ======================== -->
+				
+				<div class="bs-docs-section">
+					<div class="page-header"><h1 id="main-features">Main Features</h1></div>
+					<div class="page-header"><h1 id="icons">Icons</h1></div>
+                    
+                    <p class="lead">SuperMarket Icons and Font Awesome Icons can use the classes bellow. Please check the demo to see how you can combine them.</p>
+                    <p class="lead">Size: <span class="label label-default">.fa-2x</span>, <span class="label label-default">.fa-3x</span>, <span class="label label-default">.fa-4x</span>, <span class="label label-default">.fa-5x</span></p>
+                    <p class="lead">Color: <span class="label label-default">.color-default</span>, <span class="label label-default">.color-success</span>, <span class="label label-default">.color-info</span>, <span class="label label-default">.color-warning</span>, <span class="label label-default">.color-danger</span></p>
+                    
+                    <h3>SuperMarket Icons</h3>
+					<p>We put together with the help of <a target="_blank" href="http://fontastic.me/">Fontastic</a> a list of over <strong>2130 icons</strong> and made a font for you to use in your design. The default structure of the icon can be seen bellow.</p>
+					<pre class="prettyprint lang-html linenums">
+&lt;i class="icon gfx-atom"&gt;&lt;/i&gt;
+					</pre>                    
+					<p><a href="03-SuperMarket-icons/icons-reference.html" target="_blank" class="btn btn-default">View Icon Classes</a></p>
+					<hr />
+                    <h3>Font Awesome Icons</h3>
+					<p>For many Elements we use the great <a href="http://fontawesome.io/" target="_blank">Font Awesome</a> which gives you scalable vector icons that can instantly be customized — size, color, drop shadow, and anything that can be done with the power of CSS..</p>
+					<p><a href="http://fontawesome.io/icons/" target="_blank" class="btn btn-default">See all Icons</a> <a href="#" class="btn btn-link">or</a> <a href="http://fontawesome.io/examples/" target="_blank" class="btn btn-default">See some examples in Code</a></p>
+					<hr />
+                   
+				</div>
+
+				<!-- ======================== SLIDER ======================== -->
+				
+				<div class="bs-docs-section">
+					<div class="page-header"><h1 id="sliders">Sliders and Carousel</h1></div>
+					<p class="lead">We use two Main Sliders in this Theme, the <a href="http://owlgraphic.com/owlcarousel/" target="_blank">OWL Carousel</a>.</p>
+					<hr />
+					
+					<h3>OWL Carousel</h3>
+					<p>Touch enabled jQuery plugin that lets you create beautiful responsive carousel slider.. The OWL Carousel <b>must</b> be initialised in the jQuery File <span class="label label-warning">application.js</span>. Here is the default structure of the carousel:</p>
+
+					<pre class="prettyprint lang-html linenums">
+&lt;div class="class="owl-carousel" data-nav="no" data-dots="yes" data-margin="20" data-items_md="4" data-items_sm="3" data-items_xs="1" &gt;
+	&lt;div class="class="carousel"&gt;
+		&lt;div class="class="carousel-item"&gt;Carousel Item Content&lt;/div&gt;
+		&lt;div class="class="carousel-item"&gt;...&lt;/div&gt;        
+		&lt;div class="class="carousel-item"&gt;Carousel Item Content&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+					</pre> 
+                    <p>AS you can see the carousel has some option that can be added via data-*="". Here are the options:</p>
+                    <ul>
+						<li>data-nav="no" -  Options: yes or no - Show/Hide navigation arrows</li>
+                        <li>data-dots="yes" -  Options: yes or no, Show/Hide dots navigation.</li>
+						 <li>data-margin="20" -  Options: number, margin-right(px) on item.</li>
+                        <li>data-items_md="4", data-items_sm="3", data-items_xs="1" - The number of items you want to see on the screen:items_md >992px, 992px>items_sm >480px, 480px>items_xs>0</li>
+                    </ul>
+                    <p class="lead">Please see the demo for examples of how you can customize your carousel and sliders.</p>
+                    
+				</div>
+
+				
+				<!-- ======================== LIGHTBOX ======================== -->
+				
+				<div class="bs-docs-section">
+					<div class="page-header"><h1 id="lightbox">Lightbox</h1></div>
+					<p>The Lightbox which is integrated in the Theme runs with the <a href="http://dimsemenov.com/plugins/magnific-popup/" target="_blank">Magnific Lightbox</a>, a awesome jQuery Plugin to handle different Media Types. The Lightbox is initialised in the <span class="label label-warning">application.js</span>. For more Informations please have a look at the Documentation:</p>
+					<p><a class="btn btn-default" href="http://dimsemenov.com/plugins/magnific-popup/documentation.html" target="_blank">Documentation</a></p>	
+				</div>
+
+				
+
+				<!-- ======================== ANIMATION ======================== -->
+				
+				<div class="bs-docs-section">
+					<div class="page-header"><h1 id="animations">Banner Effect </h1></div>
+					<p class="lead">There are <a href="http://demo.smartaddons.com/templates/html/supermarket/html/banner-effect.html" target="_blank" >12 effects </a>, and you can choose one of them</p>
+					<p>To change your desired effect, find the code: </p>
+<pre class="prettyprint lang-html linenums">
+&lt;div id="wrapper" class="wrapper-full banners-effect-7&gt;
+  ...
+&lt;/div&gt;
+</pre>
+<p>					and then replace the number "7" with one of the number from 1 to 12. <a href="http://demo.smartaddons.com/templates/html/supermarket/html/banner-effect.html" target="_blank" >Demo 12 effects </a></p>
+
+										
+      
+					
+					
+				</div>				
+
+				
+				<!-- ======================== PAGES ======================== -->
+				
+				<div class="bs-docs-section">
+					<div class="page-header"><h1 id="pages">Pages</h1></div>
+					<p class="lead">We have added a lot of Sample Pages to give you some Inspiration how your Content maybe could look like. Please see the different HTML Pages.</p>	
+				</div>
+				
+				<!-- ======================== SOCIAL WIDGET ======================== -->
+				
+				
+
+				<!-- ======================== SOURCE AND CREDITS ======================== -->
+				
+				<div class="bs-docs-section">
+					<div class="page-header"><h1 id="source-and-credits">Source and Credits</h1></div>
+					<p class="lead">We have used the following Recources and Scripts:</p>	
+				</div>
+				
+				<p><b>General</b></p>
+				<ul>
+					<li>Images - <a target="_blank" href="http://shutterstock.net/">http://shutterstock.net/</a>, <a target="_blank" href="http://unsplash.com/">Unsplash</a>, <a target="_blank" href="http://www.gratisography.com/">GRATISOGRAPHY</a></li>
+					<li>Google Fonts - <a target="_blank" href="http://www.google.com/webfonts">http://www.google.com/webfonts</a></li>
+					<li>Icons Font - <a target="_blank" href="http://fontawesome.io/">http://fontawesome.io/</a></li> 
+				</ul>
+				
+				<p><b>SASS</b></p>
+				<ul>
+					<li>A Lightweight Sass Tool Set - <a target="_blank" href="http://bourbon.io/">http://bourbon.io/</a></li>
+					<li>Variables for responsive design - <a target="_blank" href="https://gist.github.com/webinfinita/11407836#file-bootstrap-breakpoints-sass">https://gist.github.com/webinfinita/11407836#file-bootstrap-breakpoints-sass</a></li> 
+					<li>The ultimate PX/REM mixin - <a target="_blank" href="http://hugogiraudel.com/2013/03/18/ultimate-rem-mixin/">http://hugogiraudel.com/2013/03/18/ultimate-rem-mixin/</a></li> 
+					<li>Makes supporting both left-to-right (LTR) and right-to-left (RTL) easy. - <a target="_blank" href="https://github.com/tysonmatanich/directional-scss">https://github.com/tysonmatanich/directional-scss</a></li>
+
+				</ul>
+				
+				<p><b>Scripts and CSS</b></p>
+				<ul>
+					<li>jQuery - <a target="_blank" href="http://www.jquery.com/">http://www.jquery.com/</a></li>
+					<li>Bootstrap 3 - <a target="_blank" href="http://getbootstrap.com/">http://getbootstrap.com/</a></li>
+					<li>The Final Countdown  - <a target="_blank" href="http://hilios.github.io/jQuery.countdown/">http://hilios.github.io/jQuery.countdown/</a></li>
+                    <li>Datetimepicker for Bootstrap - <a target="_blank" href="https://github.com/Eonasdan/bootstrap-datetimepicker/">https://github.com/Eonasdan/bootstrap-datetimepicker/</a></li>
+                    <li>jquery-ui - <a target="_blank" href="http://jqueryui.com">http://jqueryui.com</a></li>
+					<li>JQuery lightSlider - <a target="_blank" href="http://sachinchoolur.github.io/lightslider/">http://sachinchoolur.github.io/lightslider/</a></li>
+					<li>Magnific Popup - <a target="_blank" href="http://dimsemenov.com/plugins/magnific-popup/">http://dimsemenov.com/plugins/magnific-popup/</a></li>
+					<li>OWL Carousel - <a target="_blank" href="http://www.owlgraphic.com/owlcarousel/index.html">http://www.owlgraphic.com/owlcarousel/index.html</a></li>
+					<li>Lazy load images - <a target="_blank" href="http://luis-almeida.github.com/unveil">http://luis-almeida.github.com/unveil</a></li>
+					<li>jQuery elevateZoom - <a target="_blank" href="http://www.elevateweb.co.uk/image-zoom">http://www.elevateweb.co.uk/image-zoom</a></li>
+					<li>jQuery jGrowl - <a target="_blank" href="https://github.com/stanlemon/jGrowl">https://github.com/stanlemon/jGrowl</a></li>
+					<li>Magnific Popup - <a target="_blank" href="http://dimsemenov.com/plugins/magnific-popup/">http://dimsemenov.com/plugins/magnific-popup/</a></li>
+					
+					
+				</ul>
+
+				
+
+
+
+							
+				
+      </div>
+
+    </div>
+
+    <!-- Footer
+    ================================================== -->
+    <footer class="bs-footer" role="contentinfo">
+      <div class="container">
+
+        <ul class="footer-links">
+          <li>Designed and built with Love by</li>
+          <li class="muted">&middot;</li>
+          <li><a href="http://www.magentech.com">Magentech</a></li>
+        </ul>
+      </div>
+    </footer>
+
+
+<!-- ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/bootstrap.js"></script>
+<script src="assets/js/application.js"></script>
+<script src="assets/js/prettify.js"></script>
+
+  </body>
+</html>

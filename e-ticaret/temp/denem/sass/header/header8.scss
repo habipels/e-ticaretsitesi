@@ -1,0 +1,355 @@
+
+
+
+//** simple and lightweight mixin library for Sass **
+//-- url : http://bourbon.io/docs ---
+@import 'bourbon/bourbon';
+
+//** Mixins for Rem Font Sizing **
+//-- url : http://hugogiraudel.com/2013/03/18/ultimate-rem-mixin/
+@import 'utilities/rem';
+
+//** Variables for responsive design in bootstrap with sass **
+//-- url : https://gist.github.com/webinfinita/11407836
+@import 'utilities/bootstrap_breakpoints';
+
+//** Makes supporting both left-to-right (LTR) and right-to-left (RTL) easy.**
+//-- url : https://github.com/tysonmatanich/directional-scss
+@import 'utilities/directional';
+
+//Mixins utilities
+@import 'utilities/theme_variables';
+@import 'utilities/utilities';
+
+/*===============================================
+    [SASS DIRECTORY ]
+    
+    [1] BLOCK HEADER
+
+    
+==============================================*/
+
+.typeheader-8{
+    background-color: #fff;
+    // MENU ON TOP
+    &.navbar-compact{
+        .header-bottom{
+            padding: 15px 0;
+        }
+        .header-middle{ padding: 10px 0;}
+    
+    }
+    .header-top{
+        font-size: 13px;
+        background-color: #f5f5f5;
+        color: #444;
+        .module{
+            display: table-cell;
+            margin-bottom: 0;
+        }
+
+        .dropdown-menu{
+            #{$right}: 0; #{$left}: auto;        
+            li{
+                line-height: 22px;
+            }
+        }    
+
+    }
+    ul.top-link{list-style: none;margin:0; vertical-align:top;
+        display: inline-flex; float: $right;
+        > li{                
+            line-height: 44px;
+            position: relative;           
+            list-style: none;            
+            margin-#{$right}: 0px;
+            padding-#{$right}: 0px; 
+            margin-#{$left}: 20px; padding-#{$left}: 20px;
+            &:after{
+                position: absolute;
+                content: ""; width: 1px; height: 11px;
+                top: 20px; #{$left}: 0; background-color: rgba(255,255,255,0.2);
+            }
+            &:first-child{
+                &:after{ display: none;}
+            }
+            .btn-group{
+                line-height: 44px;
+                .btn-link{
+                    padding: 0;
+                    border: none;
+                    color: #444;
+                }
+            }       
+            >   a {
+                color: #444;
+                i{ margin-#{$right}: 5px; }
+            }
+        }
+    }
+    .lang-curr > li .btn-group .btn-link{
+        text-transform: uppercase; 
+    } 
+    .header-middle{
+        clear: both;
+        padding: 38px 0;
+        .middle-right{
+            padding-#{$left}: 0;
+        }
+    }
+    .top-log{
+        
+        li{
+            line-height: 44px; 
+            padding-#{$right}: 0;
+            a{ color: #444; }
+            i{ margin-#{$right}: 5px; }
+        }
+    } 
+    
+
+    .compare,
+    .top-link-wishlist { 
+        width: 44px; height: 44px;
+        border: 2px solid #e5e5e5;
+        font-size: 18px; color: #282828;
+        border-radius: 5px;
+        display: block;
+        text-align: center; line-height: 40px;
+    }  
+
+    .account{ float: $left; position: relative;  margin: 0 5px; padding: 20px 0;
+        > a{ display: block; line-height: 100%; }
+        i{ font-size: 24px; color: #222; }
+        .dropdown-menu{
+            #{$right}: -30px; #{$left}: auto;
+        }
+    }
+
+    .compare,
+    .wishlist{
+        float: $right; margin-#{$right}: 20px;
+    }
+
+    .header-bottom{
+     
+    }
+    /*=====SEARCH ======*/
+    .search-header-w{
+        
+    }
+    #sosearchpro{
+        .text-keyword{ 
+        }
+        .search{
+            position: relative;
+            margin: 0; 
+            border: 2px solid #e5e5e5;
+            border-radius: 5px;
+            width: 200px;
+            .select_category{
+                border: none;               
+                width: 180px;
+                background-color: #fff;
+                border-#{$right}: 1px solid #ddd;
+                border-top-#{$left}-radius: 5px;
+                border-bottom-#{$left}-radius: 5px;
+                display: none;
+                select{
+                    height: 40px;
+                    line-height: 40px;
+                    color: #484848;               
+                    font-size: 13px;         
+                    padding: 0 15px;   
+                    &:hover{
+                        cursor: pointer;
+                    }
+                }
+                &.icon-select{
+                    &:after{
+                        color: #484848;               
+                        font-size: 14px;
+                        line-height: 40px;
+                        #{$right}: 0;
+                        #{$left}: auto;
+                        font-family: "FontAwesome";
+                        content: "\f0d7";
+                        position: absolute;
+                        height: 100%;
+                        width: 25px;
+                    }
+                }
+            } 
+      
+            button{
+                position: absolute;
+                top: 0;
+                #{$right}: 0;
+                background-color: transparent;                
+                height: 42px;
+                text-align: center;
+                line-height: 42px;
+                padding: 0 10px;
+                font-size: 14px;   
+                border-top-#{$right}-radius: 5px;
+                border-bottom-#{$right}-radius: 5px;  
+                i{
+                    font-size: 16px; 
+                    color: #282828; 
+                }
+                span{ display: none; }
+            }
+         
+            input{
+                border: none;
+                border-radius: 5px;       
+                background-color: #fff;
+                z-index: 0;
+                height: 40px;
+                padding-#{$left}: 15px;     
+                width: 200px;             
+                color: #cccccc; font-size: 12px;
+                border-top-#{$right}-radius: 5px;
+                border-bottom-#{$right}-radius: 5px;
+                &::-moz-placeholder {
+                    color: #888888;
+                    opacity: 1; 
+                }
+                &:-ms-input-placeholder { color: #888888; } 
+                &::-webkit-input-placeholder  { color: #888888; } 
+                &:focus{
+                    z-index: 0;
+                }
+            }
+            
+        }
+    } 
+    .compare,
+    .wishlist{
+        float: $right; margin-#{$right}: 20px;
+    }
+    .logo{ text-align: center; }
+
+    /*BLOCK CART*/
+    .shopping_cart{
+        float: $right;
+        position: relative;
+        margin-#{$right}: 10px;
+        .btn-shopping-cart .top_cart{
+            position: relative;            
+            
+            .icon-c{
+                width: 44px;
+                height: 44px;   
+                line-height: 44px;        
+                float: $left;                
+                text-align: center;                
+                border: 2px solid #e5e5e5;
+                position: relative; border-radius: 5px; 
+                i{
+                    font-size: 18px; color: #282828;
+                }
+                svg{
+                    fill: #282828;
+                    position: absolute;
+                    top: 50%; #{$left}: 50%;
+                    margin-top: -10px; margin-#{$left}: -9px;
+                }
+                
+            }
+            .shopcart-inner{
+                float: $left;
+                color: #282828;
+                margin: 0;
+                .text-shopping-cart{
+                    font-size: 13px;
+                    font-weight: 400;
+                    margin-top: 0px;
+                    margin-bottom: 0;
+                    line-height: 100%;
+                    text-transform: capitalize;
+                    float: $left;
+                    padding-#{$right}: 5px;    
+                    display: none;                
+                }
+                .total-shopping-cart{
+                    font-size: 12px;
+                    float: $left;
+                    line-height: 100%;
+                    .items_cart2{
+                        display: none;
+                    }
+                    .items_cart{
+                        width: 23px; 
+                        height: 23px;
+                        line-height: 23px;    
+                        text-align: center;
+                        @include border-radius(100%);
+                        position: absolute;
+                        top: -12px;
+                        #{$left}: 32px;
+                        font-size: 12px;
+                        color: #fff;
+                    }
+                    .items_carts{ font-size: 14px; font-weight: 500; display: none; }
+                }
+            } 
+                
+        } 
+        .dropdown-menu{ top: 100%; #{$right}: -15px; #{$left}: auto;
+            color: #666;
+        }
+        .shoppingcart-box:before{right: 50px;}
+    }
+
+    /*MENU MEGA*/
+    .container-megamenu.horizontal{
+        ul.megamenu > li:hover > a,
+        ul.megamenu > li > a:hover,
+        ul.megamenu > li.active > a,
+        ul.megamenu > li.active_menu > a{
+            background-color: rgba(0,0,0,0.15);
+        }
+    }
+    .container-megamenu.horizontal ul.megamenu{ text-align: center;
+        .sub-menu{
+            text-align: $left;
+        }
+        > li{ float: none; display: inline-block;
+            padding: 0;
+            margin: 0;
+            &.with-sub-menu{
+                > a strong{
+                    position: relative; line-height: 25px;
+                    padding: side-values(0 15px 0 0px); display: inline-block;
+                    &::after{
+                        font-family: "FontAwesome";
+                        content: "\f107";
+                        font-size: 14px; color: #fff;
+                        top: 0; #{$right}: 0; 
+                        position: absolute; line-height: 25px;
+                    }
+                }
+                > a strong{
+                    position: relative;
+                    
+                                      
+                }
+            }
+            > a{ color: #fff; font-size: 14px; font-weight: 500;
+                background-color: transparent;
+                position: relative;
+                padding: 0px 20px;
+                line-height: 55px; border-radius: 0;
+                strong{ font-weight: 500; }
+                
+            }
+        }
+    } 
+
+}
+
+
+.common-home .typeheader-8 .container-megamenu.horizontal ul.megamenu > li.home > a {    
+    background-color: rgba(0,0,0,0.15);
+}

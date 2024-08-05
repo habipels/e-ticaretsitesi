@@ -1,724 +1,945 @@
 {% extends "homebase.html" %}
 {% load custom_tags %}
-{% block site %}
-{% if banner2 %}
 
-
-<div id="header-carousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        {% for i in banner2 %}
+{% block slider %}
+<!-- Main Container  -->
+<div class="main-container">
+    <div id="content">
+    {% for i in banner2 %}
                         {% if i.image %}
 
-
-
-                        <div class="carousel-item active_ver" style="height: 410px;">
-                            <img class="img-fluid" src="{{i.image.url}}" alt="Image">
-                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <div class="p-3" style="max-width: 700px;">
-                                    <h4 class="text-light text-uppercase font-weight-medium mb-3">{{i.kategori}}</h4>
-                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">{{i.keywords}}</h3>
-                                    {% if i.banner_link %}
+                              <div class="slider-container"> 
+            <div class="module sohomepage-slider ">
+                <div class="yt-content-slider"  data-rtl="yes" data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="0" data-items_column00="1" data-items_column0="1" data-items_column1="1" data-items_column2="1"  data-items_column3="1" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
+                    <div class="yt-content-slide">
+                    {% if i.banner_link %}
+                     <a href="{{i.banner_link}}"><img src="{{i.image.url}}" alt="slider1" class="img-responsive"></a>
                                         <a href="{{i.banner_link}}" class="btn btn-light py-2 px-3">Ziyaret Et</a>
                                     {% else %}
+                                     <a href="#"><img src="{{i.image.url}}" alt="slider1" class="img-responsive"></a>
                                     {% endif %}
 
-                                </div>
-                            </div>
-                        </div>
+                       
+                    </div>
+                 
+                </div>
+                
+                
+            </div>            
+        </div>
+
+                       
                         {% else %}
                         {% endif %}
                          {% endfor %}
-
-                    </div>
-                    <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
-                        <div class="btn btn-dark" style="width: 45px; height: 45px;">
-                            <span class="carousel-control-prev-icon mb-n2"></span>
+  
+        <div class="content-main-w">
+            <div class="container">
+                <!-- So categories -->
+                <div id="so_categories_51" class="so-categories module theme3 slider-cates5">                    
+                    <div class="modcontent">
+                        <div class="cat-wrap theme3">
+                            {% for i in kategoriler %}
+                            <div class="content-box">
+                                <div class="image-cat">
+                                {% if i.image.url %}
+                                    <a href="/kategori/{{i.id}}/{i.link}/"><img src="{{ i.image.url}}" alt="image" /></a>   
+                                {% else %}
+                                {% endif %}
+                                                                 
+                                </div>                        
+                                <div class="cat-title">
+                                    <a href="/kategori/{{i.id}}/{i.link}/">{{i.kategori}}</a>
+                                </div>                        
+                            </div>
+                            {% endfor %}
                         </div>
-                    </a>
-                    <a class="carousel-control-next" href="#header-carousel" data-slide="next">
-                        <div class="btn btn-dark" style="width: 45px; height: 45px;">
-                            <span class="carousel-control-next-icon mb-n2"></span>
-                        </div>
-                    </a>
-                </div>
-
-{% else %}
-{% endif %}
-{% endblock site %}
-{% block slider %}
-<style>
-    .carousel {
-        margin: 50px auto;
-        padding: 0 70px;
-    }
-    .carousel .item {
-        color: #747d89;
-        min-height: 325px;
-        text-align: center;
-        overflow: hidden;
-    }
-    .carousel .thumb-wrapper {
-        padding: 25px 15px;
-        background: #fff;
-        border-radius: 6px;
-        text-align: center;
-        position: relative;
-        box-shadow: 0 2px 3px rgba(0,0,0,0.2);
-    }
-    .carousel .item .img-box {
-        height: 120px;
-        margin-bottom: 20px;
-        width: 100%;
-        position: relative;
-    }
-    .carousel .item img {
-        max-width: 100%;
-        max-height: 100%;
-        display: inline-block;
-        position: absolute;
-        bottom: 0;
-        margin: 0 auto;
-        left: 0;
-        right: 0;
-    }
-    .carousel .item h4 {
-        font-size: 18px;
-    }
-    .carousel .item h4, .carousel .item p, .carousel .item ul {
-        margin-bottom: 5px;
-    }
-    .carousel .thumb-content .btn {
-        color: #7ac400;
-        font-size: 11px;
-        text-transform: uppercase;
-        font-weight: bold;
-        background: none;
-        border: 1px solid #7ac400;
-        padding: 6px 14px;
-        margin-top: 5px;
-        line-height: 16px;
-        border-radius: 20px;
-    }
-    .carousel .thumb-content .btn:hover, .carousel .thumb-content .btn:focus {
-        color: #fff;
-        background: #7ac400;
-        box-shadow: none;
-    }
-    .carousel .thumb-content .btn i {
-        font-size: 14px;
-        font-weight: bold;
-        margin-left: 5px;
-    }
-    .carousel .item-price {
-        font-size: 13px;
-        padding: 2px 0;
-    }
-    .carousel .item-price strike {
-        opacity: 0.7;
-        margin-right: 5px;
-    }
-    .carousel-control-prev, .carousel-control-next {
-        height: 44px;
-        width: 40px;
-        background: #7ac400;
-        margin: auto 0;
-        border-radius: 4px;
-        opacity: 0.8;
-    }
-    .carousel-control-prev:hover, .carousel-control-next:hover {
-        background: #78bf00;
-        opacity: 1;
-    }
-    .carousel-control-prev i, .carousel-control-next i {
-        font-size: 36px;
-        position: absolute;
-        top: 50%;
-        display: inline-block;
-        margin: -19px 0 0 0;
-        z-index: 5;
-        left: 0;
-        right: 0;
-        color: #fff;
-        text-shadow: none;
-        font-weight: bold;
-    }
-    .carousel-control-prev i {
-        margin-left: -2px;
-    }
-    .carousel-control-next i {
-        margin-right: -4px;
-    }
-    .carousel-indicators {
-        bottom: -50px;
-    }
-    .carousel-indicators li, .carousel-indicators li.active {
-        width: 10px;
-        height: 10px;
-        margin: 4px;
-        border-radius: 50%;
-        border: none;
-    }
-    .carousel-indicators li {
-        background: rgba(0, 0, 0, 0.2);
-    }
-    .carousel-indicators li.active {
-        background: rgba(0, 0, 0, 0.6);
-    }
-    .carousel .wish-icon {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        z-index: 99;
-        cursor: pointer;
-        font-size: 16px;
-        color: #abb0b8;
-    }
-    .carousel .wish-icon .fa-heart {
-        color: #ff6161;
-    }
-    .star-rating li {
-        padding: 0;
-    }
-    .star-rating i {
-        font-size: 14px;
-        color: #ffc000;
-    }
-    </style>
-    <script>
-    $(document).ready(function(){
-        $(".wish-icon i").click(function(){
-            $(this).toggleClass("fa-heart fa-heart-o");
-        });
-    });
-    </script>
-
-    <!-- Products Start -->
-    <div class="container pt-5 mt-2">
-        <div class="text-center mb-4">
-            <h2 class="section-title px-5"><span class="px-2">Ürünler</span></h2>
-        </div>
-        <div class="row px-xl-5 pb-3">
-
-            {% for i in santiyeler %}
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-2 mb-4">
-                    <div class="d-flex justify-content-center card-header d-flex justify-content-center product-img position-relative overflow-hidden bg-transparent border p-0">
-                    <a alt='{{ i.urun_adi }}' href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                        <img style="max-height: 200px;max-width: 200px;min-height: 200px;min-width: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-
-                        </a>
-
-                    </div>
-
-                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
-                        <div class="d-flex justify-content-center">
-                            <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
-                        </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-center bg-light border">
-
-                        <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
                     </div>
                 </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    <div class="container">
-                                            <ul class="pagination pagination-m justify-content-center">
-                                                
-                                                {% if medya.has_previous %}
-                                                    <li class="page-item"><a class="page-link" href="?page=1{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">İLK<<</a></li>
-                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">« Önceki  Sayfa</a></li>
+                <!-- end So categories -->
 
-                                                  {% if medya.number > 3 %}
-
-                                                    <li class="page-item"><a class="page-link" href="?page=1{{ medya.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">1</a></li>
-                                                    {% if medya.number > 4 %}
-                                                      <li class="page-item"><span class="page-link">...</span></li>
-                                                    {% endif %}
-                                                  {% endif %}
-                                                {% endif %}
-
-                                                {% for num in medya.paginator.page_range %}
-                                                  {% if medya.number == num %}
-                                                    <li class="page-item"><a class="page-link " style="color:black;" href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ num }}</a></li>
-                                                  {% elif num > medya.number|add:'-3' and num < medya.number|add:'3' %}
-                                                    <li class="page-item"><a class="page-link" href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ num }}</a></li>
-                                                  {% endif %}
-                                                {% endfor %}
-
-                                                {% if medya.has_next %}
-                                                  {% if medya.number < medya.paginator.num_pages|add:'-3' %}
-                                                    <li class="page-item"><span class="page-link">...</span></li>
-                                                    <li class="page-item"><a class="page-link" href="?page={{ medya.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ medya.paginator.num_pages }}</a></li>
-                                                  {% elif medya.number < medya.paginator.num_pages|add:'-2' %}
-                                                    <li class="page-item"><a class="page-link" href="?page={{ medya.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ medya.paginator.num_pages }}</a></li>
-                                                  {% endif %}
-
-                                                  <li class="page-item"><a class="page-link" href="?page={{ medya.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">Sonraki Sayfa »</a></li>
-                                                  {% if medya.number < medya.paginator.num_pages|add:'-2' %}
-                                                    <li class="page-item"><a class="page-link" href="?page={{ medya.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}"> >> Son</a></li>
-                                                  {% endif %}
-                                                {% endif %}
-                                                </ul>
+                <!-- So Advanced search -->
+                <div class="box-advanced-search">
+                    <div class="so_advanced_search">
+                        <div class="sas_wrap">
+                            <div class="sas_inner">
+                                <div class="heading-title"><h2>Select Your Vehical</h2></div>
+                                <div class="sas_inner-box-search">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 search-boxes">
+                                            <select name="make" id="so_make0" class="form-control">
+                                                <option value="">Select Make</option>
+                                                    <option value="1" >Acura</option>
+                                                    <option value="2" >BMW</option>
+                                                    <option value="3" >Chevrolet</option>
+                                                    <option value="4" >GMC</option>
+                                                    <option value="5" >Honda</option>
+                                                    <option value="6" >John deere</option>
+                                                    <option value="7" >Kawasaky</option>
+                                                    <option value="8" >Lexus</option>
+                                                    <option value="9" >mazda</option>
+                                                    <option value="10" >Mercedes</option>
+                                                    <option value="11" >nuko</option>
+                                                    <option value="12" >Opel</option>
+                                                    <option value="13" >Yamaha</option>
+                                            </select>
                                         </div>
-    <!-- Products End -->
-      <!-- Products Start -->
-      <div class="container mt-4">
-        <div class="text-center ">
-            {% if populer1 %}
-            <h2 class="section-title px-5"><a href="/populerurunler/"><span class="px-2">Popüler Ürünler</span></a></h2>
-
-                {% else %}
-                {% endif %}
-        </div>
-
-    </div>
-    <!-- Products End -->
-    {% if populer1 %}
-    <div class="container-xl populer">
-        <div class="row">
-            <div class="col-md-12">
-                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-                <!-- Carousel indicators -->
-                <ol class="carousel-indicators">
-                {% if populer1 %}
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                {% else %}
-                {% endif %}
-                    {% if populer2 %}
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                {% else %}
-                {% endif %}
-                {% if populer3 %}
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                {% else %}
-                {% endif %}
-                    
-                    
-                </ol>
-                <!-- Wrapper for carousel items -->
-                <div class="carousel-inner">
-
-
-                    <div class="item carousel-item active">
-                        <div class="row">
-
-
-                           {% for i in populer1 %}
-                            <div class="col-sm-3">
-                                <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                    <div style="border-radius: 5% !important;" class="img-box d-flex justify-content-center">
-                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                                            <img style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-
-                                            </a>
-                                    </div>
-                                    <div class="thumb-content">
-                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
-
-                                        <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
-                                        <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                    </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 search-boxes">
+                                            <select name="model" id="so_model0" class="form-control">
+                                                <option value="">Select Model</option>
+                                                <option value="1" >3D Model</option>
+                                                <option value="2" >BMW</option>
+                                                <option value="3" >1000 Rocket</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 search-boxes">
+                                            <select name="engine" id="so_engine0" class="form-control">
+                                                <option value="">Select Engine</option>
+                                                <option value="1" >320i</option>
+                                                <option value="2" >x5</option>
+                                                <option value="3" >350i</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 search-boxes">
+                                            <select name="year" id="so_year0" class="form-control">
+                                                <option value="">Select Year</option>
+                                                    <option value="1" >2015</option>
+                                                    <option value="2" >2016</option>
+                                                    <option value="3" >2017</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 search-button">
+                                            <button type="button" id="sas_search_button0">Find My Part</button>
+                                        </div>
+                                    </div>              
                                 </div>
-                            </div>
-                              {% endfor %}
+                            </div>   
                         </div>
-                    </div>
-
-
-                    <div class="item carousel-item ">
-                        <div class="row">
-                                    {% for i in populer2 %}
-                            <div class="col-sm-3">
-                                <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                    <div class="img-box">
-                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-
-                                            </a>
+                    </div> 
+                </div>
+                <!-- end So Advanced search -->
+                <div class="module listingtab-layout5">
+                    <div class="pre_text">
+                        Top sale in the week              
+                    </div>                 
+                    <h3 class="modtitle"><span>Best Seller</span></h3>
+                    <div class="modcontent">
+                        <div id="so_listing_tabs_4" class="so-listing-tabs first-load">
+                            
+                            <div class="ltabs-wrap">
+                                <div class="ltabs-tabs-container" data-delay="300" data-duration="600" data-effect="none" data-ajaxurl="" data-type_source="0" data-lg="4" data-md="4" data-sm="3" data-xs="1" data-margin="30" data-type_show="loadmore">
+                                    <!--Begin Tabs-->
+                                    <div class="ltabs-tabs-wrap"> 
+                                    <span class="ltabs-tab-selected">Brake Parts</span> <span class="ltabs-tab-arrow">▼</span>
+                                        <div class="item-sub-cat">
+                                            <ul class="ltabs-tabs cf">
+                                                <li class="ltabs-tab tab-sel" data-category-id="34" data-active-content=".items-category-34"> <span class="ltabs-tab-label">Brake Parts</span> </li>
+                                                <li class="ltabs-tab " data-category-id="32" data-active-content=".items-category-32"> <span class="ltabs-tab-label">Lighting & Electical</span> </li>
+                                                <li class="ltabs-tab " data-category-id="33" data-active-content=".items-category-33"> <span class="ltabs-tab-label">Shock & Suspension</span> </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="thumb-content">
-                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
-
-                                        <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
-                                        <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
+                                    <!-- End Tabs-->
+                                </div>
+                                <div class="wap-listing-tabs products-list grid">
+                                    <div class="ltabs-items-container">                                    
+                                        <!--Begin Items-->
+                                        <div class="ltabs-items ltabs-items-selected items-category-34" data-total="16">
+                                            <div class="ltabs-items-inner">
+                                                <div class="item">
+                                                    <div class="product-layout product-grid">                                               
+                                                        <div class="product-item-container item--static">
+                                                            <div class="left-block">
+                                                                <div class="product-image-container second_img">
+                                                                    <a href="product.html" target="_self" title="Volup tatem accu">
+                                                                        <img src="image/catalog/demo/product/270/1.jpg" class="img-1 img-responsive" alt="image1">
+                                                                        <img src="image/catalog/demo/product/270/2.jpg" class="img-2 img-responsive" alt="image2">
+                                                                    </a>
+                                                                </div>
+                                                                <span class="label-product label-new">New </span>
+                                                                <!--quickview--> 
+                                                                <div class="so-quickview">
+                                                                  <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-search"></i><span>Quick view</span></a>
+                                                                </div>                                                     
+                                                                <!--end quickview-->
+                                                            </div>
+                                                            <div class="right-block">
+                                                                <div class="button-group cartinfo--static">
+                                                                    
+                                                                    <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart"></i></button>
+                                                                    <button type="button" class="addToCart" title="Add to cart" onclick="cart.add('60 ');">
+                                                                        <span>Add to cart </span>   
+                                                                    </button>
+                                                                    <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-refresh"></i></button>                                                    
+                                                                </div>
+                                                                <h4><a href="product.html" title="Volup tatem accu" target="_self">Volup tatem accu</a></h4>
+                                                                <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                                                </div>
+                                                                <div class="price">
+                                                                  <span class="price">$48.00</span>
+                                                                </div>
+                                                            </div>                                            
+                                                        </div>                                            
+                                                    </div>
+                                                    <div class="product-layout product-grid">                                                 
+                                                        <div class="product-item-container item--static">
+                                                            <div class="left-block">
+                                                                <div class="product-image-container second_img">
+                                                                    <a href="product.html" target="_self" title="DPicanha porkcho">
+                                                                        <img src="image/catalog/demo/product/270/2.jpg" class="img-1 img-responsive" alt="image1">
+                                                                        <img src="image/catalog/demo/product/270/3.jpg" class="img-2 img-responsive" alt="image2">
+                                                                    </a>
+                                                                </div>
+                                                                <span class="label-product label-new">New</span>
+                                                                <!--quickview--> 
+                                                                <div class="so-quickview">
+                                                                  <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-search"></i><span>Quick view</span></a>
+                                                                </div>                                                     
+                                                                <!--end quickview-->
+                                                            </div>
+                                                            <div class="right-block">
+                                                                <div class="button-group cartinfo--static">                                                
+                                                                    <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart"></i></button>
+                                                                    <button type="button" class="addToCart" title="Add to cart" onclick="cart.add('60 ');">
+                                                                        <span>Add to cart </span>   
+                                                                    </button>
+                                                                    <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-refresh"></i></button>                                                    
+                                                                </div>
+                                                                <h4><a href="product.html" title="Picanha porkcho" target="_self">Picanha porkcho</a></h4>
+                                                                <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                </div>
+                                                                <div class="price">
+                                                                  <span class="price">$89.00</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>                                         
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <div class="product-layout product-grid">                                                 
+                                                        <div class="product-item-container item--static">
+                                                            <div class="left-block">
+                                                                <div class="product-image-container second_img">
+                                                                    <a href="product.html" target="_self" title="Stickrum bresao">
+                                                                        <img src="image/catalog/demo/product/270/3.jpg" class="img-1 img-responsive" alt="image1">
+                                                                        <img src="image/catalog/demo/product/270/4.jpg" class="img-2 img-responsive" alt="image2">
+                                                                    </a>
+                                                                </div>
+                                                                <span class="label-product label-sale">-11%</span>
+                                                                <!--quickview--> 
+                                                                <div class="so-quickview">
+                                                                  <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-search"></i><span>Quick view</span></a>
+                                                                </div>                                                     
+                                                                <!--end quickview-->
+                                                            </div>
+                                                            <div class="right-block">
+                                                                <div class="button-group cartinfo--static">
+                                                                    
+                                                                    <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart"></i></button>
+                                                                    <button type="button" class="addToCart" title="Add to cart" onclick="cart.add('60 ');">
+                                                                        <span>Add to cart </span>   
+                                                                    </button>
+                                                                    <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-refresh"></i></button>                                                    
+                                                                </div>
+                                                                <h4><a href="product.html" title="Stickrum bresao" target="_self">Stickrum bresao</a></h4>
+                                                                <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                                                </div>
+                                                                <div class="price">
+                                                                    <span class="price-new">$85.00</span>
+                                                                    <span class="price-old">$96.00</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>                                            
+                                                    </div>
+                                                    <div class="product-layout product-grid">                                                
+                                                        <div class="product-item-container item--static">
+                                                            <div class="left-block">
+                                                                <div class="product-image-container second_img">
+                                                                    <a href="product.html" target="_self" title="Shoulder kevinis">
+                                                                        <img src="image/catalog/demo/product/270/4.jpg" class="img-1 img-responsive" alt="image1">
+                                                                        <img src="image/catalog/demo/product/270/5.jpg" class="img-2 img-responsive" alt="image2">
+                                                                    </a>
+                                                                </div>
+                                                      
+                                                                <!--quickview--> 
+                                                                <div class="so-quickview">
+                                                                  <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-search"></i><span>Quick view</span></a>
+                                                                </div>                                                     
+                                                                <!--end quickview-->
+                                                            </div>
+                                                            <div class="right-block">
+                                                                <div class="button-group cartinfo--static">
+                                                                    
+                                                                    <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart"></i></button>
+                                                                    <button type="button" class="addToCart" title="Add to cart" onclick="cart.add('60 ');">
+                                                                        <span>Add to cart </span>   
+                                                                    </button>
+                                                                    <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-refresh"></i></button>                                                    
+                                                                </div>
+                                                                <h4><a href="product.html" title="Shoulder kevinis" target="_self">Shoulder kevinis</a></h4>
+                                                                <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                </div>
+                                                                <div class="price">
+                                                                  <span class="price">$60.00</span>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>                                             
+                                                    </div>
+                                                </div>
+                                                <div class="item">
+                                                    <div class="product-layout product-grid">                                             
+                                                        <div class="product-item-container item--static">
+                                                            <div class="left-block">
+                                                                <div class="product-image-container second_img">
+                                                                    <a href="product.html" target="_self" title="Remporum stick">
+                                                                        <img src="image/catalog/demo/product/270/5.jpg" class="img-1 img-responsive" alt="image1">
+                                                                        <img src="image/catalog/demo/product/270/6.jpg" class="img-2 img-responsive" alt="image2">
+                                                                    </a>
+                                                                </div>
+                                                                <span class="label-product label-new">New</span>
+                                                                <!--quickview--> 
+                                                                <div class="so-quickview">
+                                                                  <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-search"></i><span>Quick view</span></a>
+                                                                </div>                                                     
+                                                                <!--end quickview-->
+                                                            </div>
+                                                            <div class="right-block">
+                                                                <div class="button-group cartinfo--static">
+                                                                    
+                                                                    <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart"></i></button>
+                                                                    <button type="button" class="addToCart" title="Add to cart" onclick="cart.add('60 ');">
+                                                                        <span>Add to cart </span>   
+                                                                    </button>
+                                                                    <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-refresh"></i></button>                                                    
+                                                                </div>
+                                                                <h4><a href="product.html" title="Remporum stick" target="_self">Remporum stick</a></h4>
+                                                                <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                                                </div>
+                                                                <div class="price">
+                                                                  <span class="price">$65.00</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>                                           
+                                                    </div>
+                                                    <div class="product-layout product-grid">                                                
+                                                        <div class="product-item-container item--static">
+                                                            <div class="left-block">
+                                                                <div class="product-image-container second_img">
+                                                                    <a href="product.html" target="_self" title="Luis rute arure">
+                                                                        <img src="image/catalog/demo/product/270/7.jpg" class="img-1 img-responsive" alt="image1">
+                                                                        <img src="image/catalog/demo/product/270/8.jpg" class="img-2 img-responsive" alt="image2">
+                                                                    </a>
+                                                                </div>
+                                                                <span class="label-product label-sale">-15%</span>
+                                                                <!--quickview--> 
+                                                                <div class="so-quickview">
+                                                                  <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-search"></i><span>Quick view</span></a>
+                                                                </div>                                                     
+                                                                <!--end quickview-->
+                                                            </div>
+                                                            <div class="right-block">
+                                                                <div class="button-group cartinfo--static">
+                                                                    
+                                                                    <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart"></i></button>
+                                                                    <button type="button" class="addToCart" title="Add to cart" onclick="cart.add('60 ');">
+                                                                        <span>Add to cart </span>   
+                                                                    </button>
+                                                                    <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-refresh"></i></button>                                                    
+                                                                </div>
+                                                                <h4><a href="product.html" title="Luis rute arure" target="_self">Luis rute arure</a></h4>
+                                                                <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                </div>
+                                                                <div class="price">
+                                                                    <span class="price-new">$50.00</span>
+                                                                    <span class="price-old">$59.00</span>
+                                                                </div>
+                                                            </div>    
+                                                        </div>                                      
+                                                    </div>                                
+                                                </div>
+                                                <div class="item">
+                                                    <div class="product-layout product-grid">                                                 
+                                                        <div class="product-item-container item--static">
+                                                            <div class="left-block">
+                                                                <div class="product-image-container second_img">
+                                                                    <a href="product.html" target="_self" title="Sunt in culpa">
+                                                                        <img src="image/catalog/demo/product/270/6.jpg" class="img-1 img-responsive" alt="image1">
+                                                                        <img src="image/catalog/demo/product/270/7.jpg" class="img-2 img-responsive" alt="image2">
+                                                                    </a>
+                                                                </div>                                        
+                                                                <!--quickview--> 
+                                                                <div class="so-quickview">
+                                                                  <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-search"></i><span>Quick view</span></a>
+                                                                </div>                                                     
+                                                                <!--end quickview-->
+                                                            </div>
+                                                            <div class="right-block">
+                                                                <div class="button-group cartinfo--static">
+                                                                    
+                                                                    <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart"></i></button>
+                                                                    <button type="button" class="addToCart" title="Add to cart" onclick="cart.add('60 ');">
+                                                                        <span>Add to cart </span>   
+                                                                    </button>
+                                                                    <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-refresh"></i></button>                                                    
+                                                                </div>
+                                                                <h4><a href="product.html" title="Sunt in culpa" target="_self">Sunt in culpa</a></h4>
+                                                                <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                                                </div>
+                                                                <div class="price">
+                                                                  <span class="price">$40.00</span>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                        </div>                                            
+                                                    </div>
+                                                    <div class="product-layout product-grid">                                                 
+                                                        <div class="product-item-container item--static">
+                                                            <div class="left-block">
+                                                                <div class="product-image-container second_img">
+                                                                    <a href="product.html" target="_self" title="Duis aute irure ">
+                                                                        <img src="image/catalog/demo/product/270/8.jpg" class="img-1 img-responsive" alt="image1">
+                                                                        <img src="image/catalog/demo/product/270/9.jpg" class="img-2 img-responsive" alt="image2">
+                                                                    </a>
+                                                                </div>
+                                                                
+                                                                <!--quickview--> 
+                                                                <div class="so-quickview">
+                                                                  <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-search"></i><span>Quick view</span></a>
+                                                                </div>                                                     
+                                                                <!--end quickview-->
+                                                            </div>
+                                                            <div class="right-block">
+                                                                <div class="button-group cartinfo--static">
+                                                                    
+                                                                    <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart"></i></button>
+                                                                    <button type="button" class="addToCart" title="Add to cart" onclick="cart.add('60 ');">
+                                                                        <span>Add to cart </span>   
+                                                                    </button>
+                                                                    <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-refresh"></i></button>                                                    
+                                                                </div>
+                                                                <h4><a href="product.html" title="Volup tatem accu" target="_self">Volup tatem accu</a></h4>
+                                                                <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                                    <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                                                </div>
+                                                                <div class="price">
+                                                                   <span class="price">$60.00</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>                                            
+                                                    </div>
+                                                </div>                                                                       
+                                            </div>
+                                            <div class="ltabs-loadmore" data-active-content=".items-category-31" data-rl_start="12" data-rl_total="12" data-ajaxurl="" data-rl_load="8" data-moduleid="253">
+                                                <div class="ltabs-loadmore-btn loaded" data-label="All ready" style="display: inline-block;">                                                    
+                                                    <i class="fa fa-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ltabs-items items-category-32 grid" data-total="16">
+                                            <div class="ltabs-loading"></div>
+                                            
+                                        </div>
+                                        <div class="ltabs-items  items-category-33 grid" data-total="16">
+                                            <div class="ltabs-loading"></div>
+                                        </div>
+                                        <!--End Items-->
                                     </div>
                                 </div>
-                            </div>
-                              {% endfor %}
-                        </div>
-                    </div>
-                    <div class="item carousel-item">
-                        <div class="row">
-                                    {% for i in populer3 %}
-                            <div class="col-sm-3">
-                                <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                    <div class="img-box">
-                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-
-                                            </a>
-                                    </div>
-                                    <div class="thumb-content">
-                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
-
-                                        <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
-                                        <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                    </div>
-                                </div>
-                            </div>
-                              {% endfor %}
+                                
+                                
+                            </div>   
                         </div>
                     </div>
                 </div>
-                <!-- Carousel controls -->
-                <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-                    <i class="fa fa-angle-right"></i>
-                </a>
+
             </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-xl populermobil">
-        <div class="row">
-            <div class="col-md-12">
-                <div id="myCarouselpb" class="carousel slide" data-ride="carousel" data-interval="0">
-                <!-- Carousel indicators -->
-                <ol class="carousel-indicators">
-                {% for  i in populer1 %}
-                {% if forloop.counter  == 1 %}
-                    <li data-target="#myCarouselpb" data-slide-to="{{forloop.counter }}" class="active"></li>
-                {% else %}
-                <li data-target="#myCarouselpb" data-slide-to="{{forloop.counter }}" class=""></li>
-                {% endif %}
-                    
-                {% endfor %}
-                
-                    
-                    
-                </ol>
-                <!-- Wrapper for carousel items -->
-                <div class="carousel-inner">
-
-                     {% for  i in populer1 %}
-                     {% if forloop.counter  == 1 %}
-                    <div class="item carousel-item active">
-                        <div class="row">              
-                            <div class="col-sm-3">
-                                <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                    <div style="border-radius: 5% !important;" class="img-box d-flex justify-content-center">
-                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                                            <img style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-
-                                            </a>
-                                    </div>
-                                    <div class="thumb-content">
-                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
-
-                                        <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
-                                        <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                    </div>
-                                </div>
-                            </div>
-                              
-                        </div>
+            <div class="row-banners">
+                <div class="banners banners1">
+                    <div class="item item1">
+                        <a href="#"><img src="image/catalog/banners/id5-bn1.jpg" alt="banner"></a>
                     </div>
-                {% else %}
-                <div class="item carousel-item">
-                        <div class="row">
-
-
-                          
-                            <div class="col-sm-3">
-                                <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                    <div style="border-radius: 5% !important;" class="img-box d-flex justify-content-center">
-                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                                            <img style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-
-                                            </a>
-                                    </div>
-                                    <div class="thumb-content">
-                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
-
-                                        <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
-                                        <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                    </div>
-                                </div>
-                            </div>
-                              
-                        </div>
+                    <div class="item item2">
+                        <a href="#"><img src="image/catalog/banners/id5-bn2.jpg" alt="banner"></a>
                     </div>
-                {% endif %}
-                    
-                    {% endfor %}
+                    <div class="item item3">
+                        <a href="#"><img src="image/catalog/banners/id5-bn3.jpg" alt="banner"></a>
+                    </div>
                 </div>
-                <!-- Carousel controls -->
-                <a class="carousel-control-prev" href="#myCarouselpb" data-slide="prev">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                <a class="carousel-control-next" href="#myCarouselpb" data-slide="next">
-                    <i class="fa fa-angle-right"></i>
-                </a>
             </div>
+            <div class="container">
+                <div class="row">
+                    <!-- Col products simple-->
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="module product-simple">
+                            <h3 class="modtitle">
+                                <span>Ürünler</span>
+                            </h3>
+                            <div class="modcontent">
+                                <div id="so_extra_slider_31" class="so-extraslider" >
+                                    <!-- Begin extraslider-inner -->
+                                    <div class="yt-content-slider extraslider-inner" data-rtl="yes" data-autoplay="no" data-delay="4" data-speed="0.6" data-margin="0" data-items_column00="1" data-items_column0="1" data-items_column1="1" data-items_column2="1" data-items_column3="1" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="yes" data-buttonpage="top">                                   
+                                        
+                                        <div class="item">
+                                        {% for i in urunler1 %}
+                                        <div class="product-item-container product-layout item-inner">
+                                                <div class="item-image">
+                                                    <div class="product-image-container second_img">
+                                                        <a alt='{{ i.urun_adi }}' href="/urun/{{i.id}}/{% duzenle i.urun_adi %}">
+                                                            <img src="{{ i|urun_resimleri_alma }}" class="img-1 img-responsive" alt="image1">
+                                                            
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="item-info">
+                                                    <div class="item-title"><a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" title='{{ i.urun_adi   }}' target="_self">{{ i.urun_adi |slice:":50"  }}</a></div>
+                                                    <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    </div>
+                                                    <div class="price">
+                                                      <span class="price">{{i.fiyat}} TL</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                            
+                                     
+                                            
+                                        </div>
+                                       <div class="item">
+                                        {% for i in urunler2 %}
+                                        <div class="product-item-container product-layout item-inner">
+                                                <div class="item-image">
+                                                    <div class="product-image-container second_img">
+                                                        <a alt='{{ i.urun_adi }}' href="/urun/{{i.id}}/{% duzenle i.urun_adi %}">
+                                                            <img src="{{ i|urun_resimleri_alma }}" class="img-1 img-responsive" alt="image1">
+                                                            
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="item-info">
+                                                    <div class="item-title"><a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" title='{{ i.urun_adi   }}' target="_self">{{ i.urun_adi |slice:":50"  }}</a></div>
+                                                    <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    </div>
+                                                    <div class="price">
+                                                      <span class="price">{{i.fiyat}} TL</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                            
+                                     
+                                            
+                                        </div>
+                                        <div class="item">
+                                        {% for i in urunler3 %}
+                                        <div class="product-item-container product-layout item-inner">
+                                                <div class="item-image">
+                                                    <div class="product-image-container second_img">
+                                                        <a alt='{{ i.urun_adi }}' href="/urun/{{i.id}}/{% duzenle i.urun_adi %}">
+                                                            <img src="{{ i|urun_resimleri_alma }}" class="img-1 img-responsive" alt="image1">
+                                                            
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="item-info">
+                                                    <div class="item-title"><a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" title='{{ i.urun_adi   }}' target="_self">{{ i.urun_adi |slice:":50"  }}</a></div>
+                                                    <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    </div>
+                                                    <div class="price">
+                                                      <span class="price">{{i.fiyat}} TL</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                            
+                                     
+                                            
+                                        </div>
+                                    </div>
+                                    <!--End extraslider-inner -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="module product-simple">
+                            <h3 class="modtitle">
+                                <span>İndirimli Ürünler</span>
+                            </h3>
+                            <div class="modcontent">
+                                <div id="so_extra_slider_31" class="so-extraslider" >
+                                    <!-- Begin extraslider-inner -->
+                                    <div class="yt-content-slider extraslider-inner" data-rtl="yes" data-autoplay="no" data-delay="4" data-speed="0.6" data-margin="0" data-items_column00="1" data-items_column0="1" data-items_column1="1" data-items_column2="1" data-items_column3="1" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="yes" data-buttonpage="top">                                   
+                                       <div class="item">
+                                        {% for i in indirimdekiurunler1 %}
+                                        <div class="product-item-container product-layout item-inner">
+                                                <div class="item-image">
+                                                    <div class="product-image-container second_img">
+                                                        <a alt='{{ i.urun_adi }}' href="/urun/{{i.id}}/{% duzenle i.urun_adi %}">
+                                                            <img src="{{ i|urun_resimleri_alma }}" class="img-1 img-responsive" alt="image1">
+                                                            
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="item-info">
+                                                    <div class="item-title"><a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" title='{{ i.urun_adi   }}' target="_self">{{ i.urun_adi |slice:":50"  }}</a></div>
+                                                    <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    </div>
+                                                    <div class="price">
+                                                      <span class="price">{{i.fiyat}} TL</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                            
+                                     
+                                            
+                                        </div>
+                                         <div class="item">
+                                        {% for i in indirimdekiurunler2 %}
+                                        <div class="product-item-container product-layout item-inner">
+                                                <div class="item-image">
+                                                    <div class="product-image-container second_img">
+                                                        <a alt='{{ i.urun_adi }}' href="/urun/{{i.id}}/{% duzenle i.urun_adi %}">
+                                                            <img src="{{ i|urun_resimleri_alma }}" class="img-1 img-responsive" alt="image1">
+                                                            
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="item-info">
+                                                    <div class="item-title"><a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" title='{{ i.urun_adi   }}' target="_self">{{ i.urun_adi |slice:":50"  }}</a></div>
+                                                    <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    </div>
+                                                    <div class="price">
+                                                      <span class="price">{{i.fiyat}} TL</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                            
+                                     
+                                            
+                                        </div>
+                                         <div class="item">
+                                        {% for i in indirimdekiurunler3 %}
+                                        <div class="product-item-container product-layout item-inner">
+                                                <div class="item-image">
+                                                    <div class="product-image-container second_img">
+                                                        <a alt='{{ i.urun_adi }}' href="/urun/{{i.id}}/{% duzenle i.urun_adi %}">
+                                                            <img src="{{ i|urun_resimleri_alma }}" class="img-1 img-responsive" alt="image1">
+                                                            
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="item-info">
+                                                    <div class="item-title"><a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" title='{{ i.urun_adi   }}' target="_self">{{ i.urun_adi |slice:":50"  }}</a></div>
+                                                    <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    </div>
+                                                    <div class="price">
+                                                      <span class="price">{{i.fiyat}} TL</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %} 
+                                        </div>
+                                        
+                                    </div>
+                                    <!--End extraslider-inner -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 last-col">
+                        <div class="module product-simple">
+                            <h3 class="modtitle">
+                                <span>Popiler Ürünler</span>
+                            </h3>
+                            <div class="modcontent">
+                                <div id="so_extra_slider_32" class="so-extraslider" >
+                                    <!-- Begin extraslider-inner -->
+                                    <div class="yt-content-slider extraslider-inner" data-rtl="yes" data-autoplay="no" data-delay="4" data-speed="0.6" data-margin="0" data-items_column00="1" data-items_column0="1" data-items_column1="1" data-items_column2="1" data-items_column3="1" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="yes" data-buttonpage="top">
+                                        <div class="item">
+                                        {% for i in populer1 %}
+                                        <div class="product-item-container product-layout item-inner">
+                                                <div class="item-image">
+                                                    <div class="product-image-container second_img">
+                                                        <a alt='{{ i.urun_adi }}' href="/urun/{{i.id}}/{% duzenle i.urun_adi %}">
+                                                            <img src="{{ i|urun_resimleri_alma }}" class="img-1 img-responsive" alt="image1">
+                                                            
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="item-info">
+                                                    <div class="item-title"><a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" title='{{ i.urun_adi   }}' target="_self">{{ i.urun_adi |slice:":50"  }}</a></div>
+                                                    <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    </div>
+                                                    <div class="price">
+                                                      <span class="price">{{i.fiyat}} TL</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                            
+                                     
+                                            
+                                        </div>
+                                        <div class="item">
+                                        {% for i in populer2 %}
+                                        <div class="product-item-container product-layout item-inner">
+                                                <div class="item-image">
+                                                    <div class="product-image-container second_img">
+                                                        <a alt='{{ i.urun_adi }}' href="/urun/{{i.id}}/{% duzenle i.urun_adi %}">
+                                                            <img src="{{ i|urun_resimleri_alma }}" class="img-1 img-responsive" alt="image1">
+                                                            
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="item-info">
+                                                    <div class="item-title"><a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" title='{{ i.urun_adi   }}' target="_self">{{ i.urun_adi |slice:":50"  }}</a></div>
+                                                    <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    </div>
+                                                    <div class="price">
+                                                      <span class="price">{{i.fiyat}} TL</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                            
+                                     
+                                            
+                                        </div>
+                                        <div class="item">
+                                        {% for i in populer3 %}
+                                        <div class="product-item-container product-layout item-inner">
+                                                <div class="item-image">
+                                                    <div class="product-image-container second_img">
+                                                        <a alt='{{ i.urun_adi }}' href="/urun/{{i.id}}/{% duzenle i.urun_adi %}">
+                                                            <img src="{{ i|urun_resimleri_alma }}" class="img-1 img-responsive" alt="image1">
+                                                            
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="item-info">
+                                                    <div class="item-title"><a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" title='{{ i.urun_adi   }}' target="_self">{{ i.urun_adi |slice:":50"  }}</a></div>
+                                                    <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    </div>
+                                                    <div class="price">
+                                                      <span class="price">{{i.fiyat}} TL</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                            
+                                     
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                    <!--End extraslider-inner -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end col products simple-->
+                </div>
             </div>
+
+            <div class="row-brands">
+                <div class="slider-brands container">           
+                    <div class="yt-content-slider contentslider" data-rtl="no" data-loop="yes" data-autoplay="no" data-autoheight="no" data-autowidth="no" data-delay="4" data-speed="0.6" data-margin="0" data-items_column00="6" data-items_column0="6" data-items_column1="5" data-items_column2="3" data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-hoverpause="yes">
+                        <div class="item"><a href="#"><img src="image/catalog/brands/b1.jpg" alt="brand"></a></div>
+                        <div class="item"><a href="#"><img src="image/catalog/brands/b2.jpg" alt="brand"></a></div>
+                        <div class="item"><a href="#"><img src="image/catalog/brands/b3.jpg" alt="brand"></a></div>
+                        <div class="item"><a href="#"><img src="image/catalog/brands/b4.jpg" alt="brand"></a></div>
+                        <div class="item"><a href="#"><img src="image/catalog/brands/b5.jpg" alt="brand"></a></div>
+                        <div class="item"><a href="#"><img src="image/catalog/brands/b6.jpg" alt="brand"></a></div>
+                        <div class="item"><a href="#"><img src="image/catalog/brands/b3.jpg" alt="brand"></a></div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="module so-latest-blog blog-home">
+                    <div class="pre_text">Our recent posts</div>
+                    <h3 class="modtitle"><span>Latest blogs</span></h3>
+                    <div class="modcontent clearfix">
+                        <div class="so-blog-external buttom-type1 button-type1">
+                            <div class="blog-external yt-content-slider contentslider" data-rtl="no" data-loop="no" data-autoplay="no" data-autoheight="no" data-autowidth="no" data-delay="4" data-speed="0.6" data-margin="30" data-items_column00="3" data-items_column0="3" data-items_column1="2" data-items_column2="2" data-items_column3="1" data-items_column4="1" data-arrows="no" data-pagination="no" data-lazyload="yes" data-hoverpause="yes">
+                                <div class="media">
+                                    <div class="item head-button">
+                                        <div class="media-left so-block">
+                                            <a class="imag" href="#"><img src="image/catalog/blog/1.jpg" alt="image" /></a>
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="media-content so-block">
+                                                <div class="infos"><span class="media-date-added"> March 6th, 2019</span>By <span class="media-author">Wash upito</span></div>
+                                                <h4 class="media-heading font-title head-item">
+                                                    <a href="#" title="Biten demons lector in henderit in vulp no sea takimata sanctus est" target="_self">Biten demons lector in henderit in ..</a>
+                                                </h4>
+                                                <div class="readmore font-title">
+                                                    <a href="#" target="_self"><span>Read more</span> </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="item head-button">
+                                        <div class="media-left so-block">
+                                            <a class="imag" href="#"><img src="image/catalog/blog/2.jpg" alt="image" /></a>
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="media-content so-block">
+                                                <div class="infos"><span class="media-date-added"> March 6th, 2019</span>By <span class="media-author">Wash upito</span></div>
+                                                <h4 class="media-heading font-title head-item">
+                                                    <a href="#" title="Commodo laoreet semper tincidun  sit vel illum dolore eu feugiat" target="_self">Commodo laoreet semper tincidun sit ..</a>
+                                                </h4>
+                                                <div class="readmore font-title">
+                                                    <a href="#" target="_self"><span>Read more</span> </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media">
+                                    <div class="item head-button">
+                                        <div class="media-left so-block">
+                                            <a class="imag" href="#"><img src="image/catalog/blog/3.jpg" alt="image" /></a>
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="media-content so-block">
+                                                <div class="infos"><span class="media-date-added"> March 6th, 2019</span>By <span class="media-author">Wash upito</span></div>
+                                                <h4 class="media-heading font-title head-item">
+                                                    <a href="#" title="Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse" target="_self">Duis autem vel eum iriure dolor ..</a>
+                                                </h4>
+                                                <div class="readmore font-title">
+                                                    <a href="#" target="_self"><span>Read more</span> </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-color">
+                <div class="block-services container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 col-margin1">
+                            <div class="icon-service">
+                                <div class="icon"><i class="pe-7s-car">&nbsp;</i></div>
+                                <div class="text">
+                                    <h6>Free shipping</h6>
+                                    <p class="no-margin">On all orders over $99.00</p>
+                                </div>
+                            </div>
+                        </div>        
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 col-margin1">
+                            <div class="icon-service">
+                                <div class="icon"><i class="pe-7s-refresh-2">&nbsp;</i></div>
+                                <div class="text">
+                                    <h6>30 days return</h6>
+                                    <p class="no-margin">You have 30 days to return</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 col-margin">
+                            <div class="icon-service">
+                                <div class="icon"><i class="pe-7s-door-lock">&nbsp;</i></div>
+                                <div class="text">
+                                    <h6>Safe Shopping<br></h6>
+                                    <p class="no-margin">Payment 100% secure</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="icon-service">
+                                <div class="icon"><i class="pe-7s-users">&nbsp;</i></div>
+                                <div class="text">
+                                    <h6>Online support</h6>
+                                    <p class="no-margin">Contact us 24 hours a day</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div>
-<!-- Products End -->
-                {% else %}
-                {% endif %}
         
-           <!-- Products Start -->
-           <div class="container py-5">
-            <div class="text-center mb-4">
-                {% if indirimdekiurunler1 %}
-                     <h2 class="section-title px-5"><a href="/indirimdeolanurunler/"><span class="px-2">İndirimde Olan Ürünler</span></a></h2>
-                    {% else %}
-                    {% endif %}
-            </div>
-        </div>
-        <!-- Products End -->
-        {% if indirimdekiurunler1 %}
-        <div class="container-xl indirim">
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="myCarousel1" class="carousel slide" data-ride="carousel" data-interval="0">
-                    <!-- Carousel indicators -->
-                    <ol class="carousel-indicators">
-                    {% if indirimdekiurunler1 %}
-                    <li data-target="#myCarousel1" data-slide-to="0" class="active"></li>
-                    {% else %}
-                    {% endif %}
-                       {% if indirimdekiurunler2 %}
-                    <li data-target="#myCarousel1" data-slide-to="1"></li>
-                    {% else %}
-                    {% endif %}
-                    {% if indirimdekiurunler3 %}
-                    <li data-target="#myCarousel1" data-slide-to="2"></li>
-                    {% else %}
-                    {% endif %}
-                        
-                        
-                    </ol>
-                    <!-- Wrapper for carousel items -->
-                    <div class="carousel-inner">
-
-
-                        <div class="item carousel-item active">
-                            <div class="row">
-
-
-                               {% for i in indirimdekiurunler1 %}
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                        <div style="border-radius: 5% !important;" class="img-box d-flex justify-content-center">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                                                <img style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-                                                <div class="resimYazisi">%{% indirim_orani  i.eski_fiyat i.fiyat %} İndirim</div>
-                                                <style>
-                                            .resimKapsayici {position:relative}
-                                            .resimYazisi {position:absolute;left:10px;top:10px;width: 50px;
-                                                height: 50px;
-                                                background-color: rgb(255, 136, 0); /* Kırmızı renk */
-                                                border-radius: 50%; color: white;}
-                                            </style>
-                                                </a>
-                                        </div>
-                                        <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
-
-                                            <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del>{{i.eski_fiyat}} TL</del></h6>
-                                            <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                  {% endfor %}
-                            </div>
-                        </div>
-
-
-                        <div class="item carousel-item ">
-                            <div class="row">
-                                		{% for i in indirimdekiurunler2 %}
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                        <div class="img-box">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                                                <img style="max-height: 200px;max-width: 200px;min-height: 200px;min-width: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-                                                <div class="resimYazisi">%{% indirim_orani  i.eski_fiyat i.fiyat %} İndirim</div>
-                                                <style>
-                                            .resimKapsayici {position:relative}
-                                            .resimYazisi {position:absolute;left:10px;top:10px;width: 50px;
-                                                height: 50px;
-                                                background-color: rgb(255, 136, 0); /* Kırmızı renk */
-                                                border-radius: 50%; color: white;}
-                                            </style>
-                                                </a>
-                                        </div>
-                                        <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
-
-                                            <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del>{{i.eski_fiyat}} TL</del></h6>
-                                            <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                  {% endfor %}
-                            </div>
-                        </div>
-                        <div class="item carousel-item">
-                            <div class="row">
-                                		{% for i in indirimdekiurunler3 %}
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                        <div class="img-box">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                                                <img style="max-height: 200px;max-width: 200px;min-height: 200px;min-width: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-                                                <div class="resimYazisi">%{% indirim_orani  i.eski_fiyat i.fiyat %} İndirim</div>
-                                                <style>
-                                            .resimKapsayici {position:relative}
-                                            .resimYazisi {position:absolute;left:10px;top:10px;width: 50px;
-                                                height: 50px;
-                                                background-color: rgb(255, 136, 0); /* Kırmızı renk */
-                                                border-radius: 50%; color: white;}
-                                            </style>
-                                                </a>
-                                        </div>
-                                        <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":50"  }}</p></a>
-
-                                            <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del>{{i.eski_fiyat}} TL</del></h6>
-                                            <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                  {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Carousel controls -->
-                    <a class="carousel-control-prev" href="#myCarousel1" data-slide="prev">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a class="carousel-control-next" href="#myCarousel1" data-slide="next">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-xl indirimmobil">
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="myCarousel11" class="carousel slide" data-ride="carousel" data-interval="0">
-                    <!-- Carousel indicators -->
-                    <ol class="carousel-indicators">
-                    {% for i in indirimdekiurunler1 %}
-                        {% if forloop.counter  == 1 %}
-                        <li data-target="#myCarousel11" data-slide-to="{{forloop.counter }}" class="active"></li>
-                    {% else %}
-                    <li data-target="#myCarousel11" data-slide-to="{{forloop.counter }}" class=""></li>
-                    {% endif %}
-                    {% endfor %}
-                    </ol>
-                    <!-- Wrapper for carousel items -->
-                    <div class="carousel-inner">
-
-                        {% for i in indirimdekiurunler1 %}
-                        {% if forloop.counter  == 1 %}
-                       
-                    
-                        <div class="item carousel-item active">
-                            <div class="row">
-
-
-                               
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                        <div style="border-radius: 5% !important;" class="img-box d-flex justify-content-center">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                                                <img style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-                                                <div class="resimYazisi">%{% indirim_orani  i.eski_fiyat i.fiyat %} İndirim</div>
-                                                <style>
-                                            .resimKapsayici {position:relative}
-                                            .resimYazisi {position:absolute;left:10px;top:10px;width: 50px;
-                                                height: 50px;
-                                                background-color: rgb(255, 136, 0); /* Kırmızı renk */
-                                                border-radius: 50%; color: white;}
-                                            </style>
-                                                </a>
-                                        </div>
-                                        <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
-
-                                            <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del>{{i.eski_fiyat}} TL</del></h6>
-                                            <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                 
-                            </div>
-                        </div>
-                        {% else %}
-                        <div class="item carousel-item">
-                            <div class="row">
-
-
-                               
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
-                                        <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                        <div style="border-radius: 5% !important;" class="img-box d-flex justify-content-center">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                                                <img style="max-height: 150px;max-width: 150px;min-height: 150px;min-width: 150px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-                                                <div class="resimYazisi">%{% indirim_orani  i.eski_fiyat i.fiyat %} İndirim</div>
-                                                <style>
-                                            .resimKapsayici {position:relative}
-                                            .resimYazisi {position:absolute;left:10px;top:10px;width: 50px;
-                                                height: 50px;
-                                                background-color: rgb(255, 136, 0); /* Kırmızı renk */
-                                                border-radius: 50%; color: white;}
-                                            </style>
-                                                </a>
-                                        </div>
-                                        <div class="thumb-content">
-                                            <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi }}</p></a>
-
-                                            <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del>{{i.eski_fiyat}} TL</del></h6>
-                                            <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                 
-                            </div>
-                        </div>
-                    {% endif %}
-                         {% endfor %}
-
-                    </div>
-                    <!-- Carousel controls -->
-                    <a class="carousel-control-prev" href="#myCarousel11" data-slide="prev">
-                        <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a class="carousel-control-next" href="#myCarousel11" data-slide="next">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
-                </div>
-                </div>
-            </div>
-        </div>
-        {% else %}
-                {% endif %}
+    </div>
+</div>
 {% endblock slider %}

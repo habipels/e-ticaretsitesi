@@ -1,0 +1,207 @@
+
+//** simple and lightweight mixin library for Sass **
+//-- url : http://bourbon.io/docs ---
+@import 'bourbon/bourbon';
+
+//** Mixins for Rem Font Sizing **
+//-- url : http://hugogiraudel.com/2013/03/18/ultimate-rem-mixin/
+@import 'utilities/rem';
+
+//** Variables for responsive design in bootstrap with sass **
+//-- url : https://gist.github.com/webinfinita/11407836
+@import 'utilities/bootstrap_breakpoints';
+
+//** Makes supporting both left-to-right (LTR) and right-to-left (RTL) easy.**
+//-- url : https://github.com/tysonmatanich/directional-scss
+@import 'utilities/directional';
+
+//Mixins utilities
+@import 'utilities/theme_variables';
+@import 'utilities/utilities';
+
+/* ================================================================================ */
+
+
+.typefooter-7{
+  padding-top: 0px;
+  /* GENERAL */
+  .module .modtitle{
+      font-size: 18px; color: #222;  
+      font-weight: 500;
+      text-transform: uppercase;   
+      margin: 0 0 25px 0;          
+  }
+  .box-infos .module .modtitle{ margin-bottom: 30px; }
+  .box-footer{        
+    .modcontent{
+      ul.menu{
+        li{           
+              a{
+                border: 0 none;               
+                padding: 0;       
+                font-weight: 400; 
+                line-height: 35px;  
+                position: relative;          
+                display: inline-block;
+                padding-#{$left}: 0px;
+                @include transition(all 0.2s ease-in-out 0s);
+                color: #bbb;
+                &:before{
+                  position: absolute;
+                  content: "";
+                  width: 0px; height: 1px;
+                  top: 50%; margin-top: -1px;
+                  #{$left}: 0;
+                  @include transition(all 0.2s ease-in-out 0s); 
+                }
+                &:hover{ padding-#{$left}: 15px;
+                  &:before{
+                    width: 8px;
+                  }
+                }
+              }       
+            }
+      }
+    }
+  }
+  
+
+  .footer-middle{
+      text-align: center;
+  }
+  .content-footer{
+  	width: 70%; margin: 0 auto;
+  	padding: 60px 0;
+  	p{
+  		line-height: 21px; margin-top: 40px;
+  		margin-bottom: 35px;
+  	}
+  }
+  .footer-links{
+  	border-top: 1px solid #e5e5e5;
+  	border-bottom: 1px solid #e5e5e5;
+  	padding: 33px 10px;
+  	ul{
+  		li{ 
+  			display: inline-block; 
+  			margin: 0 25px;
+  			a{
+  				font-weight: 500; font-size: 14px; color: #282828;
+  				text-transform: uppercase;
+  			}
+  		}
+  	}
+  }
+
+  .newsletter-footer7{
+      .newsletter{
+
+        .modtitle{  
+            width: 52%;
+            float: $left;
+            font-size: 18px; text-transform: uppercase;
+            color: #fff; font-weight: 500;
+            margin: 0; line-height: 44px;
+        }
+        .block_content{ margin: 33px 0;
+          margin-#{$left}: 52%;      
+          form.signup{
+            display: block;
+            margin: 0;
+            .form-group{
+              position: relative;
+              input.form-control{
+                border-radius: 3px;
+                height: 44px;
+                line-height: 44px;
+                width: 100%;
+                box-shadow: none;
+                padding: side-values(0 0 0 15px);
+                border: none;           
+                background-color: #fff;    
+                &::-moz-placeholder {
+                      color: #484848;
+                        opacity: 1; 
+                    }
+                    &:-ms-input-placeholder { color: #484848; } 
+                    &::-webkit-input-placeholder  { color: #484848; } 
+                      &:focus{
+                          z-index: 0;
+                      }
+                }
+            }
+
+              .subcribe{
+                position: absolute;
+                  top: 0px;
+                  #{$right}: -1px;
+                  button{       
+                  border: 0 none;
+                  color: #fff;
+                  font-weight: 400;
+                  font-size: 14px;
+                  height: 44px;
+                  line-height: 44px;
+                  padding: 0 20px;    
+                  text-transform: uppercase;
+                  border-top-#{$right}-radius: 3px;
+                  border-bottom-#{$right}-radius: 3px;
+                background-color: #282828;
+              }
+              } 
+              
+          }
+        }
+      }
+  }
+
+  .socials{ margin-top: 0px;
+
+        li{
+            display: inline-block; margin-#{$right}: 10px;
+            &:last-child{
+              margin-#{$right}: 0px;
+            }
+            a{ 
+              width: 40px; height: 40px; background-color: #282828;
+              text-align: center; line-height: 40px;
+              font-size: 18px; color: #fff;
+              display: block; border-radius: 3px;
+              &:hover{  }
+
+            }
+        }
+    }
+
+    .box-infos{
+      color: #bbb;
+      .list-icon{
+        li{
+          padding-#{$left}: 40px; margin-bottom: 24px;
+          position: relative;
+          a{ color: #bbb; }
+          .icon{ font-size: 24px; position: absolute; top: 0; #{$left}: 0; 
+            font-weight: 600;
+            &.pe-7s-map-marker{ top: 14px; }
+          }
+        }
+      }
+    }
+  /* FOOTER BOTTOM */
+
+  .footer-bottom{
+      padding: 40px 0;
+      text-align: center;
+      .copyright{
+        
+      }
+      .payment-w{
+        margin-bottom: 20px;
+      }
+  }
+}
+
+
+@media (min-width: 1200px) and (max-width: 1649px){
+
+}

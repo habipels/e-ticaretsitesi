@@ -23,7 +23,7 @@ def site_bilgileri():
     sozluk["youtube"] = sosyalmedyayoutube.objects.last()
     sozluk["logo"] = sayfa_logosu.objects.last()
     sozluk["pencere_icon"] = sayfa_iconu.objects.last()
-    sozluk["kategoriler"] = Meslek.objects.all()
+    sozluk["kategoriler"] = Meslek.objects.filter(slaytta_gorunsun = True).order_by("numarasi")
     sozluk["banner"] = banner.objects.filter(banner_gosterme = True).order_by("banner_sira")
     sozluk["site_adi"] = site_adi.objects.last()
     sozluk["email"] = email_adres.objects.last()
@@ -34,9 +34,7 @@ def site_bilgileri():
     sozluk["adres"] = adres.objects.last()
     sozluk["footeryazisi"] = sitefooteryazisiz.objects.last()
     sozluk["banner2"] = Meslek.objects.filter(slaytta_gorunsun = True).order_by("numarasi")
-    print(Meslek.objects.filter(slaytta_gorunsun = True).order_by("numarasi"))
-    print("*"*50)
-    print(banner.objects.filter(banner_gosterme = True).order_by("banner_sira"))
+    
     content = {"content":sozluk} 
     return content
 # Create your views here.
@@ -57,6 +55,9 @@ def homepage(request):
             # if the page is out of range, deliver the last page
         page_obj = paginator.page(paginator.num_pages)
     content["santiyeler"] = page_obj
+    content["urunler1"] = urun.objects.filter(silinme_bilgisi = False)[0:4]
+    content["urunler2"] = urun.objects.filter(silinme_bilgisi = False)[4:8]
+    content["urunler3"] = urun.objects.filter(silinme_bilgisi = False)[8:12]
     content["indirimdekiurunler1"] = urun.objects.filter(urun_stok__gte=1,eski_fiyat__gt=F('fiyat'),silinme_bilgisi = False)[0:4]
     content["indirimdekiurunler2"] = urun.objects.filter(urun_stok__gte=1,eski_fiyat__gt=F('fiyat'),silinme_bilgisi = False)[4:8]
     content["indirimdekiurunler3"] = urun.objects.filter(urun_stok__gte=1,eski_fiyat__gt=F('fiyat'),silinme_bilgisi = False)[8:12]

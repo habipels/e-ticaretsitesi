@@ -1,50 +1,78 @@
+
 {% load static %}
 <!DOCTYPE html>
-<html lang="tr">
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="{{content.site_adi.site_adi_sekme_tr}}" name="keywords">
-    <meta content="{{content.site_adi.site_adi_genel}}" name="description">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Favicon -->
+    
+    <!-- Basic page needs
+    ============================================ -->
+    {% block head %}
+    <title>{{content.site_adi.site_adi_sekme_tr}}</title>
+    {% endblock head %}
     {% if content.pencere_icon %}
         <link href="{{content.pencere_icon.sayfa_icon.url}}" rel="icon">
     {% else %}
     {% endif %}
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="{{content.site_adi.site_adi_sekme_tr}}" name="keywords">
+    <meta content="{{content.site_adi.site_adi_genel}}" name="description">
+    <meta name="author" content="Habip ELİŞ">
+    <meta name="robots" content="index, follow" />
+   
+    <!-- Mobile specific metas
+    ============================================ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- Favicon
+    ============================================ -->
+  
+   
+    <!-- Libs CSS
+    ============================================ -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap/css/bootstrap.min.css' %}">
+    <link href="{% static 'css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'js/datetimepicker/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
+    <link href="{% static 'js/owl-carousel/owl.carousel.css' %}" rel="stylesheet">
+    <link href="{% static 'css/themecss/lib.css' %}" rel="stylesheet">
+    <link href="{% static 'js/jquery-ui/jquery-ui.min.css' %}" rel="stylesheet">
+    <link href="{% static 'js/minicolors/miniColors.css' %}" rel="stylesheet">
+    
+    <link href="{% static 'js/pe-icon-7-stroke/css/pe-icon-7-stroke.css' %}" rel="stylesheet">
+    <link href="{% static 'pe-icon-7-stroke/css/helper.css' %}" rel="stylesheet">
 
+    <!-- Theme CSS
+    ============================================ -->
+    <link href="{% static 'css/themecss/so_searchpro.css' %}" rel="stylesheet">
+    <link href="{% static 'css/themecss/so_megamenu.css' %}" rel="stylesheet">
+    <link href="{% static 'css/themecss/so_advanced_search.css' %}" rel="stylesheet">
+    <link href="{% static 'css/themecss/so-listing-tabs.css' %}" rel="stylesheet">
+    <link href="{% static 'css/themecss/so-categories.css' %}" rel="stylesheet">
+    <link href="{% static 'css/themecss/so-newletter-popup.css' %}" rel="stylesheet">
+    <link href="{% static 'css/themecss/so-latest-blog.css' %}" rel="stylesheet">
 
+    <link href="{% static 'css/footer/footer5.css' %}" rel="stylesheet">
+    <link href="{% static 'css/header/header5.css' %}" rel="stylesheet">
+    <link id="color_scheme" href="{% static 'css/home5.css' %}" rel="stylesheet"> 
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+     <!-- Google web fonts
+    ============================================ -->
+    <link href='https://fonts.googleapis.com/css?family=Rubik:300,400,400i,500,600,700' rel='stylesheet' type='text/css'>     
+    <style type="text/css">
+         body{font-family:'Rubik', sans-serif;}
+    </style>
 
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <!-- jQuery kütüphanesini dahil edin -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- jQuery Sticky eklentisini dahil edin -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.sticky/1.0.4/jquery.sticky.min.js"></script>
-    {% block head %}
-    <title>{{content.site_adi.site_adi_sekme_tr}}</title>
-    {% endblock head %}
 </head>
-    {% block header %}
+
+<body class="common-home res layout-5">
+    
+    <div id="wrapper" class="wrapper-fluid banners-effect-5">
+        {% block header %}
         {% include "page_includes/header.html" %}
     {% endblock header %}
 
-    {% block menu %}
-        {% include "page_includes/menu.html" %}
-    {% endblock menu %}
+
     {% block site %}
 
     {% endblock site %}
@@ -63,31 +91,52 @@
         {% include "page_includes/footer.html" %}
     {% endblock footer %}
     {% block javascript %}
-    <script>
-        var ilkOge = document.querySelector('.active_ver');
-
-// İlk öğeye yeni bir sınıf ekleme
-            if (ilkOge) {
-            ilkOge.classList.add('active');
-            }
-    </script>
     {% endblock javascript %}
     <!-- Back to Top -->
-    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    </div>
+   
+
+<!-- End Color Scheme
+============================================ -->
 
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
-    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
 
-    <!-- Contact Javascript File -->
-    <script src="{% static 'mail/jqBootstrapValidation.min.js' %}"></script>
-    <script src="{% static 'mail/contact.js' %}"></script>
+<!-- Include Libs & Plugins
+============================================ -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/owl-carousel/owl.carousel.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/slick-slider/slick.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/themejs/libs.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/unveil/jquery.unveil.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/countdown/jquery.countdown.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/datetimepicker/moment.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/datetimepicker/bootstrap-datetimepicker.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-ui/jquery-ui.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/modernizr/modernizr-2.6.2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/minicolors/jquery.miniColors.min.js' %}"></script>
 
-    <!-- Template Javascript -->
-    <script src="{% static 'js/main.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/lightslider/lightslider.js' %}"></script>
+
+<!-- Theme files
+============================================ -->
+
+<script type="text/javascript" src="{% static 'js/themejs/application.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'js/themejs/homepage.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'js/themejs/toppanel.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/themejs/so_megamenu.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/themejs/addtocart.js' %}"></script>  
+
+<!-- <script type="text/javascript" src="{% static 'js/themejs/cpanel.js' %}"></script> -->
+
+ <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
           var babyHeader = document.getElementById('baby_header');
@@ -161,5 +210,4 @@
 </script>
     {% endblock whatsap %}
 </body>
-
 </html>

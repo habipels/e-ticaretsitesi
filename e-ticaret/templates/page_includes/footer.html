@@ -1,60 +1,150 @@
 {% load static %}
+<!-- Footer Container -->
+    <footer class="footer-container typefooter-5">
+        <!-- Footer middle Container -->
+        <div class="container">
+            <div class="row footer-middle">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 col-style">
+                    <div class="box-footer box-infos">
+                        <div class="module">
+                            <h3 class="modtitle">İletişim</h3>
+                            <div class="modcontent">
+                                <ul class="list-icon">
+                                      <li><span class="icon pe-7s-map-marker"></span>{{content.adres.sirket_adresi_tr}}</li>
+                                    <li><span class="icon pe-7s-call"></span><a style="color: white !important;" href="tel:+{{content.telefon.sirket_numarasi}}">{{content.telefon.sirket_numarasi_gosterilecek_metin}}</a></li>
+                                    <li><span class="icon pe-7s-mail"></span><a style="color: white !important;" href="mailto:{{content.email.sirket_email_adresi}}">{{content.email.sirket_email_adresi}}</a></li>
+                                    <li><span class="icon pe-7s-alarm"></span>{{footeryazisi}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 col-style">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-style">
+                            <div class="box-information box-footer">
+                                <div class="module clearfix">
+                                    <h3 class="modtitle">Hızlı Linkler</h3>
+                                    <div class="modcontent">
+                                        <ul class="menu">
+                                        
+                            
+                            
+                                            <li><a style="color: white !important;" class="text-dark mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Anasayfa</a></li>
+                                            <li><a style="color: white !important;" class="text-dark mb-2" href="/hakkimizda"><i class="fa fa-angle-right mr-2"></i>Hakkımızda</a></li>
+                                            <li><a style="color: white !important;" class="text-dark mb-2" href="/iletisim"><i class="fa fa-angle-right mr-2"></i>İletişim</a></li>
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
 
-<!-- Footer Start -->
-    <div style="background-color: #3652AD !important; margin" class="container-fluid bg-secondary text-dark mt-5 pt-5">
-        <div class="row px-xl-5 pt-5">
-            <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
-                <a href="/" class="text-decoration-none">
-                    {% if content.logo %}
-                            <img style="max-width: 150px; margin-bottom: 5px;;" src="{{content.logo.image.url}}" alt="">
-                        {% else %}
-                        {% endif %}
-                </a>
-                <p style="color: white !important;"><b>{{footeryazisi}}</b></p>
-                <p style="color: white !important;" class="mb-2"><i style="color: white !important;" class="fa fa-map-marker-alt text-primary mr-3"></i>{{content.adres.sirket_adresi_tr}}</p>
-                <p style="color: white !important;" class="mb-2"><i style="color: white !important;" class="fa fa-envelope text-primary mr-3"></i><a style="color: white !important;" href="mailto:{{content.email.sirket_email_adresi}}">{{content.email.sirket_email_adresi}}</a></p>
-                <p style="color: white !important;" class="mb-0"><i style="color: white !important;" class="fa fa-phone-alt text-primary mr-3"></i><a style="color: white !important;" href="tel:+{{content.telefon.sirket_numarasi}}">{{content.telefon.sirket_numarasi_gosterilecek_metin}}</a></p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-style">
+                            <div class="box-account box-footer">
+                                <div class="module clearfix">
+                                    <h3 class="modtitle">Genel</h3>
+                                    <div class="modcontent">
+                                        <ul class="menu">
+                                        {% for i in content.yasal_metinler %}
+                                <li><a style="color: white !important;" class="text-dark mb-2" href="/yasalmetinler/{{i.id}}/{{i.yasal_metin_basligi}}"><i class="fa fa-angle-right mr-2"></i>{{i.yasal_metin_basligi}}</a>
+                            </li>{% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-clear">
+                            <div class="box-service box-footer">
+                              <div class="module clearfix">
+                                <h3 class="modtitle">Bize Ulaşın</h3>
+                                <div class="modcontent">
+                                  <ul class="menu">
+                                  <li><a style="color: white !important;" class="text-dark mb-2" href="/iletisim"><i class="fa fa-angle-right mr-2"></i>İletişim</a>
+                            </li><li><a style="color: white !important;" class="text-dark mb-2" target="_blank" href="https://api.whatsapp.com/send?phone={{telefon.sirket_numarasi}}&text=Merhaba!"><i class="fa fa-angle-right mr-2"></i>Whatsapp</a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-8 col-md-12">
+            
+        </div>
+        <div class="row-bottom">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-4 mb-5">
-                        <h5 style="color: white !important;" class="font-weight-bold text-dark mb-4">Hızlı Linkler</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a style="color: white !important;" class="text-dark mb-2" href="/"><i class="fa fa-angle-right mr-2"></i>Anasayfa</a>
-                            <a style="color: white !important;" class="text-dark mb-2" href="/hakkimizda"><i class="fa fa-angle-right mr-2"></i>Hakkımızda</a>
-                            <a style="color: white !important;" class="text-dark mb-2" href="/iletisim"><i class="fa fa-angle-right mr-2"></i>İletişim</a>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 col-socials">
+                        <div class="socials-w">
+                            <h3>Bizi Takip Edin</h3>
+                            <ul class="socials">
+                             {% if content.facebook %}<li class="facebook">
+                        <a style="color: white !important;" class="text-dark px-2" href="{{content.facebook.link}}">
+                        <i  style="color: white !important;"  class="fa fa-facebook-f"></i>
+                    </a></li>
+                    {% else %}
+                    {% endif %}
+                    {% if content.tw %}<li class="facebook">
+                        <a  style="color: white !important;"  class="text-dark px-2" href="{{content.tw.link}}">
+                        <i  style="color: white !important;"  class="fa fa-twitter"></i>
+                    </a></li>
+                    {% else %}
+                    {% endif %}
+                    {% if content.link %}<li class="facebook">
+                        <a  style="color: white !important;"  class="text-dark px-2" href="{{content.link.link}}">
+                        <i  style="color: white !important;"  class="fa fa-linkedin-in"></i>
+                    </a></li>
+                    {% else %}
+                    {% endif %}
+                    {% if content.insta %}<li class="facebook">
+                        <a  style="color: white !important;"  class="text-dark px-2" href="{{content.insta.link}}">
+                        <i  style="color: white !important;"  class="fa fa-instagram"></i>
+                    </a></li>
+                    {% else %}
+                    {% endif %}
+                    {% if content.youtube %}<li class="facebook">
+                        <a  style="color: white !important;"  class="text-dark pl-2" href="{{content.youtube.link}}">
+                        <i  style="color: white !important;"  class="fa fa-youtube"></i>
+                    </a></li>
+                    {% else %}
+                    {% endif %}
+                    
+                            </ul>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-5">
-                        <h5 style="color: white !important;" class="font-weight-bold text-dark mb-4">Genel</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            {% for i in content.yasal_metinler %}
-                                <a style="color: white !important;" class="text-dark mb-2" href="/yasalmetinler/{{i.id}}/{{i.yasal_metin_basligi}}"><i class="fa fa-angle-right mr-2"></i>{{i.yasal_metin_basligi}}</a>
-                            {% endfor %}
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                        <div class="module newsletter-footer1">
+                            <div class="newsletter">
+                                <h3 class="modtitle">Bizi Takip Edin Avantajlı Fiyatlardan Yaralanın</h3>
+                                <div class="block_content">
+                                   
+                                </div>     
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-5">
-                        <h5 style="color: white !important;" class="font-weight-bold text-dark mb-4">Bize Ulaşın</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a style="color: white !important;" class="text-dark mb-2" href="/iletisim"><i class="fa fa-angle-right mr-2"></i>İletişim</a>
-                            <a style="color: white !important;" class="text-dark mb-2" target="_blank" href="https://api.whatsapp.com/send?phone={{telefon.sirket_numarasi}}&text=Merhaba!"><i class="fa fa-angle-right mr-2"></i>Whatsapp</a>
-
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
-        <div class="row border-top border-light mx-xl-5 py-4">
-            <div class="col-md-6 px-xl-0">
-                <p class="mb-md-0 text-center text-md-left text-dark">
-                    &copy; <a style="color: white !important;" class="text-dark font-weight-semi-bold" href="#">Trakya Oto Parça</a>
-                </p>
-            </div>
-            <div class="col-md-6 px-xl-0 text-center text-md-right">
-                <img class="img-fluid" style="max-width: 150px;" src="{% static 'odeme.jpg' %}" alt="">
-            </div>
-            <div style="height: 25px !important;" ></div>
+        <!-- /Footer middle Container -->
+        <!-- Footer Bottom Container -->
+        <div class="footer-bottom">        
+            <div class="container">
+                <div class="row">
+                    <div class="copyright col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                        <p><a href="#" target="_blank">Trakya Oto Parça</a></p>
+                    </div>                 
+                    <div class="payment-w col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                        <img src="{% static 'odeme.jpg' %}" alt="imgpayment">
+                    </div>
+                </div>
+            </div>            
         </div>
-    </div>
-    <!-- Footer End -->
+        <!-- /Footer Bottom Container -->
+        
+        
+            <!--Back To Top-->
+        <div class="back-to-top"><i class="fa fa-angle-up"></i></div>
+    </footer>
+    <!-- //end Footer Container -->
