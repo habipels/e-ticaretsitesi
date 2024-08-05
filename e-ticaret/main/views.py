@@ -85,7 +85,7 @@ def urunler_tekli_sayfa (request,id,slug):
     a  = get_object_or_404(urun,id = id).urun_bakma_saysi+1
     urun.objects.filter(id = id).update(urun_bakma_saysi = a)
     content["urun_resimleri"] = urun_resimleri.objects.filter(urun_bilgisi = get_object_or_404(urun,id = id))
-    return render(request,"urunlist/urun_goster.html",content)
+    return render(request,"urunlist/urun_gosterme.html",content)
 
 
 def sepete_urun_ekleme(request,id,slug):
@@ -335,7 +335,7 @@ def kategori_ver_urunleri_gosterme(request,id,slug):
     content["santiyeler"] = page_obj
     content["top"]  = profile
     content["medya"] = page_obj
-    return render(request,"kategori/kategori_urun_goster.html",content)
+    return render(request,"kategori/kategori_urun_gosterme.html",content)
 
 def indirimli_urunleri_gosterme(request):
     content = site_bilgileri()
@@ -384,7 +384,7 @@ def indirimli_urunleri_gosterme(request):
     content["santiyeler"] = page_obj
     content["top"]  = profile
     content["medya"] = page_obj
-    return render(request,"kategori/indirimli_urun_goster.html",content)
+    return render(request,"kategori/indirimli_urun_gosterme.html",content)
 
 def popiler_urunleri_gosterme(request):
     content = site_bilgileri()

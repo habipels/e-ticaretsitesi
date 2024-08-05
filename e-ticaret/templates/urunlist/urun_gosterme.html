@@ -1,0 +1,369 @@
+{% extends "homebase.html" %}
+{% load custom_tags %}
+{% block head %}
+    <title>{{site_adi.site_adi_sekme_tr}} | {{urun_.urun_adi}}</title>
+    {% endblock head %}
+{% block slider %}
+   <script>
+    $(document).ready(function(){
+        $(".wish-icon i").click(function(){
+            $(this).toggleClass("fa-heart fa-heart-o");
+        });
+    });	
+    </script>
+ <!-- Main Container  -->
+    <div class="main-container container">
+        <ul class="breadcrumb">
+            <li><a href="/"><i class="fa fa-home"></i></a></li>
+            <li><a href="#">{{urun_.urun_adi}}</a></li>
+        </ul>
+        
+        <div class="row">
+
+            <!--Middle Part Start-->
+            <div id="content" class="col-md-9 col-sm-8">
+                
+                <div class="product-view">
+                    <div class="left-content-product">
+                        <div class="row">
+                            <div class="content-product-left col-md-6 col-sm-12 col-xs-12">
+                                <div id="thumb-slider-vertical" class="thumb-vertical-outer">
+                                    <!-- <span class="btn-more prev-thumb nt"><i class="fa fa-angle-up"></i></span>
+                                    <span class="btn-more next-thumb nt"><i class="fa fa-angle-down"></i></span> -->
+                                    <ul class="thumb-vertical">
+                                    {% for i in urun_resimleri %}
+                                         <li class="owl2-item">
+                                            <a data-index="{{i.id}}" class="img thumbnail" data-image="{{i.image.url}}" title="Canon EOS 5D">
+                                                <img src="{{i.image.url}}" title="Canon EOS 5D" alt="Canon EOS 5D">
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                       
+                                    
+                                       
+                                    </ul>                                                           
+                                </div>
+                                <div class="large-image  vertical">
+                                    <img itemprop="image" class="product-image-zoom" src="{{ urun_|urun_resimleri_alma }}" data-zoom-image="{{ urun_|urun_resimleri_alma }}" title="{{urun_.urun_adi}}" alt="{{urun_.urun_adi}}">
+                                </div>
+                            </div>
+
+                            <div class="content-product-right col-md-6 col-sm-12 col-xs-12">
+                                <div class="title-product">
+                                    <h1>{{urun_.urun_adi}}</h1>
+                                </div>
+                                <!-- Review ---->
+                                <div class="box-review form-group">
+                                    <div class="ratings">
+                                        <div class="rating-box">
+                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+                                            <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+                                        </div>
+                                    </div>
+
+                                    <a class="reviews_button" href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">0 reviews</a>  | 
+                                    <a class="write_review_button" href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">Write a review</a>
+                                </div>
+
+                                <div class="product-label form-group">
+                                    <div class="product_page_price price" itemprop="offerDetails" itemscope="" itemtype="http://data-vocabulary.org/Offer">
+                                        <span class="price-new" itemprop="price">₺ {{urun_.fiyat}}</span>
+                                        {% if urun_.fiyat < urun_.eski_fiyat  %}
+                                            <span class="price-old">₺ {{urun_.eski_fiyat}}</span>
+                                        {% else %}
+                                        {% endif %}
+                                        
+                                    </div>
+                                    <div class="stock"><span>Stok Durumu:</span> <span class="status-stock">Stokta Var</span></div>
+                                </div>
+
+                                <div class="product-box-desc">
+                                    <div class="inner-box-desc">
+                                        {{urun_ | urun_filteleri_alma_bilgisi}}
+                                    </div>
+                                </div>
+
+                                <div class="short_description form-group">
+                                   </div>
+                                   <form action="/urunekle/" method="post">
+                                    {% csrf_token %}
+                    <input type="text" hidden  name="urun" value="{{urun_.id}}">
+                        <input type="text" hidden  name="urunadi" value="{{urun_.urun_adi}}">
+                                <div id="product">
+                                    <div class="form-group box-info-product">
+                                        <div class="option quantity">
+                                            <div class="input-group quantity-control" unselectable="on" style="-webkit-user-select: none;">
+                                                <label>Adet</label>
+                                                <input class="form-control" type="text" name="adet"
+                                                value="1">
+                                                <input type="hidden" name="product_id" value="50">
+                                                <span class="input-group-addon product_quantity_down">−</span>
+                                                <span class="input-group-addon product_quantity_up">+</span>
+                                            </div>
+                                        </div>
+                                        <div class="cart">
+                                            <button type="submit" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Sepete Ekle</button>
+                                        </div>
+                                        <div class="add-to-links wish_comp">
+                                            <ul class="blank list-inline">
+                                                <li class="wishlist">
+                                                    <a class="icon" data-toggle="tooltip" title=""
+                                                    onclick="wishlist.add('50');" data-original-title="Add to Wish List"><i class="fa fa-heart"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="compare">
+                                                    <a class="icon" data-toggle="tooltip" title=""
+                                                    onclick="compare.add('50');" data-original-title="Compare this Product"><i class="fa fa-exchange"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </form>
+                                </div>
+                                <!-- end box info product -->
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                
+                </div>
+                
+                <!-- Product Tabs -->
+                <div class="producttab ">
+                    <div class="tabsslider horizontal-tabs  col-xs-12">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#tab-1">Açıklama</a></li>
+                            <li class="item_nonactive"><a data-toggle="tab" href="#tab-review">Yorumlar</a></li>
+                         
+                        </ul>
+                        <div class="tab-content col-xs-12">
+                           
+                            <div id="tab-1" class="tab-pane fade active in">
+                                {{urun_.urun_aciklama |safe}}
+                            </div>
+                            <div id="tab-review" class="tab-pane fade">
+                                <form>
+                                  
+                                </form>
+                            </div>
+                            <div id="tab-4" class="tab-pane fade">
+                                          
+                            </div>
+                            <div id="tab-5" class="tab-pane fade">
+                           
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- //Product Tabs -->
+                
+                <!-- Related Products -->
+                <div class="related titleLine products-list grid module ">
+                    <h3 class="modtitle">Benzer Ürünler </h3>
+            
+                    <div class="releate-products yt-content-slider products-list" data-rtl="no" data-loop="yes" data-autoplay="no" data-autoheight="no" data-autowidth="no" data-delay="4" data-speed="0.6" data-margin="30" data-items_column00="4" data-items_column0="4" data-items_column1="3" data-items_column2="2" data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-hoverpause="yes">
+                        {% benzer_urunler urun_.kategori.all.0.id  as d %}  
+                        {% for i in d.profile1 %}
+                        <div class="product-layout product-grid">                                               
+                            <div class="product-item-container item--static">
+                                <div class="left-block">
+                                    <div class="product-image-container second_img">
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" target="_self" title="Volup tatem accu">
+                                            <img src="{{ i|urun_resimleri_alma }}" class="img-1 img-responsive" alt="image1">
+                                            <img src="{{ i|urun_resimleri_alma }}" class="img-2 img-responsive" alt="image2">
+                                        </a>
+                                    </div>
+                                    <span class="label-product label-new">Yeni Ürün </span>
+                                    <!--quickview--> 
+                                    <div class="so-quickview">
+                                      <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-search"></i><span>Quick view</span></a>
+                                    </div>                                                     
+                                    <!--end quickview-->
+                                </div>
+                                <div class="right-block">
+                                    <div class="button-group cartinfo--static">
+                                        
+                                        <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart"></i></button>
+                                        <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="addToCart" title="Add to cart" onclick="cart.add('60 ');">
+                                            <span>Sepete Ekle </span>   
+                                        </a>
+                                        <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-refresh"></i></button>                                                    
+                                    </div>
+                                    <h4><a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" title="Volup tatem accu" target="_self">{{ i.urun_adi }}</a></h4>
+                                    <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                    </div>
+                                    <div class="price">
+                                      <span class="price">{{i.fiyat}} TL</span>
+                                    </div>
+                                </div>                                            
+                            </div>                                            
+                        </div>
+                        {% endfor %}    
+                        {% for i in d.profile2 %}
+                        <div class="product-layout product-grid">                                               
+                            <div class="product-item-container item--static">
+                                <div class="left-block">
+                                    <div class="product-image-container second_img">
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" target="_self" title="Volup tatem accu">
+                                            <img src="{{ i|urun_resimleri_alma }}" class="img-1 img-responsive" alt="image1">
+                                            <img src="{{ i|urun_resimleri_alma }}" class="img-2 img-responsive" alt="image2">
+                                        </a>
+                                    </div>
+                                    <span class="label-product label-new">Yeni Ürün </span>
+                                    <!--quickview--> 
+                                    <div class="so-quickview">
+                                      <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-search"></i><span>Quick view</span></a>
+                                    </div>                                                     
+                                    <!--end quickview-->
+                                </div>
+                                <div class="right-block">
+                                    <div class="button-group cartinfo--static">
+                                        
+                                        <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart"></i></button>
+                                        <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="addToCart" title="Add to cart" onclick="cart.add('60 ');">
+                                            <span>Sepete Ekle </span>   
+                                        </a>
+                                        <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-refresh"></i></button>                                                    
+                                    </div>
+                                    <h4><a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" title="Volup tatem accu" target="_self">{{ i.urun_adi }}</a></h4>
+                                    <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                    </div>
+                                    <div class="price">
+                                      <span class="price">{{i.fiyat}} TL</span>
+                                    </div>
+                                </div>                                            
+                            </div>                                            
+                        </div>
+                        {% endfor %}  
+                        {% for i in d.profile3 %}
+                        <div class="product-layout product-grid">                                               
+                            <div class="product-item-container item--static">
+                                <div class="left-block">
+                                    <div class="product-image-container second_img">
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" target="_self" title="Volup tatem accu">
+                                            <img src="{{ i|urun_resimleri_alma }}" class="img-1 img-responsive" alt="image1">
+                                            <img src="{{ i|urun_resimleri_alma }}" class="img-2 img-responsive" alt="image2">
+                                        </a>
+                                    </div>
+                                    <span class="label-product label-new">Yeni Ürün </span>
+                                    <!--quickview--> 
+                                    <div class="so-quickview">
+                                      <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="quickview.html" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-search"></i><span>Quick view</span></a>
+                                    </div>                                                     
+                                    <!--end quickview-->
+                                </div>
+                                <div class="right-block">
+                                    <div class="button-group cartinfo--static">
+                                        
+                                        <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart"></i></button>
+                                        <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="addToCart" title="Add to cart" onclick="cart.add('60 ');">
+                                            <span>Sepete Ekle </span>   
+                                        </a>
+                                        <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-refresh"></i></button>                                                    
+                                    </div>
+                                    <h4><a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" title="Volup tatem accu" target="_self">{{ i.urun_adi }}</a></h4>
+                                    <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                    </div>
+                                    <div class="price">
+                                      <span class="price">{{i.fiyat}} TL</span>
+                                    </div>
+                                </div>                                            
+                            </div>                                            
+                        </div>
+                        {% endfor %}  
+                    </div>
+                </div>
+
+                <!-- end Related  Products-->
+
+        
+
+                
+            </div>
+            <!--Middle Part End-->
+            <!--Left Part Start -->
+            <aside class="col-sm-4 col-md-3 content-aside" id="column-left">
+                <div class="module category-style">
+                    <h3 class="modtitle">Kategoriler</h3>
+                    <div class="modcontent">
+                        <div class="box-category">
+                            <ul id="cat_accordion" class="list-group">
+                                {% getir_kategorileri None %}
+                            </ul>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+       
+                <div class="module banner-left hidden-xs ">
+                    <div class="banner-sidebar banners">
+                      <div>
+                       
+                      </div>
+                    </div>
+                </div>
+            </aside>
+            <!--Left Part End -->
+        </div>
+        
+    </div>
+    <!-- //Main Container -->
+        
+{% endblock slider %}
+{% block whatsap %}
+    <script>
+    var url = 'https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?46735';
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = url;
+    var options = {
+  "enabled":true,
+  "chatButtonSetting":{
+      "backgroundColor":"#4dc247",
+      "ctaText":"",
+      "borderRadius":"25",
+      "marginLeft":"0",
+      "marginBottom":"100",
+      "marginRight":"50",
+      "position":"right"
+  },
+  "brandSetting":{
+      "brandName":"{{site_adi.site_adi_sekme_tr}}",
+      "brandSubTitle":"Çevrimiçi",
+      "brandImg":"{{pencere_icon.sayfa_icon.url}}",
+      "welcomeText":"Merhaba!\nNasıl Yardımcı Olabilirim",
+      "messageText":"Merhaba  https://www.trakyaotoyedekparca.com/urun/{{urun_.id}}/{% duzenle urun_.urun_adi %} için bilgi alabilir miyim?",
+      "backgroundColor":"#008000",
+      "ctaText":"Mesaj Gönder",
+      "borderRadius":"25",
+      "autoShow":false,
+      "phoneNumber":" +{{telefon.sirket_numarasi}}"
+  }
+};
+    s.onload = function() {
+        CreateWhatsappChatWidget(options);
+    };
+    var x = document.getElementsByTagName('script')[0];
+    x.parentNode.insertBefore(s, x);
+</script>
+    {% endblock whatsap %}

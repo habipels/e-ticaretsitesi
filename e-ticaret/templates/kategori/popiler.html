@@ -1,163 +1,252 @@
 {% extends "homebase.html" %}
 {% load custom_tags %}
-
+{% load static  %}
 {% block slider %}
-<style>
+ <!-- Main Container  -->
+    <div class="main-container container">
+        <ul class="breadcrumb">
+            <li><a href="/"><i class="fa fa-home"></i></a></li>
+            <li><a href="#">Tüm Kategoriler</a></li>
+        </ul>
+        
+        <div class="row">
+            <!--Left Part Start -->
+            <aside class="col-sm-4 col-md-3 content-aside" id="column-left">
+                <div class="module category-style">
+                    <h3 class="modtitle">Tüm Kategoriler</h3>
+                    <div class="modcontent">
+                        <div class="box-category">
+                            <ul id="cat_accordion" class="list-group">
+                               {% getir_kategorileri None %}
 
-a {font-size: small; margin-top: 10px; position: relative; display: inline-block;}
-
-.min-max-slider {position: relative; width: 200px; text-align: center; margin-bottom: 50px;}
-.min-max-slider > label {display: none;}
-span.value {height: 1.7em; font-weight: bold; display: inline-block;}
-span.value.lower::before {content: "₺ "; display: inline-block;}
-span.value.upper::before {content: "- ₺ "; display: inline-block; margin-left: 0.4em;}
-.min-max-slider > .legend {display: flex; justify-content: space-between;}
-.min-max-slider > .legend > * {font-size: small; opacity: 0.25;}
-.min-max-slider > input {cursor: pointer; position: absolute;}
-
-/* webkit specific styling */
-.min-max-slider > input {
-  -webkit-appearance: none;
-  outline: none!important;
-  background: transparent;
-  background-image: linear-gradient(to bottom, transparent 0%, transparent 30%, silver 30%, silver 60%, transparent 60%, transparent 100%);
-}
-.min-max-slider > input::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-  appearance: none;
-  width: 14px; /* Set a specific slider handle width */
-  height: 14px; /* Slider handle height */
-  background: #eee; /* Green background */
-  cursor: pointer; /* Cursor on hover */
-  border: 1px solid gray;
-  border-radius: 100%;
-}
-.min-max-slider > input::-webkit-slider-runnable-track {cursor: pointer;}
-</style>
-
-        <!-- Shop Start -->
-    <div class="container pt-5">
-        <div class="row px-xl-5">
-            <!-- Shop Sidebar Start -->
-            <div class="col-lg-3 col-md-12">
-                <!-- Price Start -->
-                <div class="border-bottom mb-4 pb-4">
-                <ul class="menu" style="list-style-type:none;">
-                  {% getir_kategorileri kategorisi.id %}
-                    
-                </ul>
-                    
-                  
-                </div>
-                <form>
-                <div class="border-bottom mb-4 pb-4 ">
-                    <h5 class="font-weight-semi-bold mb-4">Fiyat Aralığı</h5>
-                  <label for="min">Minimum Fiyat</label>
-                      <input id="min" class="min" name="min" value="{% if request.GET.min %}{{request.GET.min}}{% endif %}" type="number" step="1" min="0" max="1000000" />
-                      <label for="max">Maximum Fiyat</label>
-                      <input id="max" class="max" name="max" value="{% if request.GET.max %}{{request.GET.max}}{% endif %}" type="number" step="1" min="0" max="1000000" />
-                </div>
-                <!-- Price End -->
-                
-                <!-- Color Start -->
-                <div class="border-bottom mb-4 pb-4">
-                        {% for j in filtre_basliklari %}
-                        
-                      <h5 class="font-weight-semi-bold mb-4">{{j.filtre_adi}}</h5>
-                        {% for i in filtre %}
-                          {% if j == i.filtre_bagli_oldu_filtre %}
-                          
-                          
-                          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" name="marka" value="{{i.id}}"  id="color-all{{i.id}}">
-                            <label class="custom-control-label" for="color-all{{i.id}}">{{i.filtre_adi}}</label>
-                            
+                            </ul>
                         </div>
-                        {% else %}
-                          {% endif %}
-                        {% endfor %}
-                        {% endfor %}
                         
-                        <div class="border-bottom mt-4 pb-4">
-                          <button class="btn btn-info"  type="submit">ARA</button>
-                      </div>
                         
-                   
+                    </div>
                 </div>
-                 
-                <!-- Color End -->
-
-
-            </div>
-            <!-- Shop Sidebar End -->
-
-
-            <!-- Shop Product Start -->
-            <div class="col-lg-9 col-md-12">
-                <div class="row pb-3">
-                    <div class="col-12 pb-1">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                           
-                                <div class="input-group">
-                                    <input type="text" style="border: 1px solid black;" value="{% if  request.GET.search %}{{request.GET.search}}{% endif %}"  name="search" class="form-control" placeholder="Ara ..">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text bg-transparent text-primary">
-                                            <i class="fa fa-search"></i>
-                                        </span>
+                <div class="module product-simple">
+                    <h3 class="modtitle">
+                        <span>Filtreleme</span>
+                    </h3>
+                    <div class="modcontent">
+                        <div class="so-extraslider" >
+                            <!-- Begin extraslider-inner -->
+                            <div class="yt-content-slider extraslider-inner">
+                                <div class="item ">
+                                    <form>
+                                        <div class="border-bottom mb-4 pb-4 ">
+                                            <h5 class="font-weight-semi-bold mb-4">Fiyat Aralığı</h5> 
+                                            <hr>
+                                          <label for="min">Minimum Fiyat</label>
+                                              <input id="min" class="min" name="min" value="{% if request.GET.min %}{{request.GET.min}}{% endif %}" type="number" step="1" min="0" max="1000000" />
+                                              <label for="max">Maximum Fiyat</label>
+                                              <input id="max" class="max" name="max" value="{% if request.GET.max %}{{request.GET.max}}{% endif %}" type="number" step="1" min="0" max="1000000" />
+                                        </div>
+                                        <!-- Price End -->
+                                        
+                                        <!-- Color Start -->
+                                        <div class="border-bottom mb-4 pb-4">
+                                                {% for j in filtre_basliklari %}
+                                                
+                                              <h5 class="font-weight-semi-bold mb-4">{{j.filtre_adi}}</h5>
+                                                {% for i in filtre %}
+                                                  {% if j == i.filtre_bagli_oldu_filtre %}
+                                                  
+                                                  
+                                                  <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                                                    <input type="checkbox" class="custom-control-input" name="marka" value="{{i.id}}"  id="color-all{{i.id}}">
+                                                    <label class="custom-control-label" for="color-all{{i.id}}">{{i.filtre_adi}}</label>
+                                                    
+                                                </div>
+                                                {% else %}
+                                                  {% endif %}
+                                                {% endfor %}
+                                                {% endfor %}
+                                                
+                                                <div class="border-bottom mt-4 pb-4">
+                                                  <button class="btn btn-info"  type="submit">ARA</button>
+                                              </div>
+                                                
+                                           
+                                        </div>
+                                         
+                                        <!-- Color End -->
+                        
+                        
+                                    </div>
+                                    <!-- Shop Sidebar End -->
+                        
+                        
+                                    <!-- Shop Product Start -->
+                                    
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="row pb-3">
+                                            <div class="col-12 pb-1">
+                                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                                   
+                                                        <div class="input-group">
+                                                            <input type="text" style="border: 1px solid black;" value="{% if  request.GET.search %}{{request.GET.search}}{% endif %}"  name="search" class="form-control" placeholder="Ara ..">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text bg-transparent text-primary">
+                                                                   
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    
+                                                    
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </form>
+                                </div>
+                            </div>
+                            <!--End extraslider-inner -->
+                        </div>
+                    </div>
+                </div>
+                <div class="module banner-left hidden-xs ">
+                    <div class="banner-sidebar banners">
+                      <div>
+               
+                      </div>
+                    </div>
+                </div>
+            </aside>
+            <!--Left Part End -->
+            
+            <!--Middle Part Start-->
+            <div id="content" class="col-md-9 col-sm-8">
+                <div class="products-category">
+                    <h3 class="title-category ">Popiler Ürünler</h3>
+                    <hr>
+                    <div class="category-desc">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="banners">
+                                    <div>
+                                        
+                                        
                                     </div>
                                 </div>
                             
-                            <div class="dropdown ml-4">
-                                <select name="siralama" id="">
-                                {% if request.GET.search %}
-                                {% if request.GET.search == "0" %}
-                                  <option value="{{request.GET.search}}">Sırala</option>
-                                {% elif  request.GET.search == "1" %}
-                                <option value="{{request.GET.search}}">Artan Fiyata</option>
-                                {% elif  request.GET.search == "2" %}
-                                <option value="{{request.GET.search}}">Azalan Fiyata</option>
-                                {% elif  request.GET.search == "3" %}
-                                <option value="{{request.GET.search}}">A 'dan Z 'ye</option>
-                                {% elif  request.GET.search == "4" %}
-                                <option value="{{request.GET.search}}">En son Eklenenler</option>
-                                {% endif %}    
-                                {% endif %}
-                                  <option value="0">Sırala</option>
-                                  <option value="1">Artan Fiyata</option>
-                                  <option value="2">Azalan Fiyata</option>
-                                  <option value="3">A 'dan Z 'ye</option>
-                                  <option value="4">En son Eklenenler</option>
-                                </select>
-                                
                             </div>
                         </div>
                     </div>
-                    </form>
-                    {% for i in santiyeler %}
-                    <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
-                      <div class="card product-item border-2 mb-4">
-                          <div class="d-flex justify-content-center card-header d-flex justify-content-center product-img position-relative overflow-hidden bg-transparent border p-0">
-                          <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0">
-                              <img style="max-height: 200px;max-width: 200px;min-height: 200px;min-width: 200px;" class="img-fluid w-100" src="{{ i|urun_resimleri_alma }}" alt="">
-      
-                              </a>
-      
-                          </div>
-      
-                          <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                              <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" class=" text-dark p-0"><p>{{ i.urun_adi |slice:":20"  }}</p></a>
-                              <div class="d-flex justify-content-center">
-                                  <h6>{{i.fiyat}} TL</h6><h6 class="text-muted ml-2"><del></del></h6>
-                              </div>
-                          </div>
-                          <div class="card-footer d-flex justify-content-center bg-light border">
-      
-                              <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Sepete Ekle</a>
-                          </div>
-                      </div>
-                  </div>
-                     {% endfor %}
-                    <div class="col-12 pb-1">
+                    <!-- Filters -->
+                    <div class="product-filter product-filter-top filters-panel">
+                        <div class="row">
+                            <div class="col-md-5 col-sm-3 col-xs-12 view-mode">
+                                
+                                    <div class="list-view">
+                                        <button class="btn btn-default grid active" data-view="grid" data-toggle="tooltip"  data-original-title="Grid"><i class="fa fa-th"></i></button>
+                                        <button class="btn btn-default list" data-view="list" data-toggle="tooltip" data-original-title="List"><i class="fa fa-th-list"></i></button>
+                                    </div>
+                        
+                            </div>
+                            <div class="short-by-show form-inline text-right col-md-7 col-sm-9 col-xs-12">
+                                <div class="form-group short-by">
+                                    <label class="control-label" for="input-sort">Sort By:</label>
+                                    <select id="input-sort" class="form-control"
+                                    onchange="location = this.value;">
+                                        <option value="" selected="selected">Default</option>
+                                        <option value="">Name (A - Z)</option>
+                                        <option value="">Name (Z - A)</option>
+                                        <option value="">Price (Low &gt; High)</option>
+                                        <option value="">Price (High &gt; Low)</option>
+                                        <option value="">Rating (Highest)</option>
+                                        <option value="">Rating (Lowest)</option>
+                                        <option value="">Model (A - Z)</option>
+                                        <option value="">Model (Z - A)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" for="input-limit">Show:</label>
+                                    <select id="input-limit" class="form-control" onchange="location = this.value;">
+                                        <option value="" selected="selected">15</option>
+                                        <option value="">25</option>
+                                        <option value="">50</option>
+                                        <option value="">75</option>
+                                        <option value="">100</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- <div class="box-pagination col-md-3 col-sm-4 col-xs-12 text-right">
+                                <ul class="pagination">
+                                    <li class="active"><span>1</span></li>
+                                    <li><a href="">2</a></li><li><a href="">&gt;</a></li>
+                                    <li><a href="">&gt;|</a></li>
+                                </ul>
+                            </div> -->
+                        </div>
+                    </div>
+                    <!-- //end Filters -->
+
+                    <!--changed listings-->
+                    <div class="products-list row nopadding-xs so-filter-gird">
+                        {% for i in santiyeler %}
+                        <div class="product-layout col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <div class="product-item-container item--static">
+                                <div class="left-block">
+                                    <div class="product-image-container second_img">
+                                        <a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" target="_self" title="Volup tatem accu">
+                                            <img src="{{ i|urun_resimleri_alma }}" class="img-1 img-responsive" alt="image1">
+                                           
+                                        </a>
+                                    </div>
+                                    <span class="label-product label-new">Yeni Ürün</span>
+                                    <!--quickview--> 
+                                    <div class="so-quickview">
+                                      <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-search"></i><span>Göz At</span></a>
+                                    </div>                                                     
+                                    <!--end quickview-->
+                                </div>
+                                <div class="right-block">
+                                    <div class="button-group cartinfo--static">
+                                        
+                                        <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart"></i></button>
+                                        <a href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" class="addToCart" title="Add to cart">
+                                            <span>Sepete Ekle</span>   
+                                        </a>
+                                        <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-refresh"></i></button>                                                    
+                                    </div>
+                                    <h4><a href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" title="Volup tatem accu" target="_self">{{i.urun_adi | slice:":30"}}</a></h4>
+                                    <div class="rating">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                        <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                    </div>
+                                    <div class="price">
+                                      <span class="price">{{i.fiyat}} TL</span>
+                                    </div>
+                                    <div class="description item-desc">
+                                        <p>{{i.urun_adi}}</p>
+                                    </div>
+                                    <div class="list-block">
+                                        <a class="addToCart btn-button" href="/sepet/{{i.id}}/{% duzenle i.urun_adi %}" title="Add to Cart" onclick="cart.add('101', '1');"><i class="fa fa-shopping-basket"></i>
+                                        </a>
+                                        <button class="wishlist btn-button" type="button" title="Add to Wish List" onclick="wishlist.add('101');"><i class="fa fa-heart"></i>
+                                        </button>
+                                        <button class="compare btn-button" type="button" title="Compare this Product" onclick="compare.add('101');"><i class="fa fa-refresh"></i>
+                                        </button>
+                                        <!--quickview-->                                                      
+                                        <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="/urun/{{i.id}}/{% duzenle i.urun_adi %}" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i></a>                                                        
+                                        <!--end quickview-->
+                                    </div>
+                                </div>                                            
+                            </div>
+                        </div>
+                        {% endfor %}
+           
+
+                    </div>
+                    <!--// End Changed listings-->
+                    <!-- Filters -->
+                    <div class="product-filter product-filter-bottom filters-panel">
+                        <div class="row">
+                           <div class="col-12 pb-1">
                         <nav aria-label="Page navigation">
                           <ul class="pagination pagination-m justify-content-center">
 
@@ -194,129 +283,49 @@ span.value.upper::before {content: "- ₺ "; display: inline-block; margin-left:
                                                 </ul>
                         </nav>
                     </div>
+                        </div>
+                    </div>
+                    <!-- //end Filters -->
+                    
                 </div>
+                
             </div>
-            <!-- Shop Product End -->
+            
+
+            <!--Middle Part End-->
         </div>
     </div>
-    <!-- Shop End -->
-    <!-- Products Start -->
+    <!-- //Main Container -->
 
+ <script type="text/javascript" src="{% static 'js/jquery-2.2.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/owl-carousel/owl.carousel.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/slick-slider/slick.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/themejs/libs.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/unveil/jquery.unveil.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/countdown/jquery.countdown.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/datetimepicker/moment.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/datetimepicker/bootstrap-datetimepicker.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery-ui/jquery-ui.min.js' %}"></script>
 
-    <!-- Products End -->
-  
-    <script>
-      var thumbsize = 14;
+    <script type="text/javascript" src="{% static 'js/lightslider/lightslider.js' %}"></script>
+    <!-- Theme files
+    ============================================ -->
     
-    function draw(slider,splitvalue) {
     
-        /* set function vars */
-        var min = slider.querySelector('.min');
-        var max = slider.querySelector('.max');
-        var lower = slider.querySelector('.lower');
-        var upper = slider.querySelector('.upper');
-        var legend = slider.querySelector('.legend');
-        var thumbsize = parseInt(slider.getAttribute('data-thumbsize'));
-        var rangewidth = parseInt(slider.getAttribute('data-rangewidth'));
-        var rangemin = parseInt(slider.getAttribute('data-rangemin'));
-        var rangemax = parseInt(slider.getAttribute('data-rangemax'));
+    <script type="text/javascript" src="{% static 'js/themejs/so_megamenu.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/themejs/addtocart.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/themejs/application.js' %}"></script>  
     
-        /* set min and max attributes */
-        min.setAttribute('max',splitvalue);
-        max.setAttribute('min',splitvalue);
     
-        /* set css */
-        min.style.width = parseInt(thumbsize + ((splitvalue - rangemin)/(rangemax - rangemin))*(rangewidth - (2*thumbsize)))+'px';
-        max.style.width = parseInt(thumbsize + ((rangemax - splitvalue)/(rangemax - rangemin))*(rangewidth - (2*thumbsize)))+'px';
-        min.style.left = '0px';
-        max.style.left = parseInt(min.style.width)+'px';
-        min.style.top = lower.offsetHeight+'px';
-        max.style.top = lower.offsetHeight+'px';
-        legend.style.marginTop = min.offsetHeight+'px';
-        slider.style.height = (lower.offsetHeight + min.offsetHeight + legend.offsetHeight)+'px';
-        
-        /* correct for 1 off at the end */
-        if(max.value>(rangemax - 1)) max.setAttribute('data-value',rangemax);
-    
-        /* write value and labels */
-        max.value = max.getAttribute('data-value'); 
-        min.value = min.getAttribute('data-value');
-        lower.innerHTML = min.getAttribute('data-value');
-        upper.innerHTML = max.getAttribute('data-value');
-    
-    }
-    
-    function init(slider) {
-        /* set function vars */
-        var min = slider.querySelector('.min');
-        var max = slider.querySelector('.max');
-        var rangemin = parseInt(min.getAttribute('min'));
-        var rangemax = parseInt(max.getAttribute('max'));
-        var avgvalue = (rangemin + rangemax)/2;
-        var legendnum = slider.getAttribute('data-legendnum');
-    
-        /* set data-values */
-        min.setAttribute('data-value',rangemin);
-        max.setAttribute('data-value',rangemax);
-        
-        /* set data vars */
-        slider.setAttribute('data-rangemin',rangemin); 
-        slider.setAttribute('data-rangemax',rangemax); 
-        slider.setAttribute('data-thumbsize',thumbsize); 
-        slider.setAttribute('data-rangewidth',slider.offsetWidth);
-    
-        /* write labels */
-        var lower = document.createElement('span');
-        var upper = document.createElement('span');
-        lower.classList.add('lower','value');
-        upper.classList.add('upper','value');
-        lower.appendChild(document.createTextNode(rangemin));
-        upper.appendChild(document.createTextNode(rangemax));
-        slider.insertBefore(lower,min.previousElementSibling);
-        slider.insertBefore(upper,min.previousElementSibling);
-        
-        /* write legend */
-        var legend = document.createElement('div');
-        legend.classList.add('legend');
-        var legendvalues = [];
-        for (var i = 0; i < legendnum; i++) {
-            legendvalues[i] = document.createElement('div');
-            var val = Math.round(rangemin+(i/(legendnum-1))*(rangemax - rangemin));
-            legendvalues[i].appendChild(document.createTextNode(val));
-            legend.appendChild(legendvalues[i]);
-    
-        } 
-        slider.appendChild(legend);
-    
-        /* draw */
-        draw(slider,avgvalue);
-    
-        /* events */
-        min.addEventListener("input", function() {update(min);});
-        max.addEventListener("input", function() {update(max);});
-    }
-    
-    function update(el){
-        /* set function vars */
-        var slider = el.parentElement;
-        var min = slider.querySelector('#min');
-        var max = slider.querySelector('#max');
-        var minvalue = Math.floor(min.value);
-        var maxvalue = Math.floor(max.value);
-        
-        /* set inactive values before draw */
-        min.setAttribute('data-value',minvalue);
-        max.setAttribute('data-value',maxvalue);
-    
-        var avgvalue = (minvalue + maxvalue)/2;
-    
-        /* draw */
-        draw(slider,avgvalue);
-    }
-    
-    var sliders = document.querySelectorAll('.min-max-slider');
-    sliders.forEach( function(slider) {
-        init(slider);
-    });
-    </script>
+    <script type="text/javascript">
+    // Check if Cookie exists
+        if($.cookie('display')){
+            view = $.cookie('display');
+        }else{
+            view = 'grid';
+        }
+        if(view) display(view);
+    //--></script> 
 {% endblock slider %}

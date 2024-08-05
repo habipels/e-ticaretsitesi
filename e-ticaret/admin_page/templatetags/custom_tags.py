@@ -143,8 +143,22 @@ def sepetteki_urun_sayisi_kullan(stok_kart):
         for i in a:
             icerikler = icerikler + 1
 
-    return icerikler if icerikler else ""
+    return  icerikler if icerikler else ""
+@register.simple_tag
+def sepetteki_urun_sayisi_kullan_i(stok_kart):
+    x_forwarded_for = stok_kart.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = stok_kart.META.get('REMOTE_ADDR')
+    sepet_sahibi = sepet_olusturma_ip.objects.filter(sepet_sahibi=ip,sepet_satin_alma_durumu = False).last()
+    a = sepetteki_urunler.objects.filter(kayitli_olmayan_kullanici = sepet_sahibi )
+    icerikler = 0
+    if sepet_sahibi:
+        for i in a:
+            icerikler = icerikler + 1
 
+    return  a
 @register.simple_tag
 def carpma(a,b):
     return round(float(a*b), 2)
@@ -246,7 +260,7 @@ def kategoi_bilgisi_duzednleme(id):
                     veri = veri+'{}'.format(str(kategoi_bilgisi_duzednleme(j.id)))
                 veri = veri + "</ul></li></div>"
             else:
-                veri = veri+ '<li class=""><a class="subcategory_item" href="/kategori/{}/{}/"><i class="fas fa-angle-right"></i> {}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
+                veri = veri+ '<li class=""><a class="subcategory_item" href="/kategori/{}/{}/">  {}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
     return  mark_safe(veri)
 @register.simple_tag
 def kategoi_bilgisi_duzednleme2(id):
@@ -293,7 +307,7 @@ def getir(id):
     z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = id,slaytta_gorunsun = False).order_by("numarasi")
     y = 0
     for i in z:
-        b = b+'<li><a href="/kategori/{}/{}/"><i class="fas fa-angle-right"></i>{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
+        b = b+'<li><a href="/kategori/{}/{}/"> {}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
         y = y+1
         if y >= 5:
             b = b+'<li><a href="/kategori/{}/{}/" style="color: var(--orange);font-size: small;">Tümünü Gör</a></li>'.format(str(i.ust_kategory.id),str(i.ust_kategory.link))
@@ -511,7 +525,7 @@ def getir_kategorileri(id):
     z = Meslek.objects.filter(silinme_bilgisi = False,ust_kategory_id = id).order_by("numarasi")
     y = 0
     for i in z:
-        b = b+'<li ><a style="color: black !important;" href="/kategori/{}/{}/"><i style="color: black !important;" class="fas fa-angle-right"></i>{}</a></li>'.format(str(i.id),str(i.link),str(i.kategori))
+        b = b+' <li class=""><a href="/kategori/{}/{}/" class="cutom-parent">{}</a>  <span class="dcjq-icon"></span></li></li>'.format(str(i.id),str(i.link),str(i.kategori))
     return mark_safe(b)
 
 
