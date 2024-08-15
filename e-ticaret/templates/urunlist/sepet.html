@@ -9,6 +9,7 @@
                 <table class="table table-bordered text-center mb-0">
                     <thead class="bg-secondary text-dark">
                         <tr>
+                            <th>Görsel</th>
                             <th>Ürün</th>
                             <th>Fiyatı</th>
                             <th>Miktarı</th>
@@ -22,7 +23,8 @@
                         
                         <tr>
                             <td class="align-middle"><img src="{{i.urun_bilgisi | urun_resimleri_alma}}" alt="" style=" max-width: 50px;min-width: 50px;
-                            "> {{ i.urun_bilgisi.urun_adi }}</td>
+                            "> </td>
+                            <td class="align-middle">{{ i.urun_bilgisi.urun_adi }}</td>
                             <td class="align-middle"> {{i.urun_bilgisi.fiyat}} TL</td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style="width: 100px;">
@@ -48,7 +50,7 @@
             </div>
             <div class="col-lg-4">
                 
-                <div class="card border-secondary mb-5">
+                <div class="card border-secondary mb-5" >
                     <div class="card-header bg-secondary border-0">
                         <h4 class="font-weight-semi-bold m-0">Sipariş Detayı</h4>
                         <hr>
@@ -67,15 +69,16 @@
                     </div>
                     <div class="card-footer border-secondary bg-transparent">
                         <div class="d-flex justify-content-between mt-2">
-                            <h5 class="font-weight-bold">Genel Toplam</h5>
-                            <h5 class="font-weight-bold">{% sepet_toplam_tutar_t request %} TL</h5>
+                            <h3 class="font-weight-bold" style="color: rgb(217, 50, 50);">Genel Toplam</h5>
+                            <h3 class="font-weight-bold" style="color: rgb(49, 49, 190);">{% sepet_toplam_tutar_t request %} TL</h5>
                         </div>
                         <hr>
-                        <a href="/odeme" class="btn btn-block btn-primary my-3 py-3">Siparişi Tamamla</a>
+                        <a href="/odeme" class="btn btn-block btn-primary my-3 py-3 mb-5">Siparişi Tamamla</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Cart End -->
+     <br>
 {% endblock slider %}
